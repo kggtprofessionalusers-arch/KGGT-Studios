@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>KGGT STUDIOS — Create. Imagine.</title>
 
 <style>
@@ -28,47 +29,13 @@ body{
 #boot{
     position:fixed;
     inset:0;
-    background:
-        radial-gradient(circle at 50% 45%,#8b5cf620,transparent 32%),
-        radial-gradient(circle at 50% 55%,#ec489915,transparent 45%),
-        #050509;
+    background:#050509;
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
     z-index:9999;
-    animation:bootOut .8s ease 3.2s forwards;
-    overflow:hidden;
-}
-
-#boot::before{
-    content:"";
-    position:absolute;
-    width:420px;
-    height:420px;
-    border:1px solid #8b5cf644;
-    border-radius:50%;
-    box-shadow:
-        0 0 80px #8b5cf633,
-        inset 0 0 80px #ec489922;
-    animation:bootRing 2.2s ease-in-out infinite;
-}
-
-#boot::after{
-    content:"";
-    position:absolute;
-    width:560px;
-    height:560px;
-    border:1px solid #ec489922;
-    border-radius:50%;
-    animation:bootRing2 3s linear infinite;
-}
-
-.bootLogo,
-.bootStudio,
-.loader{
-    position:relative;
-    z-index:2;
+    animation:bootOut 1s ease 2.8s forwards;
 }
 
 .bootLogo{
@@ -78,16 +45,13 @@ body{
     text-shadow:
         0 0 15px #8b5cf6,
         0 0 40px #ec4899;
-    animation:
-        logoReveal 1.4s cubic-bezier(.2,.8,.2,1) both,
-        logoFloat 1.4s 1.4s infinite alternate;
+    animation:logoFloat 1.4s infinite alternate;
 }
 
 .bootStudio{
     color:#b8a5ff;
     letter-spacing:8px;
     margin-top:8px;
-    animation:studioReveal 1s .55s both;
 }
 
 .loader{
@@ -96,19 +60,7 @@ body{
     background:#222;
     border-radius:20px;
     margin-top:30px;
-    overflow:visible;
-}
-
-.loader::before{
-    content:"LOADING CREATIVE ENGINE";
-    position:absolute;
-    left:0;
-    top:-23px;
-    width:100%;
-    text-align:center;
-    font-size:9px;
-    letter-spacing:2px;
-    color:#8f82b8;
+    overflow:hidden;
 }
 
 .loader span{
@@ -116,77 +68,16 @@ body{
     height:100%;
     width:0;
     background:linear-gradient(90deg,#8b5cf6,#ec4899);
-    animation:load 2.8s ease forwards;
+    animation:load 2.5s ease forwards;
 }
 
 @keyframes load{
     to{width:100%}
 }
 
-@keyframes logoReveal{
-    0%{
-        opacity:0;
-        transform:scale(.55) translateY(25px);
-        filter:blur(12px)
-    }
-
-    70%{
-        opacity:1;
-        transform:scale(1.06);
-        filter:blur(0)
-    }
-
-    100%{
-        transform:scale(1)
-    }
-}
-
-@keyframes studioReveal{
-    from{
-        opacity:0;
-        letter-spacing:20px;
-        transform:translateY(10px)
-    }
-
-    to{
-        opacity:1;
-        letter-spacing:8px;
-        transform:translateY(0)
-    }
-}
-
 @keyframes logoFloat{
-    from{
-        transform:translateY(0) rotateX(0)
-    }
-
-    to{
-        transform:translateY(-12px) rotateX(10deg)
-    }
-}
-
-@keyframes bootRing{
-    0%,100%{
-        transform:scale(.65);
-        opacity:.25
-    }
-
-    50%{
-        transform:scale(1);
-        opacity:.75
-    }
-}
-
-@keyframes bootRing2{
-    from{
-        transform:rotate(0deg) scale(.85);
-        opacity:.15
-    }
-
-    to{
-        transform:rotate(360deg) scale(1.08);
-        opacity:.5
-    }
+    from{transform:translateY(0)}
+    to{transform:translateY(-12px)}
 }
 
 @keyframes bootOut{
@@ -196,7 +87,7 @@ body{
     }
 }
 
-/* ================= MAIN BACKGROUND ================= */
+/* ================= BACKGROUND ================= */
 
 #canvas{
     position:fixed;
@@ -231,15 +122,11 @@ body{
 }
 
 @keyframes glowMove{
-    to{
-        transform:translate(180px,150px)
-    }
+    to{transform:translate(180px,150px)}
 }
 
 @keyframes glowMove2{
-    to{
-        transform:translate(-180px,-120px)
-    }
+    to{transform:translate(-180px,-120px)}
 }
 
 /* ================= NAV ================= */
@@ -363,11 +250,7 @@ body{
     line-height:1.7;
 }
 
-/* ================= HOME ================= */
-
-#homeInfo{
-    min-height:90vh;
-}
+/* ================= INFO ================= */
 
 .infoGrid{
     margin-top:45px;
@@ -459,14 +342,17 @@ body{
     height:130px;
     border-radius:16px;
     margin-bottom:18px;
-    background:
-        radial-gradient(circle at 30% 30%,#8b5cf6aa,transparent 25%),
-        radial-gradient(circle at 70% 70%,#ec4899aa,transparent 25%),
-        #090912;
+    background:#090912;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
+}
+
+.projectPreview img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
 }
 
 .emptyProjects{
@@ -542,21 +428,10 @@ body{
     z-index:5000;
     display:none;
     overflow:hidden;
-    animation:creatorIn .45s ease both;
 }
 
 #creator.active{
     display:block;
-}
-
-@keyframes creatorIn{
-    from{
-        opacity:0
-    }
-
-    to{
-        opacity:1
-    }
 }
 
 .animeBg{
@@ -613,7 +488,6 @@ body{
     from{
         transform:translateY(-30px) rotate(0);
     }
-
     to{
         transform:translateY(110vh) rotate(360deg);
     }
@@ -631,32 +505,11 @@ body{
     padding:0 25px;
     background:#050509aa;
     backdrop-filter:blur(15px);
-    box-shadow:0 8px 35px #0006;
     z-index:10;
 }
 
 .creatorTop h2{
     letter-spacing:3px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.creatorTop h2::before{
-    content:"";
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#8b5cf6;
-    box-shadow:0 0 15px #8b5cf6;
-    animation:pulseDot 1.2s infinite;
-}
-
-@keyframes pulseDot{
-    50%{
-        transform:scale(1.7);
-        opacity:.55
-    }
 }
 
 .closeBtn{
@@ -668,6 +521,17 @@ body{
     cursor:pointer;
 }
 
+/* ================= CREATOR CANVAS ================= */
+
+#backgroundCanvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:2;
+    pointer-events:none;
+}
+
 #drawingCanvas{
     position:absolute;
     inset:0;
@@ -677,82 +541,227 @@ body{
     z-index:4;
 }
 
-/* ================= TYPE PANEL ================= */
+/* ================= TYPE MODE ================= */
 
-#textPanel{
+#typeModeHint{
     position:absolute;
-    left:25px;
-    bottom:95px;
-    z-index:20;
-    width:300px;
-    padding:15px;
+    top:82px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:25;
+    display:none;
+    padding:9px 14px;
+    border-radius:999px;
     background:#08080fcc;
     border:1px solid #ffffff18;
-    border-radius:15px;
+    color:#ddd;
+    font-size:12px;
     backdrop-filter:blur(15px);
-    box-shadow:0 18px 55px #0009;
-    display:none;
-    animation:panelIn .25s ease both;
 }
 
-#textPanel.show{
+#typeModeHint.active{
     display:block;
 }
 
-@keyframes panelIn{
+#typeEditor{
+    position:absolute;
+    display:none;
+    z-index:35;
+    width:330px;
+    background:#08080fee;
+    border:1px solid #ffffff25;
+    border-radius:16px;
+    padding:12px;
+    box-shadow:0 20px 60px #000b,0 0 30px #8b5cf633;
+    backdrop-filter:blur(20px);
+}
+
+#typeEditor.active{
+    display:block;
+    animation:typePop .18s ease-out;
+}
+
+@keyframes typePop{
     from{
         opacity:0;
-        transform:translateY(10px)
+        transform:scale(.94);
     }
-
     to{
         opacity:1;
-        transform:translateY(0)
+        transform:scale(1);
     }
 }
 
-#textPanel label{
-    display:block;
-    font-size:11px;
-    color:#aaa;
-    letter-spacing:1px;
+.typeEditorTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:9px;
+    color:#ddd;
+    font-size:12px;
+}
+
+.typeEditorTools{
+    display:flex;
+    gap:7px;
     margin-bottom:8px;
 }
 
-#textInput{
-    width:100%;
-    min-height:105px;
-    resize:vertical;
-    background:#ffffff0b;
+.typeEditorTools select,
+.typeEditorTools input{
+    flex:1;
+    min-width:0;
+    height:34px;
+    border-radius:8px;
     border:1px solid #ffffff18;
-    color:white;
-    border-radius:10px;
-    padding:10px;
+    background:#ffffff0b;
+    color:#fff;
     outline:none;
-    font:15px/1.5 Arial,sans-serif;
 }
 
-#textInput:focus{
-    border-color:#8b5cf6aa;
-    box-shadow:0 0 0 3px #8b5cf622;
+.typeEditorTools input[type=color]{
+    flex:0 0 42px;
+    padding:2px;
 }
 
-.addText{
+#typeText{
     width:100%;
-    margin-top:10px;
-    padding:11px;
-    border:0;
-    border-radius:10px;
-    background:linear-gradient(135deg,#8b5cf6,#ec4899);
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
+    min-height:100px;
+    resize:vertical;
+    border:1px solid #ffffff18;
+    border-radius:11px;
+    background:#ffffff08;
+    color:#fff;
+    outline:none;
+    padding:12px;
+    font-size:20px;
+    line-height:1.35;
 }
 
-.textHint{
+.typeEditorActions{
+    display:flex;
+    gap:7px;
+    margin-top:9px;
+}
+
+.typeEditorActions button{
+    flex:1;
+    padding:10px;
+    border:0;
+    border-radius:9px;
+    cursor:pointer;
+    color:#fff;
+}
+
+.typePlaceBtn{
+    background:linear-gradient(90deg,#8b5cf6,#ec4899);
+}
+
+.typeCancelBtn{
+    background:#ffffff10;
+}
+
+/* ================= BACKGROUND MENU ================= */
+
+#backgroundMenu{
+    position:absolute;
+    right:20px;
+    bottom:88px;
+    z-index:40;
+    display:none;
+    width:280px;
+    padding:14px;
+    border-radius:17px;
+    background:#08080fee;
+    border:1px solid #ffffff20;
+    backdrop-filter:blur(20px);
+    box-shadow:0 20px 60px #000b;
+}
+
+#backgroundMenu.active{
+    display:block;
+}
+
+.backgroundTitle{
+    font-size:12px;
+    color:#aaa;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+.backgroundGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.bgChoice{
+    height:62px;
+    border-radius:11px;
+    border:1px solid #ffffff18;
+    cursor:pointer;
+    color:#fff;
     font-size:11px;
-    color:#777;
-    margin-top:8px;
+    font-weight:bold;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding-bottom:6px;
+    text-shadow:0 1px 5px #000;
+    transition:.2s;
+}
+
+.bgChoice:hover{
+    transform:translateY(-2px);
+    border-color:#a78bfa;
+}
+
+.bg-dark{
+    background:#090912;
+}
+
+.bg-grid{
+    background-color:#11131d;
+    background-image:
+        linear-gradient(#ffffff12 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff12 1px,transparent 1px);
+    background-size:22px 22px;
+}
+
+.bg-dots{
+    background-color:#11131d;
+    background-image:radial-gradient(#ffffff45 1px,transparent 1px);
+    background-size:18px 18px;
+}
+
+.bg-paper{
+    background:#eee;
+    color:#111;
+    text-shadow:none;
+}
+
+.bg-notebook{
+    background-color:#f4f4f4;
+    background-image:linear-gradient(#3b82f655 1px,transparent 1px);
+    background-size:100% 24px;
+    color:#222;
+    text-shadow:none;
+}
+
+.bg-sunset{
+    background:linear-gradient(135deg,#20102f,#8b2f69,#f59e0b);
+}
+
+.bg-ocean{
+    background:linear-gradient(135deg,#07111f,#075985,#22d3ee);
+}
+
+.bg-forest{
+    background:linear-gradient(135deg,#06140d,#14532d,#65a30d);
+}
+
+.bg-neon{
+    background:linear-gradient(135deg,#090912,#7c3aed,#db2777);
 }
 
 /* ================= TOOLBAR ================= */
@@ -771,7 +780,6 @@ body{
     background:#08080fdd;
     border:1px solid #ffffff18;
     backdrop-filter:blur(18px);
-    box-shadow:0 15px 45px #0008;
 }
 
 .sketchToolbar button{
@@ -781,21 +789,11 @@ body{
     padding:10px 13px;
     border-radius:10px;
     cursor:pointer;
-    transition:.2s;
 }
 
-.sketchToolbar button:hover{
-    background:#8b5cf6;
-}
-
+.sketchToolbar button:hover,
 .sketchToolbar button.activeTool{
-    background:linear-gradient(135deg,#8b5cf6,#ec4899);
-    box-shadow:0 0 18px #8b5cf655;
-}
-
-.typeBtn{
-    background:linear-gradient(135deg,#8b5cf633,#ec489933)!important;
-    border:1px solid #8b5cf655!important;
+    background:#8b5cf6;
 }
 
 .sketchToolbar input[type="color"]{
@@ -809,127 +807,129 @@ body{
     width:100px;
 }
 
-/* ================= MATH AI ================= */
+/* ================= HOME AI ================= */
 
-.mathAI{
-    position:absolute;
-    top:90px;
-    right:25px;
-    z-index:40;
-    width:min(370px,calc(100vw - 50px));
-    border:1px solid #ffffff18;
-    background:#08080fcc;
-    backdrop-filter:blur(20px);
-    border-radius:18px;
-    box-shadow:0 20px 60px #0009;
+.homeMathAI{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    width:340px;
+    z-index:250;
+    border:1px solid #ffffff20;
+    border-radius:20px;
+    background:#08080fe8;
+    backdrop-filter:blur(22px);
+    box-shadow:0 20px 70px #0009,0 0 35px #8b5cf633;
     overflow:hidden;
 }
 
-.mathAI.closed .mathBody{
-    display:none;
-}
-
-.mathHead{
+.homeAIHead{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:13px 15px;
-    background:linear-gradient(90deg,#8b5cf615,#ec489915);
+    padding:14px 16px;
     border-bottom:1px solid #ffffff12;
 }
 
-.mathHead strong{
-    display:flex;
-    align-items:center;
-    gap:8px;
+.homeAIHead strong{
+    display:block;
+    font-size:14px;
+    letter-spacing:1px;
 }
 
-.aiDot{
+.homeAIHead small{
+    display:block;
+    color:#888;
+    margin-top:3px;
+    font-size:11px;
+}
+
+.homeAIStatus{
+    display:inline-block;
     width:8px;
     height:8px;
+    margin-right:7px;
     border-radius:50%;
-    background:#8b5cf6;
-    box-shadow:0 0 14px #8b5cf6;
+    background:#55f5a2;
+    box-shadow:0 0 12px #55f5a2;
 }
 
-.mathToggle{
+.homeAIHead button{
     border:0;
-    background:#ffffff10;
-    color:white;
-    border-radius:8px;
-    padding:5px 9px;
+    width:30px;
+    height:30px;
+    border-radius:9px;
+    background:#ffffff0d;
+    color:#fff;
     cursor:pointer;
+    font-size:18px;
 }
 
-.mathBody{
-    padding:13px;
+.homeAIBody{
+    padding:12px;
 }
 
-.mathMessages{
-    max-height:210px;
+.homeAIBody.hiddenAI{
+    display:none;
+}
+
+.homeAIMessages{
+    max-height:180px;
     overflow:auto;
     display:flex;
     flex-direction:column;
     gap:9px;
-    margin-bottom:10px;
+    padding:2px;
 }
 
-.mathMsg{
-    padding:9px 11px;
-    border-radius:12px;
+.homeAIMessage{
+    padding:10px 12px;
+    border-radius:13px;
     font-size:13px;
     line-height:1.5;
-    white-space:pre-wrap;
 }
 
-.mathMsg.ai{
-    background:#ffffff0a;
-    border:1px solid #ffffff0e;
+.homeAIMessage.ai{
+    background:#ffffff0b;
+    border:1px solid #ffffff10;
+    color:#ddd;
 }
 
-.mathMsg.user{
+.homeAIMessage.user{
     align-self:flex-end;
-    background:#8b5cf633;
-    border:1px solid #8b5cf655;
+    background:linear-gradient(90deg,#8b5cf6,#ec4899);
+    color:#fff;
+    max-width:85%;
 }
 
-.mathInputRow{
+.homeAIInput{
     display:flex;
     gap:7px;
+    margin-top:10px;
 }
 
-#mathInput{
+.homeAIInput input{
     min-width:0;
     flex:1;
-    background:#ffffff0b;
-    border:1px solid #ffffff18;
-    color:white;
-    border-radius:10px;
-    padding:10px;
+    border:1px solid #ffffff15;
     outline:none;
+    border-radius:11px;
+    padding:11px;
+    background:#ffffff09;
+    color:#fff;
 }
 
-#mathInput:focus{
-    border-color:#8b5cf6aa;
-}
-
-#solveMath{
+.homeAIInput button{
+    width:43px;
     border:0;
-    border-radius:10px;
-    padding:10px 12px;
-    background:linear-gradient(135deg,#8b5cf6,#ec4899);
-    color:white;
-    font-weight:bold;
+    border-radius:11px;
+    background:linear-gradient(90deg,#8b5cf6,#ec4899);
+    color:#fff;
     cursor:pointer;
+    font-size:17px;
 }
 
-.mathExamples{
-    color:#777;
-    font-size:10px;
-    margin-top:7px;
-}
-
-/* ================= RESPONSIVE ================= */
+/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
@@ -965,16 +965,20 @@ body{
         justify-content:flex-start;
     }
 
-    #textPanel{
+    .homeMathAI{
+        right:10px;
         left:10px;
-        bottom:90px;
-        width:calc(100vw - 20px);
+        bottom:10px;
+        width:auto;
     }
 
-    .mathAI{
-        top:78px;
+    #typeEditor{
+        width:min(330px,calc(100vw - 30px));
+    }
+
+    #backgroundMenu{
         right:10px;
-        width:calc(100vw - 20px);
+        width:260px;
     }
 }
 </style>
@@ -985,12 +989,17 @@ body{
 <!-- ================= BOOT ================= -->
 
 <div id="boot">
+
     <div class="bootLogo">KGGT</div>
-    <div class="bootStudio">STUDIOS</div>
+
+    <div class="bootStudio">
+        STUDIOS
+    </div>
 
     <div class="loader">
         <span></span>
     </div>
+
 </div>
 
 <canvas id="canvas"></canvas>
@@ -998,7 +1007,8 @@ body{
 <div class="bgGlow"></div>
 <div class="bgGlow2"></div>
 
-<!-- ================= NAV ================= -->
+
+<!-- ================= NAVIGATION ================= -->
 
 <nav class="nav">
 
@@ -1008,7 +1018,8 @@ body{
 
     <div class="navLinks">
 
-        <a href="#">
+        <!-- FIXED HOME LINK -->
+        <a href="https://kggtprofessionalusers-arch.github.io/KGGT-Sketch-Shop/">
             HOME
         </a>
 
@@ -1023,6 +1034,77 @@ body{
     </div>
 
 </nav>
+
+
+<!-- ================= HOME AI ================= -->
+
+<div class="homeMathAI" id="homeMathAI">
+
+    <div class="homeAIHead">
+
+        <div>
+
+            <span class="homeAIStatus"></span>
+
+            <strong>
+                KGGT AI
+            </strong>
+
+            <small>
+                Basic Math Assistant
+            </small>
+
+        </div>
+
+        <button onclick="toggleHomeAI()">
+            −
+        </button>
+
+    </div>
+
+
+    <div class="homeAIBody" id="homeAIBody">
+
+        <div
+            class="homeAIMessages"
+            id="homeAIMessages"
+        >
+
+            <div class="homeAIMessage ai">
+
+                Hi! I can solve basic maths.
+
+                Try
+                <b>25 × 16</b>,
+                <b>√144</b>,
+                <b>20% of 500</b>
+                or
+                <b>2x + 5 = 17</b>.
+
+            </div>
+
+        </div>
+
+
+        <div class="homeAIInput">
+
+            <input
+                id="homeMathInput"
+                type="text"
+                placeholder="Ask a maths question..."
+                autocomplete="off"
+            >
+
+            <button onclick="solveHomeMath()">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 <!-- ================= HERO ================= -->
 
@@ -1045,13 +1127,17 @@ body{
             Create your own artwork and explore what KGGT has built.
         </p>
 
-        <button class="createBtn" onclick="openCreator()">
+        <button
+            class="createBtn"
+            onclick="openCreator()"
+        >
             CREATE SKETCH ✦
         </button>
 
     </div>
 
 </section>
+
 
 <!-- ================= HOME INFORMATION ================= -->
 
@@ -1062,67 +1148,114 @@ body{
     </div>
 
     <p class="sectionSub">
-        KGGT Studios is made for people who want to turn simple ideas
-        into creative visual experiences.
+        KGGT Studios is made for people who want to turn simple
+        ideas into creative visual experiences.
     </p>
+
 
     <div class="infoGrid">
 
         <div class="infoCard">
-            <div class="infoIcon">🎨</div>
-            <h3>Express Creativity</h3>
+
+            <div class="infoIcon">
+                🎨
+            </div>
+
+            <h3>
+                Express Creativity
+            </h3>
+
             <p>
                 Turn your imagination into sketches and experiment
                 with your own creative ideas.
             </p>
+
         </div>
 
+
         <div class="infoCard">
-            <div class="infoIcon">✨</div>
-            <h3>Create Freely</h3>
+
+            <div class="infoIcon">
+                ✨
+            </div>
+
+            <h3>
+                Create Freely
+            </h3>
+
             <p>
                 Draw, write and build your own artwork without
                 complicated tools.
             </p>
+
         </div>
 
+
         <div class="infoCard">
-            <div class="infoIcon">🚀</div>
-            <h3>Bring Ideas Alive</h3>
+
+            <div class="infoIcon">
+                🚀
+            </div>
+
+            <h3>
+                Bring Ideas Alive
+            </h3>
+
             <p>
                 KGGT is designed to help transform ideas from
                 imagination into something you can see.
             </p>
+
         </div>
 
+
         <div class="infoCard">
-            <div class="infoIcon">🌟</div>
-            <h3>Explore Creativity</h3>
+
+            <div class="infoIcon">
+                🌟
+            </div>
+
+            <h3>
+                Explore Creativity
+            </h3>
+
             <p>
                 Discover sketches, concepts and creative projects
                 made through the KGGT experience.
             </p>
+
         </div>
 
     </div>
 
+
     <div class="quoteBox">
+
         <p>
             “Every great creation begins with a simple idea.”
         </p>
 
-        <span>— KGGT STUDIOS</span>
+        <span>
+            — KGGT STUDIOS
+        </span>
+
     </div>
 
+
     <div class="quoteBox">
+
         <p>
             “Don't just imagine it. Sketch it.”
         </p>
 
-        <span>— KGGT</span>
+        <span>
+            — KGGT
+        </span>
+
     </div>
 
 </section>
+
 
 <!-- ================= PROJECTS ================= -->
 
@@ -1137,16 +1270,30 @@ body{
         can appear here as your personal KGGT project gallery.
     </p>
 
-    <div id="projectGrid" class="projectGrid">
+    <div
+        id="projectGrid"
+        class="projectGrid"
+    >
 
-        <div class="emptyProjects" id="emptyProjects">
-            No sketches created yet.<br><br>
-            Click <b>CREATE SKETCH</b> and make your first project ✦
+        <div
+            class="emptyProjects"
+            id="emptyProjects"
+        >
+
+            No sketches created yet.
+
+            <br><br>
+
+            Click
+            <b>CREATE SKETCH</b>
+            and make your first project ✦
+
         </div>
 
     </div>
 
 </section>
+
 
 <!-- ================= ABOUT ================= -->
 
@@ -1157,61 +1304,344 @@ body{
     </div>
 
     <p class="aboutText">
+
         KGGT Studios is a creative project focused on imagination,
         sketching and digital creativity. Our goal is to create a
         place where people can explore ideas, make artwork and
         turn their imagination into something visual.
+
     </p>
+
 
     <div class="teamGrid">
 
         <div class="member">
-            <div class="avatar">K</div>
-            <h3>Kartik</h3>
-            <p>CEO</p>
+
+            <div class="avatar">
+                K
+            </div>
+
+            <h3>
+                Kartik
+            </h3>
+
+            <p>
+                CEO
+            </p>
+
         </div>
 
-        <div class="member">
-            <div class="avatar">GS</div>
-            <h3>Garvit Singh</h3>
-            <p>Artist</p>
-        </div>
 
         <div class="member">
-            <div class="avatar">GT</div>
-            <h3>Garvit Tiwari</h3>
-            <p>Artist</p>
+
+            <div class="avatar">
+                GS
+            </div>
+
+            <h3>
+                Garvit Singh
+            </h3>
+
+            <p>
+                Artist
+            </p>
+
         </div>
 
+
         <div class="member">
-            <div class="avatar">T</div>
-            <h3>Tanish</h3>
-            <p>Founder</p>
+
+            <div class="avatar">
+                GT
+            </div>
+
+            <h3>
+                Garvit Tiwari
+            </h3>
+
+            <p>
+                Artist
+            </p>
+
+        </div>
+
+
+        <div class="member">
+
+            <div class="avatar">
+                T
+            </div>
+
+            <h3>
+                Tanish
+            </h3>
+
+            <p>
+                Founder
+            </p>
+
         </div>
 
     </div>
 
 </section>
 
+
 <!-- ================= CREATOR ================= -->
 
 <div id="creator">
 
+
     <div class="animeBg">
 
         <div class="animeOrb orb1"></div>
+
         <div class="animeOrb orb2"></div>
 
-        <div class="petal" style="left:5%;animation-duration:8s"></div>
-        <div class="petal" style="left:15%;animation-duration:11s"></div>
-        <div class="petal" style="left:28%;animation-duration:9s"></div>
-        <div class="petal" style="left:40%;animation-duration:12s"></div>
-        <div class="petal" style="left:52%;animation-duration:8s"></div>
-        <div class="petal" style="left:65%;animation-duration:10s"></div>
-        <div class="petal" style="left:78%;animation-duration:13s"></div>
-        <div class="petal" style="left:90%;animation-duration:9s"></div>
+
+        <div
+            class="petal"
+            style="left:5%;animation-duration:8s"
+        ></div>
+
+        <div
+            class="petal"
+            style="left:15%;animation-duration:11s"
+        ></div>
+
+        <div
+            class="petal"
+            style="left:28%;animation-duration:9s"
+        ></div>
+
+        <div
+            class="petal"
+            style="left:40%;animation-duration:12s"
+        ></div>
+
+        <div
+            class="petal"
+            style="left:52%;animation-duration:8s"
+        ></div>
+
+        <div
+            class="petal"
+            style="left:65%;animation-duration:10s"
+        ></div>
+
+        <div
+            class="petal"
+            style="left:78%;animation-duration:13s"
+        ></div>
+
+        <div
+            class="petal"
+            style="left:90%;animation-duration:9s"
+        ></div>
 
     </div>
+
+
+    <canvas id="backgroundCanvas"></canvas>
+
+
+    <div id="typeModeHint">
+
+        Type mode:
+        click anywhere on the board to place your text ✦
+
+    </div>
+
+
+    <!-- TEXT EDITOR -->
+
+    <div id="typeEditor">
+
+        <div class="typeEditorTop">
+
+            <strong>
+                TEXT BOX
+            </strong>
+
+            <span>
+                Click Place to add it
+            </span>
+
+        </div>
+
+
+        <div class="typeEditorTools">
+
+            <select id="typeFont">
+
+                <option value="Arial">
+                    Arial
+                </option>
+
+                <option value="Georgia">
+                    Georgia
+                </option>
+
+                <option value="Verdana">
+                    Verdana
+                </option>
+
+                <option value="Courier New">
+                    Courier New
+                </option>
+
+            </select>
+
+
+            <select id="typeSize">
+
+                <option value="20">
+                    20px
+                </option>
+
+                <option value="28" selected>
+                    28px
+                </option>
+
+                <option value="36">
+                    36px
+                </option>
+
+                <option value="48">
+                    48px
+                </option>
+
+                <option value="64">
+                    64px
+                </option>
+
+            </select>
+
+
+            <input
+                id="typeColor"
+                type="color"
+                value="#ffffff"
+            >
+
+        </div>
+
+
+        <textarea
+            id="typeText"
+            placeholder="Start typing..."
+        ></textarea>
+
+
+        <div class="typeEditorActions">
+
+            <button
+                class="typeCancelBtn"
+                onclick="cancelTypeEditor()"
+            >
+                CANCEL
+            </button>
+
+            <button
+                class="typePlaceBtn"
+                onclick="placeTypedText()"
+            >
+                PLACE TEXT ✦
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- BACKGROUND MENU -->
+
+    <div id="backgroundMenu">
+
+        <div class="backgroundTitle">
+            CHOOSE YOUR BOARD BACKGROUND
+        </div>
+
+
+        <div class="backgroundGrid">
+
+            <button
+                class="bgChoice bg-dark"
+                onclick="setBoardBackground('dark')"
+            >
+                Dark
+            </button>
+
+
+            <button
+                class="bgChoice bg-grid"
+                onclick="setBoardBackground('grid')"
+            >
+                Grid
+            </button>
+
+
+            <button
+                class="bgChoice bg-dots"
+                onclick="setBoardBackground('dots')"
+            >
+                Dots
+            </button>
+
+
+            <button
+                class="bgChoice bg-paper"
+                onclick="setBoardBackground('paper')"
+            >
+                Paper
+            </button>
+
+
+            <button
+                class="bgChoice bg-notebook"
+                onclick="setBoardBackground('notebook')"
+            >
+                Notebook
+            </button>
+
+
+            <button
+                class="bgChoice bg-sunset"
+                onclick="setBoardBackground('sunset')"
+            >
+                Sunset
+            </button>
+
+
+            <button
+                class="bgChoice bg-ocean"
+                onclick="setBoardBackground('ocean')"
+            >
+                Ocean
+            </button>
+
+
+            <button
+                class="bgChoice bg-forest"
+                onclick="setBoardBackground('forest')"
+            >
+                Forest
+            </button>
+
+
+            <button
+                class="bgChoice bg-neon"
+                onclick="setBoardBackground('neon')"
+            >
+                Neon
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CREATOR TOP -->
 
     <div class="creatorTop">
 
@@ -1219,100 +1649,22 @@ body{
             KGGT CREATOR
         </h2>
 
-        <button class="closeBtn" onclick="closeCreator()">
+        <button
+            class="closeBtn"
+            onclick="closeCreator()"
+        >
             ✕ CLOSE
         </button>
 
     </div>
 
-    <!-- ================= MATH AI ================= -->
 
-    <div class="mathAI" id="mathAI">
-
-        <div class="mathHead">
-
-            <strong>
-                <span class="aiDot"></span>
-                KGGT Math AI
-            </strong>
-
-            <button class="mathToggle" onclick="toggleMathAI()">
-                −
-            </button>
-
-        </div>
-
-        <div class="mathBody">
-
-            <div class="mathMessages" id="mathMessages">
-
-                <div class="mathMsg ai">
-                    Hi! I can solve basic maths for you.
-
-                    Try:
-                    25 × 16
-                    √144
-                    15% of 240
-                    2x + 5 = 17
-                </div>
-
-            </div>
-
-            <div class="mathInputRow">
-
-                <input
-                    id="mathInput"
-                    type="text"
-                    placeholder="Ask a maths question..."
-                    autocomplete="off"
-                >
-
-                <button id="solveMath" onclick="solveMath()">
-                    SOLVE
-                </button>
-
-            </div>
-
-            <div class="mathExamples">
-                Examples: 12+8×3 • 3²+4² • 20% of 500 • x²=49
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- ================= TYPING AREA ================= -->
-
-    <div id="textPanel">
-
-        <label>
-            ✦ TYPE ON YOUR SKETCH
-        </label>
-
-        <textarea
-            id="textInput"
-            placeholder="Start typing here...
-You can write multiple lines."
-        ></textarea>
-
-        <button
-            class="addText"
-            onclick="addText()"
-        >
-            ADD TO CANVAS ✦
-        </button>
-
-        <div class="textHint">
-            Tip: write your text here, then click Add to Canvas.
-        </div>
-
-    </div>
-
-    <!-- ================= DRAWING AREA ================= -->
+    <!-- DRAWING CANVAS -->
 
     <canvas id="drawingCanvas"></canvas>
 
-    <!-- ================= TOOLBAR ================= -->
+
+    <!-- TOOLBAR -->
 
     <div class="sketchToolbar">
 
@@ -1324,23 +1676,33 @@ You can write multiple lines."
             🖌 Brush
         </button>
 
+
         <button
-            onclick="toggleTextPanel()"
+            onclick="activateTypeMode()"
             id="typeTool"
-            class="typeBtn"
         >
             T Type
         </button>
 
+
+        <button
+            onclick="toggleBackgroundMenu()"
+        >
+            🖼 Background
+        </button>
+
+
         <button onclick="setEraser()">
             🧽 Eraser
         </button>
+
 
         <input
             id="colorPicker"
             type="color"
             value="#ffffff"
         >
+
 
         <input
             id="brushSize"
@@ -1350,9 +1712,11 @@ You can write multiple lines."
             value="5"
         >
 
+
         <button onclick="clearDrawing()">
             🗑 Clear
         </button>
+
 
         <button onclick="saveDrawing()">
             💾 Save
@@ -1362,48 +1726,75 @@ You can write multiple lines."
 
 </div>
 
+
 <script>
 
-/* ================= MAIN BACKGROUND ================= */
+/* =========================================================
+   MAIN BACKGROUND
+========================================================= */
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const canvas =
+    document.getElementById("canvas");
+
+const ctx =
+    canvas.getContext("2d");
 
 let particles = [];
+
 let shapes = [];
+
 
 function resizeMain(){
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
 
 }
 
 resizeMain();
 
-window.addEventListener("resize",resizeMain);
+window.addEventListener(
+    "resize",
+    resizeMain
+);
 
-for(let i=0;i<80;i++){
+
+for(
+    let i=0;
+    i<80;
+    i++
+){
 
     particles.push({
 
         x:Math.random()*innerWidth,
+
         y:Math.random()*innerHeight,
 
-        r:Math.random()*2+0.5,
+        r:Math.random()*2+.5,
 
         vx:(Math.random()-.5)*.5,
+
         vy:(Math.random()-.5)*.5
 
     });
 
 }
 
-for(let i=0;i<14;i++){
+
+for(
+    let i=0;
+    i<14;
+    i++
+){
 
     shapes.push({
 
         x:Math.random()*innerWidth,
+
         y:Math.random()*innerHeight,
 
         size:Math.random()*40+20,
@@ -1416,6 +1807,7 @@ for(let i=0;i<14;i++){
 
 }
 
+
 function animateMain(){
 
     ctx.clearRect(
@@ -1425,16 +1817,28 @@ function animateMain(){
         canvas.height
     );
 
-    for(const p of particles){
+
+    for(
+        const p of particles
+    ){
 
         p.x += p.vx;
+
         p.y += p.vy;
 
-        if(p.x<0)p.x=innerWidth;
-        if(p.x>innerWidth)p.x=0;
 
-        if(p.y<0)p.y=innerHeight;
-        if(p.y>innerHeight)p.y=0;
+        if(p.x<0)
+            p.x=innerWidth;
+
+        if(p.x>innerWidth)
+            p.x=0;
+
+        if(p.y<0)
+            p.y=innerHeight;
+
+        if(p.y>innerHeight)
+            p.y=0;
+
 
         ctx.beginPath();
 
@@ -1446,13 +1850,17 @@ function animateMain(){
             Math.PI*2
         );
 
-        ctx.fillStyle="#ffffff55";
+        ctx.fillStyle =
+            "#ffffff55";
 
         ctx.fill();
 
     }
 
-    for(const s of shapes){
+
+    for(
+        const s of shapes
+    ){
 
         s.rot += s.speed;
 
@@ -1463,9 +1871,12 @@ function animateMain(){
             s.y
         );
 
-        ctx.rotate(s.rot);
+        ctx.rotate(
+            s.rot
+        );
 
-        ctx.strokeStyle="#8b5cf622";
+        ctx.strokeStyle =
+            "#8b5cf622";
 
         ctx.lineWidth=2;
 
@@ -1480,74 +1891,103 @@ function animateMain(){
 
     }
 
-    requestAnimationFrame(animateMain);
+
+    requestAnimationFrame(
+        animateMain
+    );
 
 }
 
 animateMain();
 
 
-/* ================= CREATOR ================= */
+/* =========================================================
+   CREATOR
+========================================================= */
 
 const creator =
-    document.getElementById("creator");
-
-const drawingCanvas =
-    document.getElementById("drawingCanvas");
-
-const dctx =
-    drawingCanvas.getContext("2d");
-
-let drawing=false;
-let erasing=false;
-
-let brushColor="#ffffff";
-let brushSize=5;
-
-let projects =
-    JSON.parse(
-        localStorage.getItem("kggtProjects") || "[]"
+    document.getElementById(
+        "creator"
     );
 
 
+const drawingCanvas =
+    document.getElementById(
+        "drawingCanvas"
+    );
+
+
+const backgroundCanvas =
+    document.getElementById(
+        "backgroundCanvas"
+    );
+
+
+const dctx =
+    drawingCanvas.getContext(
+        "2d"
+    );
+
+
+const bctx =
+    backgroundCanvas.getContext(
+        "2d"
+    );
+
+
+let drawing=false;
+
+let erasing=false;
+
+let brushColor="#ffffff";
+
+let brushSize=5;
+
+let typeMode=false;
+
+let typeX=100;
+
+let typeY=150;
+
+
+let currentBackground =
+    localStorage.getItem(
+        "kggtBoardBackground"
+    ) || "dark";
+
+
+let projects =
+    JSON.parse(
+        localStorage.getItem(
+            "kggtProjects"
+        ) || "[]"
+    );
+
+
+/* =========================================================
+   CREATOR RESIZE
+========================================================= */
+
 function resizeDrawing(){
 
-    const old =
-        document.createElement("canvas");
+    drawingCanvas.width =
+        window.innerWidth;
 
-    old.width=drawingCanvas.width;
-    old.height=drawingCanvas.height;
+    drawingCanvas.height =
+        window.innerHeight;
 
-    if(old.width && old.height){
 
-        old.getContext("2d").drawImage(
-            drawingCanvas,
-            0,
-            0
-        );
+    backgroundCanvas.width =
+        window.innerWidth;
 
-    }
+    backgroundCanvas.height =
+        window.innerHeight;
 
-    drawingCanvas.width=window.innerWidth;
-    drawingCanvas.height=window.innerHeight;
 
-    if(old.width && old.height){
-
-        dctx.drawImage(
-            old,
-            0,
-            0,
-            old.width,
-            old.height,
-            0,
-            0,
-            drawingCanvas.width,
-            drawingCanvas.height
-        );
-
-    }
+    drawBoardBackground();
 
 }
+
 
 window.addEventListener(
     "resize",
@@ -1555,31 +1995,437 @@ window.addEventListener(
 );
 
 
+/* =========================================================
+   OPEN / CLOSE CREATOR
+========================================================= */
+
 function openCreator(){
 
-    creator.classList.add("active");
+    creator.classList.add(
+        "active"
+    );
 
-    setTimeout(()=>{
 
-        resizeDrawing();
+    setTimeout(
+        ()=>{
 
-    },50);
+            resizeDrawing();
+
+            setBoardBackground(
+                currentBackground
+            );
+
+        },
+        50
+    );
 
 }
 
 
 function closeCreator(){
 
-    creator.classList.remove("active");
+    cancelTypeEditor();
+
+    typeMode=false;
+
+    document
+        .getElementById(
+            "typeModeHint"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    document
+        .getElementById(
+            "backgroundMenu"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    creator.classList.remove(
+        "active"
+    );
 
 }
 
 
-/* ================= DRAWING ================= */
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+function setBoardBackground(
+    name
+){
+
+    currentBackground=name;
+
+    localStorage.setItem(
+        "kggtBoardBackground",
+        name
+    );
+
+    drawBoardBackground();
+
+    document
+        .getElementById(
+            "backgroundMenu"
+        )
+        .classList.remove(
+            "active"
+        );
+
+}
+
+
+function drawBoardBackground(){
+
+    if(!backgroundCanvas.width)
+        return;
+
+
+    const w =
+        backgroundCanvas.width;
+
+    const h =
+        backgroundCanvas.height;
+
+
+    bctx.clearRect(
+        0,
+        0,
+        w,
+        h
+    );
+
+
+    if(
+        currentBackground==="dark"
+    ){
+
+        bctx.fillStyle =
+            "#070711";
+
+        bctx.fillRect(
+            0,
+            0,
+            w,
+            h
+        );
+
+        return;
+
+    }
+
+
+    if(
+        currentBackground==="grid"
+    ){
+
+        bctx.fillStyle =
+            "#10121b";
+
+        bctx.fillRect(
+            0,
+            0,
+            w,
+            h
+        );
+
+
+        bctx.strokeStyle =
+            "#ffffff13";
+
+        const gap=28;
+
+
+        for(
+            let x=0;
+            x<w;
+            x+=gap
+        ){
+
+            bctx.beginPath();
+
+            bctx.moveTo(
+                x,
+                0
+            );
+
+            bctx.lineTo(
+                x,
+                h
+            );
+
+            bctx.stroke();
+
+        }
+
+
+        for(
+            let y=0;
+            y<h;
+            y+=gap
+        ){
+
+            bctx.beginPath();
+
+            bctx.moveTo(
+                0,
+                y
+            );
+
+            bctx.lineTo(
+                w,
+                y
+            );
+
+            bctx.stroke();
+
+        }
+
+        return;
+
+    }
+
+
+    if(
+        currentBackground==="dots"
+    ){
+
+        bctx.fillStyle =
+            "#10121b";
+
+        bctx.fillRect(
+            0,
+            0,
+            w,
+            h
+        );
+
+
+        bctx.fillStyle =
+            "#ffffff55";
+
+
+        for(
+            let x=12;
+            x<w;
+            x+=24
+        ){
+
+            for(
+                let y=12;
+                y<h;
+                y+=24
+            ){
+
+                bctx.beginPath();
+
+                bctx.arc(
+                    x,
+                    y,
+                    1.2,
+                    0,
+                    Math.PI*2
+                );
+
+                bctx.fill();
+
+            }
+
+        }
+
+        return;
+
+    }
+
+
+    if(
+        currentBackground==="paper"
+    ){
+
+        bctx.fillStyle =
+            "#eeeeee";
+
+        bctx.fillRect(
+            0,
+            0,
+            w,
+            h
+        );
+
+        return;
+
+    }
+
+
+    if(
+        currentBackground==="notebook"
+    ){
+
+        bctx.fillStyle =
+            "#f7f7f7";
+
+        bctx.fillRect(
+            0,
+            0,
+            w,
+            h
+        );
+
+
+        bctx.strokeStyle =
+            "#3b82f655";
+
+
+        for(
+            let y=24;
+            y<h;
+            y+=24
+        ){
+
+            bctx.beginPath();
+
+            bctx.moveTo(
+                0,
+                y
+            );
+
+            bctx.lineTo(
+                w,
+                y
+            );
+
+            bctx.stroke();
+
+        }
+
+
+        bctx.strokeStyle =
+            "#ef444455";
+
+
+        bctx.beginPath();
+
+        bctx.moveTo(
+            70,
+            0
+        );
+
+        bctx.lineTo(
+            70,
+            h
+        );
+
+        bctx.stroke();
+
+        return;
+
+    }
+
+
+    const colors={
+
+        sunset:[
+            "#21102f",
+            "#8b2f69",
+            "#f59e0b"
+        ],
+
+        ocean:[
+            "#07111f",
+            "#075985",
+            "#22d3ee"
+        ],
+
+        forest:[
+            "#06140d",
+            "#14532d",
+            "#65a30d"
+        ],
+
+        neon:[
+            "#090912",
+            "#7c3aed",
+            "#db2777"
+        ]
+
+    }[currentBackground];
+
+
+    const g =
+        bctx.createLinearGradient(
+            0,
+            0,
+            w,
+            h
+        );
+
+
+    g.addColorStop(
+        0,
+        colors[0]
+    );
+
+    g.addColorStop(
+        .5,
+        colors[1]
+    );
+
+    g.addColorStop(
+        1,
+        colors[2]
+    );
+
+
+    bctx.fillStyle=g;
+
+    bctx.fillRect(
+        0,
+        0,
+        w,
+        h
+    );
+
+}
+
+
+function toggleBackgroundMenu(){
+
+    document
+        .getElementById(
+            "backgroundMenu"
+        )
+        .classList.toggle(
+            "active"
+        );
+
+}
+
+
+/* =========================================================
+   DRAWING
+========================================================= */
 
 drawingCanvas.addEventListener(
     "pointerdown",
     e=>{
+
+        if(typeMode){
+
+            openTypeEditor(
+                e.clientX,
+                e.clientY
+            );
+
+            return;
+
+        }
+
 
         drawing=true;
 
@@ -1598,28 +2444,38 @@ drawingCanvas.addEventListener(
     "pointermove",
     e=>{
 
-        if(!drawing)return;
+        if(
+            !drawing ||
+            typeMode
+        )
+            return;
 
-        dctx.lineWidth=brushSize;
 
-        dctx.lineCap="round";
+        dctx.lineWidth =
+            Number(brushSize);
 
-        dctx.lineJoin="round";
+        dctx.lineCap =
+            "round";
+
+        dctx.lineJoin =
+            "round";
+
 
         if(erasing){
 
-            dctx.globalCompositeOperation=
+            dctx.globalCompositeOperation =
                 "destination-out";
 
         }else{
 
-            dctx.globalCompositeOperation=
+            dctx.globalCompositeOperation =
                 "source-over";
 
-            dctx.strokeStyle=
+            dctx.strokeStyle =
                 brushColor;
 
         }
+
 
         dctx.lineTo(
             e.clientX,
@@ -1638,65 +2494,122 @@ window.addEventListener(
 
         drawing=false;
 
-        dctx.globalCompositeOperation=
+        dctx.globalCompositeOperation =
             "source-over";
 
     }
 );
 
 
-/* ================= BRUSH ================= */
+/* =========================================================
+   TOOLS
+========================================================= */
 
 function setBrush(){
 
+    typeMode=false;
+
     erasing=false;
 
-    dctx.globalCompositeOperation=
+
+    dctx.globalCompositeOperation =
         "source-over";
 
+
     document
-        .getElementById("brushTool")
-        .classList.add("activeTool");
+        .getElementById(
+            "typeModeHint"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    document
+        .getElementById(
+            "brushTool"
+        )
+        .classList.add(
+            "activeTool"
+        );
+
+
+    document
+        .getElementById(
+            "typeTool"
+        )
+        .classList.remove(
+            "activeTool"
+        );
 
 }
 
 
 function setEraser(){
 
+    typeMode=false;
+
     erasing=true;
 
+
     document
-        .getElementById("brushTool")
-        .classList.remove("activeTool");
+        .getElementById(
+            "typeModeHint"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    document
+        .getElementById(
+            "brushTool"
+        )
+        .classList.remove(
+            "activeTool"
+        );
+
+
+    document
+        .getElementById(
+            "typeTool"
+        )
+        .classList.remove(
+            "activeTool"
+        );
 
 }
 
 
 document
-    .getElementById("colorPicker")
+    .getElementById(
+        "colorPicker"
+    )
     .addEventListener(
         "input",
         e=>{
 
-            brushColor=e.target.value;
+            brushColor =
+                e.target.value;
 
         }
     );
 
 
 document
-    .getElementById("brushSize")
+    .getElementById(
+        "brushSize"
+    )
     .addEventListener(
         "input",
         e=>{
 
-            brushSize=e.target.value;
+            brushSize =
+                Number(e.target.value);
 
         }
     );
 
-
-/* ================= CLEAR ================= */
 
 function clearDrawing(){
 
@@ -1710,603 +2623,381 @@ function clearDrawing(){
 }
 
 
-/* ================= TYPING ================= */
+/* =========================================================
+   TYPE MODE
+========================================================= */
 
-const textPanel =
-    document.getElementById("textPanel");
+function activateTypeMode(){
 
-const textInput =
-    document.getElementById("textInput");
+    typeMode=true;
 
+    erasing=false;
 
-function toggleTextPanel(){
-
-    textPanel.classList.toggle("show");
 
     document
-        .getElementById("typeTool")
-        .classList.toggle(
-            "activeTool",
-            textPanel.classList.contains("show")
+        .getElementById(
+            "typeModeHint"
+        )
+        .classList.add(
+            "active"
         );
 
-    if(
-        textPanel.classList.contains("show")
-    ){
 
-        setTimeout(
-            ()=>textInput.focus(),
-            80
+    document
+        .getElementById(
+            "brushTool"
+        )
+        .classList.remove(
+            "activeTool"
         );
 
-    }
+
+    document
+        .getElementById(
+            "typeTool"
+        )
+        .classList.add(
+            "activeTool"
+        );
+
+
+    cancelTypeEditor();
 
 }
 
 
-function addText(){
+function openTypeEditor(
+    x,
+    y
+){
 
-    const text =
-        textInput.value.trim();
-
-    if(!text){
-
-        textInput.focus();
-
-        return;
-
-    }
-
-    dctx.globalCompositeOperation=
-        "source-over";
-
-    dctx.fillStyle="#ffffff";
-
-    dctx.font=
-        "bold 34px Arial";
-
-    dctx.shadowColor="#8b5cf6";
-
-    dctx.shadowBlur=15;
-
-    const lines =
-        text.split(/\r?\n/);
-
-    const maxWidth =
-        Math.min(
-            760,
-            drawingCanvas.width-80
+    typeX =
+        Math.max(
+            15,
+            Math.min(
+                x,
+                window.innerWidth-345
+            )
         );
 
-    let x=70;
-    let y=160;
 
-    const lineHeight=45;
+    typeY =
+        Math.max(
+            85,
+            Math.min(
+                y,
+                window.innerHeight-250
+            )
+        );
+
+
+    const editor =
+        document.getElementById(
+            "typeEditor"
+        );
+
+
+    editor.style.left =
+        typeX+"px";
+
+
+    editor.style.top =
+        typeY+"px";
+
+
+    editor.classList.add(
+        "active"
+    );
+
+
+    setTimeout(
+        ()=>{
+            document
+                .getElementById(
+                    "typeText"
+                )
+                .focus();
+        },
+        30
+    );
+
+}
+
+
+function cancelTypeEditor(){
+
+    document
+        .getElementById(
+            "typeEditor"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    document
+        .getElementById(
+            "typeText"
+        )
+        .value="";
+
+}
+
+
+function placeTypedText(){
+
+    const text =
+        document
+            .getElementById(
+                "typeText"
+            )
+            .value
+            .trim();
+
+
+    if(!text)
+        return;
+
+
+    const font =
+        document
+            .getElementById(
+                "typeFont"
+            )
+            .value;
+
+
+    const size =
+        Number(
+            document
+                .getElementById(
+                    "typeSize"
+                )
+                .value
+        );
+
+
+    const color =
+        document
+            .getElementById(
+                "typeColor"
+            )
+            .value;
+
+
+    dctx.globalCompositeOperation =
+        "source-over";
+
+
+    dctx.fillStyle =
+        color;
+
+
+    dctx.font =
+        `600 ${size}px "${font}"`;
+
+
+    dctx.shadowColor =
+        color;
+
+    dctx.shadowBlur=7;
+
+
+    const maxWidth =
+        Math.max(
+            180,
+            window.innerWidth-typeX-35
+        );
+
+
+    const words =
+        text.split(/\s+/);
+
+
+    const lineHeight =
+        size*1.35;
+
+
+    let line="";
+
+    let y=
+        typeY+size;
 
 
     for(
-        const line of lines
+        const word of words
     ){
 
-        const words =
-            line.split(" ");
+        const test =
+            line
+            ? line+" "+word
+            : word;
 
-        let current="";
 
-
-        for(
-            const word of words
+        if(
+            dctx.measureText(test).width >
+            maxWidth &&
+            line
         ){
 
-            const test =
-                current
-                ?
-                current+" "+word
-                :
-                word;
-
-
-            if(
-                dctx.measureText(test).width
-                >
-                maxWidth
-                &&
-                current
-            ){
-
-                dctx.fillText(
-                    current,
-                    x,
-                    y
-                );
-
-                y+=lineHeight;
-
-                current=word;
-
-            }else{
-
-                current=test;
-
-            }
-
-        }
-
-
-        if(current){
-
             dctx.fillText(
-                current,
-                x,
+                line,
+                typeX,
                 y
             );
 
+
+            line=word;
+
             y+=lineHeight;
 
+        }else{
+
+            line=test;
+
         }
+
+    }
+
+
+    if(line){
+
+        dctx.fillText(
+            line,
+            typeX,
+            y
+        );
 
     }
 
 
     dctx.shadowBlur=0;
 
-    textInput.value="";
 
-    textInput.focus();
-
-}
+    cancelTypeEditor();
 
 
-textInput.addEventListener(
-    "keydown",
-    e=>{
+    typeMode=false;
 
-        if(
-            (e.ctrlKey || e.metaKey)
-            &&
-            e.key==="Enter"
-        ){
-
-            e.preventDefault();
-
-            addText();
-
-        }
-
-    }
-);
-
-
-/* ================= MATH AI ================= */
-
-const mathInput =
-    document.getElementById("mathInput");
-
-const mathMessages =
-    document.getElementById("mathMessages");
-
-
-function toggleMathAI(){
 
     document
-        .getElementById("mathAI")
-        .classList.toggle("closed");
-
-}
-
-
-function addMathMessage(
-    text,
-    type
-){
-
-    const msg =
-        document.createElement("div");
-
-    msg.className=
-        "mathMsg "+type;
-
-    msg.textContent=text;
-
-    mathMessages.appendChild(msg);
-
-    mathMessages.scrollTop=
-        mathMessages.scrollHeight;
-
-}
-
-
-/* Clean user expression */
-
-function cleanMathExpression(input){
-
-    let s=
-        input
-        .toLowerCase()
-        .replace(
-            /what\s+is|calculate|solve|find|answer|equals?/g,
-            ""
+        .getElementById(
+            "typeModeHint"
         )
-        .replace(/,/g,"")
-        .replace(/×/g,"*")
-        .replace(/÷/g,"/")
-        .replace(/−/g,"-")
-        .replace(/√\s*/g,"sqrt")
-        .replace(/π/g,"pi")
-        .trim();
-
-
-    const percent =
-        s.match(
-            /^(-?\d+(?:\.\d+)?)\s*%\s*(?:of|×|\*)\s*(-?\d+(?:\.\d+)?)$/
+        .classList.remove(
+            "active"
         );
 
 
-    if(percent){
-
-        return {
-
-            value:
-                Number(percent[1])
-                *
-                Number(percent[2])
-                /
-                100,
-
-            steps:
-                `${percent[1]}% of ${percent[2]}
-= (${percent[1]} ÷ 100) × ${percent[2]}`
-
-        };
-
-    }
-
-
-    s=
-        s.replace(
-            /(\d+(?:\.\d+)?)\s*\^?\s*²/g,
-            "($1)^2"
+    document
+        .getElementById(
+            "typeTool"
+        )
+        .classList.remove(
+            "activeTool"
         );
 
 
-    s=
-        s.replace(
-            /(\d+(?:\.\d+)?)\s*\^?\s*³/g,
-            "($1)^3"
+    document
+        .getElementById(
+            "brushTool"
+        )
+        .classList.add(
+            "activeTool"
         );
-
-
-    return {
-        expression:s
-    };
 
 }
 
 
-/* Safe calculator */
+document
+    .getElementById(
+        "typeText"
+    )
+    .addEventListener(
+        "keydown",
+        e=>{
 
-function safeCalculate(expr){
+            if(
+                (e.ctrlKey || e.metaKey) &&
+                e.key==="Enter"
+            ){
 
-    if(
-        !/^[0-9+\-*/().%\s^a-z]+$/
-        .test(expr)
-    ){
+                e.preventDefault();
 
-        throw new Error("unsupported");
+                placeTypedText();
 
-    }
+            }
 
-
-    if(
-        /[a-z]/.test(expr)
-        &&
-        !/^(sqrt|sin|cos|tan|log|pi)/
-        .test(expr)
-    ){
-
-        throw new Error("unsupported");
-
-    }
-
-
-    let s=
-        expr
-        .replace(
-            /\bpi\b/g,
-            "Math.PI"
-        )
-        .replace(
-            /sqrt\s*\(/g,
-            "Math.sqrt("
-        )
-        .replace(
-            /\^/g,
-            "**"
-        );
-
-
-    if(
-        !/^[0-9+\-*/().\s*]+$/
-        .test(
-            s.replace(
-                /Math\.(PI|sqrt)/g,
-                ""
-            )
-        )
-    ){
-
-        throw new Error("unsupported");
-
-    }
-
-
-    return Function(
-        '"use strict"; return ('+
-        s+
-        ')'
-    )();
-
-}
-
-
-/* Linear equation */
-
-function solveLinearEquation(raw){
-
-    const s=
-        raw
-        .replace(/\s+/g,"")
-        .replace(/−/g,"-");
-
-
-    const match=
-        s.match(
-            /^([+-]?(?:\d*\.?\d*)x)([+-]\d+(?:\.\d+)?)?=([+-]?\d+(?:\.\d+)?)$/
-        );
-
-
-    if(!match)return null;
-
-
-    let a=
-        parseFloat(
-            match[1]
-            .replace("x","")
-        );
-
-
-    if(
-        match[1]==="x"
-        ||
-        match[1]==="+x"
-    ){
-
-        a=1;
-
-    }
-
-
-    if(match[1]==="-x"){
-
-        a=-1;
-
-    }
-
-
-    const b=
-        match[2]
-        ?
-        parseFloat(match[2])
-        :
-        0;
-
-
-    const c=
-        parseFloat(match[3]);
-
-
-    if(a===0)return null;
-
-
-    const x=
-        (c-b)/a;
-
-
-    return `
-Step 1: ${a}x ${b>=0?"+ "+b:"- "+Math.abs(b)} = ${c}
-
-Step 2: ${a}x = ${c-b}
-
-Step 3: x = ${x}
-`;
-
-}
-
-
-/* Solve */
-
-function solveMath(){
-
-    const raw=
-        mathInput.value.trim();
-
-
-    if(!raw)return;
-
-
-    addMathMessage(
-        raw,
-        "user"
+        }
     );
 
 
-    mathInput.value="";
-
-
-    try{
-
-        const equation=
-            solveLinearEquation(raw);
-
-
-        if(equation){
-
-            addMathMessage(
-                equation,
-                "ai"
-            );
-
-            return;
-
-        }
-
-
-        const parsed=
-            cleanMathExpression(raw);
-
-
-        if(
-            parsed.value !== undefined
-        ){
-
-            addMathMessage(
-                `Answer: ${parsed.value}
-
-${parsed.steps}`,
-                "ai"
-            );
-
-            return;
-
-        }
-
-
-        const expr=
-            parsed.expression;
-
-
-        const sqrtOnly=
-            expr.match(
-                /^sqrt(\d+(?:\.\d+)?)$/
-            );
-
-
-        if(sqrtOnly){
-
-            const n=
-                Number(sqrtOnly[1]);
-
-
-            addMathMessage(
-                `Answer: ${Math.sqrt(n)}
-
-√${n} = ${Math.sqrt(n)}`,
-                "ai"
-            );
-
-            return;
-
-        }
-
-
-        const answer=
-            safeCalculate(expr);
-
-
-        if(Number.isFinite(answer)){
-
-            const rounded=
-                Math.abs(
-                    answer-Math.round(answer)
-                )<1e-10
-                ?
-                Math.round(answer)
-                :
-                Number(
-                    answer.toFixed(10)
-                );
-
-
-            addMathMessage(
-                `Answer: ${rounded}
-
-Solved locally by KGGT Math AI.`,
-                "ai"
-            );
-
-            return;
-
-        }
-
-
-        throw new Error("not finite");
-
-
-    }catch(err){
-
-        addMathMessage(
-            `I can solve basic arithmetic,
-percentages, square roots,
-and simple linear equations.
-
-Try:
-25 × 16
-15% of 240
-√144
-2x + 5 = 17`,
-            "ai"
-        );
-
-    }
-
-}
-
-
-mathInput.addEventListener(
-    "keydown",
-    e=>{
-
-        if(e.key==="Enter"){
-
-            e.preventDefault();
-
-            solveMath();
-
-        }
-
-    }
-);
-
-
-/* ================= SAVE PROJECT ================= */
+/* =========================================================
+   SAVE
+========================================================= */
 
 function saveDrawing(){
 
-    const title=
+    const title =
         prompt(
             "Enter a name for your KGGT project:",
             "My KGGT Sketch"
         );
 
 
-    if(!title)return;
+    if(!title)
+        return;
 
 
-    const image=
-        drawingCanvas.toDataURL(
-            "image/png"
+    const output =
+        document.createElement(
+            "canvas"
         );
+
+
+    output.width =
+        drawingCanvas.width;
+
+
+    output.height =
+        drawingCanvas.height;
+
+
+    const octx =
+        output.getContext(
+            "2d"
+        );
+
+
+    octx.drawImage(
+        backgroundCanvas,
+        0,
+        0
+    );
+
+
+    octx.drawImage(
+        drawingCanvas,
+        0,
+        0
+    );
 
 
     projects.push({
 
         title:title,
 
-        image:image,
+        image:
+            output.toDataURL(
+                "image/png"
+            ),
 
         date:
             new Date()
-            .toLocaleDateString()
+                .toLocaleDateString(),
+
+        background:
+            currentBackground
 
     });
 
@@ -2327,17 +3018,19 @@ function saveDrawing(){
 }
 
 
-/* ================= PROJECT GALLERY ================= */
+/* =========================================================
+   PROJECTS
+========================================================= */
 
 function renderProjects(){
 
-    const grid=
+    const grid =
         document.getElementById(
             "projectGrid"
         );
 
 
-    const empty=
+    const empty =
         document.getElementById(
             "emptyProjects"
         );
@@ -2345,29 +3038,31 @@ function renderProjects(){
 
     if(projects.length===0){
 
-        empty.style.display="block";
+        empty.style.display =
+            "block";
 
         return;
 
     }
 
 
-    empty.style.display="none";
+    empty.style.display =
+        "none";
 
 
     grid.innerHTML="";
 
 
     projects.forEach(
-        (project,index)=>{
+        project=>{
 
-            const card=
+            const card =
                 document.createElement(
                     "div"
                 );
 
 
-            card.className=
+            card.className =
                 "projectCard";
 
 
@@ -2377,17 +3072,15 @@ function renderProjects(){
 
                     <img
                         src="${project.image}"
-                        style="
-                            width:100%;
-                            height:100%;
-                            object-fit:contain;
-                        "
+                        alt="KGGT Sketch"
                     >
 
                 </div>
 
                 <h3>
-                    ${escapeHTML(project.title)}
+                    ${escapeHTML(
+                        project.title
+                    )}
                 </h3>
 
                 <p style="
@@ -2395,13 +3088,16 @@ function renderProjects(){
                     margin-top:8px;
                     font-size:13px;
                 ">
-                    Created ${project.date}
+                    Created
+                    ${project.date}
                 </p>
 
             `;
 
 
-            grid.appendChild(card);
+            grid.appendChild(
+                card
+            );
 
         }
     );
@@ -2409,12 +3105,19 @@ function renderProjects(){
 }
 
 
-function escapeHTML(text){
+function escapeHTML(
+    text
+){
 
-    const div=
-        document.createElement("div");
+    const div =
+        document.createElement(
+            "div"
+        );
 
-    div.textContent=text;
+
+    div.textContent =
+        text;
+
 
     return div.innerHTML;
 
@@ -2422,6 +3125,402 @@ function escapeHTML(text){
 
 
 renderProjects();
+
+
+/* =========================================================
+   HOME AI
+========================================================= */
+
+const homeMathInput =
+    document.getElementById(
+        "homeMathInput"
+    );
+
+
+homeMathInput.addEventListener(
+    "keydown",
+    e=>{
+
+        if(e.key==="Enter"){
+
+            e.preventDefault();
+
+            solveHomeMath();
+
+        }
+
+    }
+);
+
+
+function toggleHomeAI(){
+
+    const body =
+        document.getElementById(
+            "homeAIBody"
+        );
+
+
+    body.classList.toggle(
+        "hiddenAI"
+    );
+
+
+    const button =
+        document.querySelector(
+            ".homeAIHead button"
+        );
+
+
+    button.textContent =
+        body.classList.contains(
+            "hiddenAI"
+        )
+        ? "+"
+        : "−";
+
+}
+
+
+function addHomeAIMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "homeAIMessages"
+        );
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "homeAIMessage "+type;
+
+
+    div.innerHTML =
+        text;
+
+
+    box.appendChild(
+        div
+    );
+
+
+    box.scrollTop =
+        box.scrollHeight;
+
+}
+
+
+function cleanMathExpression(
+    input
+){
+
+    return input
+
+        .toLowerCase()
+
+        .replace(
+            /what\s+is|calculate|solve|find|answer/gi,
+            ""
+        )
+
+        .replace(
+            /×/g,
+            "*"
+        )
+
+        .replace(
+            /÷/g,
+            "/"
+        )
+
+        .replace(
+            /[−–—]/g,
+            "-"
+        )
+
+        .replace(
+            /,/g,
+            ""
+        )
+
+        .replace(
+            /(\d+(?:\.\d+)?)\s*%/g,
+            "($1/100)"
+        )
+
+        .replace(
+            /√\s*(\d+(?:\.\d+)?)/g,
+            "sqrt($1)"
+        )
+
+        .replace(
+            /square root of\s*(\d+(?:\.\d+)?)/g,
+            "sqrt($1)"
+        )
+
+        .replace(
+            /π/g,
+            "pi"
+        )
+
+        .trim();
+
+}
+
+
+function solveLinearEquation(
+    raw
+){
+
+    let s =
+        raw
+            .toLowerCase()
+            .replace(
+                /\s+/g,
+                ""
+            )
+            .replace(
+                /−/g,
+                "-"
+            );
+
+
+    if(
+        !s.includes("=") ||
+        !/x/.test(s)
+    )
+        return null;
+
+
+    const parts =
+        s.split("=");
+
+
+    if(parts.length!==2)
+        return null;
+
+
+    const left =
+        parts[0];
+
+
+    const right =
+        parts[1];
+
+
+    if(
+        /x/.test(right)
+    )
+        return null;
+
+
+    const rightNum =
+        Number(right);
+
+
+    if(
+        !Number.isFinite(
+            rightNum
+        )
+    )
+        return null;
+
+
+    const match =
+        left.match(
+            /^([+-]?\d*\.?\d*)x([+-]\d*\.?\d*)?$/
+        );
+
+
+    if(!match)
+        return null;
+
+
+    let a =
+        match[1];
+
+
+    if(
+        a==="" ||
+        a==="+"
+    ){
+
+        a=1;
+
+    }else if(
+        a==="-"
+    ){
+
+        a=-1;
+
+    }else{
+
+        a=Number(a);
+
+    }
+
+
+    const b =
+        match[2]
+        ? Number(match[2])
+        : 0;
+
+
+    if(
+        !Number.isFinite(a) ||
+        a===0 ||
+        !Number.isFinite(b)
+    )
+        return null;
+
+
+    return (
+        rightNum-b
+    )/a;
+
+}
+
+
+function safeMathEvaluate(
+    expr
+){
+
+    if(!expr)
+        return null;
+
+
+    let s =
+        expr
+            .replace(
+                /pi/g,
+                "Math.PI"
+            )
+            .replace(
+                /sqrt\s*\(/g,
+                "Math.sqrt("
+            )
+            .replace(
+                /\^/g,
+                "**"
+            );
+
+
+    if(
+        !/^[0-9+\-*/().%\s_a-zA-Z]*$/.test(s)
+    ){
+
+        return null;
+
+    }
+
+
+    try{
+
+        const result =
+            Function(
+                '"use strict";return ('+
+                s+
+                ')'
+            )();
+
+
+        if(
+            typeof result!=="number" ||
+            !Number.isFinite(result)
+        )
+            return null;
+
+
+        return result;
+
+    }catch{
+
+        return null;
+
+    }
+
+}
+
+
+function solveHomeMath(){
+
+    const raw =
+        homeMathInput.value.trim();
+
+
+    if(!raw)
+        return;
+
+
+    addHomeAIMessage(
+        escapeHTML(raw),
+        "user"
+    );
+
+
+    homeMathInput.value="";
+
+
+    const equation =
+        solveLinearEquation(
+            raw
+        );
+
+
+    if(
+        equation!==null
+    ){
+
+        addHomeAIMessage(
+            `x = <b>${Number(
+                equation.toFixed(8)
+            )}</b>`,
+            "ai"
+        );
+
+        return;
+
+    }
+
+
+    const result =
+        safeMathEvaluate(
+            cleanMathExpression(
+                raw
+            )
+        );
+
+
+    if(
+        result!==null
+    ){
+
+        addHomeAIMessage(
+            `Answer: <b>${Number(
+                result.toFixed(8)
+            )}</b>`,
+            "ai"
+        );
+
+        return;
+
+    }
+
+
+    addHomeAIMessage(
+        "I can currently handle basic arithmetic, percentages, square roots and simple linear equations such as 2x + 5 = 17.",
+        "ai"
+    );
+
+}
 
 </script>
 
