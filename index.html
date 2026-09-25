@@ -28,40 +28,101 @@ body{
     min-height:100vh;
     overflow-x:hidden;
 
+    /* 🌈 CHANGING COLOUR BACKGROUND */
     background:
-        radial-gradient(circle at 15% 20%, rgba(124,58,237,.35), transparent 28%),
-        radial-gradient(circle at 85% 70%, rgba(6,182,212,.25), transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(236,72,153,.15), transparent 30%),
-        linear-gradient(135deg,#050014,#0b1020,#020617);
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(124,58,237,.55),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(6,182,212,.45),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 70% 80%,
+            rgba(236,72,153,.45),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 25% 85%,
+            rgba(34,197,94,.30),
+            transparent 28%
+        ),
+        linear-gradient(
+            120deg,
+            #050014,
+            #111827,
+            #020617
+        );
+
+    background-size:
+        180% 180%,
+        180% 180%,
+        180% 180%,
+        180% 180%,
+        300% 300%;
+
+    animation:
+        studioColors 12s ease-in-out infinite alternate;
 
     background-attachment:fixed;
 }
 
-/* Animated background */
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:-30%;
-    z-index:-5;
+/* =========================================================
+   🌈 ANIMATED STUDIO COLOURS
+========================================================= */
 
-    background:
-        radial-gradient(circle,rgba(139,92,246,.14),transparent 25%),
-        radial-gradient(circle,rgba(34,211,238,.12),transparent 25%);
+@keyframes studioColors{
 
-    animation:backgroundMove 14s ease-in-out infinite alternate;
-    pointer-events:none;
-}
-
-@keyframes backgroundMove{
     0%{
-        transform:translate(-5%,-4%) scale(1);
+        background-position:
+            0% 20%,
+            100% 10%,
+            80% 100%,
+            10% 90%,
+            0% 50%;
+    }
+
+    25%{
+        background-position:
+            30% 50%,
+            70% 20%,
+            40% 80%,
+            80% 30%,
+            50% 30%;
+    }
+
+    50%{
+        background-position:
+            70% 80%,
+            20% 60%,
+            90% 20%,
+            30% 70%,
+            100% 50%;
+    }
+
+    75%{
+        background-position:
+            90% 30%,
+            50% 90%,
+            20% 40%,
+            70% 80%,
+            40% 100%;
     }
 
     100%{
-        transform:translate(5%,4%) scale(1.15);
+        background-position:
+            20% 90%,
+            90% 70%,
+            50% 10%,
+            10% 40%,
+            100% 20%;
     }
 }
+
 
 /* =========================================================
    BOOT SCREEN
@@ -106,6 +167,7 @@ body::before{
             #fff,
             #a78bfa,
             #22d3ee,
+            #ec4899,
             #fff
         );
 
@@ -119,30 +181,43 @@ body::before{
         logoZoom 2s cubic-bezier(.16,1,.3,1),
         gradientMove 3s linear infinite;
 
-    filter:drop-shadow(0 0 35px rgba(124,58,237,.7));
+    filter:
+        drop-shadow(
+            0 0 35px
+            rgba(124,58,237,.7)
+        );
 }
 
 .boot-sub{
     margin-top:15px;
+
     letter-spacing:7px;
+
     color:#94a3b8;
+
     animation:bootText 2s ease;
 }
 
 .boot-ring{
     position:absolute;
+
     left:50%;
     top:50%;
 
     width:280px;
     height:280px;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    border:1px solid rgba(167,139,250,.3);
+    border:
+        1px solid
+        rgba(167,139,250,.3);
+
     border-radius:50%;
 
-    animation:ringSpin 5s linear infinite;
+    animation:
+        ringSpin 5s linear infinite;
 
     pointer-events:none;
 }
@@ -150,16 +225,23 @@ body::before{
 .boot-ring::before,
 .boot-ring::after{
     content:"";
+
     position:absolute;
+
     inset:20px;
 
-    border:1px solid rgba(34,211,238,.25);
+    border:
+        1px solid
+        rgba(34,211,238,.25);
+
     border-radius:50%;
 }
 
 .boot-ring::after{
     inset:45px;
-    border-color:rgba(236,72,153,.2);
+
+    border-color:
+        rgba(236,72,153,.2);
 }
 
 .boot-line{
@@ -168,28 +250,34 @@ body::before{
 
     margin:35px auto 0;
 
-    background:rgba(255,255,255,.1);
+    background:
+        rgba(255,255,255,.1);
 
     overflow:hidden;
+
     border-radius:10px;
 }
 
 .boot-line span{
     display:block;
+
     width:0;
     height:100%;
 
-    background:linear-gradient(
-        90deg,
-        #7c3aed,
-        #22d3ee,
-        #ec4899
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #22d3ee,
+            #ec4899
+        );
 
-    animation:loading 2.5s ease forwards;
+    animation:
+        loading 2.5s ease forwards;
 }
 
 @keyframes logoZoom{
+
     0%{
         transform:scale(2.5);
         opacity:0;
@@ -208,6 +296,7 @@ body::before{
 }
 
 @keyframes bootText{
+
     0%{
         opacity:0;
         letter-spacing:30px;
@@ -220,18 +309,23 @@ body::before{
 }
 
 @keyframes gradientMove{
+
     to{
         background-position:300% center;
     }
 }
 
 @keyframes ringSpin{
+
     to{
-        transform:translate(-50%,-50%) rotate(360deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
     }
 }
 
 @keyframes loading{
+
     to{
         width:100%;
     }
@@ -253,10 +347,14 @@ nav{
 
     padding:15px 5%;
 
-    background:rgba(3,5,18,.72);
+    background:
+        rgba(3,5,18,.70);
+
     backdrop-filter:blur(18px);
 
-    border-bottom:1px solid rgba(255,255,255,.12);
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.12);
 }
 
 .logo{
@@ -271,9 +369,11 @@ nav{
 nav a,
 nav button{
     color:#fff;
+
     text-decoration:none;
 
     border:0;
+
     background:transparent;
 
     padding:10px 13px;
@@ -281,6 +381,7 @@ nav button{
     border-radius:10px;
 
     font-weight:bold;
+
     cursor:pointer;
 
     transition:.25s;
@@ -289,7 +390,9 @@ nav button{
 nav a:hover,
 nav button:hover{
     background:#7c3aed;
-    transform:translateY(-2px);
+
+    transform:
+        translateY(-2px);
 }
 
 @media(max-width:850px){
@@ -327,7 +430,9 @@ nav button:hover{
     min-height:82vh;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     text-align:center;
@@ -340,7 +445,9 @@ nav button:hover{
 }
 
 .hero h1{
-    font-size:clamp(50px,9vw,110px);
+    font-size:
+        clamp(50px,9vw,110px);
+
     line-height:.95;
 
     background:
@@ -349,23 +456,33 @@ nav button:hover{
             #fff,
             #a78bfa,
             #22d3ee,
+            #ec4899,
             #fff
         );
 
     background-size:250% auto;
 
     -webkit-background-clip:text;
+
     background-clip:text;
+
     color:transparent;
 
-    animation:gradientMove 5s linear infinite;
+    animation:
+        gradientMove 5s linear infinite;
 
-    filter:drop-shadow(0 15px 35px rgba(124,58,237,.3));
+    filter:
+        drop-shadow(
+            0 15px 35px
+            rgba(124,58,237,.3)
+        );
 }
 
 .hero p{
     margin-top:25px;
+
     color:#cbd5e1;
+
     font-size:20px;
 }
 
@@ -380,17 +497,30 @@ section{
 
 .section-title{
     font-size:42px;
+
     margin-bottom:35px;
 
-    background:linear-gradient(90deg,#fff,#a78bfa);
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #a78bfa,
+            #22d3ee
+        );
+
     -webkit-background-clip:text;
+
     color:transparent;
 }
 
 .grid{
     display:grid;
+
     grid-template-columns:
-        repeat(auto-fit,minmax(240px,1fr));
+        repeat(
+            auto-fit,
+            minmax(240px,1fr)
+        );
 
     gap:25px;
 }
@@ -400,21 +530,28 @@ section{
 
     border-radius:22px;
 
-    background:rgba(255,255,255,.075);
+    background:
+        rgba(255,255,255,.075);
 
-    border:1px solid rgba(255,255,255,.14);
+    border:
+        1px solid
+        rgba(255,255,255,.14);
 
     backdrop-filter:blur(18px);
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.2);
+        0 20px 60px
+        rgba(0,0,0,.2);
 
     transition:.3s;
 }
 
 .glass:hover{
-    transform:translateY(-7px);
-    border-color:rgba(167,139,250,.5);
+    transform:
+        translateY(-7px);
+
+    border-color:
+        rgba(167,139,250,.5);
 }
 
 .glass h3{
@@ -423,6 +560,7 @@ section{
 
 .glass p{
     color:#cbd5e1;
+
     line-height:1.6;
 }
 
@@ -433,11 +571,13 @@ section{
 
 .btn{
     border:0;
+
     border-radius:12px;
 
     padding:12px 18px;
 
     color:#fff;
+
     background:#7c3aed;
 
     font-weight:bold;
@@ -448,7 +588,9 @@ section{
 }
 
 .btn:hover{
-    transform:translateY(-2px);
+    transform:
+        translateY(-2px);
+
     background:#8b5cf6;
 }
 
@@ -471,6 +613,7 @@ section{
 
 .ai-box{
     max-width:700px;
+
     margin:auto;
 }
 
@@ -481,9 +624,12 @@ section{
 
     border-radius:14px;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:
+        1px solid
+        rgba(255,255,255,.15);
 
-    background:rgba(0,0,0,.35);
+    background:
+        rgba(0,0,0,.35);
 
     color:#fff;
 
@@ -503,27 +649,30 @@ section{
 
     border-radius:15px;
 
-    background:rgba(0,0,0,.3);
+    background:
+        rgba(0,0,0,.3);
 
     color:#cbd5e1;
 }
 
 
 /* =========================================================
-   POKEMON STYLE CARDS
+   POKEMON CARDS
 ========================================================= */
 
 .gallery{
     display:grid;
 
     grid-template-columns:
-        repeat(auto-fit,minmax(270px,1fr));
+        repeat(
+            auto-fit,
+            minmax(270px,1fr)
+        );
 
     gap:30px;
 }
 
 .pokemon-card{
-
     position:relative;
 
     padding:15px;
@@ -538,29 +687,38 @@ section{
             #fff2a8
         );
 
-    border:7px solid #c89b25;
+    border:
+        7px solid
+        #c89b25;
 
     color:#241700;
 
     box-shadow:
-        0 18px 35px rgba(0,0,0,.45),
-        inset 0 0 0 2px #fff4b0;
+        0 18px 35px
+        rgba(0,0,0,.45),
+
+        inset 0 0 0 2px
+        #fff4b0;
 
     transition:.35s;
 }
 
 .pokemon-card:hover{
+
     transform:
         translateY(-10px)
         rotate(-1deg);
 
     box-shadow:
-        0 25px 50px rgba(0,0,0,.55);
+        0 25px 50px
+        rgba(0,0,0,.55);
 }
 
 .card-top{
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
     margin-bottom:10px;
@@ -570,6 +728,7 @@ section{
 
 .rarity{
     background:#f59e0b;
+
     color:#fff;
 
     padding:5px 9px;
@@ -585,13 +744,16 @@ section{
 
 .card-image{
     width:100%;
+
     height:240px;
 
     object-fit:cover;
 
     border-radius:8px;
 
-    border:4px solid #7c5a12;
+    border:
+        4px solid
+        #7c5a12;
 
     background:#ddd;
 }
@@ -610,11 +772,13 @@ section{
     color:#fff;
 
     font-size:12px;
+
     font-weight:bold;
 }
 
 .card-title{
     font-size:22px;
+
     font-weight:1000;
 
     margin-top:10px;
@@ -626,27 +790,32 @@ section{
     color:#dc2626;
 
     font-size:25px;
+
     font-weight:1000;
 }
 
 .card-actions{
     display:flex;
+
     flex-wrap:wrap;
+
     gap:7px;
 }
 
 .card-actions button{
     flex:1;
+
     min-width:75px;
 }
 
 
 /* =========================================================
-   MODAL
+   MODALS
 ========================================================= */
 
 .modal{
     position:fixed;
+
     inset:0;
 
     z-index:9000;
@@ -654,11 +823,13 @@ section{
     display:none;
 
     justify-content:center;
+
     align-items:center;
 
     padding:20px;
 
-    background:rgba(0,0,0,.8);
+    background:
+        rgba(0,0,0,.8);
 
     backdrop-filter:blur(10px);
 }
@@ -669,7 +840,9 @@ section{
 
 .modal-box{
     width:min(600px,100%);
+
     max-height:90vh;
+
     overflow:auto;
 
     padding:30px;
@@ -678,7 +851,9 @@ section{
 
     background:#101426;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:
+        1px solid
+        rgba(255,255,255,.15);
 }
 
 .modal-box h2{
@@ -697,7 +872,9 @@ section{
 
     border-radius:10px;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:
+        1px solid
+        rgba(255,255,255,.15);
 
     background:#080b16;
 
@@ -708,12 +885,15 @@ section{
 
 .modal-buttons{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
 }
 
 .preview-image{
     width:100%;
+
     max-height:70vh;
 
     object-fit:contain;
@@ -725,17 +905,20 @@ section{
 
 
 /* =========================================================
-   CREATE / CANVAS
+   CREATOR
 ========================================================= */
 
 .creator{
     max-width:1000px;
+
     margin:auto;
 }
 
 .toolbar{
     display:flex;
+
     flex-wrap:wrap;
+
     gap:8px;
 
     margin-bottom:15px;
@@ -743,6 +926,7 @@ section{
 
 canvas{
     width:100%;
+
     height:500px;
 
     background:#fff;
@@ -756,7 +940,9 @@ canvas{
 
 .color-row{
     display:flex;
+
     flex-wrap:wrap;
+
     gap:15px;
 
     margin-top:15px;
@@ -772,43 +958,56 @@ canvas{
 
 
 /* =========================================================
-   URL INSPECTOR PAGE
+   URL INSPECTOR
 ========================================================= */
 
 #inspectorPage{
-    min-height:calc(100vh - 70px);
-    padding:40px 7%;
+    min-height:
+        calc(100vh - 70px);
+
+    padding:
+        40px 7%;
 }
 
 .inspector-container{
+
     width:min(950px,100%);
+
     margin:40px auto;
 
     padding:40px;
 
     border-radius:28px;
 
-    background:rgba(255,255,255,.075);
+    background:
+        rgba(255,255,255,.075);
 
-    border:1px solid rgba(255,255,255,.15);
+    border:
+        1px solid
+        rgba(255,255,255,.15);
 
     backdrop-filter:blur(20px);
 
-    box-shadow:0 30px 100px rgba(0,0,0,.4);
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.4);
 }
 
 .inspector-heading{
-    font-size:clamp(40px,7vw,75px);
+    font-size:
+        clamp(40px,7vw,75px);
 
     background:
         linear-gradient(
             90deg,
             #fff,
             #a78bfa,
-            #22d3ee
+            #22d3ee,
+            #ec4899
         );
 
     -webkit-background-clip:text;
+
     color:transparent;
 
     margin-bottom:10px;
@@ -816,11 +1015,13 @@ canvas{
 
 .inspector-sub{
     color:#94a3b8;
+
     margin-bottom:30px;
 }
 
 .url-input-row{
     display:flex;
+
     gap:10px;
 }
 
@@ -831,9 +1032,12 @@ canvas{
 
     border-radius:13px;
 
-    border:1px solid rgba(255,255,255,.2);
+    border:
+        1px solid
+        rgba(255,255,255,.2);
 
-    background:rgba(0,0,0,.4);
+    background:
+        rgba(0,0,0,.4);
 
     color:#fff;
 
@@ -844,7 +1048,9 @@ canvas{
 
 .quick-buttons{
     display:flex;
+
     flex-wrap:wrap;
+
     gap:10px;
 
     margin-top:15px;
@@ -881,15 +1087,19 @@ canvas{
 
     border-radius:12px;
 
-    background:rgba(0,0,0,.3);
+    background:
+        rgba(0,0,0,.3);
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     word-break:break-all;
 }
 
 .info-row b{
     display:inline-block;
+
     min-width:100px;
 
     color:#a78bfa;
@@ -923,9 +1133,11 @@ footer{
 
     padding:50px 20px;
 
-    color:#64748b;
+    color:#94a3b8;
 
-    border-top:1px solid rgba(255,255,255,.08);
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
 }
 
 </style>
@@ -936,7 +1148,7 @@ footer{
 
 
 <!-- =======================================================
-     PREMIUM BOOT SCREEN
+     BOOT
 ======================================================= -->
 
 <div id="boot">
@@ -972,38 +1184,44 @@ footer{
         KGGT STUDIOS
     </div>
 
-    <a href="https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/"
-       onclick="showMain()">
+    <a
+        href="https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/"
+        onclick="showMain()">
         HOME
     </a>
 
-    <!-- SAME HTML PAGE — NO SECOND FILE -->
-    <a href="#url-inspector"
-       onclick="showInspector()">
+    <a
+        href="#url-inspector"
+        onclick="showInspector()">
         URL INSPECTOR
     </a>
 
-    <button onclick="scrollToSection('ai')">
+    <button
+        onclick="scrollToSection('ai')">
         AI
     </button>
 
-    <a href="#projects"
-       onclick="showMain()">
+    <a
+        href="#projects"
+        onclick="showMain()">
         PROJECTS
     </a>
 
-    <a href="#artwork"
-       onclick="showMain()">
+    <a
+        href="#artwork"
+        onclick="showMain()">
         ARTWORK
     </a>
 
-    <a href="#about"
-       onclick="showMain()">
+    <a
+        href="#about"
+        onclick="showMain()">
         ABOUT
     </a>
 
-    <a href="#create"
-       onclick="showMain()">
+    <a
+        href="#create"
+        onclick="showMain()">
         CREATE
     </a>
 
@@ -1014,295 +1232,326 @@ footer{
      MAIN PAGE
 ======================================================= -->
 
-<div id="mainPage" class="page active">
+<div
+    id="mainPage"
+    class="page active">
 
 
-<!-- HERO -->
+    <!-- HERO -->
 
-<section class="hero">
+    <section class="hero">
 
-    <div class="hero-content">
+        <div class="hero-content">
 
-        <h1>
-            KGGT STUDIOS
-        </h1>
+            <h1>
+                KGGT STUDIOS
+            </h1>
 
-        <p>
-            Create. Imagine. Explore.
-        </p>
+            <p>
+                Create. Imagine. Explore.
+            </p>
 
-        <p>
-            A creative world for sketches, artwork,
-            projects and ideas.
-        </p>
+            <p>
+                A creative world for sketches,
+                artwork, projects and ideas.
+            </p>
 
-    </div>
+        </div>
 
-</section>
+    </section>
 
 
-<!-- =======================================================
-     AI
-======================================================= -->
+    <!-- AI -->
 
-<section id="ai">
+    <section id="ai">
 
-    <h2 class="section-title">
-        KGGT AI
-    </h2>
+        <h2 class="section-title">
+            KGGT AI
+        </h2>
 
-    <div class="glass ai-box">
+        <div class="glass ai-box">
 
-        <input
-            id="aiInput"
-            class="ai-input"
-            placeholder="Try: 20% of 500 or 25 + 75"
-        >
+            <input
+                id="aiInput"
+                class="ai-input"
+                placeholder="Try: 20% of 500 or 25 + 75">
 
-        <button
-            class="btn"
-            onclick="calculateAI()">
-            CALCULATE
-        </button>
+            <button
+                class="btn"
+                onclick="calculateAI()">
+                CALCULATE
+            </button>
+
+            <div
+                id="aiAnswer"
+                class="ai-answer">
+                Your answer will appear here.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+        <h2 class="section-title">
+            PROJECTS
+        </h2>
+
+        <div class="grid">
+
+            <div class="glass">
+
+                <h3>
+                    🎨 Creative Sketch
+                </h3>
+
+                <p>
+                    Digital sketching and creative
+                    artwork made inside KGGT Studios.
+                </p>
+
+            </div>
+
+
+            <div class="glass">
+
+                <h3>
+                    ⚡ Digital Design
+                </h3>
+
+                <p>
+                    Modern digital designs
+                    and experiments.
+                </p>
+
+            </div>
+
+
+            <div class="glass">
+
+                <h3>
+                    🌌 Anime Art
+                </h3>
+
+                <p>
+                    Anime-inspired
+                    creative artwork.
+                </p>
+
+            </div>
+
+
+            <div class="glass">
+
+                <h3>
+                    🚀 Future Projects
+                </h3>
+
+                <p>
+                    More projects will
+                    be added here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ARTWORK -->
+
+    <section id="artwork">
+
+        <h2 class="section-title">
+            KGGT CARD COLLECTION
+        </h2>
+
+        <div class="glass">
+
+            <p style="margin-bottom:20px;">
+
+                Upload Artwork or Photos
+                and display them as
+                Pokémon-style collectible cards.
+
+            </p>
+
+            <button
+                class="btn"
+                onclick="openUploadModal()">
+
+                + UPLOAD ARTWORK / PHOTO
+
+            </button>
+
+        </div>
+
+        <br>
 
         <div
-            id="aiAnswer"
-            class="ai-answer">
-            Your answer will appear here.
+            id="gallery"
+            class="gallery">
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =======================================================
-     PROJECTS
-======================================================= -->
+    <!-- ABOUT -->
 
-<section id="projects">
+    <section id="about">
 
-    <h2 class="section-title">
-        PROJECTS
-    </h2>
+        <h2 class="section-title">
+            ABOUT KGGT
+        </h2>
 
-    <div class="grid">
+        <div class="grid">
 
-        <div class="glass">
+            <div class="glass">
 
-            <h3>
-                🎨 Creative Sketch
-            </h3>
+                <h3>
+                    KGGT STUDIOS
+                </h3>
 
-            <p>
-                Digital sketching and creative artwork
-                made inside KGGT Studios.
-            </p>
+                <p>
 
-        </div>
+                    A creative digital space
+                    for artwork, sketches,
+                    experiments and ideas.
 
-        <div class="glass">
+                </p>
 
-            <h3>
-                ⚡ Digital Design
-            </h3>
+            </div>
 
-            <p>
-                Modern digital designs and experiments.
-            </p>
 
-        </div>
+            <div class="glass">
 
-        <div class="glass">
+                <h3>
+                    👨‍🎨 Creators
+                </h3>
 
-            <h3>
-                🌌 Anime Art
-            </h3>
+                <p>
 
-            <p>
-                Anime-inspired creative artwork.
-            </p>
+                    Kartik • Tanish •
+                    Garvitsingh • Garvittiwari
+
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="glass">
-
-            <h3>
-                🚀 Future Projects
-            </h3>
-
-            <p>
-                More projects will be added here.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =======================================================
-     ARTWORK / PHOTO COLLECTION
-======================================================= -->
+    <!-- CREATE -->
 
-<section id="artwork">
+    <section id="create">
 
-    <h2 class="section-title">
-        KGGT CARD COLLECTION
-    </h2>
+        <h2 class="section-title">
+            CREATOR STUDIO
+        </h2>
 
-    <div class="glass">
+        <div class="glass creator">
 
-        <p style="margin-bottom:20px;">
-            Upload Artwork or Photos and display them
-            as Pokémon-style collectible cards.
-        </p>
+            <div class="toolbar">
 
-        <button
-            class="btn"
-            onclick="openUploadModal()">
-            + UPLOAD ARTWORK / PHOTO
-        </button>
+                <button
+                    class="btn"
+                    onclick="setTool('brush')">
+                    🖌 Brush
+                </button>
 
-    </div>
+                <button
+                    class="btn"
+                    onclick="setTool('eraser')">
+                    🧹 Eraser
+                </button>
 
-    <br>
+                <button
+                    class="btn"
+                    onclick="setTool('text')">
+                    T Type
+                </button>
 
-    <div
-        id="gallery"
-        class="gallery">
-    </div>
+                <button
+                    class="btn red"
+                    onclick="clearCanvas()">
+                    Clear
+                </button>
 
-</section>
+                <button
+                    class="btn green"
+                    onclick="saveDrawing()">
+                    Save
+                </button>
 
-
-<!-- =======================================================
-     ABOUT
-======================================================= -->
-
-<section id="about">
-
-    <h2 class="section-title">
-        ABOUT KGGT
-    </h2>
-
-    <div class="grid">
-
-        <div class="glass">
-
-            <h3>
-                KGGT STUDIOS
-            </h3>
-
-            <p>
-                A creative digital space for artwork,
-                sketches, experiments and ideas.
-            </p>
-
-        </div>
-
-        <div class="glass">
-
-            <h3>
-                👨‍🎨 Creators
-            </h3>
-
-            <p>
-                Kartik • Tanish • Garvitsingh • Garvittiwari
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
+            </div>
 
 
-<!-- =======================================================
-     CREATE
-======================================================= -->
-
-<section id="create">
-
-    <h2 class="section-title">
-        CREATOR STUDIO
-    </h2>
-
-    <div class="glass creator">
-
-        <div class="toolbar">
-
-            <button class="btn" onclick="setTool('brush')">
-                🖌 Brush
-            </button>
-
-            <button class="btn" onclick="setTool('eraser')">
-                🧹 Eraser
-            </button>
-
-            <button class="btn" onclick="setTool('text')">
-                T Type
-            </button>
-
-            <button class="btn red" onclick="clearCanvas()">
-                Clear
-            </button>
-
-            <button class="btn green" onclick="saveDrawing()">
-                Save
-            </button>
-
-        </div>
-
-
-        <canvas id="canvas"
+            <canvas
+                id="canvas"
                 width="1200"
                 height="600">
-        </canvas>
+            </canvas>
 
 
-        <div class="color-row">
+            <div class="color-row">
 
-            <label>
-                Brush:
-                <input
-                    type="color"
-                    id="brushColor"
-                    value="#000000">
-            </label>
+                <label>
 
-            <label>
-                Canvas Background:
-                <input
-                    type="color"
-                    id="canvasBg"
-                    value="#ffffff"
-                    onchange="changeCanvasBackground()">
-            </label>
+                    Brush:
 
-            <label>
-                Size:
-                <input
-                    type="range"
-                    id="brushSize"
-                    min="1"
-                    max="50"
-                    value="5">
-            </label>
+                    <input
+                        type="color"
+                        id="brushColor"
+                        value="#000000">
+
+                </label>
+
+
+                <label>
+
+                    Canvas Background:
+
+                    <input
+                        type="color"
+                        id="canvasBg"
+                        value="#ffffff"
+                        onchange="changeCanvasBackground()">
+
+                </label>
+
+
+                <label>
+
+                    Size:
+
+                    <input
+                        type="range"
+                        id="brushSize"
+                        min="1"
+                        max="50"
+                        value="5">
+
+                </label>
+
+            </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<footer>
+    <footer>
 
-    © 2026 KGGT STUDIOS — Create. Imagine.
+        © 2026 KGGT STUDIOS — Create. Imagine.
 
-</footer>
+    </footer>
 
 </div>
 
@@ -1311,7 +1560,9 @@ footer{
      URL INSPECTOR PAGE
 ======================================================= -->
 
-<div id="inspectorPage" class="page">
+<div
+    id="inspectorPage"
+    class="page">
 
     <div class="inspector-container">
 
@@ -1320,11 +1571,12 @@ footer{
         </h1>
 
         <p class="inspector-sub">
-            Inspect any website URL directly inside KGGT STUDIOS.
+
+            Inspect any website URL
+            directly inside KGGT STUDIOS.
+
         </p>
 
-
-        <!-- URL INPUT -->
 
         <div class="url-input-row">
 
@@ -1332,38 +1584,44 @@ footer{
                 id="urlInput"
                 class="url-input"
                 type="text"
-                placeholder="https://example.com"
-            >
+                placeholder="https://example.com">
 
             <button
                 class="btn"
                 onclick="inspectURL()">
+
                 INSPECT
+
             </button>
 
         </div>
 
-
-        <!-- QUICK URLS -->
 
         <div class="quick-buttons">
 
-            <button onclick="quickURL('https://chatgpt.com/')">
+            <button
+                onclick="quickURL('https://chatgpt.com/')">
+
                 ChatGPT
+
             </button>
 
-            <button onclick="quickURL('https://codepen.io/')">
+            <button
+                onclick="quickURL('https://codepen.io/')">
+
                 CodePen
+
             </button>
 
-            <button onclick="quickURL('https://github.com/')">
+            <button
+                onclick="quickURL('https://github.com/')">
+
                 GitHub
+
             </button>
 
         </div>
 
-
-        <!-- RESULT -->
 
         <div
             id="inspectorResult"
@@ -1375,44 +1633,65 @@ footer{
 
 
             <div class="info-row">
+
                 <b>Protocol:</b>
+
                 <span id="protocol"></span>
+
             </div>
 
 
             <div class="info-row">
+
                 <b>Hostname:</b>
+
                 <span id="hostname"></span>
+
             </div>
 
 
             <div class="info-row">
+
                 <b>Port:</b>
+
                 <span id="port"></span>
+
             </div>
 
 
             <div class="info-row">
+
                 <b>Path:</b>
+
                 <span id="path"></span>
+
             </div>
 
 
             <div class="info-row">
+
                 <b>Query:</b>
+
                 <span id="query"></span>
+
             </div>
 
 
             <div class="info-row">
+
                 <b>Hash:</b>
+
                 <span id="hash"></span>
+
             </div>
 
 
             <div class="info-row">
+
                 <b>Full URL:</b>
+
                 <span id="full"></span>
+
             </div>
 
 
@@ -1432,8 +1711,6 @@ footer{
         <br><br>
 
 
-        <!-- BACK BUTTON -->
-
         <button
             class="btn"
             onclick="showMain()">
@@ -1451,7 +1728,9 @@ footer{
      UPLOAD MODAL
 ======================================================= -->
 
-<div id="uploadModal" class="modal">
+<div
+    id="uploadModal"
+    class="modal">
 
     <div class="modal-box">
 
@@ -1459,8 +1738,14 @@ footer{
             KGGT CARD UPLOAD
         </h2>
 
-        <p style="color:#94a3b8;margin-bottom:20px;">
+        <p
+            style="
+            color:#94a3b8;
+            margin-bottom:20px;
+            ">
+
             Password protected upload system.
+
         </p>
 
 
@@ -1495,8 +1780,14 @@ footer{
             placeholder="Price">
 
 
-        <p style="color:#94a3b8;margin:10px 0;">
+        <p
+            style="
+            color:#94a3b8;
+            margin:10px 0;
+            ">
+
             Upload from Computer / Phone Gallery
+
         </p>
 
 
@@ -1506,8 +1797,14 @@ footer{
             accept="image/*">
 
 
-        <p style="color:#94a3b8;margin:10px 0;">
+        <p
+            style="
+            color:#94a3b8;
+            margin:10px 0;
+            ">
+
             OR use a direct online image URL
+
         </p>
 
 
@@ -1522,13 +1819,17 @@ footer{
             <button
                 class="btn green"
                 onclick="saveCard()">
+
                 SAVE CARD
+
             </button>
 
             <button
                 class="btn red"
                 onclick="closeUploadModal()">
+
                 CANCEL
+
             </button>
 
         </div>
@@ -1542,7 +1843,9 @@ footer{
      PREVIEW MODAL
 ======================================================= -->
 
-<div id="previewModal" class="modal">
+<div
+    id="previewModal"
+    class="modal">
 
     <div class="modal-box">
 
@@ -1550,17 +1853,28 @@ footer{
             id="previewImage"
             class="preview-image">
 
+
         <h2 id="previewTitle">
         </h2>
 
-        <p id="previewPrice"
-           style="color:#ef4444;font-size:25px;font-weight:bold;">
+
+        <p
+            id="previewPrice"
+            style="
+            color:#ef4444;
+            font-size:25px;
+            font-weight:bold;
+            ">
+
         </p>
+
 
         <button
             class="btn green"
             onclick="closePreview()">
+
             CLOSE
+
         </button>
 
     </div>
@@ -1572,7 +1886,9 @@ footer{
      BUY MODAL
 ======================================================= -->
 
-<div id="buyModal" class="modal">
+<div
+    id="buyModal"
+    class="modal">
 
     <div class="modal-box">
 
@@ -1580,18 +1896,28 @@ footer{
             BUY / REQUEST
         </h2>
 
-        <p style="color:#94a3b8;margin-bottom:20px;">
-            This currently sends a local purchase request.
-            It does not process real payments.
+        <p
+            style="
+            color:#94a3b8;
+            margin-bottom:20px;
+            ">
+
+            This currently saves a local
+            purchase request. It does not
+            process real payments.
+
         </p>
+
 
         <input
             id="buyerName"
             placeholder="Your Name">
 
+
         <input
             id="buyerContact"
             placeholder="Contact">
+
 
         <textarea
             id="buyerMessage"
@@ -1599,18 +1925,24 @@ footer{
             placeholder="Message">
         </textarea>
 
+
         <div class="modal-buttons">
 
             <button
                 class="btn green"
                 onclick="submitOrder()">
+
                 SEND REQUEST
+
             </button>
+
 
             <button
                 class="btn red"
                 onclick="closeBuyModal()">
+
                 CANCEL
+
             </button>
 
         </div>
@@ -1626,17 +1958,23 @@ footer{
    BOOT
 ========================================================= */
 
-window.addEventListener("load",function(){
+window.addEventListener(
+    "load",
+    function(){
 
-    setTimeout(function(){
+        setTimeout(
+            function(){
 
-        document
-            .getElementById("boot")
-            .classList.add("hide");
+                document
+                    .getElementById("boot")
+                    .classList.add("hide");
 
-    },3000);
+            },
+            3000
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -1675,15 +2013,18 @@ function scrollToSection(id){
 
     showMain();
 
-    setTimeout(function(){
+    setTimeout(
+        function(){
 
-        document
-            .getElementById(id)
-            .scrollIntoView({
-                behavior:"smooth"
-            });
+            document
+                .getElementById(id)
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
 
-    },50);
+        },
+        50
+    );
 
 }
 
@@ -1699,6 +2040,7 @@ function calculateAI(){
         .getElementById("aiInput")
         .value
         .trim();
+
 
     const answer =
         document
@@ -1717,11 +2059,6 @@ function calculateAI(){
 
     try{
 
-        let expression=input;
-
-
-        /* 20% of 500 */
-
         const percentMatch =
             input.match(
                 /^([\d.]+)\s*%\s*of\s*([\d.]+)$/i
@@ -1731,31 +2068,36 @@ function calculateAI(){
         if(percentMatch){
 
             const percent =
-                parseFloat(percentMatch[1]);
+                parseFloat(
+                    percentMatch[1]
+                );
 
             const number =
-                parseFloat(percentMatch[2]);
+                parseFloat(
+                    percentMatch[2]
+                );
 
             answer.textContent =
-                (percent/100*number).toString();
+                "Answer: " +
+                (percent / 100 * number);
 
             return;
 
         }
 
 
-        /* Basic calculator */
-
         if(
-            /^[0-9+\-*/().%\s]+$/.test(expression)
+            /^[0-9+\-*/().%\s]+$/
+            .test(input)
         ){
 
             const result =
                 Function(
                     '"use strict";return (' +
-                    expression +
+                    input +
                     ')'
                 )();
+
 
             answer.textContent =
                 "Answer: " + result;
@@ -1780,12 +2122,14 @@ function calculateAI(){
 
 
 /* =========================================================
-   LOCAL STORAGE CARD SYSTEM
+   CARD SYSTEM
 ========================================================= */
 
 let cards =
     JSON.parse(
-        localStorage.getItem("kggtGallery") || "[]"
+        localStorage.getItem(
+            "kggtGallery"
+        ) || "[]"
     );
 
 
@@ -1799,10 +2143,44 @@ function saveCards(){
 }
 
 
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
 function renderCards(){
 
     const gallery =
-        document.getElementById("gallery");
+        document
+        .getElementById("gallery");
+
 
     gallery.innerHTML="";
 
@@ -1830,102 +2208,103 @@ function renderCards(){
     }
 
 
-    cards.forEach(function(card,index){
+    cards.forEach(
+        function(card,index){
 
-        const div =
-            document.createElement("div");
-
-        div.className="pokemon-card";
-
-
-        div.innerHTML=`
-
-            <div class="card-top">
-
-                <span>
-                    KGGT COLLECTION
-                </span>
-
-                <span class="hp">
-                    HP ${100+index}
-                </span>
-
-            </div>
+            const div =
+                document
+                .createElement("div");
 
 
-            <div class="rarity">
-                ${card.type}
-            </div>
+            div.className =
+                "pokemon-card";
 
 
-            <img
-                class="card-image"
-                src="${card.image}"
-                alt="${escapeHTML(card.title)}"
-            >
+            div.innerHTML=`
+
+                <div class="card-top">
+
+                    <span>
+                        KGGT COLLECTION
+                    </span>
+
+                    <span class="hp">
+                        HP ${100 + index}
+                    </span>
+
+                </div>
 
 
-            <div class="card-type">
-                ${card.type}
-            </div>
+                <div class="rarity">
+                    ${escapeHTML(card.type)}
+                </div>
 
 
-            <div class="card-title">
-                ${escapeHTML(card.title)}
-            </div>
+                <img
+                    class="card-image"
+                    src="${card.image}"
+                    alt="${escapeHTML(card.title)}"
+                >
 
 
-            <div class="card-price">
-                ₹${card.price}
-            </div>
+                <div class="card-type">
+                    ${escapeHTML(card.type)}
+                </div>
 
 
-            <div class="card-actions">
-
-                <button
-                    class="btn blue"
-                    onclick="previewCard(${index})">
-                    PREVIEW
-                </button>
-
-                <button
-                    class="btn green"
-                    onclick="buyCard(${index})">
-                    BUY
-                </button>
-
-                <button
-                    class="btn"
-                    onclick="editPrice(${index})">
-                    EDIT
-                </button>
-
-            </div>
-
-        `;
+                <div class="card-title">
+                    ${escapeHTML(card.title)}
+                </div>
 
 
-        gallery.appendChild(div);
-
-    });
-
-}
+                <div class="card-price">
+                    ₹${escapeHTML(card.price)}
+                </div>
 
 
-function escapeHTML(text){
+                <div class="card-actions">
 
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+                    <button
+                        class="btn blue"
+                        onclick="previewCard(${index})">
+
+                        PREVIEW
+
+                    </button>
+
+
+                    <button
+                        class="btn green"
+                        onclick="buyCard(${index})">
+
+                        BUY
+
+                    </button>
+
+
+                    <button
+                        class="btn"
+                        onclick="editPrice(${index})">
+
+                        EDIT
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            gallery.appendChild(div);
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   UPLOAD
+   UPLOAD MODAL
 ========================================================= */
 
 function openUploadModal(){
@@ -1956,7 +2335,9 @@ function saveCard(){
 
     if(password !== "password"){
 
-        alert("Wrong password.");
+        alert(
+            "Wrong password."
+        );
 
         return;
 
@@ -1968,30 +2349,38 @@ function saveCard(){
         .getElementById("uploadType")
         .value;
 
+
     const title =
         document
         .getElementById("uploadTitle")
-        .value.trim();
+        .value
+        .trim();
+
 
     const price =
         document
         .getElementById("uploadPrice")
         .value;
 
+
     const file =
         document
         .getElementById("uploadFile")
         .files[0];
 
+
     const url =
         document
         .getElementById("uploadURL")
-        .value.trim();
+        .value
+        .trim();
 
 
     if(!title){
 
-        alert("Please enter a title.");
+        alert(
+            "Please enter a title."
+        );
 
         return;
 
@@ -2000,14 +2389,14 @@ function saveCard(){
 
     if(price===""){
 
-        alert("Please enter a price.");
+        alert(
+            "Please enter a price."
+        );
 
         return;
 
     }
 
-
-    /* File upload */
 
     if(file){
 
@@ -2015,16 +2404,17 @@ function saveCard(){
             new FileReader();
 
 
-        reader.onload=function(e){
+        reader.onload =
+            function(e){
 
-            addCard(
-                type,
-                title,
-                price,
-                e.target.result
-            );
+                addCard(
+                    type,
+                    title,
+                    price,
+                    e.target.result
+                );
 
-        };
+            };
 
 
         reader.readAsDataURL(file);
@@ -2033,8 +2423,6 @@ function saveCard(){
 
     }
 
-
-    /* Online image URL */
 
     if(url){
 
@@ -2057,15 +2445,26 @@ function saveCard(){
 }
 
 
-function addCard(type,title,price,image){
+function addCard(
+    type,
+    title,
+    price,
+    image
+){
 
     cards.unshift({
 
         type:type,
+
         title:title,
+
         price:price,
+
         image:image,
-        date:new Date().toISOString()
+
+        date:
+            new Date()
+            .toISOString()
 
     });
 
@@ -2076,28 +2475,40 @@ function addCard(type,title,price,image){
 
     closeUploadModal();
 
-    alert("Card added successfully!");
+
+    alert(
+        "Card added successfully!"
+    );
 
 
     document
-        .getElementById("uploadPassword")
-        .value="";
+        .getElementById(
+            "uploadPassword"
+        ).value="";
+
 
     document
-        .getElementById("uploadTitle")
-        .value="";
+        .getElementById(
+            "uploadTitle"
+        ).value="";
+
 
     document
-        .getElementById("uploadPrice")
-        .value="";
+        .getElementById(
+            "uploadPrice"
+        ).value="";
+
 
     document
-        .getElementById("uploadFile")
-        .value="";
+        .getElementById(
+            "uploadFile"
+        ).value="";
+
 
     document
-        .getElementById("uploadURL")
-        .value="";
+        .getElementById(
+            "uploadURL"
+        ).value="";
 
 }
 
@@ -2109,11 +2520,16 @@ function addCard(type,title,price,image){
 function editPrice(index){
 
     const password =
-        prompt("Enter password:");
+        prompt(
+            "Enter password:"
+        );
+
 
     if(password !== "password"){
 
-        alert("Wrong password.");
+        alert(
+            "Wrong password."
+        );
 
         return;
 
@@ -2127,8 +2543,10 @@ function editPrice(index){
         );
 
 
-    if(newPrice === null ||
-       newPrice.trim()===""){
+    if(
+        newPrice === null ||
+        newPrice.trim()===""
+    ){
 
         return;
 
@@ -2137,6 +2555,7 @@ function editPrice(index){
 
     cards[index].price =
         newPrice.trim();
+
 
     saveCards();
 
@@ -2156,23 +2575,33 @@ function previewCard(index){
 
 
     document
-        .getElementById("previewImage")
-        .src=card.image;
+        .getElementById(
+            "previewImage"
+        )
+        .src =
+            card.image;
 
 
     document
-        .getElementById("previewTitle")
-        .textContent=card.title;
+        .getElementById(
+            "previewTitle"
+        )
+        .textContent =
+            card.title;
 
 
     document
-        .getElementById("previewPrice")
-        .textContent=
+        .getElementById(
+            "previewPrice"
+        )
+        .textContent =
             "₹" + card.price;
 
 
     document
-        .getElementById("previewModal")
+        .getElementById(
+            "previewModal"
+        )
         .classList.add("show");
 
 }
@@ -2181,7 +2610,9 @@ function previewCard(index){
 function closePreview(){
 
     document
-        .getElementById("previewModal")
+        .getElementById(
+            "previewModal"
+        )
         .classList.remove("show");
 
 }
@@ -2191,15 +2622,19 @@ function closePreview(){
    BUY
 ========================================================= */
 
-let selectedCard=null;
+let selectedCard = null;
 
 
 function buyCard(index){
 
-    selectedCard=index;
+    selectedCard =
+        index;
+
 
     document
-        .getElementById("buyModal")
+        .getElementById(
+            "buyModal"
+        )
         .classList.add("show");
 
 }
@@ -2208,7 +2643,9 @@ function buyCard(index){
 function closeBuyModal(){
 
     document
-        .getElementById("buyModal")
+        .getElementById(
+            "buyModal"
+        )
         .classList.remove("show");
 
 }
@@ -2218,21 +2655,35 @@ function submitOrder(){
 
     const name =
         document
-        .getElementById("buyerName")
-        .value.trim();
+        .getElementById(
+            "buyerName"
+        )
+        .value
+        .trim();
+
 
     const contact =
         document
-        .getElementById("buyerContact")
-        .value.trim();
+        .getElementById(
+            "buyerContact"
+        )
+        .value
+        .trim();
+
 
     const message =
         document
-        .getElementById("buyerMessage")
-        .value.trim();
+        .getElementById(
+            "buyerMessage"
+        )
+        .value
+        .trim();
 
 
-    if(!name || !contact){
+    if(
+        !name ||
+        !contact
+    ){
 
         alert(
             "Please enter your name and contact."
@@ -2245,7 +2696,9 @@ function submitOrder(){
 
     let orders =
         JSON.parse(
-            localStorage.getItem("kggtOrders") || "[]"
+            localStorage.getItem(
+                "kggtOrders"
+            ) || "[]"
         );
 
 
@@ -2260,7 +2713,9 @@ function submitOrder(){
 
         message:message,
 
-        date:new Date().toISOString()
+        date:
+            new Date()
+            .toISOString()
 
     });
 
@@ -2277,16 +2732,21 @@ function submitOrder(){
 
 
     document
-        .getElementById("buyerName")
-        .value="";
+        .getElementById(
+            "buyerName"
+        ).value="";
+
 
     document
-        .getElementById("buyerContact")
-        .value="";
+        .getElementById(
+            "buyerContact"
+        ).value="";
+
 
     document
-        .getElementById("buyerMessage")
-        .value="";
+        .getElementById(
+            "buyerMessage"
+        ).value="";
 
 
     closeBuyModal();
@@ -2302,7 +2762,9 @@ function inspectURL(){
 
     let value =
         document
-        .getElementById("urlInput")
+        .getElementById(
+            "urlInput"
+        )
         .value
         .trim();
 
@@ -2318,10 +2780,14 @@ function inspectURL(){
     }
 
 
-    if(!/^https?:\/\//i.test(value)){
+    if(
+        !/^https?:\/\//i
+        .test(value)
+    ){
 
         value =
-            "https://" + value;
+            "https://" +
+            value;
 
     }
 
@@ -2333,59 +2799,82 @@ function inspectURL(){
 
 
         document
-            .getElementById("protocol")
+            .getElementById(
+                "protocol"
+            )
             .textContent =
                 url.protocol;
 
 
         document
-            .getElementById("hostname")
+            .getElementById(
+                "hostname"
+            )
             .textContent =
                 url.hostname;
 
 
         document
-            .getElementById("port")
+            .getElementById(
+                "port"
+            )
             .textContent =
-                url.port || "Default";
+                url.port ||
+                "Default";
 
 
         document
-            .getElementById("path")
+            .getElementById(
+                "path"
+            )
             .textContent =
-                url.pathname || "/";
+                url.pathname ||
+                "/";
 
 
         document
-            .getElementById("query")
+            .getElementById(
+                "query"
+            )
             .textContent =
-                url.search || "None";
+                url.search ||
+                "None";
 
 
         document
-            .getElementById("hash")
+            .getElementById(
+                "hash"
+            )
             .textContent =
-                url.hash || "None";
+                url.hash ||
+                "None";
 
 
         document
-            .getElementById("full")
+            .getElementById(
+                "full"
+            )
             .textContent =
                 url.href;
 
 
         document
-            .getElementById("visitButton")
+            .getElementById(
+                "visitButton"
+            )
             .href =
                 url.href;
 
 
         document
-            .getElementById("inspectorResult")
+            .getElementById(
+                "inspectorResult"
+            )
             .style.display =
                 "block";
 
     }
+
     catch(error){
 
         alert(
@@ -2400,8 +2889,12 @@ function inspectURL(){
 function quickURL(url){
 
     document
-        .getElementById("urlInput")
-        .value=url;
+        .getElementById(
+            "urlInput"
+        )
+        .value =
+            url;
+
 
     inspectURL();
 
@@ -2409,14 +2902,18 @@ function quickURL(url){
 
 
 /* =========================================================
-   CANVAS
+   DRAWING CANVAS
 ========================================================= */
 
 const canvas =
-    document.getElementById("canvas");
+    document.getElementById(
+        "canvas"
+    );
+
 
 const ctx =
     canvas.getContext("2d");
+
 
 let drawing=false;
 
@@ -2435,7 +2932,8 @@ ctx.fillRect(
 
 function setTool(newTool){
 
-    tool=newTool;
+    tool =
+        newTool;
 
 }
 
@@ -2443,17 +2941,30 @@ function setTool(newTool){
 function getMousePosition(event){
 
     const rect =
-        canvas.getBoundingClientRect();
+        canvas
+        .getBoundingClientRect();
 
-    return {
+
+    return{
 
         x:
-            (event.clientX-rect.left)
-            *canvas.width/rect.width,
+            (
+                event.clientX -
+                rect.left
+            )
+            *
+            canvas.width /
+            rect.width,
+
 
         y:
-            (event.clientY-rect.top)
-            *canvas.height/rect.height
+            (
+                event.clientY -
+                rect.top
+            )
+            *
+            canvas.height /
+            rect.height
 
     };
 
@@ -2467,19 +2978,30 @@ canvas.addEventListener(
         if(tool==="text"){
 
             const pos =
-                getMousePosition(event);
+                getMousePosition(
+                    event
+                );
+
 
             const text =
-                prompt("Enter text:");
+                prompt(
+                    "Enter text:"
+                );
+
 
             if(text){
 
                 ctx.fillStyle =
                     document
-                    .getElementById("brushColor")
+                    .getElementById(
+                        "brushColor"
+                    )
                     .value;
 
-                ctx.font="30px Arial";
+
+                ctx.font =
+                    "30px Arial";
+
 
                 ctx.fillText(
                     text,
@@ -2496,10 +3018,15 @@ canvas.addEventListener(
 
         drawing=true;
 
+
         const pos =
-            getMousePosition(event);
+            getMousePosition(
+                event
+            );
+
 
         ctx.beginPath();
+
 
         ctx.moveTo(
             pos.x,
@@ -2520,33 +3047,45 @@ canvas.addEventListener(
 
 
         const pos =
-            getMousePosition(event);
+            getMousePosition(
+                event
+            );
 
 
         const size =
             document
-            .getElementById("brushSize")
+            .getElementById(
+                "brushSize"
+            )
             .value;
 
 
-        ctx.lineWidth=size;
+        ctx.lineWidth =
+            size;
 
-        ctx.lineCap="round";
+
+        ctx.lineCap =
+            "round";
 
 
         if(tool==="eraser"){
 
             ctx.strokeStyle =
                 document
-                .getElementById("canvasBg")
+                .getElementById(
+                    "canvasBg"
+                )
                 .value;
 
         }
+
         else{
 
             ctx.strokeStyle =
                 document
-                .getElementById("brushColor")
+                .getElementById(
+                    "brushColor"
+                )
                 .value;
 
         }
@@ -2556,6 +3095,7 @@ canvas.addEventListener(
             pos.x,
             pos.y
         );
+
 
         ctx.stroke();
 
@@ -2577,11 +3117,15 @@ function clearCanvas(){
 
     const bg =
         document
-        .getElementById("canvasBg")
+        .getElementById(
+            "canvasBg"
+        )
         .value;
 
 
-    ctx.fillStyle=bg;
+    ctx.fillStyle =
+        bg;
+
 
     ctx.fillRect(
         0,
@@ -2603,7 +3147,9 @@ function changeCanvasBackground(){
 function saveDrawing(){
 
     const image =
-        canvas.toDataURL("image/png");
+        canvas.toDataURL(
+            "image/png"
+        );
 
 
     cards.unshift({
@@ -2612,13 +3158,16 @@ function saveDrawing(){
 
         title:
             "KGGT Drawing " +
-            new Date().toLocaleDateString(),
+            new Date()
+            .toLocaleDateString(),
 
         price:"0",
 
         image:image,
 
-        date:new Date().toISOString()
+        date:
+            new Date()
+            .toISOString()
 
     });
 
@@ -2643,7 +3192,7 @@ renderCards();
 
 
 /* =========================================================
-   ESCAPE KEY
+   ESCAPE
 ========================================================= */
 
 document.addEventListener(
@@ -2653,7 +3202,9 @@ document.addEventListener(
         if(event.key==="Escape"){
 
             closeUploadModal();
+
             closePreview();
+
             closeBuyModal();
 
         }
