@@ -1,2263 +1,3195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>KGGT STUDIOS — Create. Imagine.</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+/* =========================================================
+   BASIC RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-font-family:Arial,Helvetica,sans-serif;
-color:#fff;
-min-height:100vh;
-overflow-x:hidden;
-background:
-radial-gradient(circle at 15% 20%,rgba(124,58,237,.6),transparent 30%),
-radial-gradient(circle at 85% 20%,rgba(6,182,212,.5),transparent 30%),
-radial-gradient(circle at 75% 80%,rgba(236,72,153,.5),transparent 30%),
-radial-gradient(circle at 20% 85%,rgba(34,197,94,.35),transparent 28%),
-linear-gradient(120deg,#050014,#111827,#020617);
-background-size:180% 180%,180% 180%,180% 180%,180% 180%,300% 300%;
-animation:studioColors 12s ease-in-out infinite alternate;
-background-attachment:fixed;
+    min-height:100vh;
+    font-family:Arial, Helvetica, sans-serif;
+    color:white;
+    overflow-x:hidden;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(139,92,246,.28), transparent 30%),
+        radial-gradient(circle at 85% 25%, rgba(6,182,212,.25), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(236,72,153,.23), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(34,197,94,.18), transparent 30%),
+        linear-gradient(135deg,#050510,#0c1024,#13071d);
+
+    background-size:180% 180%;
+    animation:studioColors 14s ease-in-out infinite alternate;
 }
 
 @keyframes studioColors{
-0%{background-position:0% 20%,100% 10%,80% 100%,10% 90%,0% 50%}
-25%{background-position:30% 50%,70% 20%,40% 80%,80% 30%,50% 30%}
-50%{background-position:70% 80%,20% 60%,90% 20%,30% 70%,100% 50%}
-75%{background-position:90% 30%,50% 90%,20% 40%,70% 80%,40% 100%}
-100%{background-position:20% 90%,90% 70%,50% 10%,10% 40%,100% 20%}
+
+    0%{
+        background-position:0% 20%;
+    }
+
+    50%{
+        background-position:100% 80%;
+    }
+
+    100%{
+        background-position:20% 100%;
+    }
 }
 
-/* BOOT */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 0%,
+            rgba(255,255,255,.025) 50%,
+            transparent 100%
+        );
+
+    animation:shineMove 8s linear infinite;
+}
+
+@keyframes shineMove{
+
+    from{
+        transform:translateX(-30%);
+    }
+
+    to{
+        transform:translateX(30%);
+    }
+}
+
+
+/* =========================================================
+   BOOT SCREEN
+========================================================= */
 
 #boot{
-position:fixed;
-inset:0;
-z-index:99999;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-background:radial-gradient(circle,#7c3aed 0%,#25104f 25%,#080014 65%,#000 100%);
-transition:.8s;
-}
 
-#boot.hide{
-opacity:0;
-visibility:hidden;
-pointer-events:none;
-}
+    position:fixed;
+    inset:0;
+    z-index:99999;
 
-.boot-bg{
-position:absolute;
-inset:-30%;
-background:
-radial-gradient(circle,#06b6d4 0 2%,transparent 12%),
-radial-gradient(circle,#ec4899 0 2%,transparent 14%),
-radial-gradient(circle,#8b5cf6 0 2%,transparent 16%);
-background-size:180px 180px,250px 250px,320px 320px;
-animation:bootMove 5s linear infinite;
-opacity:.35;
-}
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
 
-@keyframes bootMove{
-to{transform:rotate(360deg) scale(1.2)}
+    background:
+        radial-gradient(circle,#1a1140,#060611 65%);
+
+    overflow:hidden;
 }
 
 .boot-rays{
-position:absolute;
-width:120vw;
-height:120vw;
-background:conic-gradient(transparent,rgba(255,255,255,.12),transparent 12%,rgba(255,255,255,.08),transparent 25%);
-animation:spin 4s linear infinite;
+    position:absolute;
+    width:700px;
+    height:700px;
+
+    background:
+        conic-gradient(
+            transparent,
+            rgba(139,92,246,.16),
+            transparent,
+            rgba(6,182,212,.14),
+            transparent
+        );
+
+    border-radius:50%;
+    animation:bootRotate 8s linear infinite;
 }
 
-@keyframes spin{
-to{transform:rotate(360deg)}
+@keyframes bootRotate{
+
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 .boot-ring{
-position:absolute;
-width:330px;
-height:330px;
-border:3px solid rgba(255,255,255,.25);
-border-radius:50%;
-box-shadow:0 0 30px #7c3aed,inset 0 0 30px #06b6d4;
-animation:ringPulse 1.5s ease-in-out infinite alternate;
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+    border:2px solid rgba(139,92,246,.5);
+
+    box-shadow:
+        0 0 30px rgba(139,92,246,.4),
+        inset 0 0 30px rgba(6,182,212,.2);
+
+    animation:bootRing 2.5s ease-in-out infinite;
 }
 
-.boot-ring:before,
-.boot-ring:after{
-content:"";
-position:absolute;
-inset:-25px;
-border-radius:50%;
-border:2px dashed rgba(255,255,255,.25);
-}
+@keyframes bootRing{
 
-.boot-ring:after{
-inset:-55px;
-border:1px solid rgba(255,255,255,.12);
-}
+    0%,100%{
+        transform:scale(.75);
+        opacity:.3;
+    }
 
-@keyframes ringPulse{
-from{transform:scale(.75) rotate(0);opacity:.4}
-to{transform:scale(1.15) rotate(180deg);opacity:1}
-}
-
-.boot-content{
-position:relative;
-z-index:3;
-text-align:center;
-animation:logoEntrance 2.2s cubic-bezier(.16,1,.3,1) forwards;
-transform:scale(.15);
-filter:blur(25px);
-}
-
-@keyframes logoEntrance{
-0%{transform:scale(.15) rotate(-8deg);filter:blur(25px);opacity:0}
-45%{transform:scale(1.35) rotate(3deg);filter:blur(4px);opacity:1}
-70%{transform:scale(.92) rotate(-1deg);filter:blur(0)}
-85%{transform:scale(1.08)}
-100%{transform:scale(1);filter:blur(0);opacity:1}
+    50%{
+        transform:scale(1.25);
+        opacity:1;
+    }
 }
 
 .boot-logo{
-font-size:clamp(55px,11vw,130px);
-font-weight:1000;
-letter-spacing:-6px;
-line-height:.8;
-color:#fff;
--webkit-text-stroke:4px #111;
-text-shadow:
-0 5px 0 #111,
-0 10px 0 #111,
-0 0 15px #fff,
-0 0 35px #8b5cf6,
-0 0 70px #06b6d4;
+
+    position:relative;
+    z-index:2;
+
+    font-size:clamp(65px,13vw,150px);
+    font-weight:1000;
+    letter-spacing:12px;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px #8b5cf6,
+        0 0 25px #8b5cf6,
+        0 0 50px #06b6d4,
+        0 0 80px #ec4899;
+
+    animation:
+        bootZoom 2.4s cubic-bezier(.2,.8,.2,1) forwards,
+        bootGlow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes bootZoom{
+
+    0%{
+        transform:scale(.15) rotate(-8deg);
+        filter:blur(25px);
+        opacity:0;
+    }
+
+    55%{
+        transform:scale(1.15) rotate(2deg);
+        filter:blur(0);
+        opacity:1;
+    }
+
+    75%{
+        transform:scale(.96);
+    }
+
+    100%{
+        transform:scale(1);
+        rotate:0deg;
+        filter:blur(0);
+        opacity:1;
+    }
+}
+
+@keyframes bootGlow{
+
+    from{
+        text-shadow:
+            0 0 10px #8b5cf6,
+            0 0 25px #8b5cf6;
+    }
+
+    to{
+        text-shadow:
+            0 0 15px #06b6d4,
+            0 0 35px #ec4899,
+            0 0 70px #8b5cf6;
+    }
 }
 
 .boot-sub{
-margin-top:22px;
-font-size:clamp(15px,3vw,25px);
-font-weight:900;
-letter-spacing:7px;
-text-transform:uppercase;
-text-shadow:0 0 20px #06b6d4;
+
+    position:relative;
+    z-index:2;
+
+    margin-top:15px;
+
+    letter-spacing:6px;
+    font-size:12px;
+
+    opacity:0;
+
+    animation:bootSub 1s ease 1.2s forwards;
 }
 
-.boot-bar{
-width:min(420px,75vw);
-height:9px;
-margin:35px auto 0;
-border-radius:50px;
-overflow:hidden;
-background:rgba(255,255,255,.15);
-border:1px solid rgba(255,255,255,.3);
+@keyframes bootSub{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:.8;
+        transform:translateY(0);
+    }
 }
 
-.boot-bar span{
-display:block;
-height:100%;
-width:0;
-background:linear-gradient(90deg,#06b6d4,#8b5cf6,#ec4899,#facc15);
-box-shadow:0 0 25px #8b5cf6;
-animation:loading 2.7s ease forwards;
+.boot-loader{
+
+    position:relative;
+    z-index:2;
+
+    width:220px;
+    height:4px;
+
+    margin-top:35px;
+
+    background:rgba(255,255,255,.1);
+    border-radius:20px;
+    overflow:hidden;
 }
 
-@keyframes loading{to{width:100%}}
+.boot-loader span{
 
-/* NAV */
+    display:block;
+    height:100%;
+    width:0;
+
+    background:linear-gradient(
+        90deg,
+        #8b5cf6,
+        #06b6d4,
+        #ec4899
+    );
+
+    box-shadow:0 0 20px #8b5cf6;
+
+    animation:loader 2.6s ease forwards;
+}
+
+@keyframes loader{
+
+    to{
+        width:100%;
+    }
+}
+
+
+/* =========================================================
+   PAGE OPENING ANIMATION
+========================================================= */
+
+.page-transition{
+
+    position:fixed;
+    inset:0;
+
+    z-index:9998;
+
+    pointer-events:none;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(5,5,18,.72);
+
+    backdrop-filter:blur(8px);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:
+        opacity:.25s ease,
+        visibility:.25s ease;
+}
+
+.page-transition.active{
+
+    opacity:1;
+    visibility:visible;
+}
+
+.transition-logo{
+
+    font-size:clamp(35px,7vw,80px);
+
+    font-weight:1000;
+    letter-spacing:8px;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px #8b5cf6,
+        0 0 30px #06b6d4,
+        0 0 60px #ec4899;
+
+    transform:scale(.65);
+
+    filter:blur(8px);
+
+    opacity:0;
+}
+
+.page-transition.active .transition-logo{
+
+    animation:
+        pageLogo .55s cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes pageLogo{
+
+    0%{
+        transform:scale(.65);
+        filter:blur(8px);
+        opacity:0;
+    }
+
+    55%{
+        transform:scale(1.08);
+        filter:blur(0);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(1);
+        filter:blur(0);
+        opacity:1;
+    }
+}
+
+.transition-ring{
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    border:2px solid rgba(139,92,246,.7);
+
+    border-radius:50%;
+
+    transform:scale(.4);
+
+    opacity:0;
+}
+
+.page-transition.active .transition-ring{
+
+    animation:ringOpen .7s ease-out forwards;
+}
+
+@keyframes ringOpen{
+
+    0%{
+        transform:scale(.4);
+        opacity:.9;
+    }
+
+    100%{
+        transform:scale(2);
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
 
 nav{
-position:sticky;
-top:0;
-z-index:5000;
-display:flex;
-align-items:center;
-gap:8px;
-padding:14px 22px;
-background:rgba(5,0,20,.72);
-backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(255,255,255,.15);
+
+    position:sticky;
+    top:0;
+    z-index:500;
+
+    display:flex;
+    align-items:center;
+
+    gap:8px;
+
+    padding:14px 4%;
+
+    background:rgba(5,5,15,.68);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    overflow-x:auto;
 }
 
 .logo{
-margin-right:auto;
-font-size:22px;
-font-weight:1000;
-text-shadow:0 0 15px #8b5cf6;
+
+    font-size:24px;
+    font-weight:1000;
+
+    margin-right:15px;
+
+    color:white;
+
+    text-shadow:
+        0 0 12px #8b5cf6,
+        0 0 25px #06b6d4;
+
+    white-space:nowrap;
 }
 
 nav a{
-color:#fff;
-text-decoration:none;
-padding:10px 12px;
-border-radius:12px;
-font-weight:800;
-font-size:14px;
-transition:.25s;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:12px;
+    font-weight:bold;
+
+    padding:10px 12px;
+
+    border-radius:10px;
+
+    white-space:nowrap;
+
+    transition:.25s;
 }
 
 nav a:hover{
-background:rgba(255,255,255,.12);
-transform:translateY(-2px);
+
+    background:rgba(139,92,246,.2);
+
+    box-shadow:
+        0 0 15px rgba(139,92,246,.25);
+
+    transform:translateY(-2px);
 }
 
-/* GENERAL */
 
-.container{
-width:min(1200px,92%);
-margin:auto;
-}
-
-section{padding:80px 0}
-
-.hero{
-min-height:82vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-
-.hero h1{
-font-size:clamp(50px,9vw,110px);
-font-weight:1000;
-line-height:.9;
-text-shadow:0 5px 0 #111,0 0 30px #8b5cf6,0 0 70px #06b6d4;
-}
-
-.hero p{
-max-width:700px;
-margin:25px auto;
-font-size:18px;
-color:#ddd;
-}
-
-.hero-buttons{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:15px;
-flex-wrap:wrap;
-}
-
-.btn{
-display:inline-block;
-padding:14px 22px;
-border-radius:14px;
-border:1px solid rgba(255,255,255,.25);
-background:linear-gradient(135deg,#7c3aed,#06b6d4);
-color:white;
-text-decoration:none;
-font-weight:900;
-cursor:pointer;
-transition:.25s;
-}
-
-.btn:hover{
-transform:translateY(-4px) scale(1.02);
-box-shadow:0 15px 35px rgba(124,58,237,.45);
-}
-
-.btn.secondary{
-background:rgba(255,255,255,.08);
-}
-
-.section-title{
-text-align:center;
-margin-bottom:45px;
-}
-
-.section-title h2{
-font-size:clamp(35px,6vw,65px);
-font-weight:1000;
-text-transform:uppercase;
-}
-
-.section-title p{
-color:#ccc;
-margin-top:10px;
-}
-
-/* HOME OPTIONS */
-
-.feature-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:25px;
-}
-
-.feature-card{
-min-height:250px;
-padding:35px;
-border-radius:28px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.18);
-backdrop-filter:blur(15px);
-transition:.3s;
-cursor:pointer;
-}
-
-.feature-card:hover{
-transform:translateY(-8px);
-box-shadow:0 20px 50px rgba(0,0,0,.3);
-}
-
-.feature-icon{
-font-size:55px;
-margin-bottom:15px;
-}
-
-.feature-card h3{
-font-size:30px;
-margin-bottom:10px;
-}
-
-.feature-card p{
-color:#ccc;
-line-height:1.6;
-}
-
-/* AI */
-
-.ai-box{
-max-width:700px;
-margin:auto;
-padding:30px;
-border-radius:25px;
-background:rgba(0,0,0,.25);
-border:1px solid rgba(255,255,255,.2);
-}
-
-.ai-input{
-width:100%;
-padding:15px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.2);
-background:rgba(255,255,255,.08);
-color:#fff;
-outline:none;
-font-size:16px;
-margin-bottom:15px;
-}
-
-.ai-result{
-margin-top:15px;
-padding:20px;
-min-height:70px;
-border-radius:15px;
-background:rgba(255,255,255,.08);
-}
-
-/* PROJECTS */
-
-.project-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:20px;
-}
-
-.project{
-padding:25px;
-border-radius:22px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.15);
-transition:.25s;
-}
-
-.project:hover{
-transform:translateY(-5px);
-}
-
-.project h3{margin-bottom:10px}
-.project p{color:#ccc}
-
-/* ABOUT */
-
-.about-box{
-max-width:900px;
-margin:auto;
-padding:40px;
-border-radius:30px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.15);
-line-height:1.8;
-color:#ddd;
-}
-
-/* CREATOR */
-
-.creator{
-padding:30px;
-border-radius:30px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.18);
-}
-
-.toolbar{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-bottom:15px;
-}
-
-.toolbar button,
-.toolbar input{
-padding:9px 12px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,.2);
-background:rgba(0,0,0,.3);
-color:white;
-}
-
-canvas{
-width:100%;
-height:450px;
-background:#fff;
-border-radius:18px;
-display:block;
-cursor:crosshair;
-}
-
-/* PAGES */
+/* =========================================================
+   FULL PAGES
+========================================================= */
 
 .full-page{
-display:none;
-min-height:calc(100vh - 70px);
+
+    display:none;
+
+    min-height:calc(100vh - 65px);
+
+    padding:55px 6%;
 }
 
 .full-page.active{
-display:block;
+
+    display:block;
+
+    animation:
+        pageContent .45s ease;
 }
 
-/* INSPECTOR */
+@keyframes pageContent{
 
-.inspector{
-width:min(900px,92%);
-margin:auto;
-padding:80px 0;
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.985);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
-.inspector-box{
-padding:30px;
-border-radius:28px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.2);
+
+/* =========================================================
+   HOME
+========================================================= */
+
+.hero{
+
+    min-height:78vh;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
 }
 
-.inspector-input{
-width:100%;
-padding:16px;
-border-radius:14px;
-border:1px solid rgba(255,255,255,.2);
-background:rgba(0,0,0,.25);
-color:#fff;
-font-size:16px;
-outline:none;
-margin-bottom:15px;
+.hero h1{
+
+    font-size:clamp(50px,10vw,120px);
+
+    line-height:.9;
+
+    font-weight:1000;
+
+    letter-spacing:-5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #8b5cf6,
+            #06b6d4,
+            #ec4899,
+            #fff
+        );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    animation:
+        titleGradient 6s linear infinite;
 }
 
-.inspector-result{
-margin-top:25px;
-padding:20px;
-border-radius:15px;
-background:rgba(0,0,0,.3);
-line-height:1.9;
-word-break:break-word;
+@keyframes titleGradient{
+
+    to{
+        background-position:300%;
+    }
 }
 
-.quick-links{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-top:15px;
+.hero p{
+
+    max-width:650px;
+
+    margin:25px auto;
+
+    color:#cbd5e1;
+
+    line-height:1.7;
 }
 
-/* UPLOAD PAGES */
+.buttons{
 
-.upload-page{
-width:min(1100px,92%);
-margin:auto;
-padding:70px 0;
+    display:flex;
+    gap:14px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
 }
 
-.upload-top{
-text-align:center;
-margin-bottom:45px;
+.btn{
+
+    border:none;
+
+    padding:13px 20px;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b5cf6,
+            #06b6d4
+        );
+
+    box-shadow:
+        0 8px 30px rgba(6,182,212,.18);
+
+    transition:.25s;
 }
 
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:25px;
+.btn:hover{
+
+    transform:translateY(-3px) scale(1.03);
+
+    box-shadow:
+        0 12px 35px rgba(139,92,246,.35);
 }
 
-.item{
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.2);
-border-radius:25px;
-overflow:hidden;
-backdrop-filter:blur(15px);
-transition:.3s;
+.btn.secondary{
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
 }
 
-.item:hover{
-transform:translateY(-7px);
-box-shadow:0 20px 45px rgba(0,0,0,.35);
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section-title{
+
+    text-align:center;
+
+    font-size:42px;
+
+    margin-bottom:35px;
+
+    font-weight:1000;
 }
 
-.item img{
-width:100%;
-height:270px;
-object-fit:cover;
-display:block;
-background:#111;
+.glass{
+
+    background:rgba(255,255,255,.055);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:22px;
+
+    padding:25px;
+
+    backdrop-filter:blur(16px);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.18);
 }
 
-.item-info{
-padding:18px;
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
 }
 
-.item-info h3{
-margin-bottom:8px;
+.project-card{
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    transition:.3s;
 }
 
-.price{
-color:#ffd43b;
-font-size:21px;
-font-weight:1000;
-margin:10px 0;
+.project-card:hover{
+
+    transform:translateY(-7px);
+
+    border-color:#8b5cf6;
+
+    box-shadow:
+        0 15px 40px rgba(139,92,246,.18);
 }
 
-.item-buttons{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
+.project-card h3{
+
+    margin-bottom:10px;
+}
+
+.project-card p{
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   AI
+========================================================= */
+
+.ai-box{
+
+    max-width:650px;
+
+    margin:auto;
+}
+
+.input{
+
+    width:100%;
+
+    padding:14px;
+
+    margin:8px 0;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,.09);
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.result{
+
+    margin-top:15px;
+
+    padding:15px;
+
+    min-height:50px;
+
+    border-radius:12px;
+
+    background:rgba(0,0,0,.25);
+
+    color:#67e8f9;
+}
+
+
+/* =========================================================
+   UPLOAD PAGE
+========================================================= */
+
+.upload-box{
+
+    max-width:650px;
+
+    margin:0 auto 40px;
+
+    text-align:center;
+}
+
+.upload-box h2{
+
+    margin-bottom:10px;
+}
+
+.upload-box p{
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+    margin-bottom:20px;
+}
+
+.upload-form{
+
+    display:none;
+
+    margin-top:20px;
+
+    text-align:left;
+}
+
+.upload-form.show{
+
+    display:block;
+
+    animation:
+        pageContent .35s ease;
+}
+
+select{
+
+    width:100%;
+
+    padding:14px;
+
+    margin:8px 0;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:10px;
+
+    background:#17172a;
+
+    color:white;
+}
+
+input[type="file"]{
+
+    width:100%;
+
+    margin:10px 0;
+
+    color:white;
+}
+
+.price-input{
+
+    width:100%;
+
+    padding:14px;
+
+    margin:8px 0;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,.09);
+
+    color:white;
+}
+
+
+/* =========================================================
+   CARD COLLECTION
+========================================================= */
+
+.collection-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+}
+
+.kggt-card{
+
+    position:relative;
+
+    padding:12px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #30240c,
+            #101014 40%,
+            #241a09
+        );
+
+    border:3px solid #d6ad45;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.4),
+        0 0 20px rgba(214,173,69,.12);
+
+    transition:.3s;
+}
+
+.kggt-card:hover{
+
+    transform:
+        translateY(-8px)
+        rotateX(2deg);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.55),
+        0 0 30px rgba(214,173,69,.25);
+}
+
+.card-top{
+
+    display:flex;
+    justify-content:space-between;
+
+    font-size:11px;
+    font-weight:bold;
+
+    padding:5px;
+}
+
+.rarity{
+
+    color:#ffd76a;
+}
+
+.hp{
+
+    color:#ff7272;
+}
+
+.card-image{
+
+    width:100%;
+
+    height:250px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+    background:#080808;
+
+    border:2px solid #a87d20;
+
+    display:block;
+}
+
+.card-info{
+
+    padding:12px 5px;
+}
+
+.card-info h3{
+
+    margin-bottom:8px;
+}
+
+.card-type{
+
+    font-size:11px;
+
+    color:#cbd5e1;
+
+    margin-bottom:8px;
+}
+
+.card-price{
+
+    font-size:20px;
+
+    font-weight:1000;
+
+    color:#ff4d4d;
+
+    text-shadow:0 0 10px rgba(255,0,0,.2);
+
+    margin-bottom:12px;
+}
+
+.card-actions{
+
+    display:flex;
+
+    gap:7px;
+
+    flex-wrap:wrap;
 }
 
 .small-btn{
-border:0;
-padding:9px 12px;
-border-radius:10px;
-background:rgba(255,255,255,.12);
-color:#fff;
-cursor:pointer;
-font-weight:800;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:8px 11px;
+
+    border-radius:8px;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background:rgba(255,255,255,.1);
 }
 
 .small-btn:hover{
-background:#7c3aed;
+
+    background:#8b5cf6;
 }
 
-/* MODAL */
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+.canvas-wrap{
+
+    max-width:1000px;
+
+    margin:auto;
+}
+
+.toolbar{
+
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:15px;
+}
+
+.tool{
+
+    padding:9px 12px;
+
+    border:none;
+
+    border-radius:9px;
+
+    background:rgba(255,255,255,.1);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.tool:hover{
+
+    background:#8b5cf6;
+}
+
+canvas{
+
+    width:100%;
+
+    height:500px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    background:white;
+
+    cursor:crosshair;
+
+    display:block;
+}
+
+
+/* =========================================================
+   INSPECTOR
+========================================================= */
+
+.inspector{
+
+    max-width:800px;
+
+    margin:auto;
+}
+
+.inspector-result{
+
+    margin-top:20px;
+
+    display:none;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    background:rgba(0,0,0,.25);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    line-height:2;
+}
+
+.inspector-result.show{
+
+    display:block;
+
+    animation:pageContent .4s ease;
+}
+
+.quick-links{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:15px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal{
-position:fixed;
-inset:0;
-z-index:10000;
-display:none;
-align-items:center;
-justify-content:center;
-padding:20px;
-background:rgba(0,0,0,.75);
-backdrop-filter:blur(10px);
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:10000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(10px);
 }
 
-.modal.show{display:flex}
+.modal.show{
+
+    display:flex;
+
+    animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
 
 .modal-box{
-width:min(650px,95%);
-max-height:90vh;
-overflow:auto;
-padding:30px;
-border-radius:25px;
-background:#111827;
-border:1px solid rgba(255,255,255,.2);
-box-shadow:0 30px 100px rgba(0,0,0,.6);
+
+    width:min(650px,100%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    padding:25px;
+
+    border-radius:22px;
+
+    background:#11111e;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.5);
+}
+
+.preview-img{
+
+    width:100%;
+
+    max-height:65vh;
+
+    object-fit:contain;
+
+    border-radius:15px;
+
+    margin-bottom:15px;
 }
 
 .close{
-float:right;
-background:none;
-color:white;
-border:0;
-font-size:25px;
-cursor:pointer;
+
+    float:right;
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
 }
 
-.form-input{
-width:100%;
-padding:13px;
-margin-bottom:12px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,.2);
-background:rgba(255,255,255,.08);
-color:white;
-outline:none;
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.team{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+
+    gap:18px;
 }
 
-.preview-image{
-width:100%;
-max-height:70vh;
-object-fit:contain;
-border-radius:15px;
-background:#000;
+.member{
+
+    padding:25px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.1);
 }
 
-/* MOBILE */
+.member strong{
 
-@media(max-width:750px){
+    display:block;
 
-nav{
-overflow-x:auto;
-white-space:nowrap;
+    margin-bottom:7px;
 }
 
-.logo{
-margin-right:5px;
+.member span{
+
+    color:#94a3b8;
+
+    font-size:13px;
 }
 
-.feature-grid{
-grid-template-columns:1fr;
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    text-align:center;
+
+    padding:35px;
+
+    color:#94a3b8;
+
+    font-size:12px;
 }
 
-.hero{
-min-height:75vh;
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    nav{
+
+        padding:12px 10px;
+    }
+
+    .logo{
+
+        font-size:20px;
+    }
+
+    .full-page{
+
+        padding:35px 5%;
+    }
+
+    .hero h1{
+
+        letter-spacing:-3px;
+    }
+
+    canvas{
+
+        height:400px;
+    }
+
 }
 
-.boot-logo{
-letter-spacing:-3px;
-}
-
-.hero-buttons{
-flex-direction:column;
-}
-
-.hero-buttons .btn{
-width:min(300px,90vw);
-}
-}
 </style>
 </head>
 
+
 <body>
 
-<!-- BOOT -->
+
+<!-- ======================================================
+     BOOT
+======================================================= -->
 
 <div id="boot">
 
-<div class="boot-bg"></div>
+    <div class="boot-rays"></div>
+    <div class="boot-ring"></div>
 
-<div class="boot-rays"></div>
+    <div class="boot-logo">
+        KGGT
+    </div>
 
-<div class="boot-ring"></div>
+    <div class="boot-sub">
+        STUDIOS • CREATE • IMAGINE
+    </div>
 
-<div class="boot-content">
-
-<div class="boot-logo">KGGT</div>
-
-<div class="boot-sub">STUDIOS</div>
-
-<div class="boot-bar">
-<span></span>
-</div>
-
-</div>
+    <div class="boot-loader">
+        <span></span>
+    </div>
 
 </div>
 
 
-<!-- =====================================================
-     MAIN NAVBAR
-     
-     IMPORTANT:
-     CARD COLLECTION and ARTWORK are NOT on HOME.
-     They are separate pages opened from the navbar.
-===================================================== -->
+<!-- ======================================================
+     PAGE TRANSITION
+======================================================= -->
+
+<div class="page-transition" id="pageTransition">
+
+    <div class="transition-ring"></div>
+
+    <div class="transition-logo">
+        KGGT
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     NAVBAR
+======================================================= -->
 
 <nav>
 
-<div class="logo">
-KGGT STUDIOS
-</div>
+    <div class="logo">
+        KGGT
+    </div>
 
-<a href="#" onclick="showPage('homePage');return false;">
-HOME
-</a>
+    <a href="javascript:void(0)"
+       onclick="openPage('homePage')">
+        HOME
+    </a>
 
-<a href="#" onclick="showPage('inspectorPage');return false;">
-URL INSPECTOR
-</a>
+    <a href="javascript:void(0)"
+       onclick="openPage('inspectorPage')">
+        URL INSPECTOR
+    </a>
 
-<a href="#" onclick="showPage('cardPage');return false;">
-CARD COLLECTION
-</a>
+    <a href="javascript:void(0)"
+       onclick="openPage('cardPage')">
+        CARD COLLECTION
+    </a>
 
-<a href="#" onclick="showPage('artworkPage');return false;">
-ARTWORK
-</a>
+    <a href="javascript:void(0)"
+       onclick="openPage('artworkPage')">
+        ARTWORK
+    </a>
 
-<a href="#" onclick="goToCreate();return false;">
-CREATION
-</a>
+    <a href="javascript:void(0)"
+       onclick="openPage('creationPage')">
+        CREATION
+    </a>
 
-<a href="#ai" onclick="showPage('homePage')">
-AI
-</a>
+    <a href="javascript:void(0)"
+       onclick="openPage('aiPage')">
+        AI
+    </a>
 
-<a href="#projects" onclick="showPage('homePage')">
-PROJECTS
-</a>
+    <a href="javascript:void(0)"
+       onclick="openPage('projectsPage')">
+        PROJECTS
+    </a>
 
-<a href="#about" onclick="showPage('homePage')">
-ABOUT
-</a>
+    <a href="javascript:void(0)"
+       onclick="openPage('aboutPage')">
+        ABOUT
+    </a>
 
 </nav>
 
 
-<!-- =====================================================
-     HOME ONLY
-     
-     NO CARD COLLECTION
-     NO ARTWORK
-     
-     Just ENTER KGGT + CREATION.
-===================================================== -->
+<!-- ======================================================
+     HOME PAGE
+======================================================= -->
 
 <div id="homePage" class="full-page active">
 
-<section class="hero">
+    <section class="hero">
 
-<div class="container">
+        <h1>
+            KGGT
+        </h1>
 
-<h1>
-KGGT<br>
-STUDIOS
-</h1>
+        <p>
+            Welcome to KGGT STUDIOS — a creative space
+            where ideas become art, projects and imagination.
+        </p>
 
-<p>
-Create. Imagine. Draw. Build. Share.
-Welcome to the creative world of KGGT Studios.
-</p>
+        <div class="buttons">
 
-<div class="hero-buttons">
+            <a
+                class="btn"
+                href="https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/"
+            >
+                ENTER KGGT
+            </a>
 
-<a
-class="btn"
-href="https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/"
->
-🚀 ENTER KGGT
-</a>
+            <button
+                class="btn secondary"
+                onclick="openPage('creationPage')"
+            >
+                ✏️ CREATION
+            </button>
 
-<button
-class="btn secondary"
-onclick="goToCreate()"
->
-✨ CREATION
-</button>
+        </div>
 
-</div>
-
-</div>
-
-</section>
-
-
-<!-- AI -->
-
-<section id="ai">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>KGGT AI</h2>
-
-<p>
-Quick calculations and creative assistance.
-</p>
+    </section>
 
 </div>
 
-<div class="ai-box">
 
-<input
-id="aiInput"
-class="ai-input"
-placeholder="Try: 20% of 500 or 25*8"
->
+<!-- ======================================================
+     URL INSPECTOR PAGE
+======================================================= -->
 
-<button
-class="btn"
-onclick="calculateAI()"
->
-CALCULATE
-</button>
+<div id="inspectorPage" class="full-page">
+
+    <h2 class="section-title">
+        🔎 URL INSPECTOR
+    </h2>
+
+    <div class="glass inspector">
+
+        <input
+            class="input"
+            id="urlInput"
+            placeholder="Enter a URL..."
+        >
+
+        <div class="buttons">
+
+            <button
+                class="btn"
+                onclick="inspectURL()"
+            >
+                INSPECT URL
+            </button>
+
+            <button
+                class="btn secondary"
+                onclick="visitURL()"
+            >
+                VISIT HERE
+            </button>
+
+        </div>
+
+        <div class="quick-links">
+
+            <button
+                class="small-btn"
+                onclick="quickURL('https://chatgpt.com/')"
+            >
+                ChatGPT
+            </button>
+
+            <button
+                class="small-btn"
+                onclick="quickURL('https://codepen.io/')"
+            >
+                CodePen
+            </button>
+
+            <button
+                class="small-btn"
+                onclick="quickURL('https://github.com/')"
+            >
+                GitHub
+            </button>
+
+        </div>
+
+        <div
+            class="inspector-result"
+            id="urlResult"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     CARD COLLECTION PAGE
+======================================================= -->
+
+<div id="cardPage" class="full-page">
+
+    <h2 class="section-title">
+        🃏 KGGT CARD COLLECTION
+    </h2>
+
+    <div class="glass upload-box">
+
+        <h2>
+            Build Your Collection
+        </h2>
+
+        <p>
+            Upload your own cards and give them a price.
+        </p>
+
+        <button
+            class="btn"
+            onclick="openUpload('Card')"
+        >
+            + UPLOAD CARD
+        </button>
+
+    </div>
+
+    <div
+        id="cardGallery"
+        class="collection-grid"
+    ></div>
+
+</div>
+
+
+<!-- ======================================================
+     ARTWORK PAGE
+======================================================= -->
+
+<div id="artworkPage" class="full-page">
+
+    <h2 class="section-title">
+        🎨 KGGT ARTWORK
+    </h2>
+
+    <div class="glass upload-box">
+
+        <h2>
+            Upload Artwork
+        </h2>
+
+        <p>
+            Add your artwork from your computer,
+            phone gallery or a direct image URL.
+        </p>
+
+        <button
+            class="btn"
+            onclick="openUpload('Artwork')"
+        >
+            + UPLOAD ARTWORK
+        </button>
+
+    </div>
+
+    <div
+        id="artworkGallery"
+        class="collection-grid"
+    ></div>
+
+</div>
+
+
+<!-- ======================================================
+     CREATION PAGE
+======================================================= -->
+
+<div id="creationPage" class="full-page">
+
+    <h2 class="section-title">
+        ✏️ CREATION STUDIO
+    </h2>
+
+    <div class="canvas-wrap glass">
+
+        <div class="toolbar">
+
+            <button
+                class="tool"
+                onclick="setTool('brush')"
+            >
+                🖌 Brush
+            </button>
+
+            <button
+                class="tool"
+                onclick="setTool('eraser')"
+            >
+                🧽 Eraser
+            </button>
+
+            <button
+                class="tool"
+                onclick="setTool('text')"
+            >
+                🔤 Type
+            </button>
+
+            <button
+                class="tool"
+                onclick="clearCanvas()"
+            >
+                🗑 Clear
+            </button>
+
+            <button
+                class="tool"
+                onclick="saveDrawing()"
+            >
+                💾 Save
+            </button>
+
+            <label class="tool">
+
+                Canvas Background
+
+                <input
+                    type="color"
+                    id="canvasBg"
+                    value="#ffffff"
+                    onchange="changeCanvasBg(this.value)"
+                >
+
+            </label>
+
+            <label class="tool">
+
+                Brush
+
+                <input
+                    type="color"
+                    id="brushColor"
+                    value="#000000"
+                >
+
+            </label>
+
+            <label class="tool">
+
+                Size
+
+                <input
+                    type="range"
+                    id="brushSize"
+                    min="1"
+                    max="40"
+                    value="5"
+                >
+
+            </label>
+
+        </div>
+
+        <canvas
+            id="drawingCanvas"
+            width="1200"
+            height="600"
+        ></canvas>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     AI PAGE
+======================================================= -->
+
+<div id="aiPage" class="full-page">
+
+    <h2 class="section-title">
+        🤖 KGGT AI
+    </h2>
+
+    <div class="glass ai-box">
+
+        <h3>
+            Basic Math AI
+        </h3>
+
+        <p style="color:#94a3b8;margin:10px 0 20px;">
+            Try examples like:
+            25 + 30,
+            100 / 4,
+            20% of 500
+        </p>
+
+        <input
+            class="input"
+            id="mathInput"
+            placeholder="Enter calculation..."
+        >
+
+        <button
+            class="btn"
+            onclick="calculateMath()"
+        >
+            CALCULATE
+        </button>
+
+        <div
+            class="result"
+            id="mathResult"
+        >
+            Result will appear here.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     PROJECTS PAGE
+======================================================= -->
+
+<div id="projectsPage" class="full-page">
+
+    <h2 class="section-title">
+        🚀 PROJECTS
+    </h2>
+
+    <div class="grid">
+
+        <div class="project-card">
+
+            <h3>
+                🎮 Game Studio
+            </h3>
+
+            <p>
+                Create your own games, experiments
+                and interactive ideas.
+            </p>
+
+        </div>
+
+        <div class="project-card">
+
+            <h3>
+                🎨 Digital Art
+            </h3>
+
+            <p>
+                Draw, design and save your artwork
+                directly inside KGGT.
+            </p>
+
+        </div>
+
+        <div class="project-card">
+
+            <h3>
+                🌐 Web Projects
+            </h3>
+
+            <p>
+                Build creative websites and
+                experiment with HTML, CSS and JS.
+            </p>
+
+        </div>
+
+        <div class="project-card">
+
+            <h3>
+                🤖 AI Experiments
+            </h3>
+
+            <p>
+                Explore calculators, creative tools
+                and future AI ideas.
+            </p>
+
+        </div>
+
+        <div class="project-card">
+
+            <h3>
+                🃏 Card Designs
+            </h3>
+
+            <p>
+                Create your own collectible card
+                designs and collections.
+            </p>
+
+        </div>
+
+        <div class="project-card">
+
+            <h3>
+                ✨ Future Lab
+            </h3>
+
+            <p>
+                A place for new KGGT experiments
+                and crazy ideas.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     ABOUT PAGE
+======================================================= -->
+
+<div id="aboutPage" class="full-page">
+
+    <h2 class="section-title">
+        👑 ABOUT KGGT
+    </h2>
+
+    <div class="glass">
+
+        <p style="
+            line-height:1.8;
+            color:#cbd5e1;
+            text-align:center;
+        ">
+
+            KGGT STUDIOS is a creative project made
+            for imagination, art, technology and fun.
+
+            Create something new.
+            Imagine something bigger.
+            Build it with KGGT.
+
+        </p>
+
+    </div>
+
+    <br><br>
+
+    <div class="team">
+
+        <div class="member">
+
+            <strong>
+                Kartik
+            </strong>
+
+            <span>
+                Founder / Creator
+            </span>
+
+        </div>
+
+        <div class="member">
+
+            <strong>
+                Tanish
+            </strong>
+
+            <span>
+                Team
+            </span>
+
+        </div>
+
+        <div class="member">
+
+            <strong>
+                Garvitsingh
+            </strong>
+
+            <span>
+                Team
+            </span>
+
+        </div>
+
+        <div class="member">
+
+            <strong>
+                Garvittiwari
+            </strong>
+
+            <span>
+                Team
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     UPLOAD MODAL
+======================================================= -->
 
 <div
-id="aiResult"
-class="ai-result"
+    class="modal"
+    id="uploadModal"
 >
-Result will appear here.
-</div>
 
-</div>
+    <div class="modal-box">
 
-</div>
+        <button
+            class="close"
+            onclick="closeModal('uploadModal')"
+        >
+            ×
+        </button>
 
-</section>
+        <h2 id="uploadHeading">
+            Upload
+        </h2>
 
+        <div
+            id="passwordArea"
+            style="margin-top:20px;"
+        >
 
-<!-- PROJECTS -->
+            <input
+                class="input"
+                id="uploadPassword"
+                type="password"
+                placeholder="Enter password"
+            >
 
-<section id="projects">
+            <button
+                class="btn"
+                onclick="unlockUpload()"
+            >
+                UNLOCK
+            </button>
 
-<div class="container">
+        </div>
 
-<div class="section-title">
+        <div
+            class="upload-form"
+            id="uploadForm"
+        >
 
-<h2>PROJECTS</h2>
+            <select id="uploadType">
 
-<p>
-Creative projects by KGGT Studios.
-</p>
+                <option value="Card">
+                    Card
+                </option>
 
-</div>
+                <option value="Artwork">
+                    Artwork
+                </option>
 
-<div class="project-grid">
+            </select>
 
-<div class="project">
-<h3>🎮 Game Concept</h3>
-<p>Build your own game ideas and concepts.</p>
-</div>
+            <input
+                class="input"
+                id="itemTitle"
+                placeholder="Title"
+            >
 
-<div class="project">
-<h3>🎨 Digital Art</h3>
-<p>Create unique digital artwork.</p>
-</div>
+            <input
+                class="price-input"
+                id="itemPrice"
+                type="number"
+                placeholder="Price ₹"
+            >
 
-<div class="project">
-<h3>💻 Web Design</h3>
-<p>Design futuristic websites and interfaces.</p>
-</div>
+            <p style="
+                color:#94a3b8;
+                margin-top:15px;
+                font-size:13px;
+            ">
+                Upload image from Computer / Phone Gallery
+            </p>
 
-<div class="project">
-<h3>🧠 AI Ideas</h3>
-<p>Experiment with creative AI concepts.</p>
-</div>
+            <input
+                type="file"
+                id="imageFile"
+                accept="image/*"
+            >
 
-<div class="project">
-<h3>✏️ Sketch Lab</h3>
-<p>Draw and save your own sketches.</p>
-</div>
+            <p style="
+                color:#94a3b8;
+                margin-top:10px;
+                font-size:13px;
+            ">
+                OR use a direct online image URL
+            </p>
 
-<div class="project">
-<h3>🚀 Future Projects</h3>
-<p>More KGGT projects coming soon.</p>
-</div>
+            <input
+                class="input"
+                id="imageURL"
+                placeholder="https://example.com/image.jpg"
+            >
 
-</div>
+            <button
+                class="btn"
+                onclick="saveUploadedItem()"
+            >
+                SAVE
+            </button>
 
-</div>
+        </div>
 
-</section>
-
-
-<!-- ABOUT -->
-
-<section id="about">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>ABOUT KGGT</h2>
-
-</div>
-
-<div class="about-box">
-
-<p>
-KGGT Studios is a creative space for art,
-sketches, digital projects, ideas and experiments.
-</p>
-
-<br>
-
-<p>
-The goal is simple:
-<strong>Create. Imagine.</strong>
-</p>
-
-<br>
-
-<p>
-Built with HTML, CSS and JavaScript.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CREATION -->
-
-<section id="create">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>CREATOR STUDIO</h2>
-
-<p>
-Draw your own creation.
-</p>
-
-</div>
-
-<div class="creator">
-
-<div class="toolbar">
-
-<button onclick="setTool('brush')">
-🖌 Brush
-</button>
-
-<button onclick="setTool('eraser')">
-🧽 Eraser
-</button>
-
-<button onclick="setTool('text')">
-T Type
-</button>
-
-<button onclick="clearCanvas()">
-🗑 Clear
-</button>
-
-<button onclick="saveSketch()">
-💾 Save
-</button>
-
-<label>
-Brush:
-<input
-type="color"
-id="brushColor"
-value="#000000"
->
-</label>
-
-<label>
-Size:
-<input
-type="range"
-id="brushSize"
-min="1"
-max="40"
-value="5"
->
-</label>
-
-<label>
-Canvas:
-<input
-type="color"
-id="canvasColor"
-value="#ffffff"
-onchange="changeCanvasBackground()"
->
-</label>
-
-</div>
-
-<canvas
-id="canvas"
-width="1100"
-height="450"
-></canvas>
-
-</div>
-
-</div>
-
-</section>
+    </div>
 
 </div>
 
 
-<!-- =====================================================
-     URL INSPECTOR = COMPLETELY SEPARATE PAGE
-===================================================== -->
+<!-- ======================================================
+     PREVIEW MODAL
+======================================================= -->
 
 <div
-id="inspectorPage"
-class="full-page"
+    class="modal"
+    id="previewModal"
 >
 
-<div class="inspector">
+    <div class="modal-box">
 
-<div class="section-title">
+        <button
+            class="close"
+            onclick="closeModal('previewModal')"
+        >
+            ×
+        </button>
 
-<h2>URL INSPECTOR</h2>
+        <img
+            id="previewImage"
+            class="preview-img"
+        >
 
-<p>
-Inspect a URL directly inside KGGT Studios.
-</p>
+        <h2 id="previewTitle"></h2>
 
-</div>
+        <p
+            id="previewPrice"
+            style="
+                color:#ff5757;
+                font-size:22px;
+                font-weight:bold;
+                margin-top:10px;
+            "
+        ></p>
 
-<div class="inspector-box">
-
-<input
-id="urlInput"
-class="inspector-input"
-placeholder="https://example.com"
->
-
-<button
-class="btn"
-onclick="inspectURL()"
->
-INSPECT URL
-</button>
-
-<button
-class="btn secondary"
-onclick="visitURL()"
->
-VISIT HERE
-</button>
-
-<div class="quick-links">
-
-<button
-class="small-btn"
-onclick="setURL('https://chatgpt.com/')"
->
-ChatGPT
-</button>
-
-<button
-class="small-btn"
-onclick="setURL('https://codepen.io/')"
->
-CodePen
-</button>
-
-<button
-class="small-btn"
-onclick="setURL('https://github.com/')"
->
-GitHub
-</button>
-
-</div>
-
-<div
-id="urlResult"
-class="inspector-result"
->
-Enter a URL above.
-</div>
-
-<br>
-
-<button
-class="btn secondary"
-onclick="showPage('homePage')"
->
-← BACK TO KGGT
-</button>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
 
-<!-- =====================================================
-     CARD COLLECTION = COMPLETELY SEPARATE PAGE
-===================================================== -->
+<footer>
 
-<div
-id="cardPage"
-class="full-page"
->
+    © 2026 KGGT STUDIOS — Create. Imagine.
 
-<div class="upload-page">
-
-<div class="upload-top">
-
-<div class="section-title">
-
-<h2>🃏 CARD COLLECTION</h2>
-
-<p>
-This is a separate KGGT page for uploading cards.
-</p>
-
-</div>
-
-<button
-class="btn"
-onclick="openUpload('card')"
->
-+ UPLOAD CARD
-</button>
-
-<button
-class="btn secondary"
-onclick="showPage('homePage')"
->
-← HOME
-</button>
-
-</div>
-
-<div
-id="cardGallery"
-class="gallery"
-></div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     ARTWORK = COMPLETELY SEPARATE PAGE
-===================================================== -->
-
-<div
-id="artworkPage"
-class="full-page"
->
-
-<div class="upload-page">
-
-<div class="upload-top">
-
-<div class="section-title">
-
-<h2>🎨 KGGT ARTWORK</h2>
-
-<p>
-This is a separate KGGT page for uploading artwork.
-</p>
-
-</div>
-
-<button
-class="btn"
-onclick="openUpload('artwork')"
->
-+ UPLOAD ARTWORK
-</button>
-
-<button
-class="btn secondary"
-onclick="showPage('homePage')"
->
-← HOME
-</button>
-
-</div>
-
-<div
-id="artworkGallery"
-class="gallery"
-></div>
-
-</div>
-
-</div>
-
-
-<!-- UPLOAD MODAL -->
-
-<div
-id="uploadModal"
-class="modal"
->
-
-<div class="modal-box">
-
-<button
-class="close"
-onclick="closeModal('uploadModal')"
->
-×
-</button>
-
-<h2 id="uploadHeading">
-Upload
-</h2>
-
-<input
-id="uploadPassword"
-class="form-input"
-type="password"
-placeholder="Password"
-/>
-
-<input
-id="uploadTitle"
-class="form-input"
-placeholder="Title"
-/>
-
-<input
-id="uploadPrice"
-class="form-input"
-placeholder="Price e.g. ₹500"
-/>
-
-<p style="color:#aaa;margin:10px 0">
-Upload image:
-</p>
-
-<input
-id="uploadFile"
-class="form-input"
-type="file"
-accept="image/*"
-/>
-
-<p style="color:#aaa;margin:10px 0">
-Or use a direct image URL:
-</p>
-
-<input
-id="uploadURL"
-class="form-input"
-placeholder="https://example.com/image.jpg"
-/>
-
-<button
-class="btn"
-onclick="saveUpload()"
->
-SAVE
-</button>
-
-</div>
-
-</div>
-
-
-<!-- PREVIEW -->
-
-<div
-id="previewModal"
-class="modal"
->
-
-<div class="modal-box">
-
-<button
-class="close"
-onclick="closeModal('previewModal')"
->
-×
-</button>
-
-<img
-id="previewImage"
-class="preview-image"
->
-
-<h2
-id="previewTitle"
-style="margin-top:15px"
-></h2>
-
-<div
-id="previewPrice"
-class="price"
-></div>
-
-</div>
-
-</div>
+</footer>
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    BOOT
-===================================================== */
+========================================================= */
 
 window.addEventListener("load",function(){
 
-setTimeout(function(){
+    setTimeout(function(){
 
-document
-.getElementById("boot")
-.classList.add("hide");
+        const boot =
+            document.getElementById("boot");
 
-},3200);
+        boot.style.transition =
+            "opacity .8s ease, transform .8s ease";
 
-});
+        boot.style.opacity="0";
+        boot.style.transform="scale(1.08)";
 
+        setTimeout(function(){
 
-/* =====================================================
-   PAGE SYSTEM
-===================================================== */
+            boot.remove();
 
-function showPage(pageID){
+        },800);
 
-document
-.querySelectorAll(".full-page")
-.forEach(function(page){
-
-page.classList.remove("active");
+    },3000);
 
 });
 
-const page=
-document.getElementById(pageID);
 
-if(page){
-page.classList.add("active");
-}
+/* =========================================================
+   PAGE SWITCHING
+========================================================= */
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+function openPage(pageId){
 
-}
+    const transition =
+        document.getElementById("pageTransition");
 
+    transition.classList.add("active");
 
-/* =====================================================
-   CREATION BUTTON
-===================================================== */
+    setTimeout(function(){
 
-function goToCreate(){
+        document
+            .querySelectorAll(".full-page")
+            .forEach(function(page){
 
-showPage("homePage");
+                page.classList.remove("active");
 
-setTimeout(function(){
+            });
 
-document
-.getElementById("create")
-.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
+        const target =
+            document.getElementById(pageId);
 
-},150);
+        if(target){
 
-}
+            target.classList.add("active");
 
+        }
 
-/* =====================================================
-   AI
-===================================================== */
+        window.scrollTo({
+            top:0,
+            behavior:"instant"
+        });
 
-function calculateAI(){
+    },300);
 
-const input=
-document
-.getElementById("aiInput")
-.value
-.trim();
+    setTimeout(function(){
 
-const result=
-document
-.getElementById("aiResult");
+        transition.classList.remove("active");
 
-if(!input){
-
-result.innerHTML=
-"Please enter a calculation.";
-
-return;
-
-}
-
-try{
-
-let expression=
-input.replace(
-/(\d+(?:\.\d+)?)\s*%\s*of\s*(\d+(?:\.\d+)?)/i,
-"($1/100)*$2"
-);
-
-if(!/^[0-9+\-*/().%\s]+$/.test(expression)){
-
-result.innerHTML=
-"Please enter a basic mathematical calculation.";
-
-return;
-
-}
-
-const answer=
-Function(
-'"use strict";return ('+
-expression+
-')'
-)();
-
-result.innerHTML=
-"<strong>Answer:</strong> "+answer;
-
-}
-
-catch(e){
-
-result.innerHTML=
-"Could not calculate that.";
-
-}
+    },700);
 
 }
 
 
-/* =====================================================
-   URL INSPECTOR
-===================================================== */
+/* =========================================================
+   AI MATH
+========================================================= */
 
-function setURL(url){
+function calculateMath(){
 
-document
-.getElementById("urlInput")
-.value=url;
+    const input =
+        document
+        .getElementById("mathInput")
+        .value
+        .trim();
 
-inspectURL();
+    const result =
+        document.getElementById("mathResult");
 
-}
+    if(!input){
 
+        result.textContent =
+            "Please enter a calculation.";
 
-function inspectURL(){
+        return;
+    }
 
-const input=
-document
-.getElementById("urlInput")
-.value
-.trim();
+    try{
 
-const result=
-document
-.getElementById("urlResult");
+        let expression=input;
 
-if(!input){
+        const percentMatch =
+            expression.match(
+                /^([\d.]+)\s*%\s*of\s*([\d.]+)$/i
+            );
 
-result.innerHTML=
-"Enter a URL.";
+        if(percentMatch){
 
-return;
+            const a=parseFloat(percentMatch[1]);
+            const b=parseFloat(percentMatch[2]);
 
-}
+            result.textContent =
+                (a/100*b);
 
-try{
+            return;
+        }
 
-const url=
-new URL(
-input.match(/^https?:\/\//)
-?input
-:"https://"+input
-);
+        expression =
+            expression.replace(/×/g,"*")
+                      .replace(/÷/g,"/");
 
-result.innerHTML=`
+        if(!/^[0-9+\-*/().%\s]+$/.test(expression)){
 
-<strong>Protocol:</strong>
-${url.protocol}<br>
+            result.textContent =
+                "Please enter a valid math expression.";
 
-<strong>Hostname:</strong>
-${url.hostname}<br>
+            return;
+        }
 
-<strong>Port:</strong>
-${url.port || "Default"}<br>
+        const answer =
+            Function(
+                '"use strict";return ('+
+                expression+
+                ')'
+            )();
 
-<strong>Path:</strong>
-${url.pathname || "/"}<br>
+        result.textContent =
+            "Answer: " + answer;
 
-<strong>Query:</strong>
-${url.search || "None"}<br>
+    }catch(error){
 
-<strong>Hash:</strong>
-${url.hash || "None"}<br><br>
+        result.textContent =
+            "Could not calculate that.";
 
-<strong>Full URL:</strong><br>
-${url.href}
-
-`;
-
-}
-
-catch(e){
-
-result.innerHTML=
-"Invalid URL.";
-
-}
+    }
 
 }
 
 
-function visitURL(){
-
-let url=
-document
-.getElementById("urlInput")
-.value
-.trim();
-
-if(!url){
-
-alert("Enter a URL first.");
-
-return;
-
-}
-
-if(!/^https?:\/\//i.test(url)){
-url="https://"+url;
-}
-
-window.open(url,"_blank");
-
-}
-
-
-/* =====================================================
+/* =========================================================
    UPLOAD SYSTEM
-===================================================== */
+========================================================= */
 
-let currentUploadType="artwork";
-
+let uploadTarget="Card";
 
 function openUpload(type){
 
-currentUploadType=type;
+    uploadTarget=type;
 
-document
-.getElementById("uploadHeading")
-.textContent=
-type==="card"
-?"🃏 Upload KGGT Card"
-:"🎨 Upload KGGT Artwork";
+    document.getElementById("uploadModal")
+        .classList.add("show");
 
-document
-.getElementById("uploadPassword")
-.value="";
+    document.getElementById("uploadHeading")
+        .textContent=
+        "Upload " + type;
 
-document
-.getElementById("uploadTitle")
-.value="";
+    document.getElementById("uploadType")
+        .value=type;
 
-document
-.getElementById("uploadPrice")
-.value="";
+    document.getElementById("passwordArea")
+        .style.display="block";
 
-document
-.getElementById("uploadURL")
-.value="";
+    document.getElementById("uploadForm")
+        .classList.remove("show");
 
-document
-.getElementById("uploadFile")
-.value="";
+    document.getElementById("uploadPassword")
+        .value="";
 
-document
-.getElementById("uploadModal")
-.classList.add("show");
+}
+
+function unlockUpload(){
+
+    const password =
+        document.getElementById("uploadPassword")
+        .value;
+
+    if(password==="password"){
+
+        document.getElementById("passwordArea")
+            .style.display="none";
+
+        document.getElementById("uploadForm")
+            .classList.add("show");
+
+    }else{
+
+        alert("Wrong password.");
+
+    }
 
 }
 
 
-function saveUpload(){
+/* =========================================================
+   SAVE UPLOAD
+========================================================= */
 
-const password=
-document
-.getElementById("uploadPassword")
-.value;
+function saveUploadedItem(){
 
-if(password!=="password"){
+    const title =
+        document.getElementById("itemTitle")
+        .value.trim();
 
-alert("Wrong password.");
+    const price =
+        document.getElementById("itemPrice")
+        .value.trim();
 
-return;
+    const file =
+        document.getElementById("imageFile")
+        .files[0];
 
-}
+    const url =
+        document.getElementById("imageURL")
+        .value.trim();
 
-const title=
-document
-.getElementById("uploadTitle")
-.value
-.trim();
+    const type =
+        document.getElementById("uploadType")
+        .value;
 
-const price=
-document
-.getElementById("uploadPrice")
-.value
-.trim();
+    if(!title){
 
-const url=
-document
-.getElementById("uploadURL")
-.value
-.trim();
+        alert("Please enter a title.");
 
-const file=
-document
-.getElementById("uploadFile")
-.files[0];
+        return;
+    }
 
-if(!title){
+    if(!price){
 
-alert("Please enter a title.");
+        alert("Please enter a price.");
 
-return;
+        return;
+    }
 
-}
+    if(!file && !url){
 
-if(!price){
+        alert(
+            "Please select an image or enter an image URL."
+        );
 
-alert("Please enter a price.");
+        return;
+    }
 
-return;
+    if(file){
 
-}
+        const reader =
+            new FileReader();
 
-if(!file && !url){
+        reader.onload=function(e){
 
-alert("Please select an image or enter an image URL.");
+            finishSave(
+                type,
+                title,
+                price,
+                e.target.result
+            );
 
-return;
+        };
 
-}
+        reader.readAsDataURL(file);
 
-if(file){
+    }else{
 
-const reader=
-new FileReader();
+        finishSave(
+            type,
+            title,
+            price,
+            url
+        );
 
-reader.onload=function(e){
-
-createUpload(
-e.target.result,
-title,
-price
-);
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-else{
-
-createUpload(
-url,
-title,
-price
-);
-
-}
+    }
 
 }
 
 
-function createUpload(
-image,
-title,
-price
-){
+function finishSave(type,title,price,image){
 
-const items=
-JSON.parse(
-localStorage.getItem("kggtGallery") || "[]"
-);
+    const items =
+        JSON.parse(
+            localStorage.getItem("kggtGallery") ||
+            "[]"
+        );
 
-items.push({
+    items.push({
 
-id:Date.now(),
+        id:Date.now(),
 
-type:currentUploadType,
+        type:type,
 
-title:title,
+        title:title,
 
-price:price,
+        price:price,
 
-image:image
+        image:image,
 
-});
+        date:new Date().toLocaleDateString()
 
-localStorage.setItem(
-"kggtGallery",
-JSON.stringify(items)
-);
+    });
 
-closeModal("uploadModal");
+    localStorage.setItem(
+        "kggtGallery",
+        JSON.stringify(items)
+    );
 
-renderGallery();
+    closeModal("uploadModal");
+
+    clearUploadForm();
+
+    renderGallery();
 
 }
 
 
-/* =====================================================
-   GALLERY
-===================================================== */
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearUploadForm(){
+
+    document.getElementById("itemTitle")
+        .value="";
+
+    document.getElementById("itemPrice")
+        .value="";
+
+    document.getElementById("imageURL")
+        .value="";
+
+    document.getElementById("imageFile")
+        .value="";
+
+}
+
+
+/* =========================================================
+   RENDER GALLERY
+========================================================= */
 
 function renderGallery(){
 
-const items=
-JSON.parse(
-localStorage.getItem("kggtGallery") || "[]"
-);
+    const items =
+        JSON.parse(
+            localStorage.getItem("kggtGallery") ||
+            "[]"
+        );
 
-const artworkGallery=
-document.getElementById("artworkGallery");
+    const cards =
+        document.getElementById("cardGallery");
 
-const cardGallery=
-document.getElementById("cardGallery");
+    const artworks =
+        document.getElementById("artworkGallery");
 
-artworkGallery.innerHTML="";
-cardGallery.innerHTML="";
+    cards.innerHTML="";
+    artworks.innerHTML="";
 
+    items.forEach(function(item){
 
-items.forEach(function(item){
+        const html=`
 
-const html=`
+        <div class="kggt-card">
 
-<div class="item">
+            <div class="card-top">
 
-<img
-src="${item.image}"
-alt="${escapeHTML(item.title)}"
-onerror="this.style.opacity='.3'"
->
+                <span class="rarity">
+                    ⭐ KGGT RARE
+                </span>
 
-<div class="item-info">
+                <span class="hp">
+                    HP ${Math.floor(Math.random()*100)+1}
+                </span>
 
-<h3>
-${escapeHTML(item.title)}
-</h3>
+            </div>
 
-<div class="price">
-${escapeHTML(item.price)}
-</div>
+            <img
+                src="${item.image}"
+                class="card-image"
+                alt="${escapeHTML(item.title)}"
+            >
 
-<div class="item-buttons">
+            <div class="card-info">
 
-<button
-class="small-btn"
-onclick="previewItem(${item.id})"
->
-👁 PREVIEW
-</button>
+                <div class="card-type">
+                    ${item.type}
+                </div>
 
-<button
-class="small-btn"
-onclick="buyItem(${item.id})"
->
-💰 BUY
-</button>
+                <h3>
+                    ${escapeHTML(item.title)}
+                </h3>
 
-<button
-class="small-btn"
-onclick="editPrice(${item.id})"
->
-✏️ EDIT PRICE
-</button>
+                <div class="card-price">
+                    ₹${escapeHTML(item.price)}
+                </div>
 
-<button
-class="small-btn"
-onclick="deleteItem(${item.id})"
->
-🗑 DELETE
-</button>
+                <div class="card-actions">
 
-</div>
+                    <button
+                        class="small-btn"
+                        onclick="previewItem(${item.id})"
+                    >
+                        PREVIEW
+                    </button>
 
-</div>
+                    <button
+                        class="small-btn"
+                        onclick="buyItem(${item.id})"
+                    >
+                        BUY
+                    </button>
 
-</div>
+                    <button
+                        class="small-btn"
+                        onclick="editPrice(${item.id})"
+                    >
+                        EDIT
+                    </button>
 
-`;
+                    <button
+                        class="small-btn"
+                        onclick="deleteItem(${item.id})"
+                    >
+                        DELETE
+                    </button>
 
-if(item.type==="card"){
-cardGallery.innerHTML+=html;
-}
-else{
-artworkGallery.innerHTML+=html;
-}
+                </div>
 
-});
+            </div>
 
+        </div>
 
-if(!cardGallery.innerHTML){
+        `;
 
-cardGallery.innerHTML=`
+        if(item.type==="Card"){
 
-<div style="
-grid-column:1/-1;
-text-align:center;
-padding:60px;
-color:#aaa;
-">
+            cards.innerHTML+=html;
 
-No cards uploaded yet.
+        }else{
 
-<br><br>
+            artworks.innerHTML+=html;
 
-Click "+ UPLOAD CARD" to add one.
+        }
 
-</div>
-
-`;
+    });
 
 }
 
 
-if(!artworkGallery.innerHTML){
-
-artworkGallery.innerHTML=`
-
-<div style="
-grid-column:1/-1;
-text-align:center;
-padding:60px;
-color:#aaa;
-">
-
-No artwork uploaded yet.
-
-<br><br>
-
-Click "+ UPLOAD ARTWORK" to add one.
-
-</div>
-
-`;
-
-}
-
-}
-
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
 function escapeHTML(text){
 
-return String(text)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
-/* =====================================================
+/* =========================================================
    PREVIEW
-===================================================== */
+========================================================= */
 
 function previewItem(id){
 
-const items=
-JSON.parse(
-localStorage.getItem("kggtGallery") || "[]"
-);
+    const items =
+        JSON.parse(
+            localStorage.getItem("kggtGallery") ||
+            "[]"
+        );
 
-const item=
-items.find(function(x){
-return x.id===id;
-});
+    const item =
+        items.find(function(x){
+            return x.id===id;
+        });
 
-if(!item)return;
+    if(!item)return;
 
-document
-.getElementById("previewImage")
-.src=item.image;
+    document.getElementById("previewImage")
+        .src=item.image;
 
-document
-.getElementById("previewTitle")
-.textContent=item.title;
+    document.getElementById("previewTitle")
+        .textContent=item.title;
 
-document
-.getElementById("previewPrice")
-.textContent=item.price;
+    document.getElementById("previewPrice")
+        .textContent="₹"+item.price;
 
-document
-.getElementById("previewModal")
-.classList.add("show");
+    document.getElementById("previewModal")
+        .classList.add("show");
 
 }
 
 
-/* =====================================================
-   BUY
-===================================================== */
-
-function buyItem(id){
-
-const items=
-JSON.parse(
-localStorage.getItem("kggtGallery") || "[]"
-);
-
-const item=
-items.find(function(x){
-return x.id===id;
-});
-
-if(!item)return;
-
-alert(
-"Purchase request:\n\n"+
-item.title+
-"\nPrice: "+
-item.price+
-"\n\nPayment can be connected later."
-);
-
-}
-
-
-/* =====================================================
-   PRICE
-===================================================== */
+/* =========================================================
+   EDIT PRICE
+========================================================= */
 
 function editPrice(id){
 
-const password=
-prompt("Enter password:");
+    const password =
+        prompt("Enter password:");
 
-if(password!=="password"){
+    if(password!=="password"){
 
-alert("Wrong password.");
+        alert("Wrong password.");
 
-return;
+        return;
+    }
+
+    const newPrice =
+        prompt("Enter new price:");
+
+    if(newPrice===null)return;
+
+    const items =
+        JSON.parse(
+            localStorage.getItem("kggtGallery") ||
+            "[]"
+        );
+
+    const item =
+        items.find(function(x){
+            return x.id===id;
+        });
+
+    if(item){
+
+        item.price=newPrice;
+
+        localStorage.setItem(
+            "kggtGallery",
+            JSON.stringify(items)
+        );
+
+        renderGallery();
+
+    }
 
 }
 
-const newPrice=
-prompt("Enter new price:");
 
-if(!newPrice)return;
-
-const items=
-JSON.parse(
-localStorage.getItem("kggtGallery") || "[]"
-);
-
-const item=
-items.find(function(x){
-return x.id===id;
-});
-
-if(item){
-
-item.price=newPrice;
-
-localStorage.setItem(
-"kggtGallery",
-JSON.stringify(items)
-);
-
-renderGallery();
-
-}
-
-}
-
-
-/* =====================================================
+/* =========================================================
    DELETE
-===================================================== */
+========================================================= */
 
 function deleteItem(id){
 
-const password=
-prompt("Enter password:");
+    const password =
+        prompt("Enter password:");
 
-if(password!=="password"){
+    if(password!=="password"){
 
-alert("Wrong password.");
+        alert("Wrong password.");
 
-return;
+        return;
+    }
+
+    if(!confirm("Delete this item?")){
+
+        return;
+    }
+
+    let items =
+        JSON.parse(
+            localStorage.getItem("kggtGallery") ||
+            "[]"
+        );
+
+    items =
+        items.filter(function(item){
+            return item.id!==id;
+        });
+
+    localStorage.setItem(
+        "kggtGallery",
+        JSON.stringify(items)
+    );
+
+    renderGallery();
 
 }
 
-if(!confirm("Delete this item?"))return;
 
-let items=
-JSON.parse(
-localStorage.getItem("kggtGallery") || "[]"
-);
+/* =========================================================
+   BUY
+========================================================= */
 
-items=
-items.filter(function(item){
-return item.id!==id;
-});
+function buyItem(id){
 
-localStorage.setItem(
-"kggtGallery",
-JSON.stringify(items)
-);
+    const items =
+        JSON.parse(
+            localStorage.getItem("kggtGallery") ||
+            "[]"
+        );
 
-renderGallery();
+    const item =
+        items.find(function(x){
+            return x.id===id;
+        });
+
+    if(!item)return;
+
+    alert(
+        "Purchase request for " +
+        item.title +
+        " — ₹" +
+        item.price +
+        "\n\nPayment system can be added later."
+    );
 
 }
 
 
-/* =====================================================
-   MODAL
-===================================================== */
+/* =========================================================
+   MODALS
+========================================================= */
 
 function closeModal(id){
 
-document
-.getElementById(id)
-.classList
-.remove("show");
+    document
+        .getElementById(id)
+        .classList.remove("show");
 
 }
 
-document
-.querySelectorAll(".modal")
-.forEach(function(modal){
 
-modal.addEventListener(
-"click",
-function(e){
+/* =========================================================
+   URL INSPECTOR
+========================================================= */
 
-if(e.target===modal){
-modal.classList.remove("show");
+function quickURL(url){
+
+    document.getElementById("urlInput")
+        .value=url;
+
+    inspectURL();
+
 }
 
+function inspectURL(){
+
+    let value =
+        document.getElementById("urlInput")
+        .value.trim();
+
+    const output =
+        document.getElementById("urlResult");
+
+    if(!value){
+
+        output.innerHTML=
+            "Please enter a URL.";
+
+        output.classList.add("show");
+
+        return;
+    }
+
+    try{
+
+        if(
+            !value.startsWith("http://") &&
+            !value.startsWith("https://")
+        ){
+
+            value="https://"+value;
+
+        }
+
+        const url=
+            new URL(value);
+
+        output.innerHTML=`
+
+            <strong>Protocol:</strong>
+            ${escapeHTML(url.protocol)}
+            <br>
+
+            <strong>Hostname:</strong>
+            ${escapeHTML(url.hostname)}
+            <br>
+
+            <strong>Port:</strong>
+            ${escapeHTML(url.port || "Default")}
+            <br>
+
+            <strong>Path:</strong>
+            ${escapeHTML(url.pathname)}
+            <br>
+
+            <strong>Query:</strong>
+            ${escapeHTML(url.search || "None")}
+            <br>
+
+            <strong>Hash:</strong>
+            ${escapeHTML(url.hash || "None")}
+            <br>
+
+            <strong>Full URL:</strong>
+            ${escapeHTML(url.href)}
+
+        `;
+
+        output.classList.add("show");
+
+        document.getElementById("urlInput")
+            .value=url.href;
+
+    }catch(error){
+
+        output.innerHTML=
+            "Invalid URL.";
+
+        output.classList.add("show");
+
+    }
+
 }
-);
 
-});
+function visitURL(){
+
+    let value =
+        document.getElementById("urlInput")
+        .value.trim();
+
+    if(!value){
+
+        alert("Enter a URL first.");
+
+        return;
+    }
+
+    if(
+        !value.startsWith("http://") &&
+        !value.startsWith("https://")
+    ){
+
+        value="https://"+value;
+
+    }
+
+    window.open(
+        value,
+        "_blank"
+    );
+
+}
 
 
-/* =====================================================
-   CREATOR CANVAS
-===================================================== */
+/* =========================================================
+   CANVAS
+========================================================= */
 
-const canvas=
-document.getElementById("canvas");
+const canvas =
+    document.getElementById("drawingCanvas");
 
-const ctx=
-canvas.getContext("2d");
+const ctx =
+    canvas.getContext("2d");
 
 let drawing=false;
+
 let tool="brush";
 
-ctx.fillStyle="#ffffff";
-
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
+let canvasBackground="#ffffff";
 
 
-function setTool(selectedTool){
+function resizeCanvas(){
 
-tool=selectedTool;
+    const oldImage =
+        canvas.toDataURL();
 
-canvas.style.cursor=
-selectedTool==="text"
-?"text"
-:"crosshair";
+    /*
+       Keep fixed internal canvas size.
+       CSS handles display size.
+    */
 
 }
 
+function setTool(newTool){
 
-function getPosition(event){
+    tool=newTool;
 
-const rect=
-canvas.getBoundingClientRect();
+    if(tool==="text"){
 
-return{
+        const text=
+            prompt("Type your text:");
 
-x:
-(event.clientX-rect.left)
-*(canvas.width/rect.width),
+        if(text){
 
-y:
-(event.clientY-rect.top)
-*(canvas.height/rect.height)
+            ctx.fillStyle=
+                document.getElementById(
+                    "brushColor"
+                ).value;
 
-};
+            ctx.font="30px Arial";
+
+            ctx.fillText(
+                text,
+                80,
+                80
+            );
+
+        }
+
+    }
 
 }
 
 
 canvas.addEventListener(
-"pointerdown",
-function(event){
-
-const pos=
-getPosition(event);
-
-if(tool==="text"){
-
-const text=
-prompt("Type your text:");
-
-if(text){
-
-ctx.fillStyle=
-document
-.getElementById("brushColor")
-.value;
-
-ctx.font="30px Arial";
-
-ctx.fillText(
-text,
-pos.x,
-pos.y
+    "mousedown",
+    startDrawing
 );
 
-}
-
-return;
-
-}
-
-drawing=true;
-
-ctx.beginPath();
-
-ctx.moveTo(
-pos.x,
-pos.y
+canvas.addEventListener(
+    "mousemove",
+    draw
 );
 
-}
+canvas.addEventListener(
+    "mouseup",
+    stopDrawing
+);
+
+canvas.addEventListener(
+    "mouseleave",
+    stopDrawing
 );
 
 
 canvas.addEventListener(
-"pointermove",
-function(event){
+    "touchstart",
+    function(e){
 
-if(!drawing)return;
+        e.preventDefault();
 
-const pos=
-getPosition(event);
+        const touch=e.touches[0];
 
-const size=
-document
-.getElementById("brushSize")
-.value;
+        const rect=
+            canvas.getBoundingClientRect();
 
-if(tool==="eraser"){
+        startDrawing({
+            clientX:touch.clientX,
+            clientY:touch.clientY
+        });
 
-ctx.strokeStyle=
-document
-.getElementById("canvasColor")
-.value;
-
-}
-
-else{
-
-ctx.strokeStyle=
-document
-.getElementById("brushColor")
-.value;
-
-}
-
-ctx.lineWidth=size;
-ctx.lineCap="round";
-ctx.lineJoin="round";
-
-ctx.lineTo(
-pos.x,
-pos.y
-);
-
-ctx.stroke();
-
-}
+    },
+    {passive:false}
 );
 
 
 canvas.addEventListener(
-"pointerup",
-function(){
-drawing=false;
-}
+    "touchmove",
+    function(e){
+
+        e.preventDefault();
+
+        const touch=e.touches[0];
+
+        draw({
+            clientX:touch.clientX,
+            clientY:touch.clientY
+        });
+
+    },
+    {passive:false}
 );
 
+
 canvas.addEventListener(
-"pointerleave",
-function(){
-drawing=false;
-}
+    "touchend",
+    stopDrawing
 );
+
+
+function getPosition(e){
+
+    const rect=
+        canvas.getBoundingClientRect();
+
+    return {
+
+        x:
+            (e.clientX-rect.left)
+            *canvas.width/
+            rect.width,
+
+        y:
+            (e.clientY-rect.top)
+            *canvas.height/
+            rect.height
+
+    };
+
+}
+
+
+function startDrawing(e){
+
+    if(tool==="text")return;
+
+    drawing=true;
+
+    const pos=
+        getPosition(e);
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        pos.x,
+        pos.y
+    );
+
+}
+
+
+function draw(e){
+
+    if(!drawing)return;
+
+    const pos=
+        getPosition(e);
+
+    ctx.lineWidth=
+        document.getElementById(
+            "brushSize"
+        ).value;
+
+    ctx.lineCap="round";
+
+    if(tool==="eraser"){
+
+        ctx.globalCompositeOperation=
+            "destination-out";
+
+    }else{
+
+        ctx.globalCompositeOperation=
+            "source-over";
+
+        ctx.strokeStyle=
+            document.getElementById(
+                "brushColor"
+            ).value;
+
+    }
+
+    ctx.lineTo(
+        pos.x,
+        pos.y
+    );
+
+    ctx.stroke();
+
+}
+
+
+function stopDrawing(){
+
+    drawing=false;
+
+    ctx.beginPath();
+
+    ctx.globalCompositeOperation=
+        "source-over";
+
+}
 
 
 function clearCanvas(){
 
-const color=
-document
-.getElementById("canvasColor")
-.value;
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-ctx.fillStyle=color;
-
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
+    fillCanvasBackground();
 
 }
 
 
-function changeCanvasBackground(){
+function fillCanvasBackground(){
 
-clearCanvas();
+    ctx.save();
 
-}
+    ctx.globalCompositeOperation=
+        "destination-over";
 
+    ctx.fillStyle=
+        canvasBackground;
 
-function saveSketch(){
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-const image=
-canvas.toDataURL("image/png");
-
-const link=
-document.createElement("a");
-
-link.download=
-"KGGT-Sketch-"+Date.now()+".png";
-
-link.href=image;
-
-link.click();
+    ctx.restore();
 
 }
 
 
-/* START */
+function changeCanvasBg(color){
+
+    canvasBackground=color;
+
+    fillCanvasBackground();
+
+}
+
+
+function saveDrawing(){
+
+    const image=
+        canvas.toDataURL("image/png");
+
+    const title=
+        prompt(
+            "Enter a title for your artwork:"
+        );
+
+    if(!title)return;
+
+    const items =
+        JSON.parse(
+            localStorage.getItem("kggtGallery") ||
+            "[]"
+        );
+
+    items.push({
+
+        id:Date.now(),
+
+        type:"Artwork",
+
+        title:title,
+
+        price:"0",
+
+        image:image,
+
+        date:new Date().toLocaleDateString()
+
+    });
+
+    localStorage.setItem(
+        "kggtGallery",
+        JSON.stringify(items)
+    );
+
+    alert(
+        "Your creation has been saved to KGGT Artwork!"
+    );
+
+    renderGallery();
+
+}
+
+
+/* =========================================================
+   INITIALISE CANVAS
+========================================================= */
+
+fillCanvasBackground();
 
 renderGallery();
+
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.querySelectorAll(".modal")
+.forEach(function(modal){
+
+    modal.addEventListener(
+        "click",
+        function(e){
+
+            if(e.target===modal){
+
+                modal.classList.remove("show");
+
+            }
+
+        }
+    );
+
+});
+
 
 </script>
 
