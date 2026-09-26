@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>KGGT STUDIOS — Create. Imagine.</title>
+<title>KGGT STUDIOS — CREATE. IMAGINE.</title>
 
 <style>
 /* =========================================================
-   KGGT STUDIOS — ULTRA LIGHT JARVIS EDITION
-   CSS/JS only • no canvas particles • no heavy libraries
+   KGGT STUDIOS
+   ULTRA PREMIUM / PERFORMANCE EDITION
+   SINGLE HTML FILE
 ========================================================= */
 
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
 }
 
 html{
@@ -23,241 +24,338 @@ html{
 
 body{
   min-height:100vh;
-  background:#02050b;
+  background:#02040a;
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
 
 /* =========================================================
-   GLOBAL JARVIS BACKGROUND
+   PERFORMANCE-FRIENDLY JARVIS BACKGROUND
 ========================================================= */
 
-body:before{
-  content:"";
+.jarvis-bg{
   position:fixed;
   inset:0;
-  z-index:-10;
+  z-index:-20;
   pointer-events:none;
+  overflow:hidden;
   background:
-    radial-gradient(circle at 50% 50%,rgba(0,190,255,.10),transparent 32%),
-    radial-gradient(circle at 10% 80%,rgba(100,50,255,.08),transparent 30%),
-    radial-gradient(circle at 90% 15%,rgba(0,255,220,.07),transparent 28%),
-    #02050b;
+    radial-gradient(circle at 50% 50%,rgba(0,170,255,.12),transparent 30%),
+    radial-gradient(circle at 10% 90%,rgba(80,50,255,.10),transparent 32%),
+    radial-gradient(circle at 90% 10%,rgba(0,255,220,.08),transparent 32%),
+    #02040a;
 }
 
-.machineGrid{
-  position:fixed;
+.jarvis-grid{
+  position:absolute;
   inset:0;
-  z-index:-8;
-  pointer-events:none;
-  opacity:.16;
+  opacity:.12;
   background-image:
-    linear-gradient(rgba(0,190,255,.15) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,190,255,.15) 1px,transparent 1px);
-  background-size:55px 55px;
-  mask-image:linear-gradient(to bottom,transparent,#000 15%,#000 85%,transparent);
+    linear-gradient(rgba(0,210,255,.18) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,210,255,.18) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:linear-gradient(
+    to bottom,
+    transparent,
+    #000 18%,
+    #000 82%,
+    transparent
+  );
 }
 
-.machineGlow{
-  position:fixed;
+.jarvis-orb{
+  position:absolute;
   width:500px;
   height:500px;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
-  border-radius:50%;
   border:1px solid rgba(0,210,255,.10);
+  border-radius:50%;
   box-shadow:
-    0 0 100px rgba(0,180,255,.06),
-    inset 0 0 100px rgba(0,180,255,.04);
-  pointer-events:none;
-  z-index:-7;
+    0 0 80px rgba(0,170,255,.06),
+    inset 0 0 80px rgba(0,170,255,.04);
 }
 
 /* =========================================================
-   PAGE BOOT
+   CINEMATIC BOOT
 ========================================================= */
 
-#pageBoot{
+#boot{
   position:fixed;
   inset:0;
-  z-index:99999;
-  display:none;
+  z-index:999999;
+  display:flex;
   align-items:center;
   justify-content:center;
-  background:
-    radial-gradient(circle at center,#071c2d 0,#03070e 38%,#010207 100%);
   overflow:hidden;
+  background:
+    radial-gradient(
+      circle at center,
+      #08283b 0%,
+      #03101b 25%,
+      #02050b 55%,
+      #000 100%
+    );
 }
 
-#pageBoot.show{
-  display:flex;
+#boot.hide{
+  animation:bootExit .8s cubic-bezier(.7,0,.2,1) forwards;
+  pointer-events:none;
 }
 
-.bootScan{
+@keyframes bootExit{
+  0%{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+  }
+  100%{
+    opacity:0;
+    transform:scale(1.15);
+    filter:blur(15px);
+  }
+}
+
+.boot-stars{
   position:absolute;
   inset:0;
-  pointer-events:none;
+  background-image:
+    radial-gradient(circle,#fff 1px,transparent 1px),
+    radial-gradient(circle,#00d9ff 1px,transparent 1px);
+  background-size:90px 90px,140px 140px;
+  background-position:10px 20px,50px 70px;
+  opacity:.25;
+}
+
+.boot-grid{
+  position:absolute;
+  width:160%;
+  height:160%;
+  left:-30%;
+  top:35%;
+  background-image:
+    linear-gradient(rgba(0,210,255,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,210,255,.12) 1px,transparent 1px);
+  background-size:55px 55px;
+  transform:
+    perspective(450px)
+    rotateX(62deg);
+  transform-origin:center top;
+  opacity:.25;
+}
+
+.boot-scan{
+  position:absolute;
+  inset:0;
   background:repeating-linear-gradient(
     to bottom,
     transparent 0,
-    transparent 4px,
-    rgba(0,210,255,.025) 5px
+    transparent 5px,
+    rgba(0,220,255,.025) 6px
   );
 }
 
-.bootGrid{
-  position:absolute;
-  inset:-50%;
-  background-image:
-    linear-gradient(rgba(0,190,255,.08) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,190,255,.08) 1px,transparent 1px);
-  background-size:55px 55px;
-  transform:perspective(400px) rotateX(60deg);
-  opacity:.3;
-}
-
-.bootCore{
+.boot-core{
   position:relative;
-  z-index:5;
-  width:min(650px,90%);
+  width:min(760px,90%);
   text-align:center;
+  z-index:10;
 }
 
-.bootRings{
+.boot-reactor{
   position:absolute;
-  width:330px;
-  height:330px;
+  width:360px;
+  height:360px;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
-  pointer-events:none;
 }
 
-.bootRing{
+.reactor-ring{
   position:absolute;
   inset:0;
-  border:1px solid rgba(0,210,255,.25);
   border-radius:50%;
+  border:1px solid rgba(0,220,255,.25);
 }
 
-.bootRing:nth-child(1){
-  animation:ringSpin 5s linear infinite;
-  border-top-color:#00d9ff;
+.reactor-ring:nth-child(1){
+  border-top-color:#00eaff;
+  animation:spin 4s linear infinite;
 }
 
-.bootRing:nth-child(2){
-  inset:30px;
-  animation:ringSpinReverse 3s linear infinite;
-  border-right-color:#7c5cff;
+.reactor-ring:nth-child(2){
+  inset:28px;
+  border-right-color:#775cff;
+  animation:spinReverse 2.7s linear infinite;
 }
 
-.bootRing:nth-child(3){
-  inset:65px;
-  animation:ringSpin 2s linear infinite;
+.reactor-ring:nth-child(3){
+  inset:58px;
   border-bottom-color:#00ffd5;
+  animation:spin 1.8s linear infinite;
 }
 
-@keyframes ringSpin{
+.reactor-ring:nth-child(4){
+  inset:92px;
+  border-left-color:#00aaff;
+  animation:spinReverse 1.2s linear infinite;
+}
+
+@keyframes spin{
   to{transform:rotate(360deg)}
 }
 
-@keyframes ringSpinReverse{
+@keyframes spinReverse{
   to{transform:rotate(-360deg)}
 }
 
-.bootLogo{
+.boot-logo{
   position:relative;
-  font-size:clamp(75px,16vw,155px);
+  font-size:clamp(80px,17vw,165px);
   font-weight:1000;
   letter-spacing:8px;
+  line-height:.8;
   color:#fff;
+
   text-shadow:
-    0 0 8px #00d9ff,
-    0 0 30px #0077ff,
-    0 0 70px rgba(0,180,255,.4);
-  animation:bootLogo .75s cubic-bezier(.2,.8,.2,1);
+    0 0 8px #fff,
+    0 0 18px #00eaff,
+    0 0 45px #008cff,
+    0 0 90px rgba(0,160,255,.5);
+
+  animation:
+    logoZoom 1.2s cubic-bezier(.16,1,.3,1),
+    logoGlow 2s ease-in-out infinite alternate;
 }
 
-@keyframes bootLogo{
-  from{
+@keyframes logoZoom{
+  0%{
     opacity:0;
-    transform:scale(1.8);
-    filter:blur(25px);
+    transform:scale(2.4);
+    filter:blur(30px);
   }
-  to{
+  55%{
     opacity:1;
+    transform:scale(.94);
+    filter:blur(1px);
+  }
+  100%{
     transform:scale(1);
     filter:blur(0);
   }
 }
 
-.bootSub{
-  margin-top:-5px;
-  color:#7ddfff;
-  letter-spacing:8px;
-  font-size:12px;
+@keyframes logoGlow{
+  from{
+    text-shadow:
+      0 0 8px #fff,
+      0 0 18px #00eaff,
+      0 0 35px #008cff;
+  }
+  to{
+    text-shadow:
+      0 0 10px #fff,
+      0 0 25px #00eaff,
+      0 0 65px #008cff,
+      0 0 100px rgba(0,180,255,.45);
+  }
 }
 
-.bootStatus{
-  margin-top:30px;
-  color:#8ca6b8;
+.boot-studios{
+  margin-top:5px;
+  color:#7beaff;
+  font-size:12px;
+  letter-spacing:10px;
+}
+
+.boot-message{
+  margin-top:35px;
+  color:#8da7b8;
   font-size:10px;
   letter-spacing:3px;
+  min-height:14px;
 }
 
-.bootProgress{
+.boot-progress{
+  width:min(560px,80%);
   height:3px;
   margin:14px auto 0;
-  width:min(500px,80%);
-  background:#10202d;
+  background:#10202b;
   overflow:hidden;
 }
 
-.bootProgress span{
+.boot-progress span{
   display:block;
-  height:100%;
   width:0;
-  background:linear-gradient(90deg,#006aff,#00eaff,#00ffd5);
-  box-shadow:0 0 12px #00d9ff;
-  animation:bootProgress .85s ease-out forwards;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    #006cff,
+    #00d9ff,
+    #00ffd5
+  );
+  box-shadow:0 0 15px #00d9ff;
+  animation:progress 2.2s cubic-bezier(.2,.7,.2,1) forwards;
 }
 
-@keyframes bootProgress{
-  to{width:100%}
+@keyframes progress{
+  0%{width:0}
+  20%{width:18%}
+  45%{width:42%}
+  70%{width:69%}
+  88%{width:87%}
+  100%{width:100%}
 }
 
-.bootModules{
-  margin-top:15px;
+.boot-modules{
   display:flex;
   justify-content:center;
-  gap:18px;
+  gap:22px;
   flex-wrap:wrap;
-  color:#526879;
+  margin-top:15px;
   font-size:8px;
-  letter-spacing:1.5px;
+  letter-spacing:2px;
+  color:#496474;
 }
 
-.bootModules span{
-  animation:moduleOn .4s forwards;
+.boot-modules span{
   opacity:.15;
+  animation:module .35s forwards;
 }
 
-.bootModules span:nth-child(1){animation-delay:.15s}
-.bootModules span:nth-child(2){animation-delay:.30s}
-.bootModules span:nth-child(3){animation-delay:.45s}
-.bootModules span:nth-child(4){animation-delay:.60s}
+.boot-modules span:nth-child(1){animation-delay:.3s}
+.boot-modules span:nth-child(2){animation-delay:.55s}
+.boot-modules span:nth-child(3){animation-delay:.8s}
+.boot-modules span:nth-child(4){animation-delay:1.05s}
+.boot-modules span:nth-child(5){animation-delay:1.3s}
 
-@keyframes moduleOn{
+@keyframes module{
   to{
     opacity:1;
     color:#00d9ff;
   }
 }
 
+.boot-online{
+  margin-top:20px;
+  font-size:9px;
+  letter-spacing:4px;
+  color:#00ffd5;
+  opacity:0;
+  animation:online .4s 1.65s forwards;
+}
+
+@keyframes online{
+  to{
+    opacity:1;
+    text-shadow:0 0 12px #00ffd5;
+  }
+}
+
 /* =========================================================
-   NAVBAR
+   NAVIGATION
 ========================================================= */
 
 nav{
@@ -270,10 +368,10 @@ nav{
 
   display:flex;
   align-items:center;
-  gap:6px;
-  padding:0 24px;
+  gap:5px;
+  padding:0 22px;
 
-  background:rgba(2,6,13,.82);
+  background:rgba(1,5,12,.84);
   border-bottom:1px solid rgba(0,210,255,.18);
   backdrop-filter:blur(10px);
 }
@@ -283,17 +381,18 @@ nav{
   font-size:21px;
   font-weight:1000;
   letter-spacing:2px;
-  text-shadow:0 0 15px #00cfff;
+  color:#fff;
+  text-shadow:0 0 14px #00d9ff;
 }
 
 nav button{
-  border:1px solid transparent;
+  color:#8395a5;
   background:transparent;
-  color:#91a1b0;
-  padding:9px 11px;
+  border:1px solid transparent;
   border-radius:7px;
+  padding:9px 10px;
   cursor:pointer;
-  font-size:11px;
+  font-size:10px;
   font-weight:bold;
   transition:.15s;
 }
@@ -303,47 +402,46 @@ nav button.active{
   color:#fff;
   border-color:rgba(0,210,255,.35);
   background:rgba(0,190,255,.08);
-  text-shadow:0 0 8px #00cfff;
+  text-shadow:0 0 8px #00d9ff;
 }
 
 @media(max-width:900px){
   nav{
     overflow-x:auto;
   }
-
   nav button{
     white-space:nowrap;
   }
 }
 
 /* =========================================================
-   PAGES
+   PAGE SYSTEM
 ========================================================= */
 
 .page{
   display:none;
   min-height:100vh;
-  padding:105px 5% 60px;
+  padding:105px 5% 70px;
 }
 
 .page.active{
   display:block;
 }
 
-.pageTitle{
-  font-size:clamp(36px,6vw,60px);
+.page-title{
+  font-size:clamp(38px,6vw,64px);
   font-weight:1000;
-  margin-bottom:8px;
-  text-shadow:0 0 20px rgba(0,200,255,.15);
+  line-height:.95;
+  margin-bottom:10px;
 }
 
-.pageDesc{
-  color:#7d8d9c;
+.page-desc{
+  color:#7d8e9d;
   margin-bottom:30px;
 }
 
 /* =========================================================
-   BEAUTIFUL HOME
+   HOME
 ========================================================= */
 
 #home{
@@ -353,275 +451,293 @@ nav button.active{
   overflow:hidden;
 }
 
-/* SLIDESHOW */
-
-.universe{
+.home-universe{
   position:absolute;
   inset:0;
   overflow:hidden;
-  background:#010208;
+  background:#000;
 }
 
 .slide{
   position:absolute;
   inset:0;
-
-  background-size:cover;
   background-position:center;
-
+  background-size:cover;
   opacity:0;
-  transform:scale(1.04);
-
-  animation:cinematicSlide 42s infinite;
-
-  filter:brightness(.46) saturate(1.18);
+  transform:scale(1.06);
+  animation:cinematicSlide 48s infinite;
+  will-change:opacity,transform;
+  filter:brightness(.45) saturate(1.12);
 }
 
 /*
-  Universe + famous Earth locations.
-  Images are compressed through Unsplash parameters.
+   SPACE + EARTH + FAMOUS LANDSCAPES
+   Low/medium compressed images keep the page responsive.
 */
 
 .slide:nth-child(1){
-  background-image:url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=65");
+  background-image:url(
+    "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=65"
+  );
   animation-delay:0s;
 }
 
 .slide:nth-child(2){
-  background-image:url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=65");
-  animation-delay:7s;
+  background-image:url(
+    "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=65"
+  );
+  animation-delay:8s;
 }
 
 .slide:nth-child(3){
-  background-image:url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=65");
-  animation-delay:14s;
+  background-image:url(
+    "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=65"
+  );
+  animation-delay:16s;
 }
 
 .slide:nth-child(4){
-  background-image:url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=65");
-  animation-delay:21s;
+  background-image:url(
+    "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=65"
+  );
+  animation-delay:24s;
 }
 
 .slide:nth-child(5){
-  background-image:url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=65");
-  animation-delay:28s;
+  background-image:url(
+    "https://images.unsplash.com/photo-1470214304380-aadaedcfff1b?auto=format&fit=crop&w=1600&q=65"
+  );
+  animation-delay:32s;
 }
 
 .slide:nth-child(6){
-  background-image:url("https://images.unsplash.com/photo-1470214304380-aadaedcfff1b?auto=format&fit=crop&w=1600&q=65");
-  animation-delay:35s;
+  background-image:url(
+    "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=65"
+  );
+  animation-delay:40s;
 }
 
 @keyframes cinematicSlide{
+
   0%{
     opacity:0;
-    transform:scale(1.04);
+    transform:scale(1.06);
   }
 
-  5%{
+  4%{
     opacity:1;
   }
 
-  15%{
+  14%{
     opacity:1;
     transform:scale(1);
   }
 
-  21%{
+  19%{
     opacity:0;
-    transform:scale(1.01);
+    transform:scale(1.015);
   }
 
   100%{
     opacity:0;
   }
+
 }
 
-/* CINEMATIC OVERLAY */
+/* CINEMATIC HOME OVERLAY */
 
-.universe::after{
+.home-universe:after{
   content:"";
   position:absolute;
   inset:0;
+
   background:
     linear-gradient(
       90deg,
-      rgba(0,5,15,.72),
-      rgba(0,5,15,.25) 50%,
-      rgba(0,5,15,.7)
+      rgba(0,4,12,.82),
+      rgba(0,5,14,.25) 50%,
+      rgba(0,4,12,.78)
     ),
     linear-gradient(
       0deg,
-      rgba(0,3,10,.85),
-      transparent 35%,
-      rgba(0,5,15,.2)
+      rgba(0,3,9,.9),
+      transparent 45%,
+      rgba(0,4,12,.3)
     );
 }
 
-/* HORIZONTAL SCAN */
+.home-scan{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  opacity:.3;
 
-.homeScan{
+  background:linear-gradient(
+    to bottom,
+    transparent 49.7%,
+    rgba(0,210,255,.08) 50%,
+    transparent 50.3%
+  );
+
+  background-size:100% 8px;
+}
+
+.home-hud{
   position:absolute;
   inset:0;
   z-index:3;
   pointer-events:none;
-  background:
-    linear-gradient(
-      to bottom,
-      transparent 49.7%,
-      rgba(0,210,255,.08) 50%,
-      transparent 50.3%
-    );
-  background-size:100% 8px;
 }
 
-/* HOME HUD */
-
-.homeHUD{
-  position:absolute;
-  inset:0;
-  z-index:4;
-  pointer-events:none;
-}
-
-.corner{
+.hud-corner{
   position:absolute;
   width:90px;
   height:90px;
   border-color:rgba(0,210,255,.55);
 }
 
-.corner.tl{
+.hud-corner.tl{
   top:90px;
   left:25px;
   border-top:1px solid;
   border-left:1px solid;
 }
 
-.corner.tr{
+.hud-corner.tr{
   top:90px;
   right:25px;
   border-top:1px solid;
   border-right:1px solid;
 }
 
-.corner.bl{
-  bottom:30px;
+.hud-corner.bl{
+  bottom:25px;
   left:25px;
   border-bottom:1px solid;
   border-left:1px solid;
 }
 
-.corner.br{
-  bottom:30px;
+.hud-corner.br{
+  bottom:25px;
   right:25px;
   border-bottom:1px solid;
   border-right:1px solid;
 }
 
-.hudLabel{
+.hud-label{
   position:absolute;
-  color:rgba(130,220,255,.65);
   font-size:8px;
+  color:rgba(130,225,255,.65);
   letter-spacing:2px;
 }
 
-.hudLabel.top{
-  top:80px;
+.hud-label.top{
+  top:82px;
   left:50%;
   transform:translateX(-50%);
 }
 
-.hudLabel.bottom{
+.hud-label.bottom{
   bottom:20px;
   left:50%;
   transform:translateX(-50%);
 }
 
-/* HOME CENTER */
-
-.homeCenter{
+.home-center{
   position:relative;
   z-index:10;
+
   min-height:100vh;
+  padding:100px 20px 40px;
 
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
   text-align:center;
-  padding:90px 20px 40px;
 }
 
-.systemText{
+.system-online{
+  color:#00d9ff;
   font-size:10px;
   letter-spacing:5px;
-  color:#00d9ff;
-  text-shadow:0 0 12px #00d9ff;
   margin-bottom:20px;
+  text-shadow:0 0 14px #00d9ff;
 }
 
-.homeTitle{
-  font-size:clamp(65px,13vw,155px);
-  line-height:.8;
+.home-title{
+  font-size:clamp(70px,14vw,165px);
   font-weight:1000;
-  letter-spacing:-6px;
+  line-height:.78;
+  letter-spacing:-7px;
+
   text-shadow:
-    0 0 12px rgba(0,220,255,.7),
-    0 0 45px rgba(0,100,255,.4);
+    0 0 12px rgba(255,255,255,.5),
+    0 0 30px rgba(0,210,255,.65),
+    0 0 70px rgba(0,100,255,.35);
 }
 
-.homeTitle span{
+.home-title span{
   color:#00d9ff;
 }
 
-.homeSub{
+.home-subtitle{
   margin-top:25px;
-  color:#d2e9f5;
+  color:#d1e9f5;
   font-size:13px;
   letter-spacing:5px;
 }
 
-.homeButtons{
+.home-buttons{
   display:flex;
-  gap:12px;
   flex-wrap:wrap;
   justify-content:center;
-  margin-top:30px;
+  gap:12px;
+  margin-top:32px;
 }
 
-.mainBtn{
-  min-width:150px;
-  padding:14px 22px;
-  border-radius:7px;
-  border:1px solid rgba(0,210,255,.45);
-  background:rgba(2,16,28,.75);
+.main-btn{
+  min-width:155px;
+  padding:15px 22px;
+
   color:#fff;
+  background:rgba(2,15,27,.78);
+  border:1px solid rgba(0,215,255,.45);
+  border-radius:8px;
+
   cursor:pointer;
   font-weight:bold;
-  box-shadow:0 0 20px rgba(0,200,255,.08);
+
+  box-shadow:
+    0 0 20px rgba(0,190,255,.07),
+    inset 0 0 15px rgba(0,190,255,.03);
+
   transition:.18s;
 }
 
-.mainBtn:hover{
-  transform:translateY(-2px);
-  background:rgba(0,180,255,.15);
-  box-shadow:0 0 30px rgba(0,200,255,.2);
+.main-btn:hover{
+  transform:translateY(-3px);
+  background:rgba(0,170,255,.15);
+  border-color:#00d9ff;
+  box-shadow:
+    0 0 30px rgba(0,210,255,.18);
 }
 
 /* =========================================================
-   CARDS / GALLERIES
+   GALLERIES
 ========================================================= */
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  grid-template-columns:
+    repeat(auto-fill,minmax(230px,1fr));
   gap:18px;
 }
 
 .card{
-  background:rgba(5,12,23,.88);
+  background:rgba(5,12,23,.9);
   border:1px solid rgba(0,210,255,.14);
   border-radius:12px;
   padding:12px;
@@ -629,16 +745,17 @@ nav button.active{
 }
 
 .card:hover{
-  border-color:rgba(0,210,255,.4);
   transform:translateY(-3px);
+  border-color:rgba(0,210,255,.4);
 }
 
 .card img{
+  display:block;
   width:100%;
   aspect-ratio:1;
   object-fit:cover;
   border-radius:8px;
-  background:#02050b;
+  background:#010308;
 }
 
 .card h3{
@@ -646,36 +763,38 @@ nav button.active{
 }
 
 .price{
-  color:#ff5264;
-  font-weight:bold;
+  color:#ff5063;
   font-size:19px;
+  font-weight:bold;
   margin-bottom:10px;
 }
 
 .btn{
-  padding:11px 16px;
+  padding:11px 17px;
+  color:#fff;
+  background:#071522;
   border:1px solid rgba(0,210,255,.25);
   border-radius:7px;
-  background:#071321;
-  color:#fff;
   cursor:pointer;
+  font-weight:bold;
 }
 
 .btn:hover{
-  background:#0a2437;
+  background:#0b2639;
+  border-color:#00d9ff;
 }
 
 /* =========================================================
    AI
 ========================================================= */
 
-.aiBox{
-  max-width:600px;
+.ai-box{
+  max-width:620px;
   margin:auto;
+  padding:26px;
+  border-radius:14px;
   background:rgba(5,12,23,.9);
   border:1px solid rgba(0,210,255,.18);
-  border-radius:14px;
-  padding:25px;
 }
 
 input,
@@ -684,17 +803,19 @@ textarea{
   width:100%;
   padding:13px;
   margin:7px 0;
-  border-radius:7px;
-  border:1px solid rgba(0,210,255,.18);
-  background:#02070e;
+
   color:#fff;
+  background:#02070e;
+
+  border:1px solid rgba(0,210,255,.18);
+  border-radius:7px;
   outline:none;
 }
 
 input:focus,
-select:focus{
+select:focus,
+textarea:focus{
   border-color:#00d9ff;
-  box-shadow:0 0 10px rgba(0,210,255,.1);
 }
 
 .result{
@@ -702,7 +823,7 @@ select:focus{
   padding:14px;
   border-radius:7px;
   background:#02070e;
-  color:#70ffad;
+  color:#70ffae;
 }
 
 /* =========================================================
@@ -717,8 +838,8 @@ select:focus{
 .toolbar,
 .tools{
   display:flex;
-  flex-wrap:wrap;
   gap:8px;
+  flex-wrap:wrap;
   margin-bottom:12px;
 }
 
@@ -733,8 +854,12 @@ canvas{
 }
 
 .tools label{
+  display:flex;
+  align-items:center;
+  gap:7px;
   padding:8px;
-  background:#071321;
+  color:#9fb0bd;
+  background:#071522;
   border:1px solid rgba(0,210,255,.14);
   border-radius:7px;
   font-size:11px;
@@ -759,7 +884,7 @@ canvas{
 
 .info div{
   padding:12px;
-  background:#06101c;
+  background:#06101b;
   border-bottom:1px solid rgba(0,210,255,.07);
   word-break:break-all;
 }
@@ -776,45 +901,65 @@ canvas{
 .about{
   max-width:850px;
   margin:auto;
+  color:#aab8c4;
   line-height:1.8;
-  color:#a8b6c3;
 }
 
 .team{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
   gap:15px;
   margin-top:25px;
 }
 
 .member{
   padding:20px;
-  border-radius:10px;
-  background:#06101c;
+  background:#06101b;
   border:1px solid rgba(0,210,255,.14);
+  border-radius:10px;
 }
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
 @media(max-width:600px){
 
-  .homeTitle{
+  .home-title{
     letter-spacing:-3px;
   }
 
-  .homeSub{
+  .home-subtitle{
     letter-spacing:2px;
   }
 
-  .corner{
+  .hud-corner{
     width:50px;
     height:50px;
   }
 
+  .boot-reactor{
+    width:260px;
+    height:260px;
+  }
+
   .info{
     grid-template-columns:100px 1fr;
+  }
+
+}
+
+/* REDUCE MOTION FOR DEVICES THAT REQUEST IT */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
   }
 
 }
@@ -823,47 +968,65 @@ canvas{
 
 <body>
 
-<!-- LIGHTWEIGHT JARVIS BACKGROUND -->
-<div class="machineGrid"></div>
-<div class="machineGlow"></div>
+<!-- =======================================================
+     JARVIS BACKGROUND
+======================================================= -->
+
+<div class="jarvis-bg">
+  <div class="jarvis-grid"></div>
+  <div class="jarvis-orb"></div>
+</div>
 
 
-<!-- ======================================================
-     UNIVERSAL PAGE BOOT
-====================================================== -->
+<!-- =======================================================
+     BOOT SCREEN
+======================================================= -->
 
-<div id="pageBoot">
+<div id="boot">
 
-  <div class="bootScan"></div>
-  <div class="bootGrid"></div>
+  <div class="boot-stars"></div>
+  <div class="boot-grid"></div>
+  <div class="boot-scan"></div>
 
-  <div class="bootCore">
+  <div class="boot-core">
 
-    <div class="bootRings">
-      <div class="bootRing"></div>
-      <div class="bootRing"></div>
-      <div class="bootRing"></div>
+    <div class="boot-reactor">
+
+      <div class="reactor-ring"></div>
+      <div class="reactor-ring"></div>
+      <div class="reactor-ring"></div>
+      <div class="reactor-ring"></div>
+
     </div>
 
-    <div class="bootLogo">KGGT</div>
+    <div class="boot-logo">
+      KGGT
+    </div>
 
-    <div class="bootSub">
+    <div class="boot-studios">
       STUDIOS
     </div>
 
-    <div class="bootStatus" id="bootStatus">
-      CONNECTING TO CREATIVE CORE...
+    <div
+      class="boot-message"
+      id="bootMessage">
+      INITIALIZING KGGT CREATIVE CORE...
     </div>
 
-    <div class="bootProgress">
+    <div class="boot-progress">
       <span></span>
     </div>
 
-    <div class="bootModules">
-      <span>CORE</span>
-      <span>NEURAL</span>
-      <span>VISUAL</span>
-      <span>CREATIVE</span>
+    <div class="boot-modules">
+      <span>CORE ENGINE</span>
+      <span>VISUAL MATRIX</span>
+      <span>CREATIVE ENGINE</span>
+      <span>NEURAL SYSTEM</span>
+      <span>JARVIS CORE</span>
+    </div>
+
+    <div class="boot-online">
+      SYSTEM ONLINE
     </div>
 
   </div>
@@ -871,9 +1034,9 @@ canvas{
 </div>
 
 
-<!-- ======================================================
-     NAVBAR
-====================================================== -->
+<!-- =======================================================
+     NAVIGATION
+======================================================= -->
 
 <nav>
 
@@ -881,44 +1044,60 @@ canvas{
     KGGT STUDIOS
   </div>
 
-  <button data-page="home" onclick="openPage('home')">
+  <button
+    data-page="home"
+    onclick="openPage('home')">
     HOME
   </button>
 
-  <button data-page="inspector" onclick="openPage('inspector')">
+  <button
+    data-page="inspector"
+    onclick="openPage('inspector')">
     URL INSPECTOR
   </button>
 
-  <button data-page="cards" onclick="openPage('cards')">
+  <button
+    data-page="cards"
+    onclick="openPage('cards')">
     CARD COLLECTION
   </button>
 
-  <button data-page="artwork" onclick="openPage('artwork')">
+  <button
+    data-page="artwork"
+    onclick="openPage('artwork')">
     ARTWORK
   </button>
 
-  <button data-page="creation" onclick="openPage('creation')">
+  <button
+    data-page="creation"
+    onclick="openPage('creation')">
     CREATION
   </button>
 
-  <button data-page="ai" onclick="openPage('ai')">
+  <button
+    data-page="ai"
+    onclick="openPage('ai')">
     AI
   </button>
 
-  <button data-page="about" onclick="openPage('about')">
+  <button
+    data-page="about"
+    onclick="openPage('about')">
     ABOUT
   </button>
 
 </nav>
 
 
-<!-- ======================================================
+<!-- =======================================================
      HOME
-====================================================== -->
+======================================================= -->
 
-<section id="home" class="page active">
+<section
+  id="home"
+  class="page active">
 
-  <div class="universe">
+  <div class="home-universe">
 
     <div class="slide"></div>
     <div class="slide"></div>
@@ -929,50 +1108,53 @@ canvas{
 
   </div>
 
-  <div class="homeScan"></div>
+  <div class="home-scan"></div>
 
-  <div class="homeHUD">
+  <div class="home-hud">
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+    <div class="hud-corner tl"></div>
+    <div class="hud-corner tr"></div>
+    <div class="hud-corner bl"></div>
+    <div class="hud-corner br"></div>
 
-    <div class="hudLabel top">
+    <div class="hud-label top">
       KGGT // PLANETARY VISUAL NETWORK
     </div>
 
-    <div class="hudLabel bottom">
-      SYSTEM ONLINE // EARTH + SPACE
+    <div class="hud-label bottom">
+      VISUAL MATRIX ONLINE // EARTH + SPACE
     </div>
 
   </div>
 
-  <div class="homeCenter">
+  <div class="home-center">
 
-    <div class="systemText">
+    <div class="system-online">
       JARVIS CREATIVE CORE ONLINE
     </div>
 
-    <h1 class="homeTitle">
+    <h1 class="home-title">
       KGGT<br>
       <span>STUDIOS</span>
     </h1>
 
-    <div class="homeSub">
+    <div class="home-subtitle">
       CREATE • IMAGINE • EXPLORE
     </div>
 
-    <div class="homeButtons">
+    <div class="home-buttons">
 
       <button
-        class="mainBtn"
-        onclick="location.href='https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/'">
+        class="main-btn"
+        onclick="
+          location.href=
+          'https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/'
+        ">
         ENTER KGGT
       </button>
 
       <button
-        class="mainBtn"
+        class="main-btn"
         onclick="openPage('creation')">
         CREATE
       </button>
@@ -984,31 +1166,37 @@ canvas{
 </section>
 
 
-<!-- ======================================================
+<!-- =======================================================
      URL INSPECTOR
-====================================================== -->
+======================================================= -->
 
-<section id="inspector" class="page">
+<section
+  id="inspector"
+  class="page">
 
   <div class="inspector">
 
-    <h1 class="pageTitle">
+    <h1 class="page-title">
       URL INSPECTOR
     </h1>
 
-    <p class="pageDesc">
-      Analyze and open websites.
+    <p class="page-desc">
+      Inspect, analyze and visit URLs.
     </p>
 
     <input
       id="urlInput"
       placeholder="https://example.com">
 
-    <button class="btn" onclick="inspectURL()">
+    <button
+      class="btn"
+      onclick="inspectURL()">
       INSPECT
     </button>
 
-    <button class="btn" onclick="visitURL()">
+    <button
+      class="btn"
+      onclick="visitURL()">
       VISIT HERE
     </button>
 
@@ -1016,19 +1204,25 @@ canvas{
 
       <button
         class="btn"
-        onclick="quickURL('https://chatgpt.com/')">
+        onclick="
+          quickURL('https://chatgpt.com/')
+        ">
         ChatGPT
       </button>
 
       <button
         class="btn"
-        onclick="quickURL('https://codepen.io/')">
+        onclick="
+          quickURL('https://codepen.io/')
+        ">
         CodePen
       </button>
 
       <button
         class="btn"
-        onclick="quickURL('https://github.com/')">
+        onclick="
+          quickURL('https://github.com/')
+        ">
         GitHub
       </button>
 
@@ -1041,82 +1235,96 @@ canvas{
 </section>
 
 
-<!-- ======================================================
+<!-- =======================================================
      CARD COLLECTION
-====================================================== -->
+======================================================= -->
 
-<section id="cards" class="page">
+<section
+  id="cards"
+  class="page">
 
-  <h1 class="pageTitle">
+  <h1 class="page-title">
     CARD COLLECTION
   </h1>
 
-  <p class="pageDesc">
-    KGGT card collection.
+  <p class="page-desc">
+    Your KGGT card universe.
   </p>
 
-  <button class="btn">
+  <button
+    class="btn"
+    onclick="alert('Upload system ready to connect.')">
     + UPLOAD CARD
   </button>
 
 </section>
 
 
-<!-- ======================================================
+<!-- =======================================================
      ARTWORK
-====================================================== -->
+======================================================= -->
 
-<section id="artwork" class="page">
+<section
+  id="artwork"
+  class="page">
 
-  <h1 class="pageTitle">
+  <h1 class="page-title">
     KGGT ARTWORK
   </h1>
 
-  <p class="pageDesc">
-    Your creative collection.
+  <p class="page-desc">
+    Your digital artwork collection.
   </p>
 
-  <button class="btn">
+  <button
+    class="btn"
+    onclick="alert('Artwork upload system ready.')">
     + UPLOAD ARTWORK
   </button>
 
 </section>
 
 
-<!-- ======================================================
-     CREATION
-====================================================== -->
+<!-- =======================================================
+     CREATION STUDIO
+======================================================= -->
 
-<section id="creation" class="page">
+<section
+  id="creation"
+  class="page">
 
   <div class="creator">
 
-    <h1 class="pageTitle">
+    <h1 class="page-title">
       CREATION STUDIO
     </h1>
 
-    <p class="pageDesc">
-      Draw your next creation.
+    <p class="page-desc">
+      Draw. Create. Save.
     </p>
 
     <div class="toolbar">
 
-      <button class="btn"
+      <button
+        class="btn"
         onclick="tool='brush'">
         BRUSH
       </button>
 
-      <button class="btn"
+      <button
+        class="btn"
         onclick="tool='eraser'">
         ERASER
       </button>
 
-      <button class="btn"
+      <button
+        class="btn"
         onclick="clearCanvas()">
         CLEAR
       </button>
 
-      <button class="btn"
+      <button
+        class="btn"
         onclick="saveDrawing()">
         SAVE ARTWORK
       </button>
@@ -1132,7 +1340,7 @@ canvas{
     <div class="tools">
 
       <label>
-        Brush
+        COLOR
         <input
           id="brushColor"
           type="color"
@@ -1140,7 +1348,7 @@ canvas{
       </label>
 
       <label>
-        Canvas Background
+        BACKGROUND
         <input
           id="canvasBg"
           type="color"
@@ -1148,7 +1356,7 @@ canvas{
       </label>
 
       <label>
-        Size
+        SIZE
         <input
           id="brushSize"
           type="range"
@@ -1164,19 +1372,21 @@ canvas{
 </section>
 
 
-<!-- ======================================================
+<!-- =======================================================
      AI
-====================================================== -->
+======================================================= -->
 
-<section id="ai" class="page">
+<section
+  id="ai"
+  class="page">
 
-  <div class="aiBox">
+  <div class="ai-box">
 
-    <h1 class="pageTitle">
+    <h1 class="page-title">
       KGGT AI
     </h1>
 
-    <p class="pageDesc">
+    <p class="page-desc">
       Fast calculation engine.
     </p>
 
@@ -1201,21 +1411,23 @@ canvas{
 </section>
 
 
-<!-- ======================================================
+<!-- =======================================================
      ABOUT
-====================================================== -->
+======================================================= -->
 
-<section id="about" class="page">
+<section
+  id="about"
+  class="page">
 
   <div class="about">
 
-    <h1 class="pageTitle">
+    <h1 class="page-title">
       ABOUT KGGT
     </h1>
 
     <p>
       KGGT STUDIOS is a creative platform for
-      digital art, sketches, projects and ideas.
+      digital artwork, sketches, projects and ideas.
     </p>
 
     <div class="team">
@@ -1248,18 +1460,67 @@ canvas{
 
 
 <script>
+/* =========================================================
+   BOOT MESSAGE SEQUENCE
+========================================================= */
+
+const bootMessages=[
+  "INITIALIZING KGGT CREATIVE CORE...",
+  "CONNECTING VISUAL MATRIX...",
+  "LOADING PLANETARY DATABASE...",
+  "CALIBRATING CREATIVE ENGINE...",
+  "STARTING JARVIS CORE...",
+  "SYSTEM ONLINE"
+];
+
+let messageIndex=0;
+
+const bootMessage=
+  document.getElementById("bootMessage");
+
+const messageTimer=
+  setInterval(()=>{
+
+    if(messageIndex<bootMessages.length){
+
+      bootMessage.textContent=
+        bootMessages[messageIndex];
+
+      messageIndex++;
+
+    }else{
+
+      clearInterval(messageTimer);
+
+    }
+
+  },350);
+
 
 /* =========================================================
-   UNIVERSAL TAB BOOT
+   FIRST BOOT
+========================================================= */
+
+setTimeout(()=>{
+
+  document
+    .getElementById("boot")
+    .classList.add("hide");
+
+},3000);
+
+
+/* =========================================================
+   TAB BOOT
 ========================================================= */
 
 let currentPage="home";
-let bootTimer=null;
+let changingPage=false;
 
-const pageNames={
-  home:"LOADING HOME SYSTEM...",
+const pageMessages={
+  home:"LOADING PLANETARY VISUAL MATRIX...",
   inspector:"INITIALIZING URL INSPECTOR...",
-  cards:"LOADING CARD DATABASE...",
+  cards:"LOADING CARD COLLECTION...",
   artwork:"LOADING ARTWORK MATRIX...",
   creation:"STARTING CREATION ENGINE...",
   ai:"INITIALIZING KGGT AI...",
@@ -1268,55 +1529,74 @@ const pageNames={
 
 function openPage(page){
 
-  if(page===currentPage)return;
+  if(page===currentPage || changingPage){
+    return;
+  }
 
-  currentPage=page;
+  changingPage=true;
 
-  clearTimeout(bootTimer);
+  const boot=
+    document.getElementById("boot");
 
-  const boot=document.getElementById("pageBoot");
-  const status=document.getElementById("bootStatus");
+  const message=
+    document.getElementById("bootMessage");
 
-  status.textContent=
-    pageNames[page] || "INITIALIZING SYSTEM...";
+  message.textContent=
+    pageMessages[page]||
+    "INITIALIZING KGGT SYSTEM...";
 
-  /* SHOW MACHINE BOOT */
-  boot.classList.add("show");
+  /* SHOW BOOT */
+  boot.classList.remove("hide");
 
-  /* RESET ANIMATION */
-  const progress=
-    document.querySelector(".bootProgress span");
+  /* RESTART LOGO ANIMATION */
+  const logo=
+    document.querySelector(".boot-logo");
 
-  progress.style.animation="none";
-  void progress.offsetWidth;
-  progress.style.animation=
-    "bootProgress .85s ease-out forwards";
+  logo.style.animation="none";
+  void logo.offsetWidth;
 
-  /* CHANGE PAGE AFTER BOOT */
-  bootTimer=setTimeout(()=>{
+  logo.style.animation=
+    "logoZoom 1s cubic-bezier(.16,1,.3,1),logoGlow 2s ease-in-out infinite alternate";
+
+  /* CHANGE PAGE */
+  setTimeout(()=>{
 
     document
       .querySelectorAll(".page")
-      .forEach(p=>p.classList.remove("active"));
+      .forEach(p=>{
+        p.classList.remove("active");
+      });
 
-    document
-      .getElementById(page)
-      .classList.add("active");
+    const target=
+      document.getElementById(page);
+
+    if(target){
+      target.classList.add("active");
+    }
 
     document
       .querySelectorAll("nav button")
-      .forEach(btn=>{
-        btn.classList.toggle(
+      .forEach(button=>{
+        button.classList.toggle(
           "active",
-          btn.dataset.page===page
+          button.dataset.page===page
         );
       });
 
+    currentPage=page;
+
     window.scrollTo(0,0);
 
-    boot.classList.remove("show");
+  },550);
 
-  },900);
+  /* HIDE BOOT */
+  setTimeout(()=>{
+
+    boot.classList.add("hide");
+    changingPage=false;
+
+  },1000);
+
 }
 
 
@@ -1341,12 +1621,17 @@ function inspectURL(){
       .trim();
 
   if(!raw){
+
     alert("Enter a URL.");
+
     return;
+
   }
 
   if(!/^https?:\/\//i.test(raw)){
+
     raw="https://"+raw;
+
   }
 
   try{
@@ -1357,28 +1642,29 @@ function inspectURL(){
 
       <div class="info">
 
-        <div>Protocol</div>
+        <div>PROTOCOL</div>
         <div>${safe(u.protocol)}</div>
 
-        <div>Hostname</div>
+        <div>HOSTNAME</div>
         <div>${safe(u.hostname)}</div>
 
-        <div>Port</div>
+        <div>PORT</div>
         <div>${safe(u.port||"Default")}</div>
 
-        <div>Path</div>
+        <div>PATH</div>
         <div>${safe(u.pathname)}</div>
 
-        <div>Query</div>
+        <div>QUERY</div>
         <div>${safe(u.search||"None")}</div>
 
-        <div>Hash</div>
+        <div>HASH</div>
         <div>${safe(u.hash||"None")}</div>
 
-        <div>Full URL</div>
+        <div>FULL URL</div>
         <div>${safe(u.href)}</div>
 
       </div>
+
     `;
 
   }catch{
@@ -1398,7 +1684,9 @@ function visitURL(){
       .value
       .trim();
 
-  if(!url)return;
+  if(!url){
+    return;
+  }
 
   if(!/^https?:\/\//i.test(url)){
     url="https://"+url;
@@ -1410,7 +1698,7 @@ function visitURL(){
 
 
 /* =========================================================
-   AI
+   AI CALCULATOR
 ========================================================= */
 
 function calculate(){
@@ -1422,7 +1710,8 @@ function calculate(){
       .trim();
 
   const result=
-    document.getElementById("mathResult");
+    document
+      .getElementById("mathResult");
 
   if(!input){
 
@@ -1435,22 +1724,25 @@ function calculate(){
 
   try{
 
-    const percent=
+    const percentage=
       input.match(
         /^(\d+(?:\.\d+)?)%\s*of\s*(\d+(?:\.\d+)?)$/i
       );
 
-    if(percent){
+    if(percentage){
 
       result.textContent=
-        parseFloat(percent[1])*
-        parseFloat(percent[2])/100;
+        parseFloat(percentage[1])*
+        parseFloat(percentage[2])/
+        100;
 
       return;
 
     }
 
-    if(!/^[0-9+\-*/().%\s]+$/.test(input)){
+    if(
+      !/^[0-9+\-*/().%\s]+$/.test(input)
+    ){
 
       result.textContent=
         "Invalid calculation.";
@@ -1475,7 +1767,7 @@ function calculate(){
 
 
 /* =========================================================
-   LIGHTWEIGHT CREATION ENGINE
+   LIGHTWEIGHT DRAWING ENGINE
 ========================================================= */
 
 const canvas=
@@ -1490,6 +1782,7 @@ let lastX=0;
 let lastY=0;
 
 ctx.fillStyle="#ffffff";
+
 ctx.fillRect(
   0,
   0,
@@ -1497,104 +1790,98 @@ ctx.fillRect(
   canvas.height
 );
 
-
 canvas.addEventListener(
   "pointerdown",
-  startDraw
+  e=>{
+
+    drawing=true;
+
+    const rect=
+      canvas.getBoundingClientRect();
+
+    lastX=
+      (e.clientX-rect.left)*
+      canvas.width/
+      rect.width;
+
+    lastY=
+      (e.clientY-rect.top)*
+      canvas.height/
+      rect.height;
+
+  }
 );
 
 canvas.addEventListener(
   "pointermove",
-  draw
+  e=>{
+
+    if(!drawing){
+      return;
+    }
+
+    const rect=
+      canvas.getBoundingClientRect();
+
+    const x=
+      (e.clientX-rect.left)*
+      canvas.width/
+      rect.width;
+
+    const y=
+      (e.clientY-rect.top)*
+      canvas.height/
+      rect.height;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      lastX,
+      lastY
+    );
+
+    ctx.lineTo(
+      x,
+      y
+    );
+
+    ctx.lineWidth=
+      document
+        .getElementById("brushSize")
+        .value;
+
+    ctx.lineCap="round";
+
+    if(tool==="eraser"){
+
+      ctx.strokeStyle=
+        document
+          .getElementById("canvasBg")
+          .value;
+
+    }else{
+
+      ctx.strokeStyle=
+        document
+          .getElementById("brushColor")
+          .value;
+
+    }
+
+    ctx.stroke();
+
+    lastX=x;
+    lastY=y;
+
+  }
 );
 
 window.addEventListener(
   "pointerup",
-  stopDraw
-);
-
-
-function startDraw(e){
-
-  drawing=true;
-
-  const r=
-    canvas.getBoundingClientRect();
-
-  lastX=
-    (e.clientX-r.left)*
-    canvas.width/r.width;
-
-  lastY=
-    (e.clientY-r.top)*
-    canvas.height/r.height;
-
-}
-
-
-function draw(e){
-
-  if(!drawing)return;
-
-  const r=
-    canvas.getBoundingClientRect();
-
-  const x=
-    (e.clientX-r.left)*
-    canvas.width/r.width;
-
-  const y=
-    (e.clientY-r.top)*
-    canvas.height/r.height;
-
-  ctx.beginPath();
-
-  ctx.moveTo(
-    lastX,
-    lastY
-  );
-
-  ctx.lineTo(
-    x,
-    y
-  );
-
-  ctx.lineWidth=
-    document
-      .getElementById("brushSize")
-      .value;
-
-  ctx.lineCap="round";
-
-  if(tool==="eraser"){
-
-    ctx.strokeStyle=
-      document
-        .getElementById("canvasBg")
-        .value;
-
-  }else{
-
-    ctx.strokeStyle=
-      document
-        .getElementById("brushColor")
-        .value;
-
+  ()=>{
+    drawing=false;
   }
-
-  ctx.stroke();
-
-  lastX=x;
-  lastY=y;
-
-}
-
-
-function stopDraw(){
-
-  drawing=false;
-
-}
+);
 
 
 function clearCanvas(){
@@ -1617,9 +1904,11 @@ function clearCanvas(){
 function saveDrawing(){
 
   const title=
-    prompt("Artwork title:");
+    prompt("Enter artwork title:");
 
-  if(!title)return;
+  if(!title){
+    return;
+  }
 
   const image=
     canvas.toDataURL(
@@ -1627,12 +1916,14 @@ function saveDrawing(){
       .75
     );
 
-  const data=
+  const gallery=
     JSON.parse(
-      localStorage.getItem("kggtGallery")||"[]"
+      localStorage.getItem(
+        "kggtGallery"
+      )||"[]"
     );
 
-  data.unshift({
+  gallery.unshift({
 
     id:Date.now(),
 
@@ -1648,18 +1939,18 @@ function saveDrawing(){
 
   localStorage.setItem(
     "kggtGallery",
-    JSON.stringify(data)
+    JSON.stringify(gallery)
   );
 
   alert(
-    "Artwork saved to KGGT."
+    "Artwork saved successfully!"
   );
 
 }
 
 
 /* =========================================================
-   SAFE TEXT
+   SAFE DISPLAY
 ========================================================= */
 
 function safe(value){
@@ -1675,11 +1966,13 @@ function safe(value){
 
 
 /* =========================================================
-   INITIAL STATE
+   HOME ACTIVE
 ========================================================= */
 
 document
-  .querySelector('nav button[data-page="home"]')
+  .querySelector(
+    'nav button[data-page="home"]'
+  )
   .classList.add("active");
 
 </script>
