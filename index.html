@@ -1,3959 +1,1055 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>KGGT STUDIOS — Create. Imagine.</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>KGGT STUDIOS</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-    min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
-    color:#fff;
-    overflow-x:hidden;
-
-    background:
-        radial-gradient(circle at 10% 20%,#8b5cf6,transparent 32%),
-        radial-gradient(circle at 90% 20%,#06b6d4,transparent 32%),
-        radial-gradient(circle at 70% 90%,#ec4899,transparent 32%),
-        radial-gradient(circle at 10% 90%,#22c55e,transparent 32%),
-        linear-gradient(135deg,#03030a,#0b1025,#16091e);
-
-    background-size:180% 180%;
-    animation:rapidBackground 3s ease-in-out infinite alternate;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  background:#090b18;
+  overflow-x:hidden;
 }
 
-@keyframes rapidBackground{
-
-    0%{
-        background-position:0% 0%;
-        filter:hue-rotate(0deg);
-    }
-
-    25%{
-        background-position:100% 20%;
-        filter:hue-rotate(35deg);
-    }
-
-    50%{
-        background-position:30% 100%;
-        filter:hue-rotate(75deg);
-    }
-
-    75%{
-        background-position:100% 70%;
-        filter:hue-rotate(120deg);
-    }
-
-    100%{
-        background-position:0% 50%;
-        filter:hue-rotate(180deg);
-    }
+/* LIGHTWEIGHT BACKGROUND */
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    radial-gradient(circle at 15% 20%,#5220a844,transparent 35%),
+    radial-gradient(circle at 85% 75%,#00bcd433,transparent 35%),
+    linear-gradient(135deg,#090b18,#11152b,#090b18);
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,255,255,.035),
-            transparent
-        );
-
-    animation:lightSweep 3s linear infinite;
-}
-
-@keyframes lightSweep{
-    from{
-        transform:translateX(-100%);
-    }
-
-    to{
-        transform:translateX(100%);
-    }
-}
-
-
-/* =========================================================
-   FUTURISTIC MACHINE BOOT
-========================================================= */
-
+/* BOOT */
 #boot{
-
-    position:fixed;
-    inset:0;
-    z-index:99999;
-
-    overflow:hidden;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #111c3d 0%,
-            #080b18 40%,
-            #020208 100%
-        );
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#05060d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 }
-
-.boot-grid{
-
-    position:absolute;
-    inset:-50%;
-
-    background-image:
-        linear-gradient(
-            rgba(6,182,212,.12) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(139,92,246,.12) 1px,
-            transparent 1px
-        );
-
-    background-size:45px 45px;
-
-    transform:
-        perspective(500px)
-        rotateX(65deg)
-        translateY(100px);
-
-    animation:gridMove 2.5s linear infinite;
-
-    opacity:.45;
+.bootBox{
+  width:min(600px,90%);
 }
-
-@keyframes gridMove{
-
-    from{
-        background-position:0 0;
-    }
-
-    to{
-        background-position:0 45px;
-    }
+.bootLogo{
+  font-size:clamp(70px,15vw,150px);
+  font-weight:1000;
+  letter-spacing:10px;
+  color:#fff;
+  text-shadow:0 0 20px #7c4dff;
+  animation:logoIn 1.2s ease-out;
 }
-
-.boot-scan{
-
-    position:absolute;
-
-    width:100%;
-    height:2px;
-
-    top:-10px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #06b6d4,
-            #8b5cf6,
-            transparent
-        );
-
-    box-shadow:
-        0 0 20px #06b6d4,
-        0 0 50px #8b5cf6;
-
-    animation:scanLine 2.4s linear infinite;
+.bootSub{
+  color:#aaa;
+  letter-spacing:5px;
+  margin:10px 0 25px;
 }
-
-@keyframes scanLine{
-
-    0%{
-        top:-10px;
-        opacity:0;
-    }
-
-    15%{
-        opacity:1;
-    }
-
-    85%{
-        opacity:1;
-    }
-
-    100%{
-        top:100%;
-        opacity:0;
-    }
+.progress{
+  height:4px;
+  background:#222;
+  border-radius:20px;
+  overflow:hidden;
 }
-
-
-/* BOOT PARTICLES */
-
-.boot-particles{
-
-    position:absolute;
-    inset:0;
+.progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:#7c4dff;
+  animation:load 2.2s ease forwards;
 }
-
-.boot-particles i{
-
-    position:absolute;
-
-    width:3px;
-    height:3px;
-
-    border-radius:50%;
-
-    background:#06b6d4;
-
-    box-shadow:
-        0 0 8px #06b6d4,
-        0 0 18px #8b5cf6;
-
-    animation:
-        particleFloat
-        var(--time)
-        linear
-        infinite;
-
-    left:var(--left);
-    top:var(--top);
+.bootText{
+  margin-top:12px;
+  color:#777;
+  font-size:12px;
+  letter-spacing:2px;
 }
-
-.boot-particles i:nth-child(1){
-    --left:8%;
-    --top:70%;
-    --time:3s;
+@keyframes logoIn{
+  from{opacity:0;transform:scale(1.5);filter:blur(15px)}
+  to{opacity:1;transform:scale(1);filter:blur(0)}
 }
+@keyframes load{to{width:100%}}
 
-.boot-particles i:nth-child(2){
-    --left:18%;
-    --top:25%;
-    --time:4s;
-}
-
-.boot-particles i:nth-child(3){
-    --left:28%;
-    --top:80%;
-    --time:2.5s;
-}
-
-.boot-particles i:nth-child(4){
-    --left:40%;
-    --top:15%;
-    --time:3.5s;
-}
-
-.boot-particles i:nth-child(5){
-    --left:52%;
-    --top:75%;
-    --time:4.2s;
-}
-
-.boot-particles i:nth-child(6){
-    --left:64%;
-    --top:20%;
-    --time:2.7s;
-}
-
-.boot-particles i:nth-child(7){
-    --left:75%;
-    --top:65%;
-    --time:3.8s;
-}
-
-.boot-particles i:nth-child(8){
-    --left:86%;
-    --top:30%;
-    --time:2.8s;
-}
-
-.boot-particles i:nth-child(9){
-    --left:94%;
-    --top:80%;
-    --time:4.5s;
-}
-
-.boot-particles i:nth-child(10){
-    --left:12%;
-    --top:45%;
-    --time:3.2s;
-}
-
-.boot-particles i:nth-child(11){
-    --left:34%;
-    --top:50%;
-    --time:2.4s;
-}
-
-.boot-particles i:nth-child(12){
-    --left:58%;
-    --top:40%;
-    --time:3.7s;
-}
-
-.boot-particles i:nth-child(13){
-    --left:72%;
-    --top:85%;
-    --time:2.9s;
-}
-
-.boot-particles i:nth-child(14){
-    --left:82%;
-    --top:12%;
-    --time:4s;
-}
-
-.boot-particles i:nth-child(15){
-    --left:47%;
-    --top:90%;
-    --time:3.3s;
-}
-
-@keyframes particleFloat{
-
-    0%{
-        transform:translateY(30px) scale(.5);
-        opacity:0;
-    }
-
-    50%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(-100px) scale(1.5);
-        opacity:0;
-    }
-}
-
-
-/* HUD */
-
-.hud{
-
-    position:absolute;
-
-    width:420px;
-    height:420px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(6,182,212,.2);
-
-    box-shadow:
-        0 0 40px rgba(6,182,212,.05),
-        inset 0 0 40px rgba(139,92,246,.05);
-}
-
-.hud1{
-    animation:hudRotate 10s linear infinite;
-}
-
-.hud2{
-
-    width:520px;
-    height:520px;
-
-    border-color:rgba(236,72,153,.15);
-
-    animation:hudRotateReverse 14s linear infinite;
-}
-
-@keyframes hudRotate{
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-@keyframes hudRotateReverse{
-
-    to{
-        transform:rotate(-360deg);
-    }
-}
-
-
-/* BOOT CORE */
-
-.boot-core{
-
-    position:relative;
-
-    width:310px;
-    height:310px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    z-index:5;
-}
-
-.core-ring{
-
-    position:absolute;
-
-    border-radius:50%;
-
-    border:1px solid;
-
-}
-
-.ring1{
-
-    width:280px;
-    height:280px;
-
-    border-color:#06b6d4;
-
-    border-top-color:transparent;
-
-    box-shadow:
-        0 0 20px rgba(6,182,212,.4);
-
-    animation:ringSpin 3s linear infinite;
-}
-
-.ring2{
-
-    width:230px;
-    height:230px;
-
-    border-color:#8b5cf6;
-
-    border-right-color:transparent;
-
-    box-shadow:
-        0 0 20px rgba(139,92,246,.4);
-
-    animation:ringSpinReverse 2.2s linear infinite;
-}
-
-.ring3{
-
-    width:180px;
-    height:180px;
-
-    border-color:#ec4899;
-
-    border-bottom-color:transparent;
-
-    box-shadow:
-        0 0 20px rgba(236,72,153,.35);
-
-    animation:ringSpin 1.7s linear infinite;
-}
-
-@keyframes ringSpin{
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-@keyframes ringSpinReverse{
-
-    to{
-        transform:rotate(-360deg);
-    }
-}
-
-.core-cross{
-
-    position:absolute;
-
-    width:120px;
-    height:120px;
-}
-
-.core-cross span{
-
-    position:absolute;
-
-    background:rgba(6,182,212,.3);
-
-}
-
-.core-cross span:first-child{
-
-    width:100%;
-    height:1px;
-
-    top:50%;
-}
-
-.core-cross span:last-child{
-
-    width:1px;
-    height:100%;
-
-    left:50%;
-}
-
-.kg-logo{
-
-    position:relative;
-    z-index:4;
-
-    font-size:65px;
-
-    font-weight:1000;
-
-    letter-spacing:7px;
-
-    color:white;
-
-    transform:scale(.2);
-
-    filter:blur(20px);
-
-    opacity:0;
-
-    text-shadow:
-        0 0 10px #8b5cf6,
-        0 0 30px #06b6d4,
-        0 0 60px #ec4899;
-
-    animation:logoBoot 2.3s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-@keyframes logoBoot{
-
-    0%{
-        transform:scale(.2) rotate(-10deg);
-        filter:blur(20px);
-        opacity:0;
-    }
-
-    45%{
-        transform:scale(1.2) rotate(3deg);
-        filter:blur(0);
-        opacity:1;
-    }
-
-    65%{
-        transform:scale(.92);
-    }
-
-    82%{
-        transform:scale(1.05);
-    }
-
-    100%{
-        transform:scale(1);
-        filter:blur(0);
-        opacity:1;
-    }
-}
-
-.kg-sub{
-
-    position:absolute;
-
-    bottom:18px;
-
-    font-size:9px;
-
-    letter-spacing:6px;
-
-    color:#67e8f9;
-
-    opacity:0;
-
-    animation:subBoot 1s ease 1.3s forwards;
-}
-
-@keyframes subBoot{
-
-    from{
-        opacity:0;
-        letter-spacing:1px;
-    }
-
-    to{
-        opacity:.8;
-        letter-spacing:6px;
-    }
-}
-
-
-/* TERMINAL */
-
-.boot-terminal{
-
-    position:relative;
-
-    z-index:10;
-
-    width:min(500px,80vw);
-
-    margin-top:10px;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    color:#67e8f9;
-
-    font-size:11px;
-}
-
-.boot-line{
-
-    width:100%;
-    height:4px;
-
-    margin-top:10px;
-
-    background:rgba(255,255,255,.08);
-
-    overflow:hidden;
-
-    border-radius:20px;
-}
-
-.boot-line span{
-
-    display:block;
-
-    height:100%;
-
-    width:0;
-
-    background:
-        linear-gradient(
-            90deg,
-            #06b6d4,
-            #8b5cf6,
-            #ec4899
-        );
-
-    box-shadow:
-        0 0 15px #06b6d4;
-
-    animation:bootProgress 3.6s linear forwards;
-}
-
-@keyframes bootProgress{
-
-    to{
-        width:100%;
-    }
-}
-
-.boot-data{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:7px;
-
-    color:#64748b;
-
-    font-size:9px;
-}
-
-
-/* MODULES */
-
-.boot-modules{
-
-    position:absolute;
-
-    left:5%;
-
-    bottom:8%;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size:9px;
-
-    color:#64748b;
-
-    line-height:2;
-}
-
-.boot-modules div{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-}
-
-.module-dot{
-
-    width:5px;
-    height:5px;
-
-    border-radius:50%;
-
-    background:#475569;
-}
-
-.boot-modules b{
-
-    color:#64748b;
-
-    font-weight:normal;
-}
-
-.boot-online{
-
-    position:absolute;
-
-    z-index:20;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size:20px;
-
-    letter-spacing:6px;
-
-    color:#67e8f9;
-
-    text-shadow:
-        0 0 15px #06b6d4,
-        0 0 30px #8b5cf6;
-
-    opacity:0;
-
-    transform:scale(.7);
-
-}
-
-.boot-online small{
-
-    display:block;
-
-    text-align:center;
-
-    margin-top:8px;
-
-    font-size:9px;
-
-    letter-spacing:4px;
-
-    color:#94a3b8;
-}
-
-
-/* =========================================================
-   PAGE TRANSITION
-========================================================= */
-
-.page-transition{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:9998;
-
-    pointer-events:none;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(3,3,12,.72);
-
-    backdrop-filter:blur(10px);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.25s;
-}
-
-.page-transition.active{
-
-    opacity:1;
-    visibility:visible;
-}
-
-.transition-logo{
-
-    font-size:70px;
-
-    font-weight:1000;
-
-    letter-spacing:8px;
-
-    color:white;
-
-    text-shadow:
-        0 0 15px #8b5cf6,
-        0 0 35px #06b6d4,
-        0 0 70px #ec4899;
-
-    animation:transitionLogo .6s ease forwards;
-}
-
-@keyframes transitionLogo{
-
-    from{
-        transform:scale(.5);
-        filter:blur(10px);
-        opacity:0;
-    }
-
-    50%{
-        transform:scale(1.1);
-        filter:blur(0);
-        opacity:1;
-    }
-
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
-
-.transition-ring{
-
-    position:absolute;
-
-    width:170px;
-    height:170px;
-
-    border:2px solid #06b6d4;
-
-    border-radius:50%;
-
-    animation:transitionRing .7s ease-out forwards;
-}
-
-@keyframes transitionRing{
-
-    from{
-        transform:scale(.3);
-        opacity:1;
-    }
-
-    to{
-        transform:scale(2.2);
-        opacity:0;
-    }
-}
-
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
+/* NAV */
 nav{
-
-    position:sticky;
-    top:0;
-
-    z-index:500;
-
-    display:flex;
-    align-items:center;
-
-    gap:7px;
-
-    padding:13px 4%;
-
-    background:rgba(4,4,15,.68);
-
-    backdrop-filter:blur(18px);
-
-    border-bottom:
-        1px solid rgba(255,255,255,.08);
-
-    overflow-x:auto;
+  position:sticky;
+  top:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 4%;
+  background:#090b18ee;
+  border-bottom:1px solid #ffffff12;
+  backdrop-filter:blur(8px);
 }
-
 .logo{
-
-    font-size:24px;
-
-    font-weight:1000;
-
-    margin-right:15px;
-
-    white-space:nowrap;
-
-    text-shadow:
-        0 0 12px #8b5cf6,
-        0 0 25px #06b6d4;
+  font-weight:1000;
+  font-size:22px;
+  margin-right:auto;
+}
+nav button{
+  border:0;
+  background:transparent;
+  color:#bbb;
+  padding:9px 11px;
+  cursor:pointer;
+  border-radius:8px;
+  font-weight:bold;
+}
+nav button:hover{
+  color:#fff;
+  background:#ffffff10;
+}
+@media(max-width:800px){
+  nav{overflow-x:auto}
+  nav button{white-space:nowrap}
 }
 
-nav a{
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:11px;
-
-    font-weight:bold;
-
-    padding:10px 12px;
-
-    border-radius:10px;
-
-    white-space:nowrap;
-
-    transition:.25s;
+/* PAGES */
+.page{
+  display:none;
+  min-height:calc(100vh - 65px);
+  padding:60px 5%;
 }
-
-nav a:hover{
-
-    background:
-        rgba(139,92,246,.2);
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 0 20px rgba(139,92,246,.2);
-}
-
-
-/* =========================================================
-   PAGES
-========================================================= */
-
-.full-page{
-
-    display:none;
-
-    min-height:calc(100vh - 65px);
-
-    padding:55px 6%;
-}
-
-.full-page.active{
-
-    display:block;
-
-    animation:
-        pageAppear .5s ease;
-}
-
-@keyframes pageAppear{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(20px)
-            scale(.98);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-
-/* =========================================================
-   HOME
-========================================================= */
+.page.active{display:block}
 
 .hero{
-
-    min-height:72vh;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    flex-direction:column;
-
-    text-align:center;
+  min-height:72vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 }
-
 .hero h1{
-
-    font-size:
-        clamp(65px,12vw,150px);
-
-    line-height:.85;
-
-    font-weight:1000;
-
-    letter-spacing:-7px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #8b5cf6,
-            #06b6d4,
-            #ec4899,
-            #fff
-        );
-
-    background-size:300%;
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    animation:
-        titleGradient 4s linear infinite;
+  font-size:clamp(55px,11vw,120px);
+  line-height:.9;
+  font-weight:1000;
 }
-
-@keyframes titleGradient{
-
-    to{
-        background-position:300%;
-    }
+.hero h1 span{
+  color:#8b6cff;
 }
-
 .hero p{
-
-    max-width:650px;
-
-    margin:25px auto;
-
-    color:#cbd5e1;
-
-    line-height:1.7;
+  margin:22px 0;
+  color:#aaa;
+  font-size:18px;
 }
-
 .buttons{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:12px;
-
-    flex-wrap:wrap;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
 }
-
 .btn{
+  padding:13px 22px;
+  border:1px solid #ffffff22;
+  border-radius:10px;
+  background:#15192d;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+.btn.primary{
+  background:#704cff;
+  border-color:#704cff;
+}
+.btn:hover{transform:translateY(-2px)}
 
-    border:none;
-
-    padding:13px 20px;
-
-    border-radius:12px;
-
-    color:white;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    text-decoration:none;
-
-    background:
-        linear-gradient(
-            135deg,
-            #8b5cf6,
-            #06b6d4
-        );
-
-    box-shadow:
-        0 8px 30px rgba(6,182,212,.2);
-
-    transition:.25s;
+/* HEADINGS */
+.pageTitle{
+  font-size:45px;
+  margin-bottom:10px;
+  font-weight:1000;
+}
+.pageDesc{
+  color:#999;
+  margin-bottom:35px;
 }
 
-.btn:hover{
-
-    transform:
-        translateY(-3px)
-        scale(1.03);
-
-    box-shadow:
-        0 12px 40px rgba(139,92,246,.4);
-}
-
-.btn.secondary{
-
-    background:
-        rgba(255,255,255,.08);
-
-    border:
-        1px solid rgba(255,255,255,.15);
-}
-
-
-/* =========================================================
-   HOME CREATIONS
-========================================================= */
-
-.home-creations{
-
-    margin-top:25px;
-}
-
-.section-title{
-
-    text-align:center;
-
-    font-size:40px;
-
-    margin-bottom:30px;
-
-    font-weight:1000;
-}
-
-.home-note{
-
-    text-align:center;
-
-    color:#94a3b8;
-
-    margin-bottom:25px;
-
-    font-size:13px;
-}
-
-
-/* =========================================================
-   GLASS
-========================================================= */
-
-.glass{
-
-    background:
-        rgba(255,255,255,.055);
-
-    border:
-        1px solid rgba(255,255,255,.1);
-
-    border-radius:22px;
-
-    padding:25px;
-
-    backdrop-filter:blur(16px);
-
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.18);
-}
-
-
-/* =========================================================
-   COLLECTION
-========================================================= */
-
-.collection-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(250px,1fr));
-
-    gap:25px;
-}
-
-.kggt-card{
-
-    padding:12px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #30240c,
-            #101014 40%,
-            #241a09
-        );
-
-    border:
-        3px solid #d6ad45;
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.4);
-
-    transition:.3s;
-}
-
-.kggt-card:hover{
-
-    transform:
-        translateY(-8px)
-        scale(1.01);
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.55),
-        0 0 30px rgba(214,173,69,.2);
-}
-
-.card-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    padding:5px;
-
-    font-size:10px;
-
-    font-weight:bold;
-}
-
-.rarity{
-    color:#ffd76a;
-}
-
-.hp{
-    color:#ff7272;
-}
-
-.card-image{
-
-    width:100%;
-
-    height:250px;
-
-    object-fit:cover;
-
-    border-radius:12px;
-
-    background:#050505;
-
-    border:
-        2px solid #a87d20;
-
-    display:block;
-}
-
-.card-info{
-
-    padding:12px 5px;
-}
-
-.card-type{
-
-    color:#94a3b8;
-
-    font-size:11px;
-
-    margin-bottom:7px;
-}
-
-.card-info h3{
-
-    margin-bottom:8px;
-}
-
-.card-price{
-
-    color:#ff4d4d;
-
-    font-size:20px;
-
-    font-weight:1000;
-
-    margin-bottom:12px;
-}
-
-.card-actions{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:7px;
-}
-
-.small-btn{
-
-    border:none;
-
-    padding:8px 11px;
-
-    border-radius:8px;
-
-    color:white;
-
-    background:
-        rgba(255,255,255,.1);
-
-    cursor:pointer;
-
-    font-size:10px;
-
-    font-weight:bold;
-}
-
-.small-btn:hover{
-
-    background:#8b5cf6;
-}
-
-
-/* =========================================================
-   UPLOAD
-========================================================= */
-
-.upload-box{
-
-    max-width:650px;
-
-    margin:0 auto 40px;
-
-    text-align:center;
-}
-
-.upload-box p{
-
-    color:#94a3b8;
-
-    margin:10px 0 20px;
-
-    font-size:13px;
-}
-
-.upload-form{
-
-    display:none;
-
-    text-align:left;
-
-    margin-top:20px;
-}
-
-.upload-form.show{
-
-    display:block;
-
-    animation:pageAppear .4s ease;
-}
-
-.input,
-.price-input,
-select{
-
-    width:100%;
-
-    padding:14px;
-
-    margin:8px 0;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:10px;
-
-    background:
-        rgba(255,255,255,.09);
-
-    color:white;
-
-    border:
-        1px solid rgba(255,255,255,.1);
-}
-
-select{
-
-    background:#151525;
-}
-
-input[type="file"]{
-
-    width:100%;
-
-    margin:12px 0;
-
-    color:white;
-}
-
-
-/* =========================================================
-   AI
-========================================================= */
-
-.ai-box{
-
-    max-width:650px;
-
-    margin:auto;
-}
-
-.result{
-
-    margin-top:15px;
-
-    padding:15px;
-
-    min-height:50px;
-
-    border-radius:12px;
-
-    background:
-        rgba(0,0,0,.25);
-
-    color:#67e8f9;
-}
-
-
-/* =========================================================
-   INSPECTOR
-========================================================= */
-
-.inspector{
-
-    max-width:800px;
-
-    margin:auto;
-}
-
-.inspector-result{
-
-    display:none;
-
-    margin-top:20px;
-
-    padding:20px;
-
-    border-radius:15px;
-
-    background:
-        rgba(0,0,0,.25);
-
-    line-height:2;
-
-    color:#cbd5e1;
-}
-
-.inspector-result.show{
-
-    display:block;
-
-    animation:pageAppear .4s ease;
-}
-
-.quick-links{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:15px;
-
-    flex-wrap:wrap;
-}
-
-
-/* =========================================================
-   CREATION CANVAS
-========================================================= */
-
-.canvas-wrap{
-
-    max-width:1100px;
-
-    margin:auto;
-}
-
-.toolbar{
-
-    display:flex;
-
-    gap:8px;
-
-    flex-wrap:wrap;
-
-    margin-bottom:15px;
-}
-
-.tool{
-
-    padding:9px 12px;
-
-    border:none;
-
-    border-radius:9px;
-
-    color:white;
-
-    background:
-        rgba(255,255,255,.1);
-
-    cursor:pointer;
-}
-
-.tool:hover{
-
-    background:#8b5cf6;
-}
-
-canvas{
-
-    width:100%;
-
-    height:500px;
-
-    display:block;
-
-    border-radius:18px;
-
-    border:
-        1px solid rgba(255,255,255,.2);
-
-    background:white;
-
-    cursor:crosshair;
-}
-
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
+/* GRID */
 .grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:18px;
+}
+.card{
+  background:#111527;
+  border:1px solid #ffffff15;
+  border-radius:15px;
+  padding:12px;
+  transition:.2s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#765cff;
+}
+.card img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:10px;
+  background:#080a12;
+}
+.card h3{
+  margin:12px 0 5px;
+}
+.price{
+  color:#ff4757;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.cardActions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.smallBtn{
+  border:0;
+  background:#20263d;
+  color:#fff;
+  padding:8px 10px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:12px;
+}
+.smallBtn:hover{background:#704cff}
 
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
-
-    gap:20px;
+/* HOME CREATIONS */
+#homeGallery .card img{
+  aspect-ratio:16/11;
 }
 
-.project-card{
-
-    padding:25px;
-
-    border-radius:20px;
-
-    background:
-        rgba(255,255,255,.06);
-
-    border:
-        1px solid rgba(255,255,255,.1);
-
-    transition:.3s;
+/* AI */
+.aiBox{
+  max-width:600px;
+  margin:auto;
+  background:#111527;
+  border:1px solid #ffffff15;
+  border-radius:18px;
+  padding:25px;
+}
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  margin:8px 0;
+  border-radius:9px;
+  border:1px solid #ffffff18;
+  background:#080b16;
+  color:#fff;
+  outline:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:#765cff;
+}
+.result{
+  margin-top:15px;
+  padding:15px;
+  border-radius:10px;
+  background:#080b16;
+  color:#8cffb0;
+  min-height:45px;
 }
 
-.project-card:hover{
-
-    transform:translateY(-7px);
-
-    border-color:#8b5cf6;
-
-    box-shadow:
-        0 15px 40px rgba(139,92,246,.2);
+/* CREATION */
+.creator{
+  max-width:1000px;
+  margin:auto;
+}
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:12px;
+}
+canvas{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#fff;
+  border-radius:12px;
+  cursor:crosshair;
+  touch-action:none;
+}
+.tools{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.tools label{
+  background:#111527;
+  padding:9px;
+  border-radius:8px;
+  font-size:13px;
 }
 
-.project-card p{
-
-    color:#94a3b8;
-
-    line-height:1.6;
-
-    font-size:14px;
-
-    margin-top:8px;
+/* ABOUT */
+.about{
+  max-width:850px;
+  margin:auto;
+  line-height:1.8;
+  color:#bbb;
 }
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
 .team{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(180px,1fr));
-
-    gap:18px;
+  margin-top:25px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
 }
-
 .member{
-
-    padding:25px;
-
-    text-align:center;
-
-    border-radius:18px;
-
-    background:
-        rgba(255,255,255,.06);
-
-    border:
-        1px solid rgba(255,255,255,.1);
+  padding:20px;
+  border-radius:14px;
+  background:#111527;
+  border:1px solid #ffffff12;
 }
 
-.member strong{
-
-    display:block;
-
-    margin-bottom:7px;
-}
-
-.member span{
-
-    color:#94a3b8;
-
-    font-size:13px;
-}
-
-
-/* =========================================================
-   MODALS
-========================================================= */
-
+/* MODAL */
 .modal{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:10000;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-        rgba(0,0,0,.78);
-
-    backdrop-filter:blur(10px);
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background:#000b;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
-
-.modal.show{
-
-    display:flex;
-
-    animation:modalShow .25s ease;
+.modal.show{display:flex}
+.modalBox{
+  width:min(600px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#111527;
+  border:1px solid #ffffff18;
+  border-radius:18px;
+  padding:25px;
 }
-
-@keyframes modalShow{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
+.modalBox h2{margin-bottom:12px}
+.previewImg{
+  width:100%;
+  max-height:65vh;
+  object-fit:contain;
+  border-radius:10px;
+  background:#05060d;
 }
-
-.modal-box{
-
-    width:min(650px,100%);
-
-    max-height:90vh;
-
-    overflow:auto;
-
-    padding:25px;
-
-    border-radius:22px;
-
-    background:#11111e;
-
-    border:
-        1px solid rgba(255,255,255,.12);
-}
-
 .close{
-
-    float:right;
-
-    background:none;
-
-    border:none;
-
-    color:white;
-
-    font-size:25px;
-
-    cursor:pointer;
+  float:right;
+  border:0;
+  background:#ff4757;
+  color:white;
+  border-radius:7px;
+  padding:7px 11px;
+  cursor:pointer;
 }
 
-.preview-img{
-
-    width:100%;
-
-    max-height:65vh;
-
-    object-fit:contain;
-
-    border-radius:15px;
-
-    margin:15px 0;
+/* URL INSPECTOR */
+.inspector{
+  max-width:800px;
+  margin:auto;
+}
+.info{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:1px;
+  background:#ffffff12;
+  margin-top:20px;
+  border-radius:10px;
+  overflow:hidden;
+}
+.info div{
+  padding:13px;
+  background:#111527;
+  word-break:break-all;
+}
+.info div:nth-child(odd){
+  font-weight:bold;
+  color:#8b6cff;
 }
 
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-
-    text-align:center;
-
-    padding:35px;
-
-    color:#94a3b8;
-
-    font-size:12px;
+/* EMPTY */
+.empty{
+  text-align:center;
+  padding:60px 20px;
+  color:#777;
 }
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px){
-
-    nav{
-        padding:12px 8px;
-    }
-
-    .logo{
-        font-size:20px;
-    }
-
-    .full-page{
-        padding:35px 5%;
-    }
-
-    .hero h1{
-        letter-spacing:-4px;
-    }
-
-    canvas{
-        height:400px;
-    }
-
-    .boot-modules{
-        display:none;
-    }
-
-    .boot-core{
-        transform:scale(.8);
-    }
-
-}
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =====================================================
-     MACHINE BOOT
-===================================================== -->
-
+<!-- BOOT -->
 <div id="boot">
-
-    <div class="boot-grid"></div>
-
-    <div class="boot-scan"></div>
-
-    <div class="boot-particles">
-
-        <i></i><i></i><i></i><i></i><i></i>
-        <i></i><i></i><i></i><i></i><i></i>
-        <i></i><i></i><i></i><i></i><i></i>
-
-    </div>
-
-    <div class="hud hud1"></div>
-    <div class="hud hud2"></div>
-
-    <div class="boot-core">
-
-        <div class="core-ring ring1"></div>
-        <div class="core-ring ring2"></div>
-        <div class="core-ring ring3"></div>
-
-        <div class="core-cross">
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="kg-logo">
-            KGGT
-        </div>
-
-        <div class="kg-sub">
-            K G G T // S T U D I O S
-        </div>
-
-    </div>
-
-    <div class="boot-terminal">
-
-        <div id="bootStatus">
-            INITIALIZING KGGT SYSTEM...
-        </div>
-
-        <div class="boot-line">
-            <span></span>
-        </div>
-
-        <div class="boot-data">
-
-            <span id="bootPercent">
-                0%
-            </span>
-
-            <span>
-                SYSTEM BOOT
-            </span>
-
-        </div>
-
-    </div>
-
-    <div class="boot-modules">
-
-        <div>
-            <span class="module-dot"></span>
-            CORE ENGINE
-            <b id="m1">WAIT</b>
-        </div>
-
-        <div>
-            <span class="module-dot"></span>
-            NEURAL SYSTEM
-            <b id="m2">WAIT</b>
-        </div>
-
-        <div>
-            <span class="module-dot"></span>
-            CREATIVE ENGINE
-            <b id="m3">WAIT</b>
-        </div>
-
-        <div>
-            <span class="module-dot"></span>
-            VISUAL MATRIX
-            <b id="m4">WAIT</b>
-        </div>
-
-    </div>
-
-    <div class="boot-online" id="bootOnline">
-
-        SYSTEM ONLINE
-
-        <small>
-            KGGT STUDIOS READY
-        </small>
-
-    </div>
-
+  <div class="bootBox">
+    <div class="bootLogo">KGGT</div>
+    <div class="bootSub">STUDIOS</div>
+    <div class="progress"><span></span></div>
+    <div class="bootText">INITIALIZING CREATIVE SYSTEM...</div>
+  </div>
 </div>
 
-
-<!-- =====================================================
-     PAGE TRANSITION
-===================================================== -->
-
-<div class="page-transition" id="pageTransition">
-
-    <div class="transition-ring"></div>
-
-    <div class="transition-logo">
-        KGGT
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
-
+<!-- NAV -->
 <nav>
-
-    <div class="logo">
-        KGGT
-    </div>
-
-    <a onclick="openPage('homePage')">
-        HOME
-    </a>
-
-    <a onclick="openPage('inspectorPage')">
-        URL INSPECTOR
-    </a>
-
-    <a onclick="openPage('cardPage')">
-        CARD COLLECTION
-    </a>
-
-    <a onclick="openPage('artworkPage')">
-        ARTWORK
-    </a>
-
-    <a onclick="openPage('creationPage')">
-        CREATION
-    </a>
-
-    <a onclick="openPage('aiPage')">
-        AI
-    </a>
-
-    <a onclick="openPage('projectsPage')">
-        PROJECTS
-    </a>
-
-    <a onclick="openPage('aboutPage')">
-        ABOUT
-    </a>
-
+  <div class="logo">KGGT STUDIOS</div>
+  <button onclick="showPage('home')">HOME</button>
+  <button onclick="showPage('inspector')">URL INSPECTOR</button>
+  <button onclick="showPage('cards')">CARD COLLECTION</button>
+  <button onclick="showPage('artwork')">ARTWORK</button>
+  <button onclick="showPage('creation')">CREATION</button>
+  <button onclick="showPage('ai')">AI</button>
+  <button onclick="showPage('projects')">PROJECTS</button>
+  <button onclick="showPage('about')">ABOUT</button>
 </nav>
 
+<!-- HOME -->
+<section id="home" class="page active">
+  <div class="hero">
+    <h1>KGGT<br><span>STUDIOS</span></h1>
+    <p>Create. Imagine. Build.</p>
 
-<!-- =====================================================
-     HOME
-===================================================== -->
+    <div class="buttons">
+      <button class="btn primary"
+        onclick="location.href='https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/'">
+        ENTER KGGT
+      </button>
 
-<div id="homePage" class="full-page active">
+      <button class="btn" onclick="showPage('creation')">
+        CREATE
+      </button>
+    </div>
+  </div>
 
-    <section class="hero">
+  <h2 class="pageTitle">LATEST KGGT CREATIONS</h2>
+  <p class="pageDesc">Your uploaded artworks appear here automatically.</p>
 
-        <h1>
-            KGGT
-        </h1>
+  <div id="homeGallery" class="grid"></div>
+</section>
 
-        <p>
-            KGGT STUDIOS — Create. Imagine.
-            Turn your ideas into drawings,
-            artwork, projects and experiences.
-        </p>
+<!-- URL INSPECTOR -->
+<section id="inspector" class="page">
+  <div class="inspector">
+    <h1 class="pageTitle">URL INSPECTOR</h1>
+    <p class="pageDesc">Inspect a URL instantly.</p>
 
-        <div class="buttons">
+    <input id="urlInput" placeholder="https://example.com">
 
-            <a
-                class="btn"
-                href="https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/"
-            >
-                ENTER KGGT
-            </a>
-
-            <button
-                class="btn secondary"
-                onclick="openPage('creationPage')"
-            >
-                ✏️ CREATION
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         HOME CREATIONS
-    ================================================== -->
-
-    <section class="home-creations">
-
-        <h2 class="section-title">
-            🎨 LATEST KGGT CREATIONS
-        </h2>
-
-        <p class="home-note">
-            Every artwork or drawing you upload or save
-            automatically appears here.
-        </p>
-
-        <div
-            id="homeGallery"
-            class="collection-grid"
-        ></div>
-
-    </section>
-
-</div>
-
-
-<!-- =====================================================
-     URL INSPECTOR
-===================================================== -->
-
-<div id="inspectorPage" class="full-page">
-
-    <h2 class="section-title">
-        🔎 URL INSPECTOR
-    </h2>
-
-    <div class="glass inspector">
-
-        <input
-            class="input"
-            id="urlInput"
-            placeholder="Enter a URL..."
-        >
-
-        <div class="buttons">
-
-            <button
-                class="btn"
-                onclick="inspectURL()"
-            >
-                INSPECT
-            </button>
-
-            <button
-                class="btn secondary"
-                onclick="visitURL()"
-            >
-                VISIT HERE
-            </button>
-
-        </div>
-
-        <div class="quick-links">
-
-            <button
-                class="small-btn"
-                onclick="quickURL('https://chatgpt.com/')"
-            >
-                ChatGPT
-            </button>
-
-            <button
-                class="small-btn"
-                onclick="quickURL('https://codepen.io/')"
-            >
-                CodePen
-            </button>
-
-            <button
-                class="small-btn"
-                onclick="quickURL('https://github.com/')"
-            >
-                GitHub
-            </button>
-
-        </div>
-
-        <div
-            id="urlResult"
-            class="inspector-result"
-        ></div>
-
+    <div class="buttons" style="justify-content:flex-start">
+      <button class="btn primary" onclick="inspectURL()">INSPECT</button>
+      <button class="btn" onclick="visitURL()">VISIT HERE</button>
     </div>
 
-</div>
-
-
-<!-- =====================================================
-     CARD COLLECTION
-===================================================== -->
-
-<div id="cardPage" class="full-page">
-
-    <h2 class="section-title">
-        🃏 KGGT CARD COLLECTION
-    </h2>
-
-    <div class="glass upload-box">
-
-        <h2>
-            Your Collection
-        </h2>
-
-        <p>
-            Upload and manage your KGGT collectible cards.
-        </p>
-
-        <button
-            class="btn"
-            onclick="openUpload('Card')"
-        >
-            + UPLOAD CARD
-        </button>
-
+    <div class="buttons" style="justify-content:flex-start;margin-top:12px">
+      <button class="smallBtn" onclick="quickURL('https://chatgpt.com/')">ChatGPT</button>
+      <button class="smallBtn" onclick="quickURL('https://codepen.io/')">CodePen</button>
+      <button class="smallBtn" onclick="quickURL('https://github.com/')">GitHub</button>
     </div>
 
-    <div
-        id="cardGallery"
-        class="collection-grid"
-    ></div>
+    <div id="urlResult"></div>
+  </div>
+</section>
 
-</div>
+<!-- CARD COLLECTION -->
+<section id="cards" class="page">
+  <h1 class="pageTitle">CARD COLLECTION</h1>
+  <p class="pageDesc">Your KGGT cards.</p>
 
+  <button class="btn primary" onclick="openUpload('Card')">
+    + UPLOAD CARD
+  </button>
 
-<!-- =====================================================
-     ARTWORK
-===================================================== -->
+  <div id="cardGallery" class="grid" style="margin-top:30px"></div>
+</section>
 
-<div id="artworkPage" class="full-page">
+<!-- ARTWORK -->
+<section id="artwork" class="page">
+  <h1 class="pageTitle">KGGT ARTWORK</h1>
+  <p class="pageDesc">Upload and manage your artwork.</p>
 
-    <h2 class="section-title">
-        🎨 KGGT ARTWORK
-    </h2>
+  <button class="btn primary" onclick="openUpload('Artwork')">
+    + UPLOAD ARTWORK
+  </button>
 
-    <div class="glass upload-box">
+  <div id="artGallery" class="grid" style="margin-top:30px"></div>
+</section>
 
-        <h2>
-            Artwork Studio
-        </h2>
+<!-- CREATION -->
+<section id="creation" class="page">
+  <div class="creator">
+    <h1 class="pageTitle">CREATION STUDIO</h1>
+    <p class="pageDesc">Draw, create and save your artwork.</p>
 
-        <p>
-            Upload artwork from your device
-            or use a direct image URL.
-        </p>
-
-        <button
-            class="btn"
-            onclick="openUpload('Artwork')"
-        >
-            + UPLOAD ARTWORK
-        </button>
-
+    <div class="toolbar">
+      <button class="btn" onclick="setTool('brush')">BRUSH</button>
+      <button class="btn" onclick="setTool('eraser')">ERASER</button>
+      <button class="btn" onclick="clearCanvas()">CLEAR</button>
+      <button class="btn primary" onclick="saveDrawing()">SAVE ARTWORK</button>
     </div>
 
-    <div
-        id="artworkGallery"
-        class="collection-grid"
-    ></div>
+    <canvas id="canvas" width="1200" height="650"></canvas>
 
-</div>
+    <div class="tools">
+      <label>
+        Brush Color
+        <input id="brushColor" type="color" value="#000000">
+      </label>
 
+      <label>
+        Canvas Background
+        <input id="canvasBg" type="color" value="#ffffff">
+      </label>
 
-<!-- =====================================================
-     CREATION
-===================================================== -->
-
-<div id="creationPage" class="full-page">
-
-    <h2 class="section-title">
-        ✏️ CREATION STUDIO
-    </h2>
-
-    <div class="canvas-wrap glass">
-
-        <div class="toolbar">
-
-            <button
-                class="tool"
-                onclick="setTool('brush')"
-            >
-                🖌 BRUSH
-            </button>
-
-            <button
-                class="tool"
-                onclick="setTool('eraser')"
-            >
-                🧽 ERASER
-            </button>
-
-            <button
-                class="tool"
-                onclick="setTool('text')"
-            >
-                🔤 TYPE
-            </button>
-
-            <button
-                class="tool"
-                onclick="clearCanvas()"
-            >
-                🗑 CLEAR
-            </button>
-
-            <button
-                class="tool"
-                onclick="saveDrawing()"
-            >
-                💾 SAVE
-            </button>
-
-            <label class="tool">
-
-                Canvas Background
-
-                <input
-                    type="color"
-                    id="canvasBg"
-                    value="#ffffff"
-                    onchange="changeCanvasBg(this.value)"
-                >
-
-            </label>
-
-            <label class="tool">
-
-                Brush
-
-                <input
-                    type="color"
-                    id="brushColor"
-                    value="#000000"
-                >
-
-            </label>
-
-            <label class="tool">
-
-                Size
-
-                <input
-                    type="range"
-                    id="brushSize"
-                    min="1"
-                    max="40"
-                    value="5"
-                >
-
-            </label>
-
-        </div>
-
-        <canvas
-            id="drawingCanvas"
-            width="1200"
-            height="600"
-        ></canvas>
-
+      <label>
+        Size
+        <input id="brushSize" type="range" min="1" max="40" value="6">
+      </label>
     </div>
+  </div>
+</section>
 
-</div>
+<!-- AI -->
+<section id="ai" class="page">
+  <div class="aiBox">
+    <h1 class="pageTitle">KGGT AI</h1>
+    <p class="pageDesc">Fast calculator.</p>
 
+    <input id="mathInput" placeholder="Example: 20% of 500 or 25*4">
 
-<!-- =====================================================
-     AI
-===================================================== -->
+    <button class="btn primary" onclick="calculate()">CALCULATE</button>
 
-<div id="aiPage" class="full-page">
+    <div id="mathResult" class="result">Waiting...</div>
+  </div>
+</section>
 
-    <h2 class="section-title">
-        🤖 KGGT AI
-    </h2>
+<!-- PROJECTS -->
+<section id="projects" class="page">
+  <h1 class="pageTitle">PROJECTS</h1>
+  <p class="pageDesc">Your saved creations.</p>
 
-    <div class="glass ai-box">
+  <div id="projectGallery" class="grid"></div>
+</section>
 
-        <h3>
-            Basic Math AI
-        </h3>
+<!-- ABOUT -->
+<section id="about" class="page">
+  <div class="about">
+    <h1 class="pageTitle">ABOUT KGGT</h1>
 
-        <p style="
-            color:#94a3b8;
-            margin:10px 0 20px;
-        ">
-            Try:
-            25 + 30,
-            100 / 4,
-            20% of 500
-        </p>
-
-        <input
-            class="input"
-            id="mathInput"
-            placeholder="Enter calculation..."
-        >
-
-        <button
-            class="btn"
-            onclick="calculateMath()"
-        >
-            CALCULATE
-        </button>
-
-        <div
-            class="result"
-            id="mathResult"
-        >
-            Result will appear here.
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     PROJECTS
-===================================================== -->
-
-<div id="projectsPage" class="full-page">
-
-    <h2 class="section-title">
-        🚀 PROJECTS
-    </h2>
-
-    <div class="grid">
-
-        <div class="project-card">
-
-            <h3>🎮 Game Studio</h3>
-
-            <p>
-                Build games and interactive ideas.
-            </p>
-
-        </div>
-
-        <div class="project-card">
-
-            <h3>🎨 Digital Art</h3>
-
-            <p>
-                Create and save digital artwork.
-            </p>
-
-        </div>
-
-        <div class="project-card">
-
-            <h3>🌐 Web Projects</h3>
-
-            <p>
-                Experiment with HTML, CSS and JavaScript.
-            </p>
-
-        </div>
-
-        <div class="project-card">
-
-            <h3>🤖 AI Experiments</h3>
-
-            <p>
-                Explore creative AI tools and experiments.
-            </p>
-
-        </div>
-
-        <div class="project-card">
-
-            <h3>🃏 Card Designs</h3>
-
-            <p>
-                Design collectible cards.
-            </p>
-
-        </div>
-
-        <div class="project-card">
-
-            <h3>✨ Future Lab</h3>
-
-            <p>
-                The experimental side of KGGT.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     ABOUT
-===================================================== -->
-
-<div id="aboutPage" class="full-page">
-
-    <h2 class="section-title">
-        👑 ABOUT KGGT
-    </h2>
-
-    <div class="glass">
-
-        <p style="
-            text-align:center;
-            line-height:1.8;
-            color:#cbd5e1;
-        ">
-
-            KGGT STUDIOS is a creative space
-            for imagination, technology, artwork
-            and experimentation.
-
-            <br><br>
-
-            CREATE. IMAGINE. BUILD.
-
-        </p>
-
-    </div>
-
-    <br><br>
+    <p>
+      KGGT STUDIOS is a creative space for drawings, digital artwork,
+      projects and experiments.
+    </p>
 
     <div class="team">
-
-        <div class="member">
-            <strong>Kartik</strong>
-            <span>Founder / Creator</span>
-        </div>
-
-        <div class="member">
-            <strong>Tanish</strong>
-            <span>Team</span>
-        </div>
-
-        <div class="member">
-            <strong>Garvitsingh</strong>
-            <span>Team</span>
-        </div>
-
-        <div class="member">
-            <strong>Garvittiwari</strong>
-            <span>Team</span>
-        </div>
-
+      <div class="member"><b>Kartik</b><br>Creator</div>
+      <div class="member"><b>Tanish</b><br>Team</div>
+      <div class="member"><b>Garvitsingh</b><br>Team</div>
+      <div class="member"><b>Garvittiwari</b><br>Team</div>
     </div>
+  </div>
+</section>
 
+<!-- UPLOAD MODAL -->
+<div id="uploadModal" class="modal">
+  <div class="modalBox">
+    <button class="close" onclick="closeModal('uploadModal')">X</button>
+
+    <h2 id="uploadHeading">UPLOAD</h2>
+
+    <input id="uploadPassword" type="password" placeholder="Password">
+
+    <input id="uploadTitle" placeholder="Title">
+
+    <input id="uploadPrice" type="number" placeholder="Price">
+
+    <input id="uploadFile" type="file" accept="image/*">
+
+    <input id="uploadURL" placeholder="Direct image URL (optional)">
+
+    <p style="color:#777;font-size:12px;margin:5px 0 15px">
+      You can upload from your computer/phone or use a direct image URL.
+    </p>
+
+    <button class="btn primary" onclick="saveUpload()">SAVE</button>
+  </div>
 </div>
 
-
-<!-- =====================================================
-     UPLOAD MODAL
-===================================================== -->
-
-<div
-    class="modal"
-    id="uploadModal"
->
-
-    <div class="modal-box">
-
-        <button
-            class="close"
-            onclick="closeModal('uploadModal')"
-        >
-            ×
-        </button>
-
-        <h2 id="uploadHeading">
-            Upload
-        </h2>
-
-        <div id="passwordArea">
-
-            <input
-                class="input"
-                id="uploadPassword"
-                type="password"
-                placeholder="Enter password"
-            >
-
-            <button
-                class="btn"
-                onclick="unlockUpload()"
-            >
-                UNLOCK
-            </button>
-
-        </div>
-
-        <div
-            class="upload-form"
-            id="uploadForm"
-        >
-
-            <select id="uploadType">
-
-                <option value="Card">
-                    Card
-                </option>
-
-                <option value="Artwork">
-                    Artwork
-                </option>
-
-            </select>
-
-            <input
-                class="input"
-                id="itemTitle"
-                placeholder="Title"
-            >
-
-            <input
-                class="price-input"
-                id="itemPrice"
-                type="number"
-                placeholder="Price ₹"
-            >
-
-            <p style="
-                color:#94a3b8;
-                margin-top:15px;
-                font-size:13px;
-            ">
-                Upload from Computer / Phone Gallery
-            </p>
-
-            <input
-                type="file"
-                id="imageFile"
-                accept="image/*"
-            >
-
-            <p style="
-                color:#94a3b8;
-                margin-top:10px;
-                font-size:13px;
-            ">
-                OR use a direct image URL
-            </p>
-
-            <input
-                class="input"
-                id="imageURL"
-                placeholder="https://example.com/image.jpg"
-            >
-
-            <button
-                class="btn"
-                onclick="saveUploadedItem()"
-            >
-                SAVE
-            </button>
-
-        </div>
-
-    </div>
-
+<!-- PREVIEW -->
+<div id="previewModal" class="modal">
+  <div class="modalBox">
+    <button class="close" onclick="closeModal('previewModal')">X</button>
+    <h2 id="previewTitle"></h2>
+    <img id="previewImage" class="previewImg">
+    <p id="previewPrice" class="price" style="margin-top:12px"></p>
+  </div>
 </div>
-
-
-<!-- =====================================================
-     PREVIEW
-===================================================== -->
-
-<div
-    class="modal"
-    id="previewModal"
->
-
-    <div class="modal-box">
-
-        <button
-            class="close"
-            onclick="closeModal('previewModal')"
-        >
-            ×
-        </button>
-
-        <img
-            id="previewImage"
-            class="preview-img"
-        >
-
-        <h2 id="previewTitle"></h2>
-
-        <p
-            id="previewPrice"
-            style="
-                color:#ff5757;
-                font-size:22px;
-                font-weight:bold;
-                margin-top:10px;
-            "
-        ></p>
-
-    </div>
-
-</div>
-
-
-<footer>
-
-    © 2026 KGGT STUDIOS — Create. Imagine.
-
-</footer>
-
 
 <script>
+/* PAGE SYSTEM */
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
 
-/* =========================================================
-   BOOT SYSTEM
-========================================================= */
-
-let bootPercent=0;
-
-const bootMessages=[
-
-    "INITIALIZING KGGT SYSTEM...",
-    "CHECKING CORE ENGINE...",
-    "CONNECTING NEURAL SYSTEM...",
-    "LOADING CREATIVE ENGINE...",
-    "ACTIVATING VISUAL MATRIX...",
-    "CALIBRATING DIGITAL SPACE...",
-    "STARTING KGGT STUDIOS..."
-
-];
-
-let messageIndex=0;
-
-const bootInterval=setInterval(function(){
-
-    bootPercent+=2;
-
-    if(bootPercent>100){
-        bootPercent=100;
-    }
-
-    document.getElementById("bootPercent")
-        .textContent=bootPercent+"%";
-
-    if(
-        bootPercent%14===0 &&
-        messageIndex<bootMessages.length
-    ){
-
-        document.getElementById("bootStatus")
-            .textContent=
-            bootMessages[messageIndex];
-
-        messageIndex++;
-
-    }
-
-    if(bootPercent>=25){
-        document.getElementById("m1")
-            .textContent="ONLINE";
-    }
-
-    if(bootPercent>=45){
-        document.getElementById("m2")
-            .textContent="ONLINE";
-    }
-
-    if(bootPercent>=65){
-        document.getElementById("m3")
-            .textContent="ONLINE";
-    }
-
-    if(bootPercent>=85){
-        document.getElementById("m4")
-            .textContent="ONLINE";
-    }
-
-    if(bootPercent>=100){
-
-        clearInterval(bootInterval);
-
-        document.getElementById("bootStatus")
-            .textContent=
-            "ALL SYSTEMS OPERATIONAL";
-
-        const online=
-            document.getElementById("bootOnline");
-
-        online.style.opacity="1";
-
-        online.style.transform="scale(1)";
-
-        online.style.transition=
-            "opacity .5s ease, transform .5s ease";
-
-        setTimeout(function(){
-
-            const boot=
-                document.getElementById("boot");
-
-            boot.style.opacity="0";
-            boot.style.transform="scale(1.08)";
-
-            setTimeout(function(){
-
-                boot.remove();
-
-            },1000);
-
-        },700);
-
-    }
-
-},65);
-
-
-/* =========================================================
-   PAGE SWITCHING
-========================================================= */
-
-function openPage(pageId){
-
-    const transition=
-        document.getElementById("pageTransition");
-
-    transition.classList.add("active");
-
-    setTimeout(function(){
-
-        document
-            .querySelectorAll(".full-page")
-            .forEach(function(page){
-
-                page.classList.remove("active");
-
-            });
-
-        const target=
-            document.getElementById(pageId);
-
-        if(target){
-            target.classList.add("active");
-        }
-
-        window.scrollTo({
-            top:0,
-            behavior:"instant"
-        });
-
-        if(pageId==="homePage"){
-            renderHomeGallery();
-        }
-
-        if(pageId==="cardPage"){
-            renderGallery();
-        }
-
-        if(pageId==="artworkPage"){
-            renderGallery();
-        }
-
-    },300);
-
-    setTimeout(function(){
-
-        transition.classList.remove("active");
-
-    },700);
-
+  if(id==="cards") renderGallery("Card","cardGallery");
+  if(id==="artwork") renderGallery("Artwork","artGallery");
+  if(id==="home") renderHomeGallery();
+  if(id==="projects") renderProjects();
 }
 
+/* BOOT */
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.getElementById("boot").style.display="none";
+    renderHomeGallery();
+    renderGallery("Card","cardGallery");
+    renderGallery("Artwork","artGallery");
+    renderProjects();
+    initCanvas();
+  },2500);
+});
 
-/* =========================================================
-   MATH AI
-========================================================= */
-
-function calculateMath(){
-
-    const input=
-        document.getElementById("mathInput")
-        .value.trim();
-
-    const result=
-        document.getElementById("mathResult");
-
-    if(!input){
-
-        result.textContent=
-            "Please enter a calculation.";
-
-        return;
-    }
-
-    try{
-
-        const percent=
-            input.match(
-                /^([\d.]+)\s*%\s*of\s*([\d.]+)$/i
-            );
-
-        if(percent){
-
-            const a=
-                parseFloat(percent[1]);
-
-            const b=
-                parseFloat(percent[2]);
-
-            result.textContent=
-                "Answer: "+(a/100*b);
-
-            return;
-        }
-
-        let expression=
-            input
-            .replace(/×/g,"*")
-            .replace(/÷/g,"/");
-
-        if(
-            !/^[0-9+\-*/().%\s]+$/
-            .test(expression)
-        ){
-
-            result.textContent=
-                "Please enter a valid calculation.";
-
-            return;
-        }
-
-        const answer=
-            Function(
-                '"use strict";return ('+
-                expression+
-                ')'
-            )();
-
-        result.textContent=
-            "Answer: "+answer;
-
-    }catch(e){
-
-        result.textContent=
-            "Could not calculate that.";
-
-    }
-
+/* STORAGE */
+function getGallery(){
+  return JSON.parse(localStorage.getItem("kggtGallery")||"[]");
 }
 
+function setGallery(data){
+  localStorage.setItem("kggtGallery",JSON.stringify(data));
+}
 
-/* =========================================================
-   UPLOAD
-========================================================= */
-
-let uploadTarget="Artwork";
+/* UPLOAD */
+let uploadType="Artwork";
 
 function openUpload(type){
-
-    uploadTarget=type;
-
-    document.getElementById("uploadModal")
-        .classList.add("show");
-
-    document.getElementById("uploadHeading")
-        .textContent=
-        "Upload "+type;
-
-    document.getElementById("uploadType")
-        .value=type;
-
-    document.getElementById("passwordArea")
-        .style.display="block";
-
-    document.getElementById("uploadForm")
-        .classList.remove("show");
-
-    document.getElementById("uploadPassword")
-        .value="";
-
+  uploadType=type;
+  document.getElementById("uploadHeading").textContent="UPLOAD "+type.toUpperCase();
+  document.getElementById("uploadPassword").value="";
+  document.getElementById("uploadTitle").value="";
+  document.getElementById("uploadPrice").value="";
+  document.getElementById("uploadFile").value="";
+  document.getElementById("uploadURL").value="";
+  document.getElementById("uploadModal").classList.add("show");
 }
 
+function saveUpload(){
+  if(document.getElementById("uploadPassword").value!=="password"){
+    alert("Wrong password.");
+    return;
+  }
 
-function unlockUpload(){
+  const title=document.getElementById("uploadTitle").value.trim();
+  const price=document.getElementById("uploadPrice").value.trim();
+  const file=document.getElementById("uploadFile").files[0];
+  const url=document.getElementById("uploadURL").value.trim();
 
-    const password=
-        document.getElementById("uploadPassword")
-        .value;
+  if(!title){
+    alert("Enter a title.");
+    return;
+  }
 
-    if(password==="password"){
+  if(!file && !url){
+    alert("Select an image or enter a direct image URL.");
+    return;
+  }
 
-        document.getElementById("passwordArea")
-            .style.display="none";
+  if(file){
+    const reader=new FileReader();
 
-        document.getElementById("uploadForm")
-            .classList.add("show");
+    reader.onload=()=>{
+      addGalleryItem(title,price,reader.result);
+    };
 
-    }else{
-
-        alert("Wrong password.");
-
-    }
-
+    reader.readAsDataURL(file);
+  }else{
+    addGalleryItem(title,price,url);
+  }
 }
 
+function addGalleryItem(title,price,image){
+  const data=getGallery();
 
-/* =========================================================
-   SAVE UPLOAD
-========================================================= */
+  data.unshift({
+    id:Date.now(),
+    type:uploadType,
+    title:title,
+    price:price||"0",
+    image:image
+  });
 
-function saveUploadedItem(){
+  setGallery(data);
+  closeModal("uploadModal");
 
-    const title=
-        document.getElementById("itemTitle")
-        .value.trim();
+  renderGallery("Card","cardGallery");
+  renderGallery("Artwork","artGallery");
+  renderHomeGallery();
 
-    const price=
-        document.getElementById("itemPrice")
-        .value.trim();
-
-    const file=
-        document.getElementById("imageFile")
-        .files[0];
-
-    const url=
-        document.getElementById("imageURL")
-        .value.trim();
-
-    const type=
-        document.getElementById("uploadType")
-        .value;
-
-    if(!title){
-
-        alert("Please enter a title.");
-
-        return;
-    }
-
-    if(!price){
-
-        alert("Please enter a price.");
-
-        return;
-    }
-
-    if(!file && !url){
-
-        alert(
-            "Please select an image or enter an image URL."
-        );
-
-        return;
-    }
-
-    if(file){
-
-        const reader=
-            new FileReader();
-
-        reader.onload=function(e){
-
-            finishSave(
-                type,
-                title,
-                price,
-                e.target.result
-            );
-
-        };
-
-        reader.readAsDataURL(file);
-
-    }else{
-
-        finishSave(
-            type,
-            title,
-            price,
-            url
-        );
-
-    }
-
+  alert(uploadType+" uploaded!");
 }
 
+/* GALLERY */
+function renderGallery(type,target){
+  const box=document.getElementById(target);
+  if(!box)return;
 
-function finishSave(
-    type,
-    title,
-    price,
-    image
-){
+  const data=getGallery().filter(x=>x.type===type);
 
-    const items=
-        JSON.parse(
-            localStorage.getItem(
-                "kggtGallery"
-            ) || "[]"
-        );
+  if(!data.length){
+    box.innerHTML='<div class="empty">No '+type.toLowerCase()+' uploaded yet.</div>';
+    return;
+  }
 
-    items.unshift({
-
-        id:Date.now(),
-
-        type:type,
-
-        title:title,
-
-        price:price,
-
-        image:image,
-
-        date:
-            new Date()
-            .toLocaleDateString()
-
-    });
-
-    localStorage.setItem(
-        "kggtGallery",
-        JSON.stringify(items)
-    );
-
-    closeModal("uploadModal");
-
-    clearUploadForm();
-
-    renderGallery();
-
-    renderHomeGallery();
-
-    /* automatically show the new creation on HOME */
-
-    openPage("homePage");
-
+  box.innerHTML=data.map(item=>cardHTML(item)).join("");
 }
-
-
-/* =========================================================
-   CLEAR UPLOAD FORM
-========================================================= */
-
-function clearUploadForm(){
-
-    document.getElementById("itemTitle")
-        .value="";
-
-    document.getElementById("itemPrice")
-        .value="";
-
-    document.getElementById("imageURL")
-        .value="";
-
-    document.getElementById("imageFile")
-        .value="";
-
-}
-
-
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
-
-function escapeHTML(text){
-
-    return String(text)
-
-        .replace(/&/g,"&amp;")
-
-        .replace(/</g,"&lt;")
-
-        .replace(/>/g,"&gt;")
-
-        .replace(/"/g,"&quot;")
-
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================================================
-   CARD HTML
-========================================================= */
-
-function createCardHTML(item){
-
-    return `
-
-    <div class="kggt-card">
-
-        <div class="card-top">
-
-            <span class="rarity">
-                ⭐ KGGT RARE
-            </span>
-
-            <span class="hp">
-                HP ${Math.floor(Math.random()*100)+1}
-            </span>
-
-        </div>
-
-        <img
-            src="${item.image}"
-            class="card-image"
-            alt="${escapeHTML(item.title)}"
-        >
-
-        <div class="card-info">
-
-            <div class="card-type">
-                ${escapeHTML(item.type)}
-            </div>
-
-            <h3>
-                ${escapeHTML(item.title)}
-            </h3>
-
-            <div class="card-price">
-                ₹${escapeHTML(item.price)}
-            </div>
-
-            <div class="card-actions">
-
-                <button
-                    class="small-btn"
-                    onclick="previewItem(${item.id})"
-                >
-                    PREVIEW
-                </button>
-
-                <button
-                    class="small-btn"
-                    onclick="buyItem(${item.id})"
-                >
-                    BUY
-                </button>
-
-                <button
-                    class="small-btn"
-                    onclick="editPrice(${item.id})"
-                >
-                    EDIT
-                </button>
-
-                <button
-                    class="small-btn"
-                    onclick="deleteItem(${item.id})"
-                >
-                    DELETE
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   RENDER CARD / ARTWORK
-========================================================= */
-
-function renderGallery(){
-
-    const items=
-        JSON.parse(
-            localStorage.getItem(
-                "kggtGallery"
-            ) || "[]"
-        );
-
-    const cards=
-        document.getElementById(
-            "cardGallery"
-        );
-
-    const artworks=
-        document.getElementById(
-            "artworkGallery"
-        );
-
-    cards.innerHTML="";
-    artworks.innerHTML="";
-
-    items.forEach(function(item){
-
-        const html=
-            createCardHTML(item);
-
-        if(item.type==="Card"){
-
-            cards.innerHTML+=html;
-
-        }else{
-
-            artworks.innerHTML+=html;
-
-        }
-
-    });
-
-}
-
-
-/* =========================================================
-   IMPORTANT:
-   ALL DRAWINGS / ARTWORKS ALSO SHOW ON HOME
-========================================================= */
 
 function renderHomeGallery(){
+  const box=document.getElementById("homeGallery");
+  if(!box)return;
 
-    const home=
-        document.getElementById(
-            "homeGallery"
-        );
+  const data=getGallery().filter(x=>x.type==="Artwork");
 
-    if(!home)return;
+  if(!data.length){
+    box.innerHTML='<div class="empty">Create or upload artwork to see it here.</div>';
+    return;
+  }
 
-    const items=
-        JSON.parse(
-            localStorage.getItem(
-                "kggtGallery"
-            ) || "[]"
-        );
-
-    /* Only drawings/artwork appear on HOME */
-
-    const artworkItems=
-        items.filter(function(item){
-
-            return item.type==="Artwork";
-
-        });
-
-    if(artworkItems.length===0){
-
-        home.innerHTML=`
-
-            <div
-                class="glass"
-                style="
-                    grid-column:1/-1;
-                    text-align:center;
-                    color:#94a3b8;
-                "
-            >
-
-                🎨
-
-                <br><br>
-
-                No creations yet.
-
-                <br>
-
-                Open CREATION and make your first artwork!
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-    home.innerHTML="";
-
-    artworkItems.forEach(function(item){
-
-        home.innerHTML+=
-            createCardHTML(item);
-
-    });
-
+  box.innerHTML=data.slice(0,12).map(item=>cardHTML(item)).join("");
 }
 
+function cardHTML(item){
+  return `
+  <div class="card">
+    <img src="${escapeHTML(item.image)}" alt="">
+    <h3>${escapeHTML(item.title)}</h3>
+    <div class="price">₹${escapeHTML(item.price)}</div>
 
-/* =========================================================
-   PREVIEW
-========================================================= */
+    <div class="cardActions">
+      <button class="smallBtn" onclick="previewItem(${item.id})">PREVIEW</button>
+      <button class="smallBtn" onclick="buyItem(${item.id})">BUY</button>
+      <button class="smallBtn" onclick="editPrice(${item.id})">EDIT</button>
+      <button class="smallBtn" onclick="deleteItem(${item.id})">DELETE</button>
+    </div>
+  </div>`;
+}
 
+/* PREVIEW */
 function previewItem(id){
+  const item=getGallery().find(x=>x.id===id);
+  if(!item)return;
 
-    const items=
-        JSON.parse(
-            localStorage.getItem(
-                "kggtGallery"
-            ) || "[]"
-        );
+  document.getElementById("previewTitle").textContent=item.title;
+  document.getElementById("previewImage").src=item.image;
+  document.getElementById("previewPrice").textContent="₹"+item.price;
 
-    const item=
-        items.find(function(x){
-
-            return x.id===id;
-
-        });
-
-    if(!item)return;
-
-    document.getElementById(
-        "previewImage"
-    ).src=item.image;
-
-    document.getElementById(
-        "previewTitle"
-    ).textContent=item.title;
-
-    document.getElementById(
-        "previewPrice"
-    ).textContent=
-        "₹"+item.price;
-
-    document.getElementById(
-        "previewModal"
-    ).classList.add("show");
-
+  document.getElementById("previewModal").classList.add("show");
 }
 
-
-/* =========================================================
-   EDIT PRICE
-========================================================= */
-
-function editPrice(id){
-
-    const password=
-        prompt("Enter password:");
-
-    if(password!=="password"){
-
-        alert("Wrong password.");
-
-        return;
-    }
-
-    const newPrice=
-        prompt("Enter new price:");
-
-    if(newPrice===null)return;
-
-    const items=
-        JSON.parse(
-            localStorage.getItem(
-                "kggtGallery"
-            ) || "[]"
-        );
-
-    const item=
-        items.find(function(x){
-
-            return x.id===id;
-
-        });
-
-    if(item){
-
-        item.price=newPrice;
-
-        localStorage.setItem(
-            "kggtGallery",
-            JSON.stringify(items)
-        );
-
-        renderGallery();
-
-        renderHomeGallery();
-
-    }
-
-}
-
-
-/* =========================================================
-   DELETE
-========================================================= */
-
-function deleteItem(id){
-
-    const password=
-        prompt("Enter password:");
-
-    if(password!=="password"){
-
-        alert("Wrong password.");
-
-        return;
-    }
-
-    if(!confirm("Delete this item?")){
-
-        return;
-    }
-
-    let items=
-        JSON.parse(
-            localStorage.getItem(
-                "kggtGallery"
-            ) || "[]"
-        );
-
-    items=
-        items.filter(function(item){
-
-            return item.id!==id;
-
-        });
-
-    localStorage.setItem(
-        "kggtGallery",
-        JSON.stringify(items)
-    );
-
-    renderGallery();
-
-    renderHomeGallery();
-
-}
-
-
-/* =========================================================
-   BUY
-========================================================= */
-
+/* BUY */
 function buyItem(id){
+  const item=getGallery().find(x=>x.id===id);
+  if(!item)return;
 
-    const items=
-        JSON.parse(
-            localStorage.getItem(
-                "kggtGallery"
-            ) || "[]"
-        );
+  const name=prompt("Enter your name:");
+  if(!name)return;
 
-    const item=
-        items.find(function(x){
+  const contact=prompt("Enter contact information:");
+  if(!contact)return;
 
-            return x.id===id;
+  const orders=JSON.parse(localStorage.getItem("kggtOrders")||"[]");
 
-        });
+  orders.push({
+    id:Date.now(),
+    item:item.title,
+    price:item.price,
+    name:name,
+    contact:contact
+  });
 
-    if(!item)return;
+  localStorage.setItem("kggtOrders",JSON.stringify(orders));
 
-    alert(
-        "Purchase request:\n\n"+
-        item.title+
-        "\nPrice: ₹"+
-        item.price+
-        "\n\nPayment system can be added later."
-    );
-
+  alert("Purchase request saved!");
 }
 
+/* EDIT PRICE */
+function editPrice(id){
+  if(prompt("Enter password:")!=="password"){
+    alert("Wrong password.");
+    return;
+  }
 
-/* =========================================================
-   MODALS
-========================================================= */
+  const data=getGallery();
+  const item=data.find(x=>x.id===id);
 
+  if(!item)return;
+
+  const price=prompt("New price:",item.price);
+
+  if(price!==null){
+    item.price=price;
+    setGallery(data);
+
+    renderGallery("Card","cardGallery");
+    renderGallery("Artwork","artGallery");
+    renderHomeGallery();
+  }
+}
+
+/* DELETE */
+function deleteItem(id){
+  if(prompt("Enter password:")!=="password"){
+    alert("Wrong password.");
+    return;
+  }
+
+  if(!confirm("Delete this item?"))return;
+
+  const data=getGallery().filter(x=>x.id!==id);
+  setGallery(data);
+
+  renderGallery("Card","cardGallery");
+  renderGallery("Artwork","artGallery");
+  renderHomeGallery();
+}
+
+/* MODALS */
 function closeModal(id){
-
-    document
-        .getElementById(id)
-        .classList.remove("show");
-
+  document.getElementById(id).classList.remove("show");
 }
 
+/* AI */
+function calculate(){
+  const input=document.getElementById("mathInput").value.trim();
+  const result=document.getElementById("mathResult");
 
-/* =========================================================
-   URL INSPECTOR
-========================================================= */
+  if(!input){
+    result.textContent="Enter a calculation.";
+    return;
+  }
 
+  try{
+    let text=input.toLowerCase()
+      .replace(/what is/g,"")
+      .replace(/\?/g,"")
+      .trim();
+
+    const percent=text.match(/^(\d+(?:\.\d+)?)%\s*of\s*(\d+(?:\.\d+)?)$/);
+
+    if(percent){
+      result.textContent=
+        (parseFloat(percent[1])*parseFloat(percent[2])/100).toString();
+      return;
+    }
+
+    if(!/^[0-9+\-*/().%\s]+$/.test(text)){
+      result.textContent="Please enter a valid calculation.";
+      return;
+    }
+
+    result.textContent=Function('"use strict";return('+text+')')();
+  }catch{
+    result.textContent="Invalid calculation.";
+  }
+}
+
+/* URL INSPECTOR */
 function quickURL(url){
-
-    document.getElementById(
-        "urlInput"
-    ).value=url;
-
-    inspectURL();
-
+  document.getElementById("urlInput").value=url;
+  inspectURL();
 }
 
 function inspectURL(){
+  let raw=document.getElementById("urlInput").value.trim();
 
-    let value=
-        document.getElementById(
-            "urlInput"
-        ).value.trim();
+  if(!raw){
+    alert("Enter a URL.");
+    return;
+  }
 
-    const output=
-        document.getElementById(
-            "urlResult"
-        );
+  if(!/^https?:\/\//i.test(raw)){
+    raw="https://"+raw;
+  }
 
-    if(!value){
+  try{
+    const u=new URL(raw);
 
-        output.innerHTML=
-            "Please enter a URL.";
-
-        output.classList.add("show");
-
-        return;
-    }
-
-    try{
-
-        if(
-            !value.startsWith("http://") &&
-            !value.startsWith("https://")
-        ){
-
-            value="https://"+value;
-
-        }
-
-        const url=
-            new URL(value);
-
-        output.innerHTML=`
-
-            <strong>Protocol:</strong>
-            ${escapeHTML(url.protocol)}
-            <br>
-
-            <strong>Hostname:</strong>
-            ${escapeHTML(url.hostname)}
-            <br>
-
-            <strong>Port:</strong>
-            ${escapeHTML(url.port || "Default")}
-            <br>
-
-            <strong>Path:</strong>
-            ${escapeHTML(url.pathname)}
-            <br>
-
-            <strong>Query:</strong>
-            ${escapeHTML(url.search || "None")}
-            <br>
-
-            <strong>Hash:</strong>
-            ${escapeHTML(url.hash || "None")}
-            <br>
-
-            <strong>Full URL:</strong>
-            ${escapeHTML(url.href)}
-
-        `;
-
-        output.classList.add("show");
-
-    }catch(e){
-
-        output.innerHTML=
-            "Invalid URL.";
-
-        output.classList.add("show");
-
-    }
-
+    document.getElementById("urlResult").innerHTML=`
+      <div class="info">
+        <div>Protocol</div><div>${escapeHTML(u.protocol)}</div>
+        <div>Hostname</div><div>${escapeHTML(u.hostname)}</div>
+        <div>Port</div><div>${escapeHTML(u.port||"Default")}</div>
+        <div>Path</div><div>${escapeHTML(u.pathname)}</div>
+        <div>Query</div><div>${escapeHTML(u.search||"None")}</div>
+        <div>Hash</div><div>${escapeHTML(u.hash||"None")}</div>
+        <div>Full URL</div><div>${escapeHTML(u.href)}</div>
+      </div>`;
+  }catch{
+    document.getElementById("urlResult").innerHTML=
+      '<div class="result">Invalid URL.</div>';
+  }
 }
 
 function visitURL(){
+  let url=document.getElementById("urlInput").value.trim();
 
-    let value=
-        document.getElementById(
-            "urlInput"
-        ).value.trim();
+  if(!url)return;
 
-    if(!value){
+  if(!/^https?:\/\//i.test(url)){
+    url="https://"+url;
+  }
 
-        alert("Enter a URL first.");
-
-        return;
-    }
-
-    if(
-        !value.startsWith("http://") &&
-        !value.startsWith("https://")
-    ){
-
-        value="https://"+value;
-
-    }
-
-    window.open(
-        value,
-        "_blank"
-    );
-
+  window.open(url,"_blank");
 }
 
-
-/* =========================================================
-   CANVAS
-========================================================= */
-
-const canvas=
-    document.getElementById(
-        "drawingCanvas"
-    );
-
-const ctx=
-    canvas.getContext("2d");
-
+/* CANVAS */
+let canvas;
+let ctx;
 let drawing=false;
-
 let tool="brush";
+let lastX=0;
+let lastY=0;
 
-let canvasBackground="#ffffff";
+function initCanvas(){
+  canvas=document.getElementById("canvas");
+  ctx=canvas.getContext("2d");
 
+  fillCanvas();
 
-function getPosition(e){
-
-    const rect=
-        canvas.getBoundingClientRect();
-
-    return{
-
-        x:
-            (e.clientX-rect.left)
-            *canvas.width/
-            rect.width,
-
-        y:
-            (e.clientY-rect.top)
-            *canvas.height/
-            rect.height
-
-    };
-
+  canvas.addEventListener("pointerdown",startDraw);
+  canvas.addEventListener("pointermove",draw);
+  canvas.addEventListener("pointerup",stopDraw);
+  canvas.addEventListener("pointerleave",stopDraw);
 }
 
+function fillCanvas(){
+  if(!ctx)return;
 
-function setTool(newTool){
-
-    tool=newTool;
-
-    if(tool==="text"){
-
-        const text=
-            prompt(
-                "Type your text:"
-            );
-
-        if(text){
-
-            ctx.fillStyle=
-                document.getElementById(
-                    "brushColor"
-                ).value;
-
-            ctx.font=
-                "30px Arial";
-
-            ctx.fillText(
-                text,
-                80,
-                80
-            );
-
-        }
-
-    }
-
+  ctx.fillStyle=document.getElementById("canvasBg").value;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 }
 
+document.getElementById("canvasBg").addEventListener("input",()=>{
+  if(!ctx)return;
 
-function startDrawing(e){
+  const image=ctx.getImageData(0,0,canvas.width,canvas.height);
 
-    if(tool==="text")return;
+  ctx.fillStyle=document.getElementById("canvasBg").value;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    drawing=true;
+  ctx.putImageData(image,0,0);
+});
 
-    const pos=
-        getPosition(e);
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        pos.x,
-        pos.y
-    );
-
+function setTool(value){
+  tool=value;
 }
 
+function startDraw(e){
+  drawing=true;
+
+  const r=canvas.getBoundingClientRect();
+
+  lastX=(e.clientX-r.left)*canvas.width/r.width;
+  lastY=(e.clientY-r.top)*canvas.height/r.height;
+}
 
 function draw(e){
+  if(!drawing)return;
 
-    if(!drawing)return;
+  const r=canvas.getBoundingClientRect();
 
-    const pos=
-        getPosition(e);
+  const x=(e.clientX-r.left)*canvas.width/r.width;
+  const y=(e.clientY-r.top)*canvas.height/r.height;
 
-    ctx.lineWidth=
-        document.getElementById(
-            "brushSize"
-        ).value;
+  ctx.beginPath();
+  ctx.moveTo(lastX,lastY);
+  ctx.lineTo(x,y);
 
-    ctx.lineCap="round";
+  ctx.lineWidth=document.getElementById("brushSize").value;
+  ctx.lineCap="round";
 
-    if(tool==="eraser"){
+  if(tool==="eraser"){
+    ctx.strokeStyle=document.getElementById("canvasBg").value;
+  }else{
+    ctx.strokeStyle=document.getElementById("brushColor").value;
+  }
 
-        ctx.globalCompositeOperation=
-            "destination-out";
+  ctx.stroke();
 
-    }else{
-
-        ctx.globalCompositeOperation=
-            "source-over";
-
-        ctx.strokeStyle=
-            document.getElementById(
-                "brushColor"
-            ).value;
-
-    }
-
-    ctx.lineTo(
-        pos.x,
-        pos.y
-    );
-
-    ctx.stroke();
-
+  lastX=x;
+  lastY=y;
 }
 
-
-function stopDrawing(){
-
-    drawing=false;
-
-    ctx.beginPath();
-
-    ctx.globalCompositeOperation=
-        "source-over";
-
+function stopDraw(){
+  drawing=false;
 }
-
-
-canvas.addEventListener(
-    "mousedown",
-    startDrawing
-);
-
-canvas.addEventListener(
-    "mousemove",
-    draw
-);
-
-canvas.addEventListener(
-    "mouseup",
-    stopDrawing
-);
-
-canvas.addEventListener(
-    "mouseleave",
-    stopDrawing
-);
-
-
-canvas.addEventListener(
-    "touchstart",
-    function(e){
-
-        e.preventDefault();
-
-        const touch=
-            e.touches[0];
-
-        startDrawing({
-
-            clientX:touch.clientX,
-
-            clientY:touch.clientY
-
-        });
-
-    },
-    {passive:false}
-);
-
-
-canvas.addEventListener(
-    "touchmove",
-    function(e){
-
-        e.preventDefault();
-
-        const touch=
-            e.touches[0];
-
-        draw({
-
-            clientX:touch.clientX,
-
-            clientY:touch.clientY
-
-        });
-
-    },
-    {passive:false}
-);
-
-
-canvas.addEventListener(
-    "touchend",
-    stopDrawing
-);
-
-
-/* =========================================================
-   CANVAS BACKGROUND
-========================================================= */
-
-function fillCanvasBackground(){
-
-    ctx.save();
-
-    ctx.globalCompositeOperation=
-        "destination-over";
-
-    ctx.fillStyle=
-        canvasBackground;
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    ctx.restore();
-
-}
-
-
-function changeCanvasBg(color){
-
-    canvasBackground=color;
-
-    fillCanvasBackground();
-
-}
-
 
 function clearCanvas(){
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    fillCanvasBackground();
-
+  if(confirm("Clear canvas?")){
+    fillCanvas();
+  }
 }
-
-
-/* =========================================================
-   SAVE DRAWING
-   IMPORTANT:
-   SAVED DRAWING = ARTWORK = HOME GALLERY
-========================================================= */
 
 function saveDrawing(){
+  const title=prompt("Artwork title:");
 
-    const image=
-        canvas.toDataURL(
-            "image/png"
-        );
+  if(!title)return;
 
-    const title=
-        prompt(
-            "Enter a title for your drawing:"
-        );
+  const data=getGallery();
 
-    if(!title)return;
+  data.unshift({
+    id:Date.now(),
+    type:"Artwork",
+    title:title,
+    price:"0",
+    image:canvas.toDataURL("image/jpeg",0.8)
+  });
 
-    const items=
-        JSON.parse(
-            localStorage.getItem(
-                "kggtGallery"
-            ) || "[]"
-        );
+  setGallery(data);
 
-    items.unshift({
+  renderHomeGallery();
+  renderGallery("Artwork","artGallery");
 
-        id:Date.now(),
+  alert("Artwork saved!");
 
-        type:"Artwork",
-
-        title:title,
-
-        price:"0",
-
-        image:image,
-
-        date:
-            new Date()
-            .toLocaleDateString()
-
-    });
-
-    localStorage.setItem(
-        "kggtGallery",
-        JSON.stringify(items)
-    );
-
-    renderGallery();
-
-    renderHomeGallery();
-
-    alert(
-        "🎨 Drawing saved!\n\n"+
-        "It is now visible on the KGGT HOME page."
-    );
-
+  showPage("home");
 }
 
+/* PROJECTS */
+function renderProjects(){
+  const box=document.getElementById("projectGallery");
 
-/* =========================================================
-   INITIALISE
-========================================================= */
+  const data=getGallery().filter(x=>x.type==="Artwork");
 
-fillCanvasBackground();
+  if(!data.length){
+    box.innerHTML='<div class="empty">No projects yet.</div>';
+    return;
+  }
 
-renderGallery();
+  box.innerHTML=data.map(item=>`
+    <div class="card">
+      <img src="${escapeHTML(item.image)}">
+      <h3>${escapeHTML(item.title)}</h3>
+      <button class="smallBtn" onclick="previewItem(${item.id})">OPEN</button>
+    </div>
+  `).join("");
+}
 
-renderHomeGallery();
-
-
-/* =========================================================
-   CLOSE MODALS BY CLICKING OUTSIDE
-========================================================= */
-
-document
-    .querySelectorAll(".modal")
-    .forEach(function(modal){
-
-        modal.addEventListener(
-            "click",
-            function(e){
-
-                if(e.target===modal){
-
-                    modal.classList.remove("show");
-
-                }
-
-            }
-        );
-
-    });
-
+/* SECURITY FOR DISPLAYED TEXT */
+function escapeHTML(value){
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 </script>
 
 </body>
