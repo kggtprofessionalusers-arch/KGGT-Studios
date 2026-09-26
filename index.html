@@ -10,7 +10,7 @@
 <style>
 
 /* =========================================================
-   BASIC RESET
+   RESET
 ========================================================= */
 
 *{
@@ -25,33 +25,46 @@ html{
 
 body{
     min-height:100vh;
-    font-family:Arial, Helvetica, sans-serif;
-    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
     overflow-x:hidden;
 
     background:
-        radial-gradient(circle at 15% 20%, rgba(139,92,246,.28), transparent 30%),
-        radial-gradient(circle at 85% 25%, rgba(6,182,212,.25), transparent 30%),
-        radial-gradient(circle at 50% 90%, rgba(236,72,153,.23), transparent 30%),
-        radial-gradient(circle at 20% 80%, rgba(34,197,94,.18), transparent 30%),
-        linear-gradient(135deg,#050510,#0c1024,#13071d);
+        radial-gradient(circle at 10% 20%,#8b5cf6,transparent 32%),
+        radial-gradient(circle at 90% 20%,#06b6d4,transparent 32%),
+        radial-gradient(circle at 70% 90%,#ec4899,transparent 32%),
+        radial-gradient(circle at 10% 90%,#22c55e,transparent 32%),
+        linear-gradient(135deg,#03030a,#0b1025,#16091e);
 
     background-size:180% 180%;
-    animation:studioColors 14s ease-in-out infinite alternate;
+    animation:rapidBackground 3s ease-in-out infinite alternate;
 }
 
-@keyframes studioColors{
+@keyframes rapidBackground{
 
     0%{
-        background-position:0% 20%;
+        background-position:0% 0%;
+        filter:hue-rotate(0deg);
+    }
+
+    25%{
+        background-position:100% 20%;
+        filter:hue-rotate(35deg);
     }
 
     50%{
-        background-position:100% 80%;
+        background-position:30% 100%;
+        filter:hue-rotate(75deg);
+    }
+
+    75%{
+        background-position:100% 70%;
+        filter:hue-rotate(120deg);
     }
 
     100%{
-        background-position:20% 100%;
+        background-position:0% 50%;
+        filter:hue-rotate(180deg);
     }
 }
 
@@ -59,34 +72,33 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
-    pointer-events:none;
     z-index:-1;
+    pointer-events:none;
 
     background:
         linear-gradient(
             120deg,
-            transparent 0%,
-            rgba(255,255,255,.025) 50%,
-            transparent 100%
+            transparent,
+            rgba(255,255,255,.035),
+            transparent
         );
 
-    animation:shineMove 8s linear infinite;
+    animation:lightSweep 3s linear infinite;
 }
 
-@keyframes shineMove{
-
+@keyframes lightSweep{
     from{
-        transform:translateX(-30%);
+        transform:translateX(-100%);
     }
 
     to{
-        transform:translateX(30%);
+        transform:translateX(100%);
     }
 }
 
 
 /* =========================================================
-   BOOT SCREEN
+   FUTURISTIC MACHINE BOOT
 ========================================================= */
 
 #boot{
@@ -95,211 +107,679 @@ body::before{
     inset:0;
     z-index:99999;
 
+    overflow:hidden;
+
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
 
     background:
-        radial-gradient(circle,#1a1140,#060611 65%);
+        radial-gradient(
+            circle at center,
+            #111c3d 0%,
+            #080b18 40%,
+            #020208 100%
+        );
 
-    overflow:hidden;
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
-.boot-rays{
+.boot-grid{
+
     position:absolute;
-    width:700px;
-    height:700px;
+    inset:-50%;
+
+    background-image:
+        linear-gradient(
+            rgba(6,182,212,.12) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(139,92,246,.12) 1px,
+            transparent 1px
+        );
+
+    background-size:45px 45px;
+
+    transform:
+        perspective(500px)
+        rotateX(65deg)
+        translateY(100px);
+
+    animation:gridMove 2.5s linear infinite;
+
+    opacity:.45;
+}
+
+@keyframes gridMove{
+
+    from{
+        background-position:0 0;
+    }
+
+    to{
+        background-position:0 45px;
+    }
+}
+
+.boot-scan{
+
+    position:absolute;
+
+    width:100%;
+    height:2px;
+
+    top:-10px;
 
     background:
-        conic-gradient(
+        linear-gradient(
+            90deg,
             transparent,
-            rgba(139,92,246,.16),
-            transparent,
-            rgba(6,182,212,.14),
+            #06b6d4,
+            #8b5cf6,
             transparent
         );
 
-    border-radius:50%;
-    animation:bootRotate 8s linear infinite;
+    box-shadow:
+        0 0 20px #06b6d4,
+        0 0 50px #8b5cf6;
+
+    animation:scanLine 2.4s linear infinite;
 }
 
-@keyframes bootRotate{
+@keyframes scanLine{
+
+    0%{
+        top:-10px;
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    85%{
+        opacity:1;
+    }
+
+    100%{
+        top:100%;
+        opacity:0;
+    }
+}
+
+
+/* BOOT PARTICLES */
+
+.boot-particles{
+
+    position:absolute;
+    inset:0;
+}
+
+.boot-particles i{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:#06b6d4;
+
+    box-shadow:
+        0 0 8px #06b6d4,
+        0 0 18px #8b5cf6;
+
+    animation:
+        particleFloat
+        var(--time)
+        linear
+        infinite;
+
+    left:var(--left);
+    top:var(--top);
+}
+
+.boot-particles i:nth-child(1){
+    --left:8%;
+    --top:70%;
+    --time:3s;
+}
+
+.boot-particles i:nth-child(2){
+    --left:18%;
+    --top:25%;
+    --time:4s;
+}
+
+.boot-particles i:nth-child(3){
+    --left:28%;
+    --top:80%;
+    --time:2.5s;
+}
+
+.boot-particles i:nth-child(4){
+    --left:40%;
+    --top:15%;
+    --time:3.5s;
+}
+
+.boot-particles i:nth-child(5){
+    --left:52%;
+    --top:75%;
+    --time:4.2s;
+}
+
+.boot-particles i:nth-child(6){
+    --left:64%;
+    --top:20%;
+    --time:2.7s;
+}
+
+.boot-particles i:nth-child(7){
+    --left:75%;
+    --top:65%;
+    --time:3.8s;
+}
+
+.boot-particles i:nth-child(8){
+    --left:86%;
+    --top:30%;
+    --time:2.8s;
+}
+
+.boot-particles i:nth-child(9){
+    --left:94%;
+    --top:80%;
+    --time:4.5s;
+}
+
+.boot-particles i:nth-child(10){
+    --left:12%;
+    --top:45%;
+    --time:3.2s;
+}
+
+.boot-particles i:nth-child(11){
+    --left:34%;
+    --top:50%;
+    --time:2.4s;
+}
+
+.boot-particles i:nth-child(12){
+    --left:58%;
+    --top:40%;
+    --time:3.7s;
+}
+
+.boot-particles i:nth-child(13){
+    --left:72%;
+    --top:85%;
+    --time:2.9s;
+}
+
+.boot-particles i:nth-child(14){
+    --left:82%;
+    --top:12%;
+    --time:4s;
+}
+
+.boot-particles i:nth-child(15){
+    --left:47%;
+    --top:90%;
+    --time:3.3s;
+}
+
+@keyframes particleFloat{
+
+    0%{
+        transform:translateY(30px) scale(.5);
+        opacity:0;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-100px) scale(1.5);
+        opacity:0;
+    }
+}
+
+
+/* HUD */
+
+.hud{
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(6,182,212,.2);
+
+    box-shadow:
+        0 0 40px rgba(6,182,212,.05),
+        inset 0 0 40px rgba(139,92,246,.05);
+}
+
+.hud1{
+    animation:hudRotate 10s linear infinite;
+}
+
+.hud2{
+
+    width:520px;
+    height:520px;
+
+    border-color:rgba(236,72,153,.15);
+
+    animation:hudRotateReverse 14s linear infinite;
+}
+
+@keyframes hudRotate{
 
     to{
         transform:rotate(360deg);
     }
 }
 
-.boot-ring{
-    position:absolute;
+@keyframes hudRotateReverse{
 
-    width:250px;
-    height:250px;
-
-    border-radius:50%;
-    border:2px solid rgba(139,92,246,.5);
-
-    box-shadow:
-        0 0 30px rgba(139,92,246,.4),
-        inset 0 0 30px rgba(6,182,212,.2);
-
-    animation:bootRing 2.5s ease-in-out infinite;
-}
-
-@keyframes bootRing{
-
-    0%,100%{
-        transform:scale(.75);
-        opacity:.3;
-    }
-
-    50%{
-        transform:scale(1.25);
-        opacity:1;
+    to{
+        transform:rotate(-360deg);
     }
 }
 
-.boot-logo{
+
+/* BOOT CORE */
+
+.boot-core{
 
     position:relative;
-    z-index:2;
 
-    font-size:clamp(65px,13vw,150px);
+    width:310px;
+    height:310px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:5;
+}
+
+.core-ring{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    border:1px solid;
+
+}
+
+.ring1{
+
+    width:280px;
+    height:280px;
+
+    border-color:#06b6d4;
+
+    border-top-color:transparent;
+
+    box-shadow:
+        0 0 20px rgba(6,182,212,.4);
+
+    animation:ringSpin 3s linear infinite;
+}
+
+.ring2{
+
+    width:230px;
+    height:230px;
+
+    border-color:#8b5cf6;
+
+    border-right-color:transparent;
+
+    box-shadow:
+        0 0 20px rgba(139,92,246,.4);
+
+    animation:ringSpinReverse 2.2s linear infinite;
+}
+
+.ring3{
+
+    width:180px;
+    height:180px;
+
+    border-color:#ec4899;
+
+    border-bottom-color:transparent;
+
+    box-shadow:
+        0 0 20px rgba(236,72,153,.35);
+
+    animation:ringSpin 1.7s linear infinite;
+}
+
+@keyframes ringSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes ringSpinReverse{
+
+    to{
+        transform:rotate(-360deg);
+    }
+}
+
+.core-cross{
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+}
+
+.core-cross span{
+
+    position:absolute;
+
+    background:rgba(6,182,212,.3);
+
+}
+
+.core-cross span:first-child{
+
+    width:100%;
+    height:1px;
+
+    top:50%;
+}
+
+.core-cross span:last-child{
+
+    width:1px;
+    height:100%;
+
+    left:50%;
+}
+
+.kg-logo{
+
+    position:relative;
+    z-index:4;
+
+    font-size:65px;
+
     font-weight:1000;
-    letter-spacing:12px;
+
+    letter-spacing:7px;
 
     color:white;
 
+    transform:scale(.2);
+
+    filter:blur(20px);
+
+    opacity:0;
+
     text-shadow:
         0 0 10px #8b5cf6,
-        0 0 25px #8b5cf6,
-        0 0 50px #06b6d4,
-        0 0 80px #ec4899;
+        0 0 30px #06b6d4,
+        0 0 60px #ec4899;
 
-    animation:
-        bootZoom 2.4s cubic-bezier(.2,.8,.2,1) forwards,
-        bootGlow 1.2s ease-in-out infinite alternate;
+    animation:logoBoot 2.3s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-@keyframes bootZoom{
+@keyframes logoBoot{
 
     0%{
-        transform:scale(.15) rotate(-8deg);
-        filter:blur(25px);
+        transform:scale(.2) rotate(-10deg);
+        filter:blur(20px);
         opacity:0;
     }
 
-    55%{
-        transform:scale(1.15) rotate(2deg);
+    45%{
+        transform:scale(1.2) rotate(3deg);
         filter:blur(0);
         opacity:1;
     }
 
-    75%{
-        transform:scale(.96);
+    65%{
+        transform:scale(.92);
+    }
+
+    82%{
+        transform:scale(1.05);
     }
 
     100%{
         transform:scale(1);
-        rotate:0deg;
         filter:blur(0);
         opacity:1;
     }
 }
 
-@keyframes bootGlow{
+.kg-sub{
 
-    from{
-        text-shadow:
-            0 0 10px #8b5cf6,
-            0 0 25px #8b5cf6;
-    }
+    position:absolute;
 
-    to{
-        text-shadow:
-            0 0 15px #06b6d4,
-            0 0 35px #ec4899,
-            0 0 70px #8b5cf6;
-    }
-}
+    bottom:18px;
 
-.boot-sub{
-
-    position:relative;
-    z-index:2;
-
-    margin-top:15px;
+    font-size:9px;
 
     letter-spacing:6px;
-    font-size:12px;
+
+    color:#67e8f9;
 
     opacity:0;
 
-    animation:bootSub 1s ease 1.2s forwards;
+    animation:subBoot 1s ease 1.3s forwards;
 }
 
-@keyframes bootSub{
+@keyframes subBoot{
 
     from{
         opacity:0;
-        transform:translateY(15px);
+        letter-spacing:1px;
     }
 
     to{
         opacity:.8;
-        transform:translateY(0);
+        letter-spacing:6px;
     }
 }
 
-.boot-loader{
+
+/* TERMINAL */
+
+.boot-terminal{
 
     position:relative;
-    z-index:2;
 
-    width:220px;
+    z-index:10;
+
+    width:min(500px,80vw);
+
+    margin-top:10px;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    color:#67e8f9;
+
+    font-size:11px;
+}
+
+.boot-line{
+
+    width:100%;
     height:4px;
 
-    margin-top:35px;
+    margin-top:10px;
 
-    background:rgba(255,255,255,.1);
-    border-radius:20px;
+    background:rgba(255,255,255,.08);
+
     overflow:hidden;
+
+    border-radius:20px;
 }
 
-.boot-loader span{
+.boot-line span{
 
     display:block;
+
     height:100%;
+
     width:0;
 
-    background:linear-gradient(
-        90deg,
-        #8b5cf6,
-        #06b6d4,
-        #ec4899
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #8b5cf6,
+            #ec4899
+        );
 
-    box-shadow:0 0 20px #8b5cf6;
+    box-shadow:
+        0 0 15px #06b6d4;
 
-    animation:loader 2.6s ease forwards;
+    animation:bootProgress 3.6s linear forwards;
 }
 
-@keyframes loader{
+@keyframes bootProgress{
 
     to{
         width:100%;
     }
 }
 
+.boot-data{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:7px;
+
+    color:#64748b;
+
+    font-size:9px;
+}
+
+
+/* MODULES */
+
+.boot-modules{
+
+    position:absolute;
+
+    left:5%;
+
+    bottom:8%;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:9px;
+
+    color:#64748b;
+
+    line-height:2;
+}
+
+.boot-modules div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+.module-dot{
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#475569;
+}
+
+.boot-modules b{
+
+    color:#64748b;
+
+    font-weight:normal;
+}
+
+.boot-online{
+
+    position:absolute;
+
+    z-index:20;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:20px;
+
+    letter-spacing:6px;
+
+    color:#67e8f9;
+
+    text-shadow:
+        0 0 15px #06b6d4,
+        0 0 30px #8b5cf6;
+
+    opacity:0;
+
+    transform:scale(.7);
+
+}
+
+.boot-online small{
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:8px;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:#94a3b8;
+}
+
 
 /* =========================================================
-   PAGE OPENING ANIMATION
+   PAGE TRANSITION
 ========================================================= */
 
 .page-transition{
 
     position:fixed;
+
     inset:0;
 
     z-index:9998;
@@ -307,19 +787,18 @@ body::before{
     pointer-events:none;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
-    background:rgba(5,5,18,.72);
+    background:rgba(3,3,12,.72);
 
-    backdrop-filter:blur(8px);
+    backdrop-filter:blur(10px);
 
     opacity:0;
     visibility:hidden;
 
-    transition:
-        opacity:.25s ease,
-        visibility:.25s ease;
+    transition:.25s;
 }
 
 .page-transition.active{
@@ -330,49 +809,38 @@ body::before{
 
 .transition-logo{
 
-    font-size:clamp(35px,7vw,80px);
+    font-size:70px;
 
     font-weight:1000;
+
     letter-spacing:8px;
 
     color:white;
 
     text-shadow:
-        0 0 10px #8b5cf6,
-        0 0 30px #06b6d4,
-        0 0 60px #ec4899;
+        0 0 15px #8b5cf6,
+        0 0 35px #06b6d4,
+        0 0 70px #ec4899;
 
-    transform:scale(.65);
-
-    filter:blur(8px);
-
-    opacity:0;
+    animation:transitionLogo .6s ease forwards;
 }
 
-.page-transition.active .transition-logo{
+@keyframes transitionLogo{
 
-    animation:
-        pageLogo .55s cubic-bezier(.2,.8,.2,1)
-        forwards;
-}
-
-@keyframes pageLogo{
-
-    0%{
-        transform:scale(.65);
-        filter:blur(8px);
+    from{
+        transform:scale(.5);
+        filter:blur(10px);
         opacity:0;
     }
 
-    55%{
-        transform:scale(1.08);
+    50%{
+        transform:scale(1.1);
         filter:blur(0);
         opacity:1;
     }
 
-    100%{
+    to{
         transform:scale(1);
-        filter:blur(0);
         opacity:1;
     }
 }
@@ -384,29 +852,22 @@ body::before{
     width:170px;
     height:170px;
 
-    border:2px solid rgba(139,92,246,.7);
+    border:2px solid #06b6d4;
 
     border-radius:50%;
 
-    transform:scale(.4);
-
-    opacity:0;
+    animation:transitionRing .7s ease-out forwards;
 }
 
-.page-transition.active .transition-ring{
+@keyframes transitionRing{
 
-    animation:ringOpen .7s ease-out forwards;
-}
-
-@keyframes ringOpen{
-
-    0%{
-        transform:scale(.4);
-        opacity:.9;
+    from{
+        transform:scale(.3);
+        opacity:1;
     }
 
-    100%{
-        transform:scale(2);
+    to{
+        transform:scale(2.2);
         opacity:0;
     }
 }
@@ -420,20 +881,22 @@ nav{
 
     position:sticky;
     top:0;
+
     z-index:500;
 
     display:flex;
     align-items:center;
 
-    gap:8px;
+    gap:7px;
 
-    padding:14px 4%;
+    padding:13px 4%;
 
-    background:rgba(5,5,15,.68);
+    background:rgba(4,4,15,.68);
 
     backdrop-filter:blur(18px);
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
 
     overflow-x:auto;
 }
@@ -441,25 +904,26 @@ nav{
 .logo{
 
     font-size:24px;
+
     font-weight:1000;
 
     margin-right:15px;
 
-    color:white;
+    white-space:nowrap;
 
     text-shadow:
         0 0 12px #8b5cf6,
         0 0 25px #06b6d4;
-
-    white-space:nowrap;
 }
 
 nav a{
 
     color:white;
+
     text-decoration:none;
 
-    font-size:12px;
+    font-size:11px;
+
     font-weight:bold;
 
     padding:10px 12px;
@@ -473,17 +937,18 @@ nav a{
 
 nav a:hover{
 
-    background:rgba(139,92,246,.2);
-
-    box-shadow:
-        0 0 15px rgba(139,92,246,.25);
+    background:
+        rgba(139,92,246,.2);
 
     transform:translateY(-2px);
+
+    box-shadow:
+        0 0 20px rgba(139,92,246,.2);
 }
 
 
 /* =========================================================
-   FULL PAGES
+   PAGES
 ========================================================= */
 
 .full-page{
@@ -500,19 +965,23 @@ nav a:hover{
     display:block;
 
     animation:
-        pageContent .45s ease;
+        pageAppear .5s ease;
 }
 
-@keyframes pageContent{
+@keyframes pageAppear{
 
     from{
         opacity:0;
-        transform:translateY(15px) scale(.985);
+        transform:
+            translateY(20px)
+            scale(.98);
     }
 
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
@@ -523,26 +992,28 @@ nav a:hover{
 
 .hero{
 
-    min-height:78vh;
+    min-height:72vh;
 
     display:flex;
-    flex-direction:column;
 
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
 
     text-align:center;
 }
 
 .hero h1{
 
-    font-size:clamp(50px,10vw,120px);
+    font-size:
+        clamp(65px,12vw,150px);
 
-    line-height:.9;
+    line-height:.85;
 
     font-weight:1000;
 
-    letter-spacing:-5px;
+    letter-spacing:-7px;
 
     background:
         linear-gradient(
@@ -562,7 +1033,7 @@ nav a:hover{
     color:transparent;
 
     animation:
-        titleGradient 6s linear infinite;
+        titleGradient 4s linear infinite;
 }
 
 @keyframes titleGradient{
@@ -586,11 +1057,14 @@ nav a:hover{
 .buttons{
 
     display:flex;
-    gap:14px;
-
-    flex-wrap:wrap;
 
     justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
 }
 
 .btn{
@@ -617,47 +1091,74 @@ nav a:hover{
         );
 
     box-shadow:
-        0 8px 30px rgba(6,182,212,.18);
+        0 8px 30px rgba(6,182,212,.2);
 
     transition:.25s;
 }
 
 .btn:hover{
 
-    transform:translateY(-3px) scale(1.03);
+    transform:
+        translateY(-3px)
+        scale(1.03);
 
     box-shadow:
-        0 12px 35px rgba(139,92,246,.35);
+        0 12px 40px rgba(139,92,246,.4);
 }
 
 .btn.secondary{
 
-    background:rgba(255,255,255,.08);
+    background:
+        rgba(255,255,255,.08);
 
-    border:1px solid rgba(255,255,255,.15);
+    border:
+        1px solid rgba(255,255,255,.15);
 }
 
 
 /* =========================================================
-   SECTIONS
+   HOME CREATIONS
 ========================================================= */
+
+.home-creations{
+
+    margin-top:25px;
+}
 
 .section-title{
 
     text-align:center;
 
-    font-size:42px;
+    font-size:40px;
 
-    margin-bottom:35px;
+    margin-bottom:30px;
 
     font-weight:1000;
 }
 
+.home-note{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    margin-bottom:25px;
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   GLASS
+========================================================= */
+
 .glass{
 
-    background:rgba(255,255,255,.055);
+    background:
+        rgba(255,255,255,.055);
 
-    border:1px solid rgba(255,255,255,.1);
+    border:
+        1px solid rgba(255,255,255,.1);
 
     border-radius:22px;
 
@@ -671,107 +1172,159 @@ nav a:hover{
 
 
 /* =========================================================
-   GRID
+   COLLECTION
 ========================================================= */
 
-.grid{
+.collection-grid{
 
     display:grid;
 
     grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
+        repeat(auto-fit,minmax(250px,1fr));
 
-    gap:20px;
+    gap:25px;
 }
 
-.project-card{
+.kggt-card{
 
-    padding:25px;
+    padding:12px;
 
     border-radius:20px;
 
-    background:rgba(255,255,255,.06);
+    background:
+        linear-gradient(
+            145deg,
+            #30240c,
+            #101014 40%,
+            #241a09
+        );
 
-    border:1px solid rgba(255,255,255,.1);
+    border:
+        3px solid #d6ad45;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.4);
 
     transition:.3s;
 }
 
-.project-card:hover{
+.kggt-card:hover{
 
-    transform:translateY(-7px);
-
-    border-color:#8b5cf6;
+    transform:
+        translateY(-8px)
+        scale(1.01);
 
     box-shadow:
-        0 15px 40px rgba(139,92,246,.18);
+        0 20px 50px rgba(0,0,0,.55),
+        0 0 30px rgba(214,173,69,.2);
 }
 
-.project-card h3{
+.card-top{
 
-    margin-bottom:10px;
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:5px;
+
+    font-size:10px;
+
+    font-weight:bold;
 }
 
-.project-card p{
-
-    color:#cbd5e1;
-
-    font-size:14px;
-
-    line-height:1.6;
+.rarity{
+    color:#ffd76a;
 }
 
-
-/* =========================================================
-   AI
-========================================================= */
-
-.ai-box{
-
-    max-width:650px;
-
-    margin:auto;
+.hp{
+    color:#ff7272;
 }
 
-.input{
+.card-image{
 
     width:100%;
 
-    padding:14px;
+    height:250px;
 
-    margin:8px 0;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:10px;
-
-    background:rgba(255,255,255,.09);
-
-    color:white;
-
-    border:1px solid rgba(255,255,255,.1);
-}
-
-.result{
-
-    margin-top:15px;
-
-    padding:15px;
-
-    min-height:50px;
+    object-fit:cover;
 
     border-radius:12px;
 
-    background:rgba(0,0,0,.25);
+    background:#050505;
 
-    color:#67e8f9;
+    border:
+        2px solid #a87d20;
+
+    display:block;
+}
+
+.card-info{
+
+    padding:12px 5px;
+}
+
+.card-type{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    margin-bottom:7px;
+}
+
+.card-info h3{
+
+    margin-bottom:8px;
+}
+
+.card-price{
+
+    color:#ff4d4d;
+
+    font-size:20px;
+
+    font-weight:1000;
+
+    margin-bottom:12px;
+}
+
+.card-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:7px;
+}
+
+.small-btn{
+
+    border:none;
+
+    padding:8px 11px;
+
+    border-radius:8px;
+
+    color:white;
+
+    background:
+        rgba(255,255,255,.1);
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    font-weight:bold;
+}
+
+.small-btn:hover{
+
+    background:#8b5cf6;
 }
 
 
 /* =========================================================
-   UPLOAD PAGE
+   UPLOAD
 ========================================================= */
 
 .upload-box{
@@ -783,37 +1336,33 @@ nav a:hover{
     text-align:center;
 }
 
-.upload-box h2{
-
-    margin-bottom:10px;
-}
-
 .upload-box p{
 
-    color:#cbd5e1;
+    color:#94a3b8;
 
-    font-size:14px;
+    margin:10px 0 20px;
 
-    margin-bottom:20px;
+    font-size:13px;
 }
 
 .upload-form{
 
     display:none;
 
-    margin-top:20px;
-
     text-align:left;
+
+    margin-top:20px;
 }
 
 .upload-form.show{
 
     display:block;
 
-    animation:
-        pageContent .35s ease;
+    animation:pageAppear .4s ease;
 }
 
+.input,
+.price-input,
 select{
 
     width:100%;
@@ -828,201 +1377,113 @@ select{
 
     border-radius:10px;
 
-    background:#17172a;
+    background:
+        rgba(255,255,255,.09);
 
     color:white;
+
+    border:
+        1px solid rgba(255,255,255,.1);
+}
+
+select{
+
+    background:#151525;
 }
 
 input[type="file"]{
 
     width:100%;
 
-    margin:10px 0;
-
-    color:white;
-}
-
-.price-input{
-
-    width:100%;
-
-    padding:14px;
-
-    margin:8px 0;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:10px;
-
-    background:rgba(255,255,255,.09);
+    margin:12px 0;
 
     color:white;
 }
 
 
 /* =========================================================
-   CARD COLLECTION
+   AI
 ========================================================= */
 
-.collection-grid{
+.ai-box{
 
-    display:grid;
+    max-width:650px;
 
-    grid-template-columns:
-        repeat(auto-fit,minmax(260px,1fr));
-
-    gap:25px;
+    margin:auto;
 }
 
-.kggt-card{
+.result{
 
-    position:relative;
+    margin-top:15px;
 
-    padding:12px;
+    padding:15px;
 
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #30240c,
-            #101014 40%,
-            #241a09
-        );
-
-    border:3px solid #d6ad45;
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.4),
-        0 0 20px rgba(214,173,69,.12);
-
-    transition:.3s;
-}
-
-.kggt-card:hover{
-
-    transform:
-        translateY(-8px)
-        rotateX(2deg);
-
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.55),
-        0 0 30px rgba(214,173,69,.25);
-}
-
-.card-top{
-
-    display:flex;
-    justify-content:space-between;
-
-    font-size:11px;
-    font-weight:bold;
-
-    padding:5px;
-}
-
-.rarity{
-
-    color:#ffd76a;
-}
-
-.hp{
-
-    color:#ff7272;
-}
-
-.card-image{
-
-    width:100%;
-
-    height:250px;
-
-    object-fit:cover;
+    min-height:50px;
 
     border-radius:12px;
 
-    background:#080808;
+    background:
+        rgba(0,0,0,.25);
 
-    border:2px solid #a87d20;
-
-    display:block;
+    color:#67e8f9;
 }
 
-.card-info{
 
-    padding:12px 5px;
+/* =========================================================
+   INSPECTOR
+========================================================= */
+
+.inspector{
+
+    max-width:800px;
+
+    margin:auto;
 }
 
-.card-info h3{
+.inspector-result{
 
-    margin-bottom:8px;
-}
+    display:none;
 
-.card-type{
+    margin-top:20px;
 
-    font-size:11px;
+    padding:20px;
+
+    border-radius:15px;
+
+    background:
+        rgba(0,0,0,.25);
+
+    line-height:2;
 
     color:#cbd5e1;
-
-    margin-bottom:8px;
 }
 
-.card-price{
+.inspector-result.show{
 
-    font-size:20px;
+    display:block;
 
-    font-weight:1000;
-
-    color:#ff4d4d;
-
-    text-shadow:0 0 10px rgba(255,0,0,.2);
-
-    margin-bottom:12px;
+    animation:pageAppear .4s ease;
 }
 
-.card-actions{
+.quick-links{
 
     display:flex;
 
-    gap:7px;
+    gap:10px;
+
+    margin-top:15px;
 
     flex-wrap:wrap;
 }
 
-.small-btn{
-
-    border:none;
-
-    cursor:pointer;
-
-    padding:8px 11px;
-
-    border-radius:8px;
-
-    font-size:11px;
-
-    font-weight:bold;
-
-    color:white;
-
-    background:rgba(255,255,255,.1);
-}
-
-.small-btn:hover{
-
-    background:#8b5cf6;
-}
-
 
 /* =========================================================
-   CANVAS
+   CREATION CANVAS
 ========================================================= */
 
 .canvas-wrap{
 
-    max-width:1000px;
+    max-width:1100px;
 
     margin:auto;
 }
@@ -1046,9 +1507,10 @@ input[type="file"]{
 
     border-radius:9px;
 
-    background:rgba(255,255,255,.1);
-
     color:white;
+
+    background:
+        rgba(255,255,255,.1);
 
     cursor:pointer;
 }
@@ -1064,154 +1526,67 @@ canvas{
 
     height:500px;
 
+    display:block;
+
     border-radius:18px;
 
-    border:1px solid rgba(255,255,255,.2);
+    border:
+        1px solid rgba(255,255,255,.2);
 
     background:white;
 
     cursor:crosshair;
-
-    display:block;
 }
 
 
 /* =========================================================
-   INSPECTOR
+   PROJECTS
 ========================================================= */
 
-.inspector{
+.grid{
 
-    max-width:800px;
+    display:grid;
 
-    margin:auto;
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
 }
 
-.inspector-result{
-
-    margin-top:20px;
-
-    display:none;
-
-    padding:20px;
-
-    border-radius:16px;
-
-    background:rgba(0,0,0,.25);
-
-    border:1px solid rgba(255,255,255,.1);
-
-    line-height:2;
-}
-
-.inspector-result.show{
-
-    display:block;
-
-    animation:pageContent .4s ease;
-}
-
-.quick-links{
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-
-    margin-top:15px;
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:10000;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    background:rgba(0,0,0,.75);
-
-    backdrop-filter:blur(10px);
-}
-
-.modal.show{
-
-    display:flex;
-
-    animation:modalIn .25s ease;
-}
-
-@keyframes modalIn{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
-}
-
-.modal-box{
-
-    width:min(650px,100%);
-
-    max-height:90vh;
-
-    overflow:auto;
+.project-card{
 
     padding:25px;
 
-    border-radius:22px;
+    border-radius:20px;
 
-    background:#11111e;
+    background:
+        rgba(255,255,255,.06);
 
-    border:1px solid rgba(255,255,255,.12);
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    transition:.3s;
+}
+
+.project-card:hover{
+
+    transform:translateY(-7px);
+
+    border-color:#8b5cf6;
 
     box-shadow:
-        0 30px 100px rgba(0,0,0,.5);
+        0 15px 40px rgba(139,92,246,.2);
 }
 
-.preview-img{
+.project-card p{
 
-    width:100%;
+    color:#94a3b8;
 
-    max-height:65vh;
+    line-height:1.6;
 
-    object-fit:contain;
+    font-size:14px;
 
-    border-radius:15px;
-
-    margin-bottom:15px;
-}
-
-.close{
-
-    float:right;
-
-    border:none;
-
-    background:none;
-
-    color:white;
-
-    font-size:24px;
-
-    cursor:pointer;
+    margin-top:8px;
 }
 
 
@@ -1237,9 +1612,11 @@ canvas{
 
     border-radius:18px;
 
-    background:rgba(255,255,255,.06);
+    background:
+        rgba(255,255,255,.06);
 
-    border:1px solid rgba(255,255,255,.1);
+    border:
+        1px solid rgba(255,255,255,.1);
 }
 
 .member strong{
@@ -1254,6 +1631,97 @@ canvas{
     color:#94a3b8;
 
     font-size:13px;
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:10000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,0,0,.78);
+
+    backdrop-filter:blur(10px);
+}
+
+.modal.show{
+
+    display:flex;
+
+    animation:modalShow .25s ease;
+}
+
+@keyframes modalShow{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+.modal-box{
+
+    width:min(650px,100%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    padding:25px;
+
+    border-radius:22px;
+
+    background:#11111e;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+}
+
+.close{
+
+    float:right;
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:25px;
+
+    cursor:pointer;
+}
+
+.preview-img{
+
+    width:100%;
+
+    max-height:65vh;
+
+    object-fit:contain;
+
+    border-radius:15px;
+
+    margin:15px 0;
 }
 
 
@@ -1280,28 +1748,31 @@ footer{
 @media(max-width:600px){
 
     nav{
-
-        padding:12px 10px;
+        padding:12px 8px;
     }
 
     .logo{
-
         font-size:20px;
     }
 
     .full-page{
-
         padding:35px 5%;
     }
 
     .hero h1{
-
-        letter-spacing:-3px;
+        letter-spacing:-4px;
     }
 
     canvas{
-
         height:400px;
+    }
+
+    .boot-modules{
+        display:none;
+    }
+
+    .boot-core{
+        transform:scale(.8);
     }
 
 }
@@ -1313,33 +1784,116 @@ footer{
 <body>
 
 
-<!-- ======================================================
-     BOOT
-======================================================= -->
+<!-- =====================================================
+     MACHINE BOOT
+===================================================== -->
 
 <div id="boot">
 
-    <div class="boot-rays"></div>
-    <div class="boot-ring"></div>
+    <div class="boot-grid"></div>
 
-    <div class="boot-logo">
-        KGGT
+    <div class="boot-scan"></div>
+
+    <div class="boot-particles">
+
+        <i></i><i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i><i></i>
+
     </div>
 
-    <div class="boot-sub">
-        STUDIOS • CREATE • IMAGINE
+    <div class="hud hud1"></div>
+    <div class="hud hud2"></div>
+
+    <div class="boot-core">
+
+        <div class="core-ring ring1"></div>
+        <div class="core-ring ring2"></div>
+        <div class="core-ring ring3"></div>
+
+        <div class="core-cross">
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="kg-logo">
+            KGGT
+        </div>
+
+        <div class="kg-sub">
+            K G G T // S T U D I O S
+        </div>
+
     </div>
 
-    <div class="boot-loader">
-        <span></span>
+    <div class="boot-terminal">
+
+        <div id="bootStatus">
+            INITIALIZING KGGT SYSTEM...
+        </div>
+
+        <div class="boot-line">
+            <span></span>
+        </div>
+
+        <div class="boot-data">
+
+            <span id="bootPercent">
+                0%
+            </span>
+
+            <span>
+                SYSTEM BOOT
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="boot-modules">
+
+        <div>
+            <span class="module-dot"></span>
+            CORE ENGINE
+            <b id="m1">WAIT</b>
+        </div>
+
+        <div>
+            <span class="module-dot"></span>
+            NEURAL SYSTEM
+            <b id="m2">WAIT</b>
+        </div>
+
+        <div>
+            <span class="module-dot"></span>
+            CREATIVE ENGINE
+            <b id="m3">WAIT</b>
+        </div>
+
+        <div>
+            <span class="module-dot"></span>
+            VISUAL MATRIX
+            <b id="m4">WAIT</b>
+        </div>
+
+    </div>
+
+    <div class="boot-online" id="bootOnline">
+
+        SYSTEM ONLINE
+
+        <small>
+            KGGT STUDIOS READY
+        </small>
+
     </div>
 
 </div>
 
 
-<!-- ======================================================
+<!-- =====================================================
      PAGE TRANSITION
-======================================================= -->
+===================================================== -->
 
 <div class="page-transition" id="pageTransition">
 
@@ -1352,9 +1906,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
+<!-- =====================================================
      NAVBAR
-======================================================= -->
+===================================================== -->
 
 <nav>
 
@@ -1362,52 +1916,44 @@ footer{
         KGGT
     </div>
 
-    <a href="javascript:void(0)"
-       onclick="openPage('homePage')">
+    <a onclick="openPage('homePage')">
         HOME
     </a>
 
-    <a href="javascript:void(0)"
-       onclick="openPage('inspectorPage')">
+    <a onclick="openPage('inspectorPage')">
         URL INSPECTOR
     </a>
 
-    <a href="javascript:void(0)"
-       onclick="openPage('cardPage')">
+    <a onclick="openPage('cardPage')">
         CARD COLLECTION
     </a>
 
-    <a href="javascript:void(0)"
-       onclick="openPage('artworkPage')">
+    <a onclick="openPage('artworkPage')">
         ARTWORK
     </a>
 
-    <a href="javascript:void(0)"
-       onclick="openPage('creationPage')">
+    <a onclick="openPage('creationPage')">
         CREATION
     </a>
 
-    <a href="javascript:void(0)"
-       onclick="openPage('aiPage')">
+    <a onclick="openPage('aiPage')">
         AI
     </a>
 
-    <a href="javascript:void(0)"
-       onclick="openPage('projectsPage')">
+    <a onclick="openPage('projectsPage')">
         PROJECTS
     </a>
 
-    <a href="javascript:void(0)"
-       onclick="openPage('aboutPage')">
+    <a onclick="openPage('aboutPage')">
         ABOUT
     </a>
 
 </nav>
 
 
-<!-- ======================================================
-     HOME PAGE
-======================================================= -->
+<!-- =====================================================
+     HOME
+===================================================== -->
 
 <div id="homePage" class="full-page active">
 
@@ -1418,8 +1964,9 @@ footer{
         </h1>
 
         <p>
-            Welcome to KGGT STUDIOS — a creative space
-            where ideas become art, projects and imagination.
+            KGGT STUDIOS — Create. Imagine.
+            Turn your ideas into drawings,
+            artwork, projects and experiences.
         </p>
 
         <div class="buttons">
@@ -1442,12 +1989,35 @@ footer{
 
     </section>
 
+
+    <!-- =================================================
+         HOME CREATIONS
+    ================================================== -->
+
+    <section class="home-creations">
+
+        <h2 class="section-title">
+            🎨 LATEST KGGT CREATIONS
+        </h2>
+
+        <p class="home-note">
+            Every artwork or drawing you upload or save
+            automatically appears here.
+        </p>
+
+        <div
+            id="homeGallery"
+            class="collection-grid"
+        ></div>
+
+    </section>
+
 </div>
 
 
-<!-- ======================================================
-     URL INSPECTOR PAGE
-======================================================= -->
+<!-- =====================================================
+     URL INSPECTOR
+===================================================== -->
 
 <div id="inspectorPage" class="full-page">
 
@@ -1469,7 +2039,7 @@ footer{
                 class="btn"
                 onclick="inspectURL()"
             >
-                INSPECT URL
+                INSPECT
             </button>
 
             <button
@@ -1507,8 +2077,8 @@ footer{
         </div>
 
         <div
-            class="inspector-result"
             id="urlResult"
+            class="inspector-result"
         ></div>
 
     </div>
@@ -1516,9 +2086,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
-     CARD COLLECTION PAGE
-======================================================= -->
+<!-- =====================================================
+     CARD COLLECTION
+===================================================== -->
 
 <div id="cardPage" class="full-page">
 
@@ -1529,11 +2099,11 @@ footer{
     <div class="glass upload-box">
 
         <h2>
-            Build Your Collection
+            Your Collection
         </h2>
 
         <p>
-            Upload your own cards and give them a price.
+            Upload and manage your KGGT collectible cards.
         </p>
 
         <button
@@ -1553,9 +2123,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
-     ARTWORK PAGE
-======================================================= -->
+<!-- =====================================================
+     ARTWORK
+===================================================== -->
 
 <div id="artworkPage" class="full-page">
 
@@ -1566,12 +2136,12 @@ footer{
     <div class="glass upload-box">
 
         <h2>
-            Upload Artwork
+            Artwork Studio
         </h2>
 
         <p>
-            Add your artwork from your computer,
-            phone gallery or a direct image URL.
+            Upload artwork from your device
+            or use a direct image URL.
         </p>
 
         <button
@@ -1591,9 +2161,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
-     CREATION PAGE
-======================================================= -->
+<!-- =====================================================
+     CREATION
+===================================================== -->
 
 <div id="creationPage" class="full-page">
 
@@ -1609,35 +2179,35 @@ footer{
                 class="tool"
                 onclick="setTool('brush')"
             >
-                🖌 Brush
+                🖌 BRUSH
             </button>
 
             <button
                 class="tool"
                 onclick="setTool('eraser')"
             >
-                🧽 Eraser
+                🧽 ERASER
             </button>
 
             <button
                 class="tool"
                 onclick="setTool('text')"
             >
-                🔤 Type
+                🔤 TYPE
             </button>
 
             <button
                 class="tool"
                 onclick="clearCanvas()"
             >
-                🗑 Clear
+                🗑 CLEAR
             </button>
 
             <button
                 class="tool"
                 onclick="saveDrawing()"
             >
-                💾 Save
+                💾 SAVE
             </button>
 
             <label class="tool">
@@ -1692,9 +2262,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
-     AI PAGE
-======================================================= -->
+<!-- =====================================================
+     AI
+===================================================== -->
 
 <div id="aiPage" class="full-page">
 
@@ -1708,8 +2278,11 @@ footer{
             Basic Math AI
         </h3>
 
-        <p style="color:#94a3b8;margin:10px 0 20px;">
-            Try examples like:
+        <p style="
+            color:#94a3b8;
+            margin:10px 0 20px;
+        ">
+            Try:
             25 + 30,
             100 / 4,
             20% of 500
@@ -1740,9 +2313,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
-     PROJECTS PAGE
-======================================================= -->
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
 
 <div id="projectsPage" class="full-page">
 
@@ -1754,78 +2327,60 @@ footer{
 
         <div class="project-card">
 
-            <h3>
-                🎮 Game Studio
-            </h3>
+            <h3>🎮 Game Studio</h3>
 
             <p>
-                Create your own games, experiments
-                and interactive ideas.
+                Build games and interactive ideas.
             </p>
 
         </div>
 
         <div class="project-card">
 
-            <h3>
-                🎨 Digital Art
-            </h3>
+            <h3>🎨 Digital Art</h3>
 
             <p>
-                Draw, design and save your artwork
-                directly inside KGGT.
+                Create and save digital artwork.
             </p>
 
         </div>
 
         <div class="project-card">
 
-            <h3>
-                🌐 Web Projects
-            </h3>
+            <h3>🌐 Web Projects</h3>
 
             <p>
-                Build creative websites and
-                experiment with HTML, CSS and JS.
+                Experiment with HTML, CSS and JavaScript.
             </p>
 
         </div>
 
         <div class="project-card">
 
-            <h3>
-                🤖 AI Experiments
-            </h3>
+            <h3>🤖 AI Experiments</h3>
 
             <p>
-                Explore calculators, creative tools
-                and future AI ideas.
+                Explore creative AI tools and experiments.
             </p>
 
         </div>
 
         <div class="project-card">
 
-            <h3>
-                🃏 Card Designs
-            </h3>
+            <h3>🃏 Card Designs</h3>
 
             <p>
-                Create your own collectible card
-                designs and collections.
+                Design collectible cards.
             </p>
 
         </div>
 
         <div class="project-card">
 
-            <h3>
-                ✨ Future Lab
-            </h3>
+            <h3>✨ Future Lab</h3>
 
             <p>
-                A place for new KGGT experiments
-                and crazy ideas.
+                The experimental side of KGGT.
             </p>
 
         </div>
@@ -1835,9 +2390,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
-     ABOUT PAGE
-======================================================= -->
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 
 <div id="aboutPage" class="full-page">
 
@@ -1848,17 +2403,18 @@ footer{
     <div class="glass">
 
         <p style="
+            text-align:center;
             line-height:1.8;
             color:#cbd5e1;
-            text-align:center;
         ">
 
-            KGGT STUDIOS is a creative project made
-            for imagination, art, technology and fun.
+            KGGT STUDIOS is a creative space
+            for imagination, technology, artwork
+            and experimentation.
 
-            Create something new.
-            Imagine something bigger.
-            Build it with KGGT.
+            <br><br>
+
+            CREATE. IMAGINE. BUILD.
 
         </p>
 
@@ -1869,51 +2425,23 @@ footer{
     <div class="team">
 
         <div class="member">
-
-            <strong>
-                Kartik
-            </strong>
-
-            <span>
-                Founder / Creator
-            </span>
-
+            <strong>Kartik</strong>
+            <span>Founder / Creator</span>
         </div>
 
         <div class="member">
-
-            <strong>
-                Tanish
-            </strong>
-
-            <span>
-                Team
-            </span>
-
+            <strong>Tanish</strong>
+            <span>Team</span>
         </div>
 
         <div class="member">
-
-            <strong>
-                Garvitsingh
-            </strong>
-
-            <span>
-                Team
-            </span>
-
+            <strong>Garvitsingh</strong>
+            <span>Team</span>
         </div>
 
         <div class="member">
-
-            <strong>
-                Garvittiwari
-            </strong>
-
-            <span>
-                Team
-            </span>
-
+            <strong>Garvittiwari</strong>
+            <span>Team</span>
         </div>
 
     </div>
@@ -1921,9 +2449,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
+<!-- =====================================================
      UPLOAD MODAL
-======================================================= -->
+===================================================== -->
 
 <div
     class="modal"
@@ -1943,10 +2471,7 @@ footer{
             Upload
         </h2>
 
-        <div
-            id="passwordArea"
-            style="margin-top:20px;"
-        >
+        <div id="passwordArea">
 
             <input
                 class="input"
@@ -1999,7 +2524,7 @@ footer{
                 margin-top:15px;
                 font-size:13px;
             ">
-                Upload image from Computer / Phone Gallery
+                Upload from Computer / Phone Gallery
             </p>
 
             <input
@@ -2013,7 +2538,7 @@ footer{
                 margin-top:10px;
                 font-size:13px;
             ">
-                OR use a direct online image URL
+                OR use a direct image URL
             </p>
 
             <input
@@ -2036,9 +2561,9 @@ footer{
 </div>
 
 
-<!-- ======================================================
-     PREVIEW MODAL
-======================================================= -->
+<!-- =====================================================
+     PREVIEW
+===================================================== -->
 
 <div
     class="modal"
@@ -2086,31 +2611,106 @@ footer{
 <script>
 
 /* =========================================================
-   BOOT
+   BOOT SYSTEM
 ========================================================= */
 
-window.addEventListener("load",function(){
+let bootPercent=0;
 
-    setTimeout(function(){
+const bootMessages=[
 
-        const boot =
-            document.getElementById("boot");
+    "INITIALIZING KGGT SYSTEM...",
+    "CHECKING CORE ENGINE...",
+    "CONNECTING NEURAL SYSTEM...",
+    "LOADING CREATIVE ENGINE...",
+    "ACTIVATING VISUAL MATRIX...",
+    "CALIBRATING DIGITAL SPACE...",
+    "STARTING KGGT STUDIOS..."
 
-        boot.style.transition =
-            "opacity .8s ease, transform .8s ease";
+];
 
-        boot.style.opacity="0";
-        boot.style.transform="scale(1.08)";
+let messageIndex=0;
+
+const bootInterval=setInterval(function(){
+
+    bootPercent+=2;
+
+    if(bootPercent>100){
+        bootPercent=100;
+    }
+
+    document.getElementById("bootPercent")
+        .textContent=bootPercent+"%";
+
+    if(
+        bootPercent%14===0 &&
+        messageIndex<bootMessages.length
+    ){
+
+        document.getElementById("bootStatus")
+            .textContent=
+            bootMessages[messageIndex];
+
+        messageIndex++;
+
+    }
+
+    if(bootPercent>=25){
+        document.getElementById("m1")
+            .textContent="ONLINE";
+    }
+
+    if(bootPercent>=45){
+        document.getElementById("m2")
+            .textContent="ONLINE";
+    }
+
+    if(bootPercent>=65){
+        document.getElementById("m3")
+            .textContent="ONLINE";
+    }
+
+    if(bootPercent>=85){
+        document.getElementById("m4")
+            .textContent="ONLINE";
+    }
+
+    if(bootPercent>=100){
+
+        clearInterval(bootInterval);
+
+        document.getElementById("bootStatus")
+            .textContent=
+            "ALL SYSTEMS OPERATIONAL";
+
+        const online=
+            document.getElementById("bootOnline");
+
+        online.style.opacity="1";
+
+        online.style.transform="scale(1)";
+
+        online.style.transition=
+            "opacity .5s ease, transform .5s ease";
 
         setTimeout(function(){
 
-            boot.remove();
+            const boot=
+                document.getElementById("boot");
 
-        },800);
+            boot.style.opacity="0";
+            boot.style.transform="scale(1.08)";
 
-    },3000);
+            setTimeout(function(){
 
-});
+                boot.remove();
+
+            },1000);
+
+        },700);
+
+    }
+
+},65);
 
 
 /* =========================================================
@@ -2119,7 +2719,7 @@ window.addEventListener("load",function(){
 
 function openPage(pageId){
 
-    const transition =
+    const transition=
         document.getElementById("pageTransition");
 
     transition.classList.add("active");
@@ -2134,19 +2734,29 @@ function openPage(pageId){
 
             });
 
-        const target =
+        const target=
             document.getElementById(pageId);
 
         if(target){
-
             target.classList.add("active");
-
         }
 
         window.scrollTo({
             top:0,
             behavior:"instant"
         });
+
+        if(pageId==="homePage"){
+            renderHomeGallery();
+        }
+
+        if(pageId==="cardPage"){
+            renderGallery();
+        }
+
+        if(pageId==="artworkPage"){
+            renderGallery();
+        }
 
     },300);
 
@@ -2160,23 +2770,21 @@ function openPage(pageId){
 
 
 /* =========================================================
-   AI MATH
+   MATH AI
 ========================================================= */
 
 function calculateMath(){
 
-    const input =
-        document
-        .getElementById("mathInput")
-        .value
-        .trim();
+    const input=
+        document.getElementById("mathInput")
+        .value.trim();
 
-    const result =
+    const result=
         document.getElementById("mathResult");
 
     if(!input){
 
-        result.textContent =
+        result.textContent=
             "Please enter a calculation.";
 
         return;
@@ -2184,49 +2792,54 @@ function calculateMath(){
 
     try{
 
-        let expression=input;
-
-        const percentMatch =
-            expression.match(
+        const percent=
+            input.match(
                 /^([\d.]+)\s*%\s*of\s*([\d.]+)$/i
             );
 
-        if(percentMatch){
+        if(percent){
 
-            const a=parseFloat(percentMatch[1]);
-            const b=parseFloat(percentMatch[2]);
+            const a=
+                parseFloat(percent[1]);
 
-            result.textContent =
-                (a/100*b);
+            const b=
+                parseFloat(percent[2]);
 
-            return;
-        }
-
-        expression =
-            expression.replace(/×/g,"*")
-                      .replace(/÷/g,"/");
-
-        if(!/^[0-9+\-*/().%\s]+$/.test(expression)){
-
-            result.textContent =
-                "Please enter a valid math expression.";
+            result.textContent=
+                "Answer: "+(a/100*b);
 
             return;
         }
 
-        const answer =
+        let expression=
+            input
+            .replace(/×/g,"*")
+            .replace(/÷/g,"/");
+
+        if(
+            !/^[0-9+\-*/().%\s]+$/
+            .test(expression)
+        ){
+
+            result.textContent=
+                "Please enter a valid calculation.";
+
+            return;
+        }
+
+        const answer=
             Function(
                 '"use strict";return ('+
                 expression+
                 ')'
             )();
 
-        result.textContent =
-            "Answer: " + answer;
+        result.textContent=
+            "Answer: "+answer;
 
-    }catch(error){
+    }catch(e){
 
-        result.textContent =
+        result.textContent=
             "Could not calculate that.";
 
     }
@@ -2235,10 +2848,10 @@ function calculateMath(){
 
 
 /* =========================================================
-   UPLOAD SYSTEM
+   UPLOAD
 ========================================================= */
 
-let uploadTarget="Card";
+let uploadTarget="Artwork";
 
 function openUpload(type){
 
@@ -2249,7 +2862,7 @@ function openUpload(type){
 
     document.getElementById("uploadHeading")
         .textContent=
-        "Upload " + type;
+        "Upload "+type;
 
     document.getElementById("uploadType")
         .value=type;
@@ -2265,9 +2878,10 @@ function openUpload(type){
 
 }
 
+
 function unlockUpload(){
 
-    const password =
+    const password=
         document.getElementById("uploadPassword")
         .value;
 
@@ -2294,23 +2908,23 @@ function unlockUpload(){
 
 function saveUploadedItem(){
 
-    const title =
+    const title=
         document.getElementById("itemTitle")
         .value.trim();
 
-    const price =
+    const price=
         document.getElementById("itemPrice")
         .value.trim();
 
-    const file =
+    const file=
         document.getElementById("imageFile")
         .files[0];
 
-    const url =
+    const url=
         document.getElementById("imageURL")
         .value.trim();
 
-    const type =
+    const type=
         document.getElementById("uploadType")
         .value;
 
@@ -2339,7 +2953,7 @@ function saveUploadedItem(){
 
     if(file){
 
-        const reader =
+        const reader=
             new FileReader();
 
         reader.onload=function(e){
@@ -2369,15 +2983,21 @@ function saveUploadedItem(){
 }
 
 
-function finishSave(type,title,price,image){
+function finishSave(
+    type,
+    title,
+    price,
+    image
+){
 
-    const items =
+    const items=
         JSON.parse(
-            localStorage.getItem("kggtGallery") ||
-            "[]"
+            localStorage.getItem(
+                "kggtGallery"
+            ) || "[]"
         );
 
-    items.push({
+    items.unshift({
 
         id:Date.now(),
 
@@ -2389,7 +3009,9 @@ function finishSave(type,title,price,image){
 
         image:image,
 
-        date:new Date().toLocaleDateString()
+        date:
+            new Date()
+            .toLocaleDateString()
 
     });
 
@@ -2404,11 +3026,17 @@ function finishSave(type,title,price,image){
 
     renderGallery();
 
+    renderHomeGallery();
+
+    /* automatically show the new creation on HOME */
+
+    openPage("homePage");
+
 }
 
 
 /* =========================================================
-   CLEAR FORM
+   CLEAR UPLOAD FORM
 ========================================================= */
 
 function clearUploadForm(){
@@ -2429,101 +3057,139 @@ function clearUploadForm(){
 
 
 /* =========================================================
-   RENDER GALLERY
+   HTML ESCAPE
+========================================================= */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   CARD HTML
+========================================================= */
+
+function createCardHTML(item){
+
+    return `
+
+    <div class="kggt-card">
+
+        <div class="card-top">
+
+            <span class="rarity">
+                ⭐ KGGT RARE
+            </span>
+
+            <span class="hp">
+                HP ${Math.floor(Math.random()*100)+1}
+            </span>
+
+        </div>
+
+        <img
+            src="${item.image}"
+            class="card-image"
+            alt="${escapeHTML(item.title)}"
+        >
+
+        <div class="card-info">
+
+            <div class="card-type">
+                ${escapeHTML(item.type)}
+            </div>
+
+            <h3>
+                ${escapeHTML(item.title)}
+            </h3>
+
+            <div class="card-price">
+                ₹${escapeHTML(item.price)}
+            </div>
+
+            <div class="card-actions">
+
+                <button
+                    class="small-btn"
+                    onclick="previewItem(${item.id})"
+                >
+                    PREVIEW
+                </button>
+
+                <button
+                    class="small-btn"
+                    onclick="buyItem(${item.id})"
+                >
+                    BUY
+                </button>
+
+                <button
+                    class="small-btn"
+                    onclick="editPrice(${item.id})"
+                >
+                    EDIT
+                </button>
+
+                <button
+                    class="small-btn"
+                    onclick="deleteItem(${item.id})"
+                >
+                    DELETE
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER CARD / ARTWORK
 ========================================================= */
 
 function renderGallery(){
 
-    const items =
+    const items=
         JSON.parse(
-            localStorage.getItem("kggtGallery") ||
-            "[]"
+            localStorage.getItem(
+                "kggtGallery"
+            ) || "[]"
         );
 
-    const cards =
-        document.getElementById("cardGallery");
+    const cards=
+        document.getElementById(
+            "cardGallery"
+        );
 
-    const artworks =
-        document.getElementById("artworkGallery");
+    const artworks=
+        document.getElementById(
+            "artworkGallery"
+        );
 
     cards.innerHTML="";
     artworks.innerHTML="";
 
     items.forEach(function(item){
 
-        const html=`
-
-        <div class="kggt-card">
-
-            <div class="card-top">
-
-                <span class="rarity">
-                    ⭐ KGGT RARE
-                </span>
-
-                <span class="hp">
-                    HP ${Math.floor(Math.random()*100)+1}
-                </span>
-
-            </div>
-
-            <img
-                src="${item.image}"
-                class="card-image"
-                alt="${escapeHTML(item.title)}"
-            >
-
-            <div class="card-info">
-
-                <div class="card-type">
-                    ${item.type}
-                </div>
-
-                <h3>
-                    ${escapeHTML(item.title)}
-                </h3>
-
-                <div class="card-price">
-                    ₹${escapeHTML(item.price)}
-                </div>
-
-                <div class="card-actions">
-
-                    <button
-                        class="small-btn"
-                        onclick="previewItem(${item.id})"
-                    >
-                        PREVIEW
-                    </button>
-
-                    <button
-                        class="small-btn"
-                        onclick="buyItem(${item.id})"
-                    >
-                        BUY
-                    </button>
-
-                    <button
-                        class="small-btn"
-                        onclick="editPrice(${item.id})"
-                    >
-                        EDIT
-                    </button>
-
-                    <button
-                        class="small-btn"
-                        onclick="deleteItem(${item.id})"
-                    >
-                        DELETE
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
+        const html=
+            createCardHTML(item);
 
         if(item.type==="Card"){
 
@@ -2541,17 +3207,73 @@ function renderGallery(){
 
 
 /* =========================================================
-   ESCAPE HTML
+   IMPORTANT:
+   ALL DRAWINGS / ARTWORKS ALSO SHOW ON HOME
 ========================================================= */
 
-function escapeHTML(text){
+function renderHomeGallery(){
 
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    const home=
+        document.getElementById(
+            "homeGallery"
+        );
+
+    if(!home)return;
+
+    const items=
+        JSON.parse(
+            localStorage.getItem(
+                "kggtGallery"
+            ) || "[]"
+        );
+
+    /* Only drawings/artwork appear on HOME */
+
+    const artworkItems=
+        items.filter(function(item){
+
+            return item.type==="Artwork";
+
+        });
+
+    if(artworkItems.length===0){
+
+        home.innerHTML=`
+
+            <div
+                class="glass"
+                style="
+                    grid-column:1/-1;
+                    text-align:center;
+                    color:#94a3b8;
+                "
+            >
+
+                🎨
+
+                <br><br>
+
+                No creations yet.
+
+                <br>
+
+                Open CREATION and make your first artwork!
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+    home.innerHTML="";
+
+    artworkItems.forEach(function(item){
+
+        home.innerHTML+=
+            createCardHTML(item);
+
+    });
 
 }
 
@@ -2562,30 +3284,38 @@ function escapeHTML(text){
 
 function previewItem(id){
 
-    const items =
+    const items=
         JSON.parse(
-            localStorage.getItem("kggtGallery") ||
-            "[]"
+            localStorage.getItem(
+                "kggtGallery"
+            ) || "[]"
         );
 
-    const item =
+    const item=
         items.find(function(x){
+
             return x.id===id;
+
         });
 
     if(!item)return;
 
-    document.getElementById("previewImage")
-        .src=item.image;
+    document.getElementById(
+        "previewImage"
+    ).src=item.image;
 
-    document.getElementById("previewTitle")
-        .textContent=item.title;
+    document.getElementById(
+        "previewTitle"
+    ).textContent=item.title;
 
-    document.getElementById("previewPrice")
-        .textContent="₹"+item.price;
+    document.getElementById(
+        "previewPrice"
+    ).textContent=
+        "₹"+item.price;
 
-    document.getElementById("previewModal")
-        .classList.add("show");
+    document.getElementById(
+        "previewModal"
+    ).classList.add("show");
 
 }
 
@@ -2596,7 +3326,7 @@ function previewItem(id){
 
 function editPrice(id){
 
-    const password =
+    const password=
         prompt("Enter password:");
 
     if(password!=="password"){
@@ -2606,20 +3336,23 @@ function editPrice(id){
         return;
     }
 
-    const newPrice =
+    const newPrice=
         prompt("Enter new price:");
 
     if(newPrice===null)return;
 
-    const items =
+    const items=
         JSON.parse(
-            localStorage.getItem("kggtGallery") ||
-            "[]"
+            localStorage.getItem(
+                "kggtGallery"
+            ) || "[]"
         );
 
-    const item =
+    const item=
         items.find(function(x){
+
             return x.id===id;
+
         });
 
     if(item){
@@ -2633,6 +3366,8 @@ function editPrice(id){
 
         renderGallery();
 
+        renderHomeGallery();
+
     }
 
 }
@@ -2644,7 +3379,7 @@ function editPrice(id){
 
 function deleteItem(id){
 
-    const password =
+    const password=
         prompt("Enter password:");
 
     if(password!=="password"){
@@ -2659,15 +3394,18 @@ function deleteItem(id){
         return;
     }
 
-    let items =
+    let items=
         JSON.parse(
-            localStorage.getItem("kggtGallery") ||
-            "[]"
+            localStorage.getItem(
+                "kggtGallery"
+            ) || "[]"
         );
 
-    items =
+    items=
         items.filter(function(item){
+
             return item.id!==id;
+
         });
 
     localStorage.setItem(
@@ -2676,6 +3414,8 @@ function deleteItem(id){
     );
 
     renderGallery();
+
+    renderHomeGallery();
 
 }
 
@@ -2686,24 +3426,27 @@ function deleteItem(id){
 
 function buyItem(id){
 
-    const items =
+    const items=
         JSON.parse(
-            localStorage.getItem("kggtGallery") ||
-            "[]"
+            localStorage.getItem(
+                "kggtGallery"
+            ) || "[]"
         );
 
-    const item =
+    const item=
         items.find(function(x){
+
             return x.id===id;
+
         });
 
     if(!item)return;
 
     alert(
-        "Purchase request for " +
-        item.title +
-        " — ₹" +
-        item.price +
+        "Purchase request:\n\n"+
+        item.title+
+        "\nPrice: ₹"+
+        item.price+
         "\n\nPayment system can be added later."
     );
 
@@ -2729,8 +3472,9 @@ function closeModal(id){
 
 function quickURL(url){
 
-    document.getElementById("urlInput")
-        .value=url;
+    document.getElementById(
+        "urlInput"
+    ).value=url;
 
     inspectURL();
 
@@ -2738,12 +3482,15 @@ function quickURL(url){
 
 function inspectURL(){
 
-    let value =
-        document.getElementById("urlInput")
-        .value.trim();
+    let value=
+        document.getElementById(
+            "urlInput"
+        ).value.trim();
 
-    const output =
-        document.getElementById("urlResult");
+    const output=
+        document.getElementById(
+            "urlResult"
+        );
 
     if(!value){
 
@@ -2802,10 +3549,7 @@ function inspectURL(){
 
         output.classList.add("show");
 
-        document.getElementById("urlInput")
-            .value=url.href;
-
-    }catch(error){
+    }catch(e){
 
         output.innerHTML=
             "Invalid URL.";
@@ -2818,9 +3562,10 @@ function inspectURL(){
 
 function visitURL(){
 
-    let value =
-        document.getElementById("urlInput")
-        .value.trim();
+    let value=
+        document.getElementById(
+            "urlInput"
+        ).value.trim();
 
     if(!value){
 
@@ -2850,10 +3595,12 @@ function visitURL(){
    CANVAS
 ========================================================= */
 
-const canvas =
-    document.getElementById("drawingCanvas");
+const canvas=
+    document.getElementById(
+        "drawingCanvas"
+    );
 
-const ctx =
+const ctx=
     canvas.getContext("2d");
 
 let drawing=false;
@@ -2863,121 +3610,12 @@ let tool="brush";
 let canvasBackground="#ffffff";
 
 
-function resizeCanvas(){
-
-    const oldImage =
-        canvas.toDataURL();
-
-    /*
-       Keep fixed internal canvas size.
-       CSS handles display size.
-    */
-
-}
-
-function setTool(newTool){
-
-    tool=newTool;
-
-    if(tool==="text"){
-
-        const text=
-            prompt("Type your text:");
-
-        if(text){
-
-            ctx.fillStyle=
-                document.getElementById(
-                    "brushColor"
-                ).value;
-
-            ctx.font="30px Arial";
-
-            ctx.fillText(
-                text,
-                80,
-                80
-            );
-
-        }
-
-    }
-
-}
-
-
-canvas.addEventListener(
-    "mousedown",
-    startDrawing
-);
-
-canvas.addEventListener(
-    "mousemove",
-    draw
-);
-
-canvas.addEventListener(
-    "mouseup",
-    stopDrawing
-);
-
-canvas.addEventListener(
-    "mouseleave",
-    stopDrawing
-);
-
-
-canvas.addEventListener(
-    "touchstart",
-    function(e){
-
-        e.preventDefault();
-
-        const touch=e.touches[0];
-
-        const rect=
-            canvas.getBoundingClientRect();
-
-        startDrawing({
-            clientX:touch.clientX,
-            clientY:touch.clientY
-        });
-
-    },
-    {passive:false}
-);
-
-
-canvas.addEventListener(
-    "touchmove",
-    function(e){
-
-        e.preventDefault();
-
-        const touch=e.touches[0];
-
-        draw({
-            clientX:touch.clientX,
-            clientY:touch.clientY
-        });
-
-    },
-    {passive:false}
-);
-
-
-canvas.addEventListener(
-    "touchend",
-    stopDrawing
-);
-
-
 function getPosition(e){
 
     const rect=
         canvas.getBoundingClientRect();
 
-    return {
+    return{
 
         x:
             (e.clientX-rect.left)
@@ -2990,6 +3628,40 @@ function getPosition(e){
             rect.height
 
     };
+
+}
+
+
+function setTool(newTool){
+
+    tool=newTool;
+
+    if(tool==="text"){
+
+        const text=
+            prompt(
+                "Type your text:"
+            );
+
+        if(text){
+
+            ctx.fillStyle=
+                document.getElementById(
+                    "brushColor"
+                ).value;
+
+            ctx.font=
+                "30px Arial";
+
+            ctx.fillText(
+                text,
+                80,
+                80
+            );
+
+        }
+
+    }
 
 }
 
@@ -3066,19 +3738,80 @@ function stopDrawing(){
 }
 
 
-function clearCanvas(){
+canvas.addEventListener(
+    "mousedown",
+    startDrawing
+);
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+canvas.addEventListener(
+    "mousemove",
+    draw
+);
 
-    fillCanvasBackground();
+canvas.addEventListener(
+    "mouseup",
+    stopDrawing
+);
 
-}
+canvas.addEventListener(
+    "mouseleave",
+    stopDrawing
+);
 
+
+canvas.addEventListener(
+    "touchstart",
+    function(e){
+
+        e.preventDefault();
+
+        const touch=
+            e.touches[0];
+
+        startDrawing({
+
+            clientX:touch.clientX,
+
+            clientY:touch.clientY
+
+        });
+
+    },
+    {passive:false}
+);
+
+
+canvas.addEventListener(
+    "touchmove",
+    function(e){
+
+        e.preventDefault();
+
+        const touch=
+            e.touches[0];
+
+        draw({
+
+            clientX:touch.clientX,
+
+            clientY:touch.clientY
+
+        });
+
+    },
+    {passive:false}
+);
+
+
+canvas.addEventListener(
+    "touchend",
+    stopDrawing
+);
+
+
+/* =========================================================
+   CANVAS BACKGROUND
+========================================================= */
 
 function fillCanvasBackground(){
 
@@ -3111,25 +3844,48 @@ function changeCanvasBg(color){
 }
 
 
+function clearCanvas(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    fillCanvasBackground();
+
+}
+
+
+/* =========================================================
+   SAVE DRAWING
+   IMPORTANT:
+   SAVED DRAWING = ARTWORK = HOME GALLERY
+========================================================= */
+
 function saveDrawing(){
 
     const image=
-        canvas.toDataURL("image/png");
+        canvas.toDataURL(
+            "image/png"
+        );
 
     const title=
         prompt(
-            "Enter a title for your artwork:"
+            "Enter a title for your drawing:"
         );
 
     if(!title)return;
 
-    const items =
+    const items=
         JSON.parse(
-            localStorage.getItem("kggtGallery") ||
-            "[]"
+            localStorage.getItem(
+                "kggtGallery"
+            ) || "[]"
         );
 
-    items.push({
+    items.unshift({
 
         id:Date.now(),
 
@@ -3141,7 +3897,9 @@ function saveDrawing(){
 
         image:image,
 
-        date:new Date().toLocaleDateString()
+        date:
+            new Date()
+            .toLocaleDateString()
 
     });
 
@@ -3150,46 +3908,51 @@ function saveDrawing(){
         JSON.stringify(items)
     );
 
-    alert(
-        "Your creation has been saved to KGGT Artwork!"
-    );
-
     renderGallery();
+
+    renderHomeGallery();
+
+    alert(
+        "🎨 Drawing saved!\n\n"+
+        "It is now visible on the KGGT HOME page."
+    );
 
 }
 
 
 /* =========================================================
-   INITIALISE CANVAS
+   INITIALISE
 ========================================================= */
 
 fillCanvasBackground();
 
 renderGallery();
 
+renderHomeGallery();
+
 
 /* =========================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
+   CLOSE MODALS BY CLICKING OUTSIDE
 ========================================================= */
 
-document.querySelectorAll(".modal")
-.forEach(function(modal){
+document
+    .querySelectorAll(".modal")
+    .forEach(function(modal){
 
-    modal.addEventListener(
-        "click",
-        function(e){
+        modal.addEventListener(
+            "click",
+            function(e){
 
-            if(e.target===modal){
+                if(e.target===modal){
 
-                modal.classList.remove("show");
+                    modal.classList.remove("show");
+
+                }
 
             }
+        );
 
-        }
-    );
-
-});
-
+    });
 
 </script>
 
