@@ -2,504 +2,828 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KGGT STUDIOS</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
   font-family:Arial,Helvetica,sans-serif;
-  color:#fff;
-  background:#090b18;
+  color:white;
+  background:#02040b;
   overflow-x:hidden;
 }
 
-/* LIGHTWEIGHT BACKGROUND */
-body:before{
+/* =========================================================
+   JARVIS MACHINE BACKGROUND
+   Lightweight: CSS only, no canvas particles
+========================================================= */
+
+body{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(0,180,255,.12),transparent 28%),
+    radial-gradient(circle at 15% 80%,rgba(90,40,255,.10),transparent 30%),
+    radial-gradient(circle at 85% 20%,rgba(0,255,220,.08),transparent 30%),
+    #02040b;
+}
+
+/* MACHINE GRID */
+body::before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-2;
-  background:
-    radial-gradient(circle at 15% 20%,#5220a844,transparent 35%),
-    radial-gradient(circle at 85% 75%,#00bcd433,transparent 35%),
-    linear-gradient(135deg,#090b18,#11152b,#090b18);
+  pointer-events:none;
+  z-index:-5;
+  opacity:.18;
+  background-image:
+    linear-gradient(rgba(0,180,255,.18) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,180,255,.18) 1px,transparent 1px);
+  background-size:50px 50px;
+  mask-image:linear-gradient(to bottom,transparent,#000 25%,#000 75%,transparent);
 }
 
-/* BOOT */
-#boot{
+/* JARVIS GLOW */
+body::after{
+  content:"";
   position:fixed;
-  inset:0;
-  z-index:9999;
-  background:#05060d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+  width:500px;
+  height:500px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:-4;
+  border-radius:50%;
+  border:1px solid rgba(0,190,255,.12);
+  box-shadow:
+    0 0 80px rgba(0,180,255,.08),
+    inset 0 0 80px rgba(0,180,255,.05);
 }
-.bootBox{
-  width:min(600px,90%);
-}
-.bootLogo{
-  font-size:clamp(70px,15vw,150px);
-  font-weight:1000;
-  letter-spacing:10px;
-  color:#fff;
-  text-shadow:0 0 20px #7c4dff;
-  animation:logoIn 1.2s ease-out;
-}
-.bootSub{
-  color:#aaa;
-  letter-spacing:5px;
-  margin:10px 0 25px;
-}
-.progress{
-  height:4px;
-  background:#222;
-  border-radius:20px;
-  overflow:hidden;
-}
-.progress span{
-  display:block;
-  height:100%;
-  width:0;
-  background:#7c4dff;
-  animation:load 2.2s ease forwards;
-}
-.bootText{
-  margin-top:12px;
-  color:#777;
-  font-size:12px;
-  letter-spacing:2px;
-}
-@keyframes logoIn{
-  from{opacity:0;transform:scale(1.5);filter:blur(15px)}
-  to{opacity:1;transform:scale(1);filter:blur(0)}
-}
-@keyframes load{to{width:100%}}
 
-/* NAV */
+/* =========================================================
+   NAVBAR
+========================================================= */
+
 nav{
-  position:sticky;
+  position:fixed;
   top:0;
-  z-index:100;
+  left:0;
+  width:100%;
+  height:65px;
+  z-index:1000;
+
   display:flex;
   align-items:center;
-  gap:8px;
-  padding:14px 4%;
-  background:#090b18ee;
-  border-bottom:1px solid #ffffff12;
+  gap:7px;
+  padding:0 25px;
+
+  background:rgba(2,5,13,.82);
+  border-bottom:1px solid rgba(0,190,255,.18);
   backdrop-filter:blur(8px);
 }
+
 .logo{
-  font-weight:1000;
-  font-size:22px;
   margin-right:auto;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#fff;
+  text-shadow:0 0 15px #00bfff;
 }
+
 nav button{
-  border:0;
   background:transparent;
-  color:#bbb;
+  border:1px solid transparent;
+  color:#9da9b8;
   padding:9px 11px;
+  border-radius:7px;
   cursor:pointer;
-  border-radius:8px;
+  font-size:12px;
   font-weight:bold;
 }
+
 nav button:hover{
   color:#fff;
-  background:#ffffff10;
-}
-@media(max-width:800px){
-  nav{overflow-x:auto}
-  nav button{white-space:nowrap}
+  border-color:rgba(0,190,255,.35);
+  background:rgba(0,180,255,.08);
 }
 
-/* PAGES */
-.page{
-  display:none;
+@media(max-width:850px){
+  nav{
+    overflow-x:auto;
+  }
+
+  nav button{
+    white-space:nowrap;
+  }
+}
+
+/* =========================================================
+   HOME
+========================================================= */
+
+#home{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+  padding-top:65px;
+}
+
+/* =========================================================
+   UNIVERSE / EARTH SLIDESHOW
+========================================================= */
+
+.spaceSlideshow{
+  position:absolute;
+  inset:65px 0 0 0;
+  z-index:0;
+  overflow:hidden;
+  background:#000;
+}
+
+.spaceSlide{
+  position:absolute;
+  inset:0;
+
+  background-size:cover;
+  background-position:center;
+
+  opacity:0;
+  transform:scale(1.02);
+
+  animation:spaceShow 48s infinite;
+
+  filter:saturate(1.08) brightness(.55);
+}
+
+/*
+  Famous places / universe.
+  Images are loaded only when needed by the browser.
+*/
+.spaceSlide:nth-child(1){
+  background-image:url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1920&q=75");
+  animation-delay:0s;
+}
+
+.spaceSlide:nth-child(2){
+  background-image:url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1920&q=75");
+  animation-delay:8s;
+}
+
+.spaceSlide:nth-child(3){
+  background-image:url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1920&q=75");
+  animation-delay:16s;
+}
+
+.spaceSlide:nth-child(4){
+  background-image:url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1920&q=75");
+  animation-delay:24s;
+}
+
+.spaceSlide:nth-child(5){
+  background-image:url("https://images.unsplash.com/photo-1470214304380-aadaedcfff1b?auto=format&fit=crop&w=1920&q=75");
+  animation-delay:32s;
+}
+
+.spaceSlide:nth-child(6){
+  background-image:url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1920&q=75");
+  animation-delay:40s;
+}
+
+@keyframes spaceShow{
+  0%{
+    opacity:0;
+  }
+
+  4%{
+    opacity:1;
+  }
+
+  16%{
+    opacity:1;
+  }
+
+  20%{
+    opacity:0;
+  }
+
+  100%{
+    opacity:0;
+  }
+}
+
+/* DARK JARVIS HUD OVERLAY */
+.spaceOverlay{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      rgba(0,5,15,.45),
+      rgba(0,5,15,.62)
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 10%,
+      rgba(0,5,15,.55) 85%
+    );
+}
+
+/* SCANLINES */
+.scanlines{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+
+  background:repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 4px,
+    rgba(0,200,255,.025) 5px
+  );
+}
+
+/* =========================================================
+   HOME CONTENT
+========================================================= */
+
+.homeContent{
+  position:relative;
+  z-index:5;
+
   min-height:calc(100vh - 65px);
-  padding:60px 5%;
-}
-.page.active{display:block}
 
-.hero{
-  min-height:72vh;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
+  flex-direction:column;
+
   text-align:center;
+  padding:30px;
 }
-.hero h1{
-  font-size:clamp(55px,11vw,120px);
-  line-height:.9;
+
+.machineTag{
+  color:#00cfff;
+  font-size:12px;
+  letter-spacing:5px;
+  margin-bottom:20px;
+  text-shadow:0 0 12px #00cfff;
+}
+
+.homeTitle{
+  font-size:clamp(60px,12vw,145px);
+  line-height:.82;
   font-weight:1000;
+  letter-spacing:-5px;
+
+  text-shadow:
+    0 0 10px rgba(0,200,255,.7),
+    0 0 35px rgba(0,120,255,.35);
 }
-.hero h1 span{
-  color:#8b6cff;
+
+.homeTitle span{
+  color:#00cfff;
 }
-.hero p{
-  margin:22px 0;
-  color:#aaa;
-  font-size:18px;
+
+.homeSubtitle{
+  margin-top:25px;
+  color:#d2eaff;
+  letter-spacing:4px;
+  font-size:14px;
 }
-.buttons{
+
+.homeButtons{
   display:flex;
   gap:12px;
+  margin-top:30px;
   flex-wrap:wrap;
   justify-content:center;
 }
-.btn{
-  padding:13px 22px;
-  border:1px solid #ffffff22;
-  border-radius:10px;
-  background:#15192d;
-  color:white;
-  cursor:pointer;
-  font-weight:bold;
-}
-.btn.primary{
-  background:#704cff;
-  border-color:#704cff;
-}
-.btn:hover{transform:translateY(-2px)}
 
-/* HEADINGS */
+.mainBtn{
+  padding:14px 24px;
+  border-radius:8px;
+  border:1px solid rgba(0,210,255,.45);
+  background:rgba(0,20,35,.72);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(0,190,255,.08);
+}
+
+.mainBtn:hover{
+  background:rgba(0,190,255,.15);
+  box-shadow:0 0 25px rgba(0,190,255,.2);
+}
+
+/* =========================================================
+   JARVIS HUD
+========================================================= */
+
+.hud{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+}
+
+.hudCorner{
+  position:absolute;
+  width:80px;
+  height:80px;
+  border-color:rgba(0,200,255,.5);
+}
+
+.hudTL{
+  top:100px;
+  left:25px;
+  border-top:1px solid;
+  border-left:1px solid;
+}
+
+.hudTR{
+  top:100px;
+  right:25px;
+  border-top:1px solid;
+  border-right:1px solid;
+}
+
+.hudBL{
+  bottom:25px;
+  left:25px;
+  border-bottom:1px solid;
+  border-left:1px solid;
+}
+
+.hudBR{
+  bottom:25px;
+  right:25px;
+  border-bottom:1px solid;
+  border-right:1px solid;
+}
+
+.hudText{
+  position:absolute;
+  font-size:9px;
+  letter-spacing:2px;
+  color:rgba(150,225,255,.65);
+}
+
+.hudTop{
+  top:80px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.hudBottom{
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+/* =========================================================
+   NORMAL SECTIONS
+========================================================= */
+
+.page{
+  display:none;
+  min-height:100vh;
+  padding:110px 5% 60px;
+}
+
+.page.active{
+  display:block;
+}
+
 .pageTitle{
   font-size:45px;
-  margin-bottom:10px;
-  font-weight:1000;
-}
-.pageDesc{
-  color:#999;
-  margin-bottom:35px;
+  margin-bottom:8px;
+  font-weight:900;
 }
 
-/* GRID */
+.pageDesc{
+  color:#8795a5;
+  margin-bottom:30px;
+}
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
   gap:18px;
 }
+
 .card{
-  background:#111527;
-  border:1px solid #ffffff15;
-  border-radius:15px;
+  background:rgba(7,13,25,.86);
+  border:1px solid rgba(0,190,255,.15);
+  border-radius:12px;
   padding:12px;
-  transition:.2s;
 }
-.card:hover{
-  transform:translateY(-4px);
-  border-color:#765cff;
-}
+
 .card img{
   width:100%;
-  aspect-ratio:1/1;
+  aspect-ratio:1;
   object-fit:cover;
-  border-radius:10px;
-  background:#080a12;
+  border-radius:8px;
 }
+
 .card h3{
   margin:12px 0 5px;
 }
+
 .price{
-  color:#ff4757;
-  font-size:20px;
-  font-weight:900;
+  color:#ff5264;
+  font-size:19px;
+  font-weight:bold;
   margin-bottom:10px;
 }
-.cardActions{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-}
-.smallBtn{
-  border:0;
-  background:#20263d;
+
+.btn{
+  border:1px solid rgba(0,190,255,.3);
+  background:#081321;
   color:#fff;
-  padding:8px 10px;
+  padding:11px 17px;
   border-radius:7px;
   cursor:pointer;
-  font-size:12px;
-}
-.smallBtn:hover{background:#704cff}
-
-/* HOME CREATIONS */
-#homeGallery .card img{
-  aspect-ratio:16/11;
 }
 
-/* AI */
+.btn:hover{
+  background:#0c2537;
+}
+
+/* =========================================================
+   AI
+========================================================= */
+
 .aiBox{
   max-width:600px;
   margin:auto;
-  background:#111527;
-  border:1px solid #ffffff15;
-  border-radius:18px;
+  background:rgba(7,13,25,.9);
+  border:1px solid rgba(0,190,255,.2);
+  border-radius:14px;
   padding:25px;
 }
+
 input,select,textarea{
   width:100%;
   padding:13px;
-  margin:8px 0;
-  border-radius:9px;
-  border:1px solid #ffffff18;
-  background:#080b16;
+  margin:7px 0;
+  background:#030812;
+  border:1px solid rgba(0,190,255,.2);
+  border-radius:7px;
   color:#fff;
   outline:none;
 }
-input:focus,select:focus,textarea:focus{
-  border-color:#765cff;
-}
+
 .result{
-  margin-top:15px;
-  padding:15px;
-  border-radius:10px;
-  background:#080b16;
-  color:#8cffb0;
-  min-height:45px;
+  margin-top:12px;
+  padding:14px;
+  background:#030812;
+  border-radius:7px;
+  color:#75ffb0;
 }
 
-/* CREATION */
+/* =========================================================
+   CREATION
+========================================================= */
+
 .creator{
-  max-width:1000px;
+  max-width:1100px;
   margin:auto;
 }
+
 .toolbar{
   display:flex;
-  flex-wrap:wrap;
   gap:8px;
+  flex-wrap:wrap;
   margin-bottom:12px;
 }
+
 canvas{
-  display:block;
   width:100%;
   height:auto;
-  background:#fff;
-  border-radius:12px;
-  cursor:crosshair;
+  display:block;
+  background:white;
+  border-radius:10px;
   touch-action:none;
+  cursor:crosshair;
 }
+
 .tools{
   display:flex;
-  flex-wrap:wrap;
   gap:8px;
+  flex-wrap:wrap;
   margin-top:12px;
 }
+
 .tools label{
-  background:#111527;
-  padding:9px;
-  border-radius:8px;
-  font-size:13px;
+  background:#07101d;
+  border:1px solid rgba(0,190,255,.15);
+  padding:8px;
+  border-radius:7px;
+  font-size:12px;
 }
 
-/* ABOUT */
-.about{
-  max-width:850px;
-  margin:auto;
-  line-height:1.8;
-  color:#bbb;
-}
-.team{
-  margin-top:25px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-}
-.member{
-  padding:20px;
-  border-radius:14px;
-  background:#111527;
-  border:1px solid #ffffff12;
-}
+/* =========================================================
+   MODALS
+========================================================= */
 
-/* MODAL */
 .modal{
   position:fixed;
   inset:0;
-  z-index:500;
-  background:#000b;
+  z-index:2000;
   display:none;
   align-items:center;
   justify-content:center;
   padding:20px;
+  background:rgba(0,0,0,.8);
 }
-.modal.show{display:flex}
+
+.modal.show{
+  display:flex;
+}
+
 .modalBox{
   width:min(600px,100%);
   max-height:90vh;
   overflow:auto;
-  background:#111527;
-  border:1px solid #ffffff18;
-  border-radius:18px;
-  padding:25px;
+  background:#07101d;
+  border:1px solid rgba(0,200,255,.25);
+  border-radius:12px;
+  padding:22px;
 }
-.modalBox h2{margin-bottom:12px}
-.previewImg{
-  width:100%;
-  max-height:65vh;
-  object-fit:contain;
-  border-radius:10px;
-  background:#05060d;
-}
+
 .close{
   float:right;
+  background:#d9364f;
   border:0;
-  background:#ff4757;
-  color:white;
-  border-radius:7px;
-  padding:7px 11px;
+  color:#fff;
+  padding:7px 10px;
+  border-radius:6px;
   cursor:pointer;
 }
 
-/* URL INSPECTOR */
+.previewImg{
+  width:100%;
+  max-height:70vh;
+  object-fit:contain;
+  margin-top:15px;
+}
+
+/* =========================================================
+   URL INSPECTOR
+========================================================= */
+
 .inspector{
   max-width:800px;
   margin:auto;
 }
+
 .info{
   display:grid;
   grid-template-columns:140px 1fr;
-  gap:1px;
-  background:#ffffff12;
   margin-top:20px;
-  border-radius:10px;
+  border-radius:8px;
   overflow:hidden;
 }
+
 .info div{
-  padding:13px;
-  background:#111527;
+  padding:12px;
+  background:#07101d;
+  border-bottom:1px solid rgba(0,190,255,.08);
   word-break:break-all;
 }
+
 .info div:nth-child(odd){
+  color:#00cfff;
   font-weight:bold;
-  color:#8b6cff;
 }
 
-/* EMPTY */
-.empty{
-  text-align:center;
-  padding:60px 20px;
-  color:#777;
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about{
+  max-width:850px;
+  margin:auto;
+  line-height:1.8;
+  color:#aeb9c7;
+}
+
+.team{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  margin-top:25px;
+}
+
+.member{
+  padding:20px;
+  background:#07101d;
+  border:1px solid rgba(0,190,255,.15);
+  border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BOOT -->
-<div id="boot">
-  <div class="bootBox">
-    <div class="bootLogo">KGGT</div>
-    <div class="bootSub">STUDIOS</div>
-    <div class="progress"><span></span></div>
-    <div class="bootText">INITIALIZING CREATIVE SYSTEM...</div>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav>
   <div class="logo">KGGT STUDIOS</div>
+
   <button onclick="showPage('home')">HOME</button>
   <button onclick="showPage('inspector')">URL INSPECTOR</button>
   <button onclick="showPage('cards')">CARD COLLECTION</button>
   <button onclick="showPage('artwork')">ARTWORK</button>
   <button onclick="showPage('creation')">CREATION</button>
   <button onclick="showPage('ai')">AI</button>
-  <button onclick="showPage('projects')">PROJECTS</button>
   <button onclick="showPage('about')">ABOUT</button>
 </nav>
 
-<!-- HOME -->
-<section id="home" class="page active">
-  <div class="hero">
-    <h1>KGGT<br><span>STUDIOS</span></h1>
-    <p>Create. Imagine. Build.</p>
 
-    <div class="buttons">
-      <button class="btn primary"
+<!-- ======================================================
+     HOME
+====================================================== -->
+
+<section id="home" class="page active">
+
+  <div class="spaceSlideshow">
+
+    <!-- SPACE / EARTH / FAMOUS-LOCATION SLIDES -->
+    <div class="spaceSlide"></div>
+    <div class="spaceSlide"></div>
+    <div class="spaceSlide"></div>
+    <div class="spaceSlide"></div>
+    <div class="spaceSlide"></div>
+    <div class="spaceSlide"></div>
+
+    <div class="spaceOverlay"></div>
+    <div class="scanlines"></div>
+
+    <div class="hud">
+      <div class="hudCorner hudTL"></div>
+      <div class="hudCorner hudTR"></div>
+      <div class="hudCorner hudBL"></div>
+      <div class="hudCorner hudBR"></div>
+
+      <div class="hudText hudTop">
+        KGGT // PLANETARY VISUAL SYSTEM
+      </div>
+
+      <div class="hudText hudBottom">
+        SYSTEM ONLINE // VISUAL MATRIX ACTIVE
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="homeContent">
+
+    <div class="machineTag">
+      KGGT // JARVIS CREATIVE CORE
+    </div>
+
+    <h1 class="homeTitle">
+      KGGT<br>
+      <span>STUDIOS</span>
+    </h1>
+
+    <p class="homeSubtitle">
+      CREATE • IMAGINE • EXPLORE
+    </p>
+
+    <div class="homeButtons">
+
+      <button class="mainBtn"
         onclick="location.href='https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/'">
         ENTER KGGT
       </button>
 
-      <button class="btn" onclick="showPage('creation')">
+      <button class="mainBtn"
+        onclick="showPage('creation')">
         CREATE
       </button>
+
     </div>
+
   </div>
 
-  <h2 class="pageTitle">LATEST KGGT CREATIONS</h2>
-  <p class="pageDesc">Your uploaded artworks appear here automatically.</p>
-
-  <div id="homeGallery" class="grid"></div>
 </section>
 
+
 <!-- URL INSPECTOR -->
+
 <section id="inspector" class="page">
+
   <div class="inspector">
+
     <h1 class="pageTitle">URL INSPECTOR</h1>
-    <p class="pageDesc">Inspect a URL instantly.</p>
+
+    <p class="pageDesc">
+      Analyze a website URL.
+    </p>
 
     <input id="urlInput" placeholder="https://example.com">
 
-    <div class="buttons" style="justify-content:flex-start">
-      <button class="btn primary" onclick="inspectURL()">INSPECT</button>
-      <button class="btn" onclick="visitURL()">VISIT HERE</button>
-    </div>
+    <button class="btn" onclick="inspectURL()">INSPECT</button>
+    <button class="btn" onclick="visitURL()">VISIT HERE</button>
 
-    <div class="buttons" style="justify-content:flex-start;margin-top:12px">
-      <button class="smallBtn" onclick="quickURL('https://chatgpt.com/')">ChatGPT</button>
-      <button class="smallBtn" onclick="quickURL('https://codepen.io/')">CodePen</button>
-      <button class="smallBtn" onclick="quickURL('https://github.com/')">GitHub</button>
+    <div style="margin-top:12px">
+      <button class="btn" onclick="quickURL('https://chatgpt.com/')">ChatGPT</button>
+      <button class="btn" onclick="quickURL('https://codepen.io/')">CodePen</button>
+      <button class="btn" onclick="quickURL('https://github.com/')">GitHub</button>
     </div>
 
     <div id="urlResult"></div>
+
   </div>
+
 </section>
 
-<!-- CARD COLLECTION -->
-<section id="cards" class="page">
-  <h1 class="pageTitle">CARD COLLECTION</h1>
-  <p class="pageDesc">Your KGGT cards.</p>
 
-  <button class="btn primary" onclick="openUpload('Card')">
+<!-- CARD COLLECTION -->
+
+<section id="cards" class="page">
+
+  <h1 class="pageTitle">CARD COLLECTION</h1>
+
+  <p class="pageDesc">
+    Your KGGT cards.
+  </p>
+
+  <button class="btn">
     + UPLOAD CARD
   </button>
 
-  <div id="cardGallery" class="grid" style="margin-top:30px"></div>
 </section>
 
-<!-- ARTWORK -->
-<section id="artwork" class="page">
-  <h1 class="pageTitle">KGGT ARTWORK</h1>
-  <p class="pageDesc">Upload and manage your artwork.</p>
 
-  <button class="btn primary" onclick="openUpload('Artwork')">
+<!-- ARTWORK -->
+
+<section id="artwork" class="page">
+
+  <h1 class="pageTitle">KGGT ARTWORK</h1>
+
+  <p class="pageDesc">
+    Your artwork collection.
+  </p>
+
+  <button class="btn">
     + UPLOAD ARTWORK
   </button>
 
-  <div id="artGallery" class="grid" style="margin-top:30px"></div>
 </section>
 
+
 <!-- CREATION -->
+
 <section id="creation" class="page">
+
   <div class="creator">
+
     <h1 class="pageTitle">CREATION STUDIO</h1>
-    <p class="pageDesc">Draw, create and save your artwork.</p>
+
+    <p class="pageDesc">
+      Draw and create.
+    </p>
 
     <div class="toolbar">
-      <button class="btn" onclick="setTool('brush')">BRUSH</button>
-      <button class="btn" onclick="setTool('eraser')">ERASER</button>
-      <button class="btn" onclick="clearCanvas()">CLEAR</button>
-      <button class="btn primary" onclick="saveDrawing()">SAVE ARTWORK</button>
+
+      <button class="btn" onclick="tool='brush'">
+        BRUSH
+      </button>
+
+      <button class="btn" onclick="tool='eraser'">
+        ERASER
+      </button>
+
+      <button class="btn" onclick="clearCanvas()">
+        CLEAR
+      </button>
+
+      <button class="btn" onclick="saveDrawing()">
+        SAVE
+      </button>
+
     </div>
 
     <canvas id="canvas" width="1200" height="650"></canvas>
 
     <div class="tools">
+
       <label>
-        Brush Color
+        Brush
         <input id="brushColor" type="color" value="#000000">
       </label>
 
@@ -510,363 +834,125 @@ canvas{
 
       <label>
         Size
-        <input id="brushSize" type="range" min="1" max="40" value="6">
+        <input id="brushSize" type="range" min="1" max="35" value="6">
       </label>
+
     </div>
+
   </div>
+
 </section>
+
 
 <!-- AI -->
+
 <section id="ai" class="page">
+
   <div class="aiBox">
+
     <h1 class="pageTitle">KGGT AI</h1>
-    <p class="pageDesc">Fast calculator.</p>
 
-    <input id="mathInput" placeholder="Example: 20% of 500 or 25*4">
+    <p class="pageDesc">
+      Fast calculator.
+    </p>
 
-    <button class="btn primary" onclick="calculate()">CALCULATE</button>
+    <input
+      id="mathInput"
+      placeholder="Example: 20% of 500 or 25*4">
 
-    <div id="mathResult" class="result">Waiting...</div>
+    <button class="btn" onclick="calculate()">
+      CALCULATE
+    </button>
+
+    <div id="mathResult" class="result">
+      Waiting...
+    </div>
+
   </div>
+
 </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="page">
-  <h1 class="pageTitle">PROJECTS</h1>
-  <p class="pageDesc">Your saved creations.</p>
-
-  <div id="projectGallery" class="grid"></div>
-</section>
 
 <!-- ABOUT -->
+
 <section id="about" class="page">
+
   <div class="about">
+
     <h1 class="pageTitle">ABOUT KGGT</h1>
 
     <p>
-      KGGT STUDIOS is a creative space for drawings, digital artwork,
-      projects and experiments.
+      KGGT STUDIOS is a creative platform for art,
+      sketches, projects and digital experiments.
     </p>
 
     <div class="team">
-      <div class="member"><b>Kartik</b><br>Creator</div>
-      <div class="member"><b>Tanish</b><br>Team</div>
-      <div class="member"><b>Garvitsingh</b><br>Team</div>
-      <div class="member"><b>Garvittiwari</b><br>Team</div>
+
+      <div class="member">
+        <b>Kartik</b><br>
+        Creator
+      </div>
+
+      <div class="member">
+        <b>Tanish</b><br>
+        Team
+      </div>
+
+      <div class="member">
+        <b>Garvitsingh</b><br>
+        Team
+      </div>
+
+      <div class="member">
+        <b>Garvittiwari</b><br>
+        Team
+      </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- UPLOAD MODAL -->
-<div id="uploadModal" class="modal">
-  <div class="modalBox">
-    <button class="close" onclick="closeModal('uploadModal')">X</button>
-
-    <h2 id="uploadHeading">UPLOAD</h2>
-
-    <input id="uploadPassword" type="password" placeholder="Password">
-
-    <input id="uploadTitle" placeholder="Title">
-
-    <input id="uploadPrice" type="number" placeholder="Price">
-
-    <input id="uploadFile" type="file" accept="image/*">
-
-    <input id="uploadURL" placeholder="Direct image URL (optional)">
-
-    <p style="color:#777;font-size:12px;margin:5px 0 15px">
-      You can upload from your computer/phone or use a direct image URL.
-    </p>
-
-    <button class="btn primary" onclick="saveUpload()">SAVE</button>
-  </div>
-</div>
-
-<!-- PREVIEW -->
-<div id="previewModal" class="modal">
-  <div class="modalBox">
-    <button class="close" onclick="closeModal('previewModal')">X</button>
-    <h2 id="previewTitle"></h2>
-    <img id="previewImage" class="previewImg">
-    <p id="previewPrice" class="price" style="margin-top:12px"></p>
-  </div>
-</div>
 
 <script>
-/* PAGE SYSTEM */
+
+/* =========================================================
+   PAGE SWITCHING
+========================================================= */
+
 function showPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+
+  document
+    .querySelectorAll(".page")
+    .forEach(page=>page.classList.remove("active"));
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
   window.scrollTo(0,0);
-
-  if(id==="cards") renderGallery("Card","cardGallery");
-  if(id==="artwork") renderGallery("Artwork","artGallery");
-  if(id==="home") renderHomeGallery();
-  if(id==="projects") renderProjects();
 }
 
-/* BOOT */
-window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    document.getElementById("boot").style.display="none";
-    renderHomeGallery();
-    renderGallery("Card","cardGallery");
-    renderGallery("Artwork","artGallery");
-    renderProjects();
-    initCanvas();
-  },2500);
-});
 
-/* STORAGE */
-function getGallery(){
-  return JSON.parse(localStorage.getItem("kggtGallery")||"[]");
-}
+/* =========================================================
+   URL INSPECTOR
+========================================================= */
 
-function setGallery(data){
-  localStorage.setItem("kggtGallery",JSON.stringify(data));
-}
-
-/* UPLOAD */
-let uploadType="Artwork";
-
-function openUpload(type){
-  uploadType=type;
-  document.getElementById("uploadHeading").textContent="UPLOAD "+type.toUpperCase();
-  document.getElementById("uploadPassword").value="";
-  document.getElementById("uploadTitle").value="";
-  document.getElementById("uploadPrice").value="";
-  document.getElementById("uploadFile").value="";
-  document.getElementById("uploadURL").value="";
-  document.getElementById("uploadModal").classList.add("show");
-}
-
-function saveUpload(){
-  if(document.getElementById("uploadPassword").value!=="password"){
-    alert("Wrong password.");
-    return;
-  }
-
-  const title=document.getElementById("uploadTitle").value.trim();
-  const price=document.getElementById("uploadPrice").value.trim();
-  const file=document.getElementById("uploadFile").files[0];
-  const url=document.getElementById("uploadURL").value.trim();
-
-  if(!title){
-    alert("Enter a title.");
-    return;
-  }
-
-  if(!file && !url){
-    alert("Select an image or enter a direct image URL.");
-    return;
-  }
-
-  if(file){
-    const reader=new FileReader();
-
-    reader.onload=()=>{
-      addGalleryItem(title,price,reader.result);
-    };
-
-    reader.readAsDataURL(file);
-  }else{
-    addGalleryItem(title,price,url);
-  }
-}
-
-function addGalleryItem(title,price,image){
-  const data=getGallery();
-
-  data.unshift({
-    id:Date.now(),
-    type:uploadType,
-    title:title,
-    price:price||"0",
-    image:image
-  });
-
-  setGallery(data);
-  closeModal("uploadModal");
-
-  renderGallery("Card","cardGallery");
-  renderGallery("Artwork","artGallery");
-  renderHomeGallery();
-
-  alert(uploadType+" uploaded!");
-}
-
-/* GALLERY */
-function renderGallery(type,target){
-  const box=document.getElementById(target);
-  if(!box)return;
-
-  const data=getGallery().filter(x=>x.type===type);
-
-  if(!data.length){
-    box.innerHTML='<div class="empty">No '+type.toLowerCase()+' uploaded yet.</div>';
-    return;
-  }
-
-  box.innerHTML=data.map(item=>cardHTML(item)).join("");
-}
-
-function renderHomeGallery(){
-  const box=document.getElementById("homeGallery");
-  if(!box)return;
-
-  const data=getGallery().filter(x=>x.type==="Artwork");
-
-  if(!data.length){
-    box.innerHTML='<div class="empty">Create or upload artwork to see it here.</div>';
-    return;
-  }
-
-  box.innerHTML=data.slice(0,12).map(item=>cardHTML(item)).join("");
-}
-
-function cardHTML(item){
-  return `
-  <div class="card">
-    <img src="${escapeHTML(item.image)}" alt="">
-    <h3>${escapeHTML(item.title)}</h3>
-    <div class="price">₹${escapeHTML(item.price)}</div>
-
-    <div class="cardActions">
-      <button class="smallBtn" onclick="previewItem(${item.id})">PREVIEW</button>
-      <button class="smallBtn" onclick="buyItem(${item.id})">BUY</button>
-      <button class="smallBtn" onclick="editPrice(${item.id})">EDIT</button>
-      <button class="smallBtn" onclick="deleteItem(${item.id})">DELETE</button>
-    </div>
-  </div>`;
-}
-
-/* PREVIEW */
-function previewItem(id){
-  const item=getGallery().find(x=>x.id===id);
-  if(!item)return;
-
-  document.getElementById("previewTitle").textContent=item.title;
-  document.getElementById("previewImage").src=item.image;
-  document.getElementById("previewPrice").textContent="₹"+item.price;
-
-  document.getElementById("previewModal").classList.add("show");
-}
-
-/* BUY */
-function buyItem(id){
-  const item=getGallery().find(x=>x.id===id);
-  if(!item)return;
-
-  const name=prompt("Enter your name:");
-  if(!name)return;
-
-  const contact=prompt("Enter contact information:");
-  if(!contact)return;
-
-  const orders=JSON.parse(localStorage.getItem("kggtOrders")||"[]");
-
-  orders.push({
-    id:Date.now(),
-    item:item.title,
-    price:item.price,
-    name:name,
-    contact:contact
-  });
-
-  localStorage.setItem("kggtOrders",JSON.stringify(orders));
-
-  alert("Purchase request saved!");
-}
-
-/* EDIT PRICE */
-function editPrice(id){
-  if(prompt("Enter password:")!=="password"){
-    alert("Wrong password.");
-    return;
-  }
-
-  const data=getGallery();
-  const item=data.find(x=>x.id===id);
-
-  if(!item)return;
-
-  const price=prompt("New price:",item.price);
-
-  if(price!==null){
-    item.price=price;
-    setGallery(data);
-
-    renderGallery("Card","cardGallery");
-    renderGallery("Artwork","artGallery");
-    renderHomeGallery();
-  }
-}
-
-/* DELETE */
-function deleteItem(id){
-  if(prompt("Enter password:")!=="password"){
-    alert("Wrong password.");
-    return;
-  }
-
-  if(!confirm("Delete this item?"))return;
-
-  const data=getGallery().filter(x=>x.id!==id);
-  setGallery(data);
-
-  renderGallery("Card","cardGallery");
-  renderGallery("Artwork","artGallery");
-  renderHomeGallery();
-}
-
-/* MODALS */
-function closeModal(id){
-  document.getElementById(id).classList.remove("show");
-}
-
-/* AI */
-function calculate(){
-  const input=document.getElementById("mathInput").value.trim();
-  const result=document.getElementById("mathResult");
-
-  if(!input){
-    result.textContent="Enter a calculation.";
-    return;
-  }
-
-  try{
-    let text=input.toLowerCase()
-      .replace(/what is/g,"")
-      .replace(/\?/g,"")
-      .trim();
-
-    const percent=text.match(/^(\d+(?:\.\d+)?)%\s*of\s*(\d+(?:\.\d+)?)$/);
-
-    if(percent){
-      result.textContent=
-        (parseFloat(percent[1])*parseFloat(percent[2])/100).toString();
-      return;
-    }
-
-    if(!/^[0-9+\-*/().%\s]+$/.test(text)){
-      result.textContent="Please enter a valid calculation.";
-      return;
-    }
-
-    result.textContent=Function('"use strict";return('+text+')')();
-  }catch{
-    result.textContent="Invalid calculation.";
-  }
-}
-
-/* URL INSPECTOR */
 function quickURL(url){
+
   document.getElementById("urlInput").value=url;
+
   inspectURL();
 }
 
+
 function inspectURL(){
-  let raw=document.getElementById("urlInput").value.trim();
+
+  let raw=document
+    .getElementById("urlInput")
+    .value
+    .trim();
 
   if(!raw){
     alert("Enter a URL.");
@@ -878,26 +964,53 @@ function inspectURL(){
   }
 
   try{
+
     const u=new URL(raw);
 
     document.getElementById("urlResult").innerHTML=`
+
       <div class="info">
-        <div>Protocol</div><div>${escapeHTML(u.protocol)}</div>
-        <div>Hostname</div><div>${escapeHTML(u.hostname)}</div>
-        <div>Port</div><div>${escapeHTML(u.port||"Default")}</div>
-        <div>Path</div><div>${escapeHTML(u.pathname)}</div>
-        <div>Query</div><div>${escapeHTML(u.search||"None")}</div>
-        <div>Hash</div><div>${escapeHTML(u.hash||"None")}</div>
-        <div>Full URL</div><div>${escapeHTML(u.href)}</div>
-      </div>`;
+
+        <div>Protocol</div>
+        <div>${u.protocol}</div>
+
+        <div>Hostname</div>
+        <div>${u.hostname}</div>
+
+        <div>Port</div>
+        <div>${u.port||"Default"}</div>
+
+        <div>Path</div>
+        <div>${u.pathname}</div>
+
+        <div>Query</div>
+        <div>${u.search||"None"}</div>
+
+        <div>Hash</div>
+        <div>${u.hash||"None"}</div>
+
+        <div>Full URL</div>
+        <div>${u.href}</div>
+
+      </div>
+
+    `;
+
   }catch{
+
     document.getElementById("urlResult").innerHTML=
       '<div class="result">Invalid URL.</div>';
+
   }
 }
 
+
 function visitURL(){
-  let url=document.getElementById("urlInput").value.trim();
+
+  let url=document
+    .getElementById("urlInput")
+    .value
+    .trim();
 
   if(!url)return;
 
@@ -908,148 +1021,214 @@ function visitURL(){
   window.open(url,"_blank");
 }
 
-/* CANVAS */
-let canvas;
-let ctx;
+
+/* =========================================================
+   AI CALCULATOR
+========================================================= */
+
+function calculate(){
+
+  const input=document
+    .getElementById("mathInput")
+    .value
+    .trim();
+
+  const result=document
+    .getElementById("mathResult");
+
+  if(!input){
+    result.textContent="Enter a calculation.";
+    return;
+  }
+
+  try{
+
+    const percent=input.match(
+      /^(\d+(?:\.\d+)?)%\s*of\s*(\d+(?:\.\d+)?)$/i
+    );
+
+    if(percent){
+
+      result.textContent=
+        parseFloat(percent[1])*
+        parseFloat(percent[2])/100;
+
+      return;
+    }
+
+    if(!/^[0-9+\-*/().%\s]+$/.test(input)){
+
+      result.textContent="Invalid calculation.";
+
+      return;
+    }
+
+    result.textContent=
+      Function('"use strict";return('+input+')')();
+
+  }catch{
+
+    result.textContent="Invalid calculation.";
+
+  }
+
+}
+
+
+/* =========================================================
+   LIGHTWEIGHT DRAWING ENGINE
+========================================================= */
+
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
 let drawing=false;
 let tool="brush";
 let lastX=0;
 let lastY=0;
 
-function initCanvas(){
-  canvas=document.getElementById("canvas");
-  ctx=canvas.getContext("2d");
+ctx.fillStyle="#ffffff";
+ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  fillCanvas();
 
-  canvas.addEventListener("pointerdown",startDraw);
-  canvas.addEventListener("pointermove",draw);
-  canvas.addEventListener("pointerup",stopDraw);
-  canvas.addEventListener("pointerleave",stopDraw);
-}
+canvas.addEventListener("pointerdown",e=>{
 
-function fillCanvas(){
-  if(!ctx)return;
-
-  ctx.fillStyle=document.getElementById("canvasBg").value;
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-}
-
-document.getElementById("canvasBg").addEventListener("input",()=>{
-  if(!ctx)return;
-
-  const image=ctx.getImageData(0,0,canvas.width,canvas.height);
-
-  ctx.fillStyle=document.getElementById("canvasBg").value;
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  ctx.putImageData(image,0,0);
-});
-
-function setTool(value){
-  tool=value;
-}
-
-function startDraw(e){
   drawing=true;
 
   const r=canvas.getBoundingClientRect();
 
-  lastX=(e.clientX-r.left)*canvas.width/r.width;
-  lastY=(e.clientY-r.top)*canvas.height/r.height;
-}
+  lastX=(e.clientX-r.left)*
+    canvas.width/r.width;
 
-function draw(e){
+  lastY=(e.clientY-r.top)*
+    canvas.height/r.height;
+
+});
+
+
+canvas.addEventListener("pointermove",e=>{
+
   if(!drawing)return;
 
   const r=canvas.getBoundingClientRect();
 
-  const x=(e.clientX-r.left)*canvas.width/r.width;
-  const y=(e.clientY-r.top)*canvas.height/r.height;
+  const x=(e.clientX-r.left)*
+    canvas.width/r.width;
+
+  const y=(e.clientY-r.top)*
+    canvas.height/r.height;
 
   ctx.beginPath();
+
   ctx.moveTo(lastX,lastY);
+
   ctx.lineTo(x,y);
 
-  ctx.lineWidth=document.getElementById("brushSize").value;
+  ctx.lineWidth=
+    document.getElementById("brushSize").value;
+
   ctx.lineCap="round";
 
   if(tool==="eraser"){
-    ctx.strokeStyle=document.getElementById("canvasBg").value;
+
+    ctx.strokeStyle=
+      document.getElementById("canvasBg").value;
+
   }else{
-    ctx.strokeStyle=document.getElementById("brushColor").value;
+
+    ctx.strokeStyle=
+      document.getElementById("brushColor").value;
+
   }
 
   ctx.stroke();
 
   lastX=x;
   lastY=y;
-}
 
-function stopDraw(){
+});
+
+
+window.addEventListener("pointerup",()=>{
   drawing=false;
-}
+});
+
 
 function clearCanvas(){
-  if(confirm("Clear canvas?")){
-    fillCanvas();
-  }
+
+  ctx.fillStyle=
+    document.getElementById("canvasBg").value;
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
 }
 
+
 function saveDrawing(){
+
   const title=prompt("Artwork title:");
 
   if(!title)return;
 
-  const data=getGallery();
+  const image=canvas.toDataURL(
+    "image/jpeg",
+    .75
+  );
+
+  const data=
+    JSON.parse(
+      localStorage.getItem("kggtGallery")||"[]"
+    );
 
   data.unshift({
+
     id:Date.now(),
+
     type:"Artwork",
+
     title:title,
+
     price:"0",
-    image:canvas.toDataURL("image/jpeg",0.8)
+
+    image:image
+
   });
 
-  setGallery(data);
+  localStorage.setItem(
+    "kggtGallery",
+    JSON.stringify(data)
+  );
 
-  renderHomeGallery();
-  renderGallery("Artwork","artGallery");
+  alert("Artwork saved to KGGT.");
 
-  alert("Artwork saved!");
-
-  showPage("home");
 }
 
-/* PROJECTS */
-function renderProjects(){
-  const box=document.getElementById("projectGallery");
 
-  const data=getGallery().filter(x=>x.type==="Artwork");
+/* =========================================================
+   CANVAS BACKGROUND
+========================================================= */
 
-  if(!data.length){
-    box.innerHTML='<div class="empty">No projects yet.</div>';
-    return;
-  }
+document
+  .getElementById("canvasBg")
+  .addEventListener("change",()=>{
 
-  box.innerHTML=data.map(item=>`
-    <div class="card">
-      <img src="${escapeHTML(item.image)}">
-      <h3>${escapeHTML(item.title)}</h3>
-      <button class="smallBtn" onclick="previewItem(${item.id})">OPEN</button>
-    </div>
-  `).join("");
-}
+    ctx.fillStyle=
+      document.getElementById("canvasBg").value;
 
-/* SECURITY FOR DISPLAYED TEXT */
-function escapeHTML(value){
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
+    ctx.fillRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+  });
+
 </script>
 
 </body>
