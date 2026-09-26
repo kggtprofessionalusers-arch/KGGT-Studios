@@ -2,69 +2,258 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KGGT STUDIOS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>KGGT STUDIOS — Create. Imagine.</title>
 
 <style>
+/* =========================================================
+   KGGT STUDIOS — ULTRA LIGHT JARVIS EDITION
+   CSS/JS only • no canvas particles • no heavy libraries
+========================================================= */
+
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
-html,body{
-  width:100%;
-  min-height:100%;
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  background:#02050b;
+  color:#fff;
   font-family:Arial,Helvetica,sans-serif;
-  color:white;
-  background:#02040b;
   overflow-x:hidden;
 }
 
 /* =========================================================
-   JARVIS MACHINE BACKGROUND
-   Lightweight: CSS only, no canvas particles
+   GLOBAL JARVIS BACKGROUND
 ========================================================= */
 
-body{
-  background:
-    radial-gradient(circle at 50% 50%,rgba(0,180,255,.12),transparent 28%),
-    radial-gradient(circle at 15% 80%,rgba(90,40,255,.10),transparent 30%),
-    radial-gradient(circle at 85% 20%,rgba(0,255,220,.08),transparent 30%),
-    #02040b;
-}
-
-/* MACHINE GRID */
-body::before{
+body:before{
   content:"";
   position:fixed;
   inset:0;
+  z-index:-10;
   pointer-events:none;
-  z-index:-5;
-  opacity:.18;
-  background-image:
-    linear-gradient(rgba(0,180,255,.18) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,180,255,.18) 1px,transparent 1px);
-  background-size:50px 50px;
-  mask-image:linear-gradient(to bottom,transparent,#000 25%,#000 75%,transparent);
+  background:
+    radial-gradient(circle at 50% 50%,rgba(0,190,255,.10),transparent 32%),
+    radial-gradient(circle at 10% 80%,rgba(100,50,255,.08),transparent 30%),
+    radial-gradient(circle at 90% 15%,rgba(0,255,220,.07),transparent 28%),
+    #02050b;
 }
 
-/* JARVIS GLOW */
-body::after{
-  content:"";
+.machineGrid{
+  position:fixed;
+  inset:0;
+  z-index:-8;
+  pointer-events:none;
+  opacity:.16;
+  background-image:
+    linear-gradient(rgba(0,190,255,.15) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,190,255,.15) 1px,transparent 1px);
+  background-size:55px 55px;
+  mask-image:linear-gradient(to bottom,transparent,#000 15%,#000 85%,transparent);
+}
+
+.machineGlow{
   position:fixed;
   width:500px;
   height:500px;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
-  pointer-events:none;
-  z-index:-4;
   border-radius:50%;
-  border:1px solid rgba(0,190,255,.12);
+  border:1px solid rgba(0,210,255,.10);
   box-shadow:
-    0 0 80px rgba(0,180,255,.08),
-    inset 0 0 80px rgba(0,180,255,.05);
+    0 0 100px rgba(0,180,255,.06),
+    inset 0 0 100px rgba(0,180,255,.04);
+  pointer-events:none;
+  z-index:-7;
+}
+
+/* =========================================================
+   PAGE BOOT
+========================================================= */
+
+#pageBoot{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at center,#071c2d 0,#03070e 38%,#010207 100%);
+  overflow:hidden;
+}
+
+#pageBoot.show{
+  display:flex;
+}
+
+.bootScan{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 4px,
+    rgba(0,210,255,.025) 5px
+  );
+}
+
+.bootGrid{
+  position:absolute;
+  inset:-50%;
+  background-image:
+    linear-gradient(rgba(0,190,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,190,255,.08) 1px,transparent 1px);
+  background-size:55px 55px;
+  transform:perspective(400px) rotateX(60deg);
+  opacity:.3;
+}
+
+.bootCore{
+  position:relative;
+  z-index:5;
+  width:min(650px,90%);
+  text-align:center;
+}
+
+.bootRings{
+  position:absolute;
+  width:330px;
+  height:330px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+.bootRing{
+  position:absolute;
+  inset:0;
+  border:1px solid rgba(0,210,255,.25);
+  border-radius:50%;
+}
+
+.bootRing:nth-child(1){
+  animation:ringSpin 5s linear infinite;
+  border-top-color:#00d9ff;
+}
+
+.bootRing:nth-child(2){
+  inset:30px;
+  animation:ringSpinReverse 3s linear infinite;
+  border-right-color:#7c5cff;
+}
+
+.bootRing:nth-child(3){
+  inset:65px;
+  animation:ringSpin 2s linear infinite;
+  border-bottom-color:#00ffd5;
+}
+
+@keyframes ringSpin{
+  to{transform:rotate(360deg)}
+}
+
+@keyframes ringSpinReverse{
+  to{transform:rotate(-360deg)}
+}
+
+.bootLogo{
+  position:relative;
+  font-size:clamp(75px,16vw,155px);
+  font-weight:1000;
+  letter-spacing:8px;
+  color:#fff;
+  text-shadow:
+    0 0 8px #00d9ff,
+    0 0 30px #0077ff,
+    0 0 70px rgba(0,180,255,.4);
+  animation:bootLogo .75s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes bootLogo{
+  from{
+    opacity:0;
+    transform:scale(1.8);
+    filter:blur(25px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+  }
+}
+
+.bootSub{
+  margin-top:-5px;
+  color:#7ddfff;
+  letter-spacing:8px;
+  font-size:12px;
+}
+
+.bootStatus{
+  margin-top:30px;
+  color:#8ca6b8;
+  font-size:10px;
+  letter-spacing:3px;
+}
+
+.bootProgress{
+  height:3px;
+  margin:14px auto 0;
+  width:min(500px,80%);
+  background:#10202d;
+  overflow:hidden;
+}
+
+.bootProgress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#006aff,#00eaff,#00ffd5);
+  box-shadow:0 0 12px #00d9ff;
+  animation:bootProgress .85s ease-out forwards;
+}
+
+@keyframes bootProgress{
+  to{width:100%}
+}
+
+.bootModules{
+  margin-top:15px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+  color:#526879;
+  font-size:8px;
+  letter-spacing:1.5px;
+}
+
+.bootModules span{
+  animation:moduleOn .4s forwards;
+  opacity:.15;
+}
+
+.bootModules span:nth-child(1){animation-delay:.15s}
+.bootModules span:nth-child(2){animation-delay:.30s}
+.bootModules span:nth-child(3){animation-delay:.45s}
+.bootModules span:nth-child(4){animation-delay:.60s}
+
+@keyframes moduleOn{
+  to{
+    opacity:1;
+    color:#00d9ff;
+  }
 }
 
 /* =========================================================
@@ -76,46 +265,48 @@ nav{
   top:0;
   left:0;
   width:100%;
-  height:65px;
-  z-index:1000;
+  height:64px;
+  z-index:5000;
 
   display:flex;
   align-items:center;
-  gap:7px;
-  padding:0 25px;
+  gap:6px;
+  padding:0 24px;
 
-  background:rgba(2,5,13,.82);
-  border-bottom:1px solid rgba(0,190,255,.18);
-  backdrop-filter:blur(8px);
+  background:rgba(2,6,13,.82);
+  border-bottom:1px solid rgba(0,210,255,.18);
+  backdrop-filter:blur(10px);
 }
 
 .logo{
   margin-right:auto;
-  font-size:22px;
-  font-weight:900;
+  font-size:21px;
+  font-weight:1000;
   letter-spacing:2px;
-  color:#fff;
-  text-shadow:0 0 15px #00bfff;
+  text-shadow:0 0 15px #00cfff;
 }
 
 nav button{
-  background:transparent;
   border:1px solid transparent;
-  color:#9da9b8;
+  background:transparent;
+  color:#91a1b0;
   padding:9px 11px;
   border-radius:7px;
   cursor:pointer;
-  font-size:12px;
+  font-size:11px;
   font-weight:bold;
+  transition:.15s;
 }
 
-nav button:hover{
+nav button:hover,
+nav button.active{
   color:#fff;
-  border-color:rgba(0,190,255,.35);
-  background:rgba(0,180,255,.08);
+  border-color:rgba(0,210,255,.35);
+  background:rgba(0,190,255,.08);
+  text-shadow:0 0 8px #00cfff;
 }
 
-@media(max-width:850px){
+@media(max-width:900px){
   nav{
     overflow-x:auto;
   }
@@ -126,279 +317,13 @@ nav button:hover{
 }
 
 /* =========================================================
-   HOME
-========================================================= */
-
-#home{
-  position:relative;
-  min-height:100vh;
-  overflow:hidden;
-  padding-top:65px;
-}
-
-/* =========================================================
-   UNIVERSE / EARTH SLIDESHOW
-========================================================= */
-
-.spaceSlideshow{
-  position:absolute;
-  inset:65px 0 0 0;
-  z-index:0;
-  overflow:hidden;
-  background:#000;
-}
-
-.spaceSlide{
-  position:absolute;
-  inset:0;
-
-  background-size:cover;
-  background-position:center;
-
-  opacity:0;
-  transform:scale(1.02);
-
-  animation:spaceShow 48s infinite;
-
-  filter:saturate(1.08) brightness(.55);
-}
-
-/*
-  Famous places / universe.
-  Images are loaded only when needed by the browser.
-*/
-.spaceSlide:nth-child(1){
-  background-image:url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1920&q=75");
-  animation-delay:0s;
-}
-
-.spaceSlide:nth-child(2){
-  background-image:url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1920&q=75");
-  animation-delay:8s;
-}
-
-.spaceSlide:nth-child(3){
-  background-image:url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1920&q=75");
-  animation-delay:16s;
-}
-
-.spaceSlide:nth-child(4){
-  background-image:url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1920&q=75");
-  animation-delay:24s;
-}
-
-.spaceSlide:nth-child(5){
-  background-image:url("https://images.unsplash.com/photo-1470214304380-aadaedcfff1b?auto=format&fit=crop&w=1920&q=75");
-  animation-delay:32s;
-}
-
-.spaceSlide:nth-child(6){
-  background-image:url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1920&q=75");
-  animation-delay:40s;
-}
-
-@keyframes spaceShow{
-  0%{
-    opacity:0;
-  }
-
-  4%{
-    opacity:1;
-  }
-
-  16%{
-    opacity:1;
-  }
-
-  20%{
-    opacity:0;
-  }
-
-  100%{
-    opacity:0;
-  }
-}
-
-/* DARK JARVIS HUD OVERLAY */
-.spaceOverlay{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-
-  background:
-    linear-gradient(
-      rgba(0,5,15,.45),
-      rgba(0,5,15,.62)
-    ),
-    radial-gradient(
-      circle at center,
-      transparent 10%,
-      rgba(0,5,15,.55) 85%
-    );
-}
-
-/* SCANLINES */
-.scanlines{
-  position:absolute;
-  inset:0;
-  z-index:3;
-  pointer-events:none;
-
-  background:repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 4px,
-    rgba(0,200,255,.025) 5px
-  );
-}
-
-/* =========================================================
-   HOME CONTENT
-========================================================= */
-
-.homeContent{
-  position:relative;
-  z-index:5;
-
-  min-height:calc(100vh - 65px);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-
-  text-align:center;
-  padding:30px;
-}
-
-.machineTag{
-  color:#00cfff;
-  font-size:12px;
-  letter-spacing:5px;
-  margin-bottom:20px;
-  text-shadow:0 0 12px #00cfff;
-}
-
-.homeTitle{
-  font-size:clamp(60px,12vw,145px);
-  line-height:.82;
-  font-weight:1000;
-  letter-spacing:-5px;
-
-  text-shadow:
-    0 0 10px rgba(0,200,255,.7),
-    0 0 35px rgba(0,120,255,.35);
-}
-
-.homeTitle span{
-  color:#00cfff;
-}
-
-.homeSubtitle{
-  margin-top:25px;
-  color:#d2eaff;
-  letter-spacing:4px;
-  font-size:14px;
-}
-
-.homeButtons{
-  display:flex;
-  gap:12px;
-  margin-top:30px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.mainBtn{
-  padding:14px 24px;
-  border-radius:8px;
-  border:1px solid rgba(0,210,255,.45);
-  background:rgba(0,20,35,.72);
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 0 20px rgba(0,190,255,.08);
-}
-
-.mainBtn:hover{
-  background:rgba(0,190,255,.15);
-  box-shadow:0 0 25px rgba(0,190,255,.2);
-}
-
-/* =========================================================
-   JARVIS HUD
-========================================================= */
-
-.hud{
-  position:absolute;
-  inset:0;
-  z-index:4;
-  pointer-events:none;
-}
-
-.hudCorner{
-  position:absolute;
-  width:80px;
-  height:80px;
-  border-color:rgba(0,200,255,.5);
-}
-
-.hudTL{
-  top:100px;
-  left:25px;
-  border-top:1px solid;
-  border-left:1px solid;
-}
-
-.hudTR{
-  top:100px;
-  right:25px;
-  border-top:1px solid;
-  border-right:1px solid;
-}
-
-.hudBL{
-  bottom:25px;
-  left:25px;
-  border-bottom:1px solid;
-  border-left:1px solid;
-}
-
-.hudBR{
-  bottom:25px;
-  right:25px;
-  border-bottom:1px solid;
-  border-right:1px solid;
-}
-
-.hudText{
-  position:absolute;
-  font-size:9px;
-  letter-spacing:2px;
-  color:rgba(150,225,255,.65);
-}
-
-.hudTop{
-  top:80px;
-  left:50%;
-  transform:translateX(-50%);
-}
-
-.hudBottom{
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-}
-
-/* =========================================================
-   NORMAL SECTIONS
+   PAGES
 ========================================================= */
 
 .page{
   display:none;
   min-height:100vh;
-  padding:110px 5% 60px;
+  padding:105px 5% 60px;
 }
 
 .page.active{
@@ -406,15 +331,288 @@ nav button:hover{
 }
 
 .pageTitle{
-  font-size:45px;
+  font-size:clamp(36px,6vw,60px);
+  font-weight:1000;
   margin-bottom:8px;
-  font-weight:900;
+  text-shadow:0 0 20px rgba(0,200,255,.15);
 }
 
 .pageDesc{
-  color:#8795a5;
+  color:#7d8d9c;
   margin-bottom:30px;
 }
+
+/* =========================================================
+   BEAUTIFUL HOME
+========================================================= */
+
+#home{
+  position:relative;
+  padding:0;
+  min-height:100vh;
+  overflow:hidden;
+}
+
+/* SLIDESHOW */
+
+.universe{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  background:#010208;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+
+  background-size:cover;
+  background-position:center;
+
+  opacity:0;
+  transform:scale(1.04);
+
+  animation:cinematicSlide 42s infinite;
+
+  filter:brightness(.46) saturate(1.18);
+}
+
+/*
+  Universe + famous Earth locations.
+  Images are compressed through Unsplash parameters.
+*/
+
+.slide:nth-child(1){
+  background-image:url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=65");
+  animation-delay:0s;
+}
+
+.slide:nth-child(2){
+  background-image:url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=65");
+  animation-delay:7s;
+}
+
+.slide:nth-child(3){
+  background-image:url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=65");
+  animation-delay:14s;
+}
+
+.slide:nth-child(4){
+  background-image:url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=65");
+  animation-delay:21s;
+}
+
+.slide:nth-child(5){
+  background-image:url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=65");
+  animation-delay:28s;
+}
+
+.slide:nth-child(6){
+  background-image:url("https://images.unsplash.com/photo-1470214304380-aadaedcfff1b?auto=format&fit=crop&w=1600&q=65");
+  animation-delay:35s;
+}
+
+@keyframes cinematicSlide{
+  0%{
+    opacity:0;
+    transform:scale(1.04);
+  }
+
+  5%{
+    opacity:1;
+  }
+
+  15%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  21%{
+    opacity:0;
+    transform:scale(1.01);
+  }
+
+  100%{
+    opacity:0;
+  }
+}
+
+/* CINEMATIC OVERLAY */
+
+.universe::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,5,15,.72),
+      rgba(0,5,15,.25) 50%,
+      rgba(0,5,15,.7)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0,3,10,.85),
+      transparent 35%,
+      rgba(0,5,15,.2)
+    );
+}
+
+/* HORIZONTAL SCAN */
+
+.homeScan{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 49.7%,
+      rgba(0,210,255,.08) 50%,
+      transparent 50.3%
+    );
+  background-size:100% 8px;
+}
+
+/* HOME HUD */
+
+.homeHUD{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+}
+
+.corner{
+  position:absolute;
+  width:90px;
+  height:90px;
+  border-color:rgba(0,210,255,.55);
+}
+
+.corner.tl{
+  top:90px;
+  left:25px;
+  border-top:1px solid;
+  border-left:1px solid;
+}
+
+.corner.tr{
+  top:90px;
+  right:25px;
+  border-top:1px solid;
+  border-right:1px solid;
+}
+
+.corner.bl{
+  bottom:30px;
+  left:25px;
+  border-bottom:1px solid;
+  border-left:1px solid;
+}
+
+.corner.br{
+  bottom:30px;
+  right:25px;
+  border-bottom:1px solid;
+  border-right:1px solid;
+}
+
+.hudLabel{
+  position:absolute;
+  color:rgba(130,220,255,.65);
+  font-size:8px;
+  letter-spacing:2px;
+}
+
+.hudLabel.top{
+  top:80px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.hudLabel.bottom{
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+/* HOME CENTER */
+
+.homeCenter{
+  position:relative;
+  z-index:10;
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+  padding:90px 20px 40px;
+}
+
+.systemText{
+  font-size:10px;
+  letter-spacing:5px;
+  color:#00d9ff;
+  text-shadow:0 0 12px #00d9ff;
+  margin-bottom:20px;
+}
+
+.homeTitle{
+  font-size:clamp(65px,13vw,155px);
+  line-height:.8;
+  font-weight:1000;
+  letter-spacing:-6px;
+  text-shadow:
+    0 0 12px rgba(0,220,255,.7),
+    0 0 45px rgba(0,100,255,.4);
+}
+
+.homeTitle span{
+  color:#00d9ff;
+}
+
+.homeSub{
+  margin-top:25px;
+  color:#d2e9f5;
+  font-size:13px;
+  letter-spacing:5px;
+}
+
+.homeButtons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:30px;
+}
+
+.mainBtn{
+  min-width:150px;
+  padding:14px 22px;
+  border-radius:7px;
+  border:1px solid rgba(0,210,255,.45);
+  background:rgba(2,16,28,.75);
+  color:#fff;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 0 20px rgba(0,200,255,.08);
+  transition:.18s;
+}
+
+.mainBtn:hover{
+  transform:translateY(-2px);
+  background:rgba(0,180,255,.15);
+  box-shadow:0 0 30px rgba(0,200,255,.2);
+}
+
+/* =========================================================
+   CARDS / GALLERIES
+========================================================= */
 
 .grid{
   display:grid;
@@ -423,10 +621,16 @@ nav button:hover{
 }
 
 .card{
-  background:rgba(7,13,25,.86);
-  border:1px solid rgba(0,190,255,.15);
+  background:rgba(5,12,23,.88);
+  border:1px solid rgba(0,210,255,.14);
   border-radius:12px;
   padding:12px;
+  transition:.15s;
+}
+
+.card:hover{
+  border-color:rgba(0,210,255,.4);
+  transform:translateY(-3px);
 }
 
 .card img{
@@ -434,6 +638,7 @@ nav button:hover{
   aspect-ratio:1;
   object-fit:cover;
   border-radius:8px;
+  background:#02050b;
 }
 
 .card h3{
@@ -442,22 +647,22 @@ nav button:hover{
 
 .price{
   color:#ff5264;
-  font-size:19px;
   font-weight:bold;
+  font-size:19px;
   margin-bottom:10px;
 }
 
 .btn{
-  border:1px solid rgba(0,190,255,.3);
-  background:#081321;
-  color:#fff;
-  padding:11px 17px;
+  padding:11px 16px;
+  border:1px solid rgba(0,210,255,.25);
   border-radius:7px;
+  background:#071321;
+  color:#fff;
   cursor:pointer;
 }
 
 .btn:hover{
-  background:#0c2537;
+  background:#0a2437;
 }
 
 /* =========================================================
@@ -467,29 +672,37 @@ nav button:hover{
 .aiBox{
   max-width:600px;
   margin:auto;
-  background:rgba(7,13,25,.9);
-  border:1px solid rgba(0,190,255,.2);
+  background:rgba(5,12,23,.9);
+  border:1px solid rgba(0,210,255,.18);
   border-radius:14px;
   padding:25px;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
   width:100%;
   padding:13px;
   margin:7px 0;
-  background:#030812;
-  border:1px solid rgba(0,190,255,.2);
   border-radius:7px;
+  border:1px solid rgba(0,210,255,.18);
+  background:#02070e;
   color:#fff;
   outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:#00d9ff;
+  box-shadow:0 0 10px rgba(0,210,255,.1);
 }
 
 .result{
   margin-top:12px;
   padding:14px;
-  background:#030812;
   border-radius:7px;
-  color:#75ffb0;
+  background:#02070e;
+  color:#70ffad;
 }
 
 /* =========================================================
@@ -501,82 +714,30 @@ input,select,textarea{
   margin:auto;
 }
 
-.toolbar{
+.toolbar,
+.tools{
   display:flex;
-  gap:8px;
   flex-wrap:wrap;
+  gap:8px;
   margin-bottom:12px;
 }
 
 canvas{
+  display:block;
   width:100%;
   height:auto;
-  display:block;
-  background:white;
+  background:#fff;
   border-radius:10px;
   touch-action:none;
   cursor:crosshair;
 }
 
-.tools{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-
 .tools label{
-  background:#07101d;
-  border:1px solid rgba(0,190,255,.15);
   padding:8px;
+  background:#071321;
+  border:1px solid rgba(0,210,255,.14);
   border-radius:7px;
-  font-size:12px;
-}
-
-/* =========================================================
-   MODALS
-========================================================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.8);
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modalBox{
-  width:min(600px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#07101d;
-  border:1px solid rgba(0,200,255,.25);
-  border-radius:12px;
-  padding:22px;
-}
-
-.close{
-  float:right;
-  background:#d9364f;
-  border:0;
-  color:#fff;
-  padding:7px 10px;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-.previewImg{
-  width:100%;
-  max-height:70vh;
-  object-fit:contain;
-  margin-top:15px;
+  font-size:11px;
 }
 
 /* =========================================================
@@ -584,7 +745,7 @@ canvas{
 ========================================================= */
 
 .inspector{
-  max-width:800px;
+  max-width:850px;
   margin:auto;
 }
 
@@ -598,13 +759,13 @@ canvas{
 
 .info div{
   padding:12px;
-  background:#07101d;
-  border-bottom:1px solid rgba(0,190,255,.08);
+  background:#06101c;
+  border-bottom:1px solid rgba(0,210,255,.07);
   word-break:break-all;
 }
 
 .info div:nth-child(odd){
-  color:#00cfff;
+  color:#00d9ff;
   font-weight:bold;
 }
 
@@ -616,7 +777,7 @@ canvas{
   max-width:850px;
   margin:auto;
   line-height:1.8;
-  color:#aeb9c7;
+  color:#a8b6c3;
 }
 
 .team{
@@ -628,26 +789,126 @@ canvas{
 
 .member{
   padding:20px;
-  background:#07101d;
-  border:1px solid rgba(0,190,255,.15);
   border-radius:10px;
+  background:#06101c;
+  border:1px solid rgba(0,210,255,.14);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+  .homeTitle{
+    letter-spacing:-3px;
+  }
+
+  .homeSub{
+    letter-spacing:2px;
+  }
+
+  .corner{
+    width:50px;
+    height:50px;
+  }
+
+  .info{
+    grid-template-columns:100px 1fr;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">KGGT STUDIOS</div>
+<!-- LIGHTWEIGHT JARVIS BACKGROUND -->
+<div class="machineGrid"></div>
+<div class="machineGlow"></div>
 
-  <button onclick="showPage('home')">HOME</button>
-  <button onclick="showPage('inspector')">URL INSPECTOR</button>
-  <button onclick="showPage('cards')">CARD COLLECTION</button>
-  <button onclick="showPage('artwork')">ARTWORK</button>
-  <button onclick="showPage('creation')">CREATION</button>
-  <button onclick="showPage('ai')">AI</button>
-  <button onclick="showPage('about')">ABOUT</button>
+
+<!-- ======================================================
+     UNIVERSAL PAGE BOOT
+====================================================== -->
+
+<div id="pageBoot">
+
+  <div class="bootScan"></div>
+  <div class="bootGrid"></div>
+
+  <div class="bootCore">
+
+    <div class="bootRings">
+      <div class="bootRing"></div>
+      <div class="bootRing"></div>
+      <div class="bootRing"></div>
+    </div>
+
+    <div class="bootLogo">KGGT</div>
+
+    <div class="bootSub">
+      STUDIOS
+    </div>
+
+    <div class="bootStatus" id="bootStatus">
+      CONNECTING TO CREATIVE CORE...
+    </div>
+
+    <div class="bootProgress">
+      <span></span>
+    </div>
+
+    <div class="bootModules">
+      <span>CORE</span>
+      <span>NEURAL</span>
+      <span>VISUAL</span>
+      <span>CREATIVE</span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ======================================================
+     NAVBAR
+====================================================== -->
+
+<nav>
+
+  <div class="logo">
+    KGGT STUDIOS
+  </div>
+
+  <button data-page="home" onclick="openPage('home')">
+    HOME
+  </button>
+
+  <button data-page="inspector" onclick="openPage('inspector')">
+    URL INSPECTOR
+  </button>
+
+  <button data-page="cards" onclick="openPage('cards')">
+    CARD COLLECTION
+  </button>
+
+  <button data-page="artwork" onclick="openPage('artwork')">
+    ARTWORK
+  </button>
+
+  <button data-page="creation" onclick="openPage('creation')">
+    CREATION
+  </button>
+
+  <button data-page="ai" onclick="openPage('ai')">
+    AI
+  </button>
+
+  <button data-page="about" onclick="openPage('about')">
+    ABOUT
+  </button>
+
 </nav>
 
 
@@ -657,41 +918,40 @@ canvas{
 
 <section id="home" class="page active">
 
-  <div class="spaceSlideshow">
+  <div class="universe">
 
-    <!-- SPACE / EARTH / FAMOUS-LOCATION SLIDES -->
-    <div class="spaceSlide"></div>
-    <div class="spaceSlide"></div>
-    <div class="spaceSlide"></div>
-    <div class="spaceSlide"></div>
-    <div class="spaceSlide"></div>
-    <div class="spaceSlide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
 
-    <div class="spaceOverlay"></div>
-    <div class="scanlines"></div>
+  </div>
 
-    <div class="hud">
-      <div class="hudCorner hudTL"></div>
-      <div class="hudCorner hudTR"></div>
-      <div class="hudCorner hudBL"></div>
-      <div class="hudCorner hudBR"></div>
+  <div class="homeScan"></div>
 
-      <div class="hudText hudTop">
-        KGGT // PLANETARY VISUAL SYSTEM
-      </div>
+  <div class="homeHUD">
 
-      <div class="hudText hudBottom">
-        SYSTEM ONLINE // VISUAL MATRIX ACTIVE
-      </div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="hudLabel top">
+      KGGT // PLANETARY VISUAL NETWORK
+    </div>
+
+    <div class="hudLabel bottom">
+      SYSTEM ONLINE // EARTH + SPACE
     </div>
 
   </div>
 
+  <div class="homeCenter">
 
-  <div class="homeContent">
-
-    <div class="machineTag">
-      KGGT // JARVIS CREATIVE CORE
+    <div class="systemText">
+      JARVIS CREATIVE CORE ONLINE
     </div>
 
     <h1 class="homeTitle">
@@ -699,19 +959,21 @@ canvas{
       <span>STUDIOS</span>
     </h1>
 
-    <p class="homeSubtitle">
+    <div class="homeSub">
       CREATE • IMAGINE • EXPLORE
-    </p>
+    </div>
 
     <div class="homeButtons">
 
-      <button class="mainBtn"
+      <button
+        class="mainBtn"
         onclick="location.href='https://radhamishra983853-maker.github.io/KGGT-Sketch-Shop/'">
         ENTER KGGT
       </button>
 
-      <button class="mainBtn"
-        onclick="showPage('creation')">
+      <button
+        class="mainBtn"
+        onclick="openPage('creation')">
         CREATE
       </button>
 
@@ -722,27 +984,54 @@ canvas{
 </section>
 
 
-<!-- URL INSPECTOR -->
+<!-- ======================================================
+     URL INSPECTOR
+====================================================== -->
 
 <section id="inspector" class="page">
 
   <div class="inspector">
 
-    <h1 class="pageTitle">URL INSPECTOR</h1>
+    <h1 class="pageTitle">
+      URL INSPECTOR
+    </h1>
 
     <p class="pageDesc">
-      Analyze a website URL.
+      Analyze and open websites.
     </p>
 
-    <input id="urlInput" placeholder="https://example.com">
+    <input
+      id="urlInput"
+      placeholder="https://example.com">
 
-    <button class="btn" onclick="inspectURL()">INSPECT</button>
-    <button class="btn" onclick="visitURL()">VISIT HERE</button>
+    <button class="btn" onclick="inspectURL()">
+      INSPECT
+    </button>
+
+    <button class="btn" onclick="visitURL()">
+      VISIT HERE
+    </button>
 
     <div style="margin-top:12px">
-      <button class="btn" onclick="quickURL('https://chatgpt.com/')">ChatGPT</button>
-      <button class="btn" onclick="quickURL('https://codepen.io/')">CodePen</button>
-      <button class="btn" onclick="quickURL('https://github.com/')">GitHub</button>
+
+      <button
+        class="btn"
+        onclick="quickURL('https://chatgpt.com/')">
+        ChatGPT
+      </button>
+
+      <button
+        class="btn"
+        onclick="quickURL('https://codepen.io/')">
+        CodePen
+      </button>
+
+      <button
+        class="btn"
+        onclick="quickURL('https://github.com/')">
+        GitHub
+      </button>
+
     </div>
 
     <div id="urlResult"></div>
@@ -752,14 +1041,18 @@ canvas{
 </section>
 
 
-<!-- CARD COLLECTION -->
+<!-- ======================================================
+     CARD COLLECTION
+====================================================== -->
 
 <section id="cards" class="page">
 
-  <h1 class="pageTitle">CARD COLLECTION</h1>
+  <h1 class="pageTitle">
+    CARD COLLECTION
+  </h1>
 
   <p class="pageDesc">
-    Your KGGT cards.
+    KGGT card collection.
   </p>
 
   <button class="btn">
@@ -769,14 +1062,18 @@ canvas{
 </section>
 
 
-<!-- ARTWORK -->
+<!-- ======================================================
+     ARTWORK
+====================================================== -->
 
 <section id="artwork" class="page">
 
-  <h1 class="pageTitle">KGGT ARTWORK</h1>
+  <h1 class="pageTitle">
+    KGGT ARTWORK
+  </h1>
 
   <p class="pageDesc">
-    Your artwork collection.
+    Your creative collection.
   </p>
 
   <button class="btn">
@@ -786,55 +1083,78 @@ canvas{
 </section>
 
 
-<!-- CREATION -->
+<!-- ======================================================
+     CREATION
+====================================================== -->
 
 <section id="creation" class="page">
 
   <div class="creator">
 
-    <h1 class="pageTitle">CREATION STUDIO</h1>
+    <h1 class="pageTitle">
+      CREATION STUDIO
+    </h1>
 
     <p class="pageDesc">
-      Draw and create.
+      Draw your next creation.
     </p>
 
     <div class="toolbar">
 
-      <button class="btn" onclick="tool='brush'">
+      <button class="btn"
+        onclick="tool='brush'">
         BRUSH
       </button>
 
-      <button class="btn" onclick="tool='eraser'">
+      <button class="btn"
+        onclick="tool='eraser'">
         ERASER
       </button>
 
-      <button class="btn" onclick="clearCanvas()">
+      <button class="btn"
+        onclick="clearCanvas()">
         CLEAR
       </button>
 
-      <button class="btn" onclick="saveDrawing()">
-        SAVE
+      <button class="btn"
+        onclick="saveDrawing()">
+        SAVE ARTWORK
       </button>
 
     </div>
 
-    <canvas id="canvas" width="1200" height="650"></canvas>
+    <canvas
+      id="canvas"
+      width="1200"
+      height="650">
+    </canvas>
 
     <div class="tools">
 
       <label>
         Brush
-        <input id="brushColor" type="color" value="#000000">
+        <input
+          id="brushColor"
+          type="color"
+          value="#000000">
       </label>
 
       <label>
         Canvas Background
-        <input id="canvasBg" type="color" value="#ffffff">
+        <input
+          id="canvasBg"
+          type="color"
+          value="#ffffff">
       </label>
 
       <label>
         Size
-        <input id="brushSize" type="range" min="1" max="35" value="6">
+        <input
+          id="brushSize"
+          type="range"
+          min="1"
+          max="35"
+          value="6">
       </label>
 
     </div>
@@ -844,27 +1164,35 @@ canvas{
 </section>
 
 
-<!-- AI -->
+<!-- ======================================================
+     AI
+====================================================== -->
 
 <section id="ai" class="page">
 
   <div class="aiBox">
 
-    <h1 class="pageTitle">KGGT AI</h1>
+    <h1 class="pageTitle">
+      KGGT AI
+    </h1>
 
     <p class="pageDesc">
-      Fast calculator.
+      Fast calculation engine.
     </p>
 
     <input
       id="mathInput"
-      placeholder="Example: 20% of 500 or 25*4">
+      placeholder="20% of 500 or 25*4">
 
-    <button class="btn" onclick="calculate()">
+    <button
+      class="btn"
+      onclick="calculate()">
       CALCULATE
     </button>
 
-    <div id="mathResult" class="result">
+    <div
+      id="mathResult"
+      class="result">
       Waiting...
     </div>
 
@@ -873,17 +1201,21 @@ canvas{
 </section>
 
 
-<!-- ABOUT -->
+<!-- ======================================================
+     ABOUT
+====================================================== -->
 
 <section id="about" class="page">
 
   <div class="about">
 
-    <h1 class="pageTitle">ABOUT KGGT</h1>
+    <h1 class="pageTitle">
+      ABOUT KGGT
+    </h1>
 
     <p>
-      KGGT STUDIOS is a creative platform for art,
-      sketches, projects and digital experiments.
+      KGGT STUDIOS is a creative platform for
+      digital art, sketches, projects and ideas.
     </p>
 
     <div class="team">
@@ -918,20 +1250,73 @@ canvas{
 <script>
 
 /* =========================================================
-   PAGE SWITCHING
+   UNIVERSAL TAB BOOT
 ========================================================= */
 
-function showPage(id){
+let currentPage="home";
+let bootTimer=null;
 
-  document
-    .querySelectorAll(".page")
-    .forEach(page=>page.classList.remove("active"));
+const pageNames={
+  home:"LOADING HOME SYSTEM...",
+  inspector:"INITIALIZING URL INSPECTOR...",
+  cards:"LOADING CARD DATABASE...",
+  artwork:"LOADING ARTWORK MATRIX...",
+  creation:"STARTING CREATION ENGINE...",
+  ai:"INITIALIZING KGGT AI...",
+  about:"LOADING KGGT DATABASE..."
+};
 
-  document
-    .getElementById(id)
-    .classList.add("active");
+function openPage(page){
 
-  window.scrollTo(0,0);
+  if(page===currentPage)return;
+
+  currentPage=page;
+
+  clearTimeout(bootTimer);
+
+  const boot=document.getElementById("pageBoot");
+  const status=document.getElementById("bootStatus");
+
+  status.textContent=
+    pageNames[page] || "INITIALIZING SYSTEM...";
+
+  /* SHOW MACHINE BOOT */
+  boot.classList.add("show");
+
+  /* RESET ANIMATION */
+  const progress=
+    document.querySelector(".bootProgress span");
+
+  progress.style.animation="none";
+  void progress.offsetWidth;
+  progress.style.animation=
+    "bootProgress .85s ease-out forwards";
+
+  /* CHANGE PAGE AFTER BOOT */
+  bootTimer=setTimeout(()=>{
+
+    document
+      .querySelectorAll(".page")
+      .forEach(p=>p.classList.remove("active"));
+
+    document
+      .getElementById(page)
+      .classList.add("active");
+
+    document
+      .querySelectorAll("nav button")
+      .forEach(btn=>{
+        btn.classList.toggle(
+          "active",
+          btn.dataset.page===page
+        );
+      });
+
+    window.scrollTo(0,0);
+
+    boot.classList.remove("show");
+
+  },900);
 }
 
 
@@ -944,15 +1329,16 @@ function quickURL(url){
   document.getElementById("urlInput").value=url;
 
   inspectURL();
-}
 
+}
 
 function inspectURL(){
 
-  let raw=document
-    .getElementById("urlInput")
-    .value
-    .trim();
+  let raw=
+    document
+      .getElementById("urlInput")
+      .value
+      .trim();
 
   if(!raw){
     alert("Enter a URL.");
@@ -972,28 +1358,27 @@ function inspectURL(){
       <div class="info">
 
         <div>Protocol</div>
-        <div>${u.protocol}</div>
+        <div>${safe(u.protocol)}</div>
 
         <div>Hostname</div>
-        <div>${u.hostname}</div>
+        <div>${safe(u.hostname)}</div>
 
         <div>Port</div>
-        <div>${u.port||"Default"}</div>
+        <div>${safe(u.port||"Default")}</div>
 
         <div>Path</div>
-        <div>${u.pathname}</div>
+        <div>${safe(u.pathname)}</div>
 
         <div>Query</div>
-        <div>${u.search||"None"}</div>
+        <div>${safe(u.search||"None")}</div>
 
         <div>Hash</div>
-        <div>${u.hash||"None"}</div>
+        <div>${safe(u.hash||"None")}</div>
 
         <div>Full URL</div>
-        <div>${u.href}</div>
+        <div>${safe(u.href)}</div>
 
       </div>
-
     `;
 
   }catch{
@@ -1002,15 +1387,16 @@ function inspectURL(){
       '<div class="result">Invalid URL.</div>';
 
   }
-}
 
+}
 
 function visitURL(){
 
-  let url=document
-    .getElementById("urlInput")
-    .value
-    .trim();
+  let url=
+    document
+      .getElementById("urlInput")
+      .value
+      .trim();
 
   if(!url)return;
 
@@ -1019,33 +1405,40 @@ function visitURL(){
   }
 
   window.open(url,"_blank");
+
 }
 
 
 /* =========================================================
-   AI CALCULATOR
+   AI
 ========================================================= */
 
 function calculate(){
 
-  const input=document
-    .getElementById("mathInput")
-    .value
-    .trim();
+  const input=
+    document
+      .getElementById("mathInput")
+      .value
+      .trim();
 
-  const result=document
-    .getElementById("mathResult");
+  const result=
+    document.getElementById("mathResult");
 
   if(!input){
-    result.textContent="Enter a calculation.";
+
+    result.textContent=
+      "Enter a calculation.";
+
     return;
+
   }
 
   try{
 
-    const percent=input.match(
-      /^(\d+(?:\.\d+)?)%\s*of\s*(\d+(?:\.\d+)?)$/i
-    );
+    const percent=
+      input.match(
+        /^(\d+(?:\.\d+)?)%\s*of\s*(\d+(?:\.\d+)?)$/i
+      );
 
     if(percent){
 
@@ -1054,21 +1447,27 @@ function calculate(){
         parseFloat(percent[2])/100;
 
       return;
+
     }
 
     if(!/^[0-9+\-*/().%\s]+$/.test(input)){
 
-      result.textContent="Invalid calculation.";
+      result.textContent=
+        "Invalid calculation.";
 
       return;
+
     }
 
     result.textContent=
-      Function('"use strict";return('+input+')')();
+      Function(
+        '"use strict";return('+input+')'
+      )();
 
   }catch{
 
-    result.textContent="Invalid calculation.";
+    result.textContent=
+      "Invalid calculation.";
 
   }
 
@@ -1076,11 +1475,14 @@ function calculate(){
 
 
 /* =========================================================
-   LIGHTWEIGHT DRAWING ENGINE
+   LIGHTWEIGHT CREATION ENGINE
 ========================================================= */
 
-const canvas=document.getElementById("canvas");
-const ctx=canvas.getContext("2d");
+const canvas=
+  document.getElementById("canvas");
+
+const ctx=
+  canvas.getContext("2d");
 
 let drawing=false;
 let tool="brush";
@@ -1088,56 +1490,95 @@ let lastX=0;
 let lastY=0;
 
 ctx.fillStyle="#ffffff";
-ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillRect(
+  0,
+  0,
+  canvas.width,
+  canvas.height
+);
 
 
-canvas.addEventListener("pointerdown",e=>{
+canvas.addEventListener(
+  "pointerdown",
+  startDraw
+);
+
+canvas.addEventListener(
+  "pointermove",
+  draw
+);
+
+window.addEventListener(
+  "pointerup",
+  stopDraw
+);
+
+
+function startDraw(e){
 
   drawing=true;
 
-  const r=canvas.getBoundingClientRect();
+  const r=
+    canvas.getBoundingClientRect();
 
-  lastX=(e.clientX-r.left)*
+  lastX=
+    (e.clientX-r.left)*
     canvas.width/r.width;
 
-  lastY=(e.clientY-r.top)*
+  lastY=
+    (e.clientY-r.top)*
     canvas.height/r.height;
 
-});
+}
 
 
-canvas.addEventListener("pointermove",e=>{
+function draw(e){
 
   if(!drawing)return;
 
-  const r=canvas.getBoundingClientRect();
+  const r=
+    canvas.getBoundingClientRect();
 
-  const x=(e.clientX-r.left)*
+  const x=
+    (e.clientX-r.left)*
     canvas.width/r.width;
 
-  const y=(e.clientY-r.top)*
+  const y=
+    (e.clientY-r.top)*
     canvas.height/r.height;
 
   ctx.beginPath();
 
-  ctx.moveTo(lastX,lastY);
+  ctx.moveTo(
+    lastX,
+    lastY
+  );
 
-  ctx.lineTo(x,y);
+  ctx.lineTo(
+    x,
+    y
+  );
 
   ctx.lineWidth=
-    document.getElementById("brushSize").value;
+    document
+      .getElementById("brushSize")
+      .value;
 
   ctx.lineCap="round";
 
   if(tool==="eraser"){
 
     ctx.strokeStyle=
-      document.getElementById("canvasBg").value;
+      document
+        .getElementById("canvasBg")
+        .value;
 
   }else{
 
     ctx.strokeStyle=
-      document.getElementById("brushColor").value;
+      document
+        .getElementById("brushColor")
+        .value;
 
   }
 
@@ -1146,18 +1587,22 @@ canvas.addEventListener("pointermove",e=>{
   lastX=x;
   lastY=y;
 
-});
+}
 
 
-window.addEventListener("pointerup",()=>{
+function stopDraw(){
+
   drawing=false;
-});
+
+}
 
 
 function clearCanvas(){
 
   ctx.fillStyle=
-    document.getElementById("canvasBg").value;
+    document
+      .getElementById("canvasBg")
+      .value;
 
   ctx.fillRect(
     0,
@@ -1171,14 +1616,16 @@ function clearCanvas(){
 
 function saveDrawing(){
 
-  const title=prompt("Artwork title:");
+  const title=
+    prompt("Artwork title:");
 
   if(!title)return;
 
-  const image=canvas.toDataURL(
-    "image/jpeg",
-    .75
-  );
+  const image=
+    canvas.toDataURL(
+      "image/jpeg",
+      .75
+    );
 
   const data=
     JSON.parse(
@@ -1204,30 +1651,36 @@ function saveDrawing(){
     JSON.stringify(data)
   );
 
-  alert("Artwork saved to KGGT.");
+  alert(
+    "Artwork saved to KGGT."
+  );
 
 }
 
 
 /* =========================================================
-   CANVAS BACKGROUND
+   SAFE TEXT
+========================================================= */
+
+function safe(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   INITIAL STATE
 ========================================================= */
 
 document
-  .getElementById("canvasBg")
-  .addEventListener("change",()=>{
-
-    ctx.fillStyle=
-      document.getElementById("canvasBg").value;
-
-    ctx.fillRect(
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-  });
+  .querySelector('nav button[data-page="home"]')
+  .classList.add("active");
 
 </script>
 
